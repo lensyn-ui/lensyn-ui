@@ -1,0 +1,31 @@
+/*------------------------------------通用------------------------------------*/
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,
+big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dd,dl,dt,li,
+ol,ul,fieldset,form,label,legend,input,select,textarea,table,caption,tbody,tfoot,thead,tr,th,td
+{margin: 0; padding: 0;}/*全局边距清零*/
+body{
+  font-family:'微软雅黑','宋体',"Helvetica Neue",sans-serif,Arial,Georgia,Tahoma;
+  color:#666;
+  font-size:12px;
+  background-color:#fff;
+  box-sizing:border-box;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}/*全局字体样式*/
+
+/*常用定义*/
+input, a img,img,iframe,fieldset{border:none;}/*为元素去掉边框*/
+a span,form label,.pointer,button{cursor:pointer;}/*鼠标显示为手形*/
+ul,ol{list-style:none;}/*去掉列表样式*/
+
+select,textarea,input,button{vertical-align:middle;font-family:inherit;font-size:100%;}/*文本水平居中*/
+hr {margin-top: 20px;margin-bottom: 20px;border: 0;border-top: 1px solid #eee;}/*水平线样式*/
+img {vertical-align: middle;}
+a{
+  color: #ffffff !important;
+  text-decoration:none;
+}
+
+

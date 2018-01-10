@@ -1,0 +1,23 @@
+[{
+        "id": "ID005",
+        "name": "组件",
+        "cls": "title",
+        "hasEvt": "N",
+        "checked": false
+    },
+    {
+        "id": "ID009",
+        "name": "Form 表单",
+        "cls": "group",
+        "hasEvt": "N",
+        "checked": false
+    },
+    {
+        "id": "ID010",
+        "name": "下拉组件",
+        "cls": "txt",
+        "hasEvt": "Y",
+        "checked": true,
+        "link": "#/mdroplist"
+    }
+]

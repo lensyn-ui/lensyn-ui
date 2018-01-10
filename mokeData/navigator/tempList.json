@@ -1,0 +1,117 @@
+[{
+        "id": "ID001",
+        "name": "更新日志",
+        "cls": "title",
+        "hasEvt": "Y",
+        "checked": true,
+        "link": "#/record"
+    },
+    {
+        "id": "ID002",
+        "name": "开发指南",
+        "cls": "title",
+        "hasEvt": "N",
+        "checked": false
+    },
+    {
+        "id": "ID003",
+        "name": "安装",
+        "cls": "txt",
+        "hasEvt": "Y",
+        "checked": false,
+        "link": "#/buildin"
+    },
+    {
+        "id": "ID005",
+        "name": "组件",
+        "cls": "title",
+        "hasEvt": "N",
+        "checked": false
+    },
+    {
+        "id": "ID006",
+        "name": "基础布局",
+        "cls": "group",
+        "hasEvt": "N",
+        "checked": false
+    },
+    {
+        "id": "ID007",
+        "name": "Layout 布局",
+        "cls": "txt",
+        "hasEvt": "Y",
+        "checked": false,
+        "link": "#/layout"
+    },
+    {
+        "id": "ID008",
+        "name": "Color 颜色",
+        "cls": "txt",
+        "hasEvt": "Y",
+        "checked": false,
+        "link": "#/colors"
+    },
+    {
+        "id": "ID009",
+        "name": "Form 表单",
+        "cls": "group",
+        "hasEvt": "N",
+        "checked": false
+    },
+    {
+      "id": "ID010",
+      "name": "按钮组件",
+      "cls": "txt",
+      "hasEvt": "Y",
+      "checked": false,
+      "link": "#/button"
+    },
+  {
+    "id": "ID011",
+    "name": "输入框组件",
+    "cls": "txt",
+    "hasEvt": "Y",
+    "checked": false,
+    "link": "#/input"
+  },
+  {
+    "id": "ID012",
+    "name": "下拉组件",
+    "cls": "txt",
+    "hasEvt": "Y",
+    "checked": false,
+    "link": "#/droplist"
+  },
+  {
+    "id": "ID013",
+    "name": "Tabs组件",
+    "cls": "txt",
+    "hasEvt": "Y",
+    "checked": false,
+    "link": "#/tabs"
+  },
+  {
+    "id": "ID014",
+    "name": "可编辑树形表格",
+    "cls": "txt",
+    "hasEvt": "Y",
+    "checked": false,
+    "link": "#/treeEditTable"
+  },
+  {
+    "id": "ID016",
+    "name": "进度条组件",
+    "cls": "txt",
+    "hasEvt": "Y",
+    "checked": false,
+    "link": "#/progess"
+  },
+  {
+    "id": "ID017",
+    "name": "分页组件",
+    "cls": "txt",
+    "hasEvt": "Y",
+    "checked": false,
+    "link": "#/pagination"
+  }
+]

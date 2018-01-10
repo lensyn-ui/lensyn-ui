@@ -1,0 +1,199 @@
+.graph-box {
+  width: 100%;
+  height: 100%;
+  padding: 70px 15px 20px;
+}
+
+.graph-box .graph-item {
+  float: left;
+  width: 50%;
+  height: 100%; 
+  padding: 0 10px 5px; 
+}
+
+#percentBar,
+#purposeBar {
+  width: 100%;
+  height: calc(100% - 70px);
+}
+
+
+.summary {
+  width: 100%;
+  height: 70px;
+  padding: 5px 10px;
+  line-height: 30px; 
+  text-align: center;
+  background: url(../images/modular.png) no-repeat;
+  background-size: 100% 100%; 
+  color: #fff;
+}
+
+.summary .summary-title {
+  color: #404821;  
+}
+
+
+.summary .normal .summary-content {
+  color: #1BDD7C;
+}
+
+
+.summary .error .summary-content {
+  color: red;
+}
+
+.summary .info .summary-title {
+  color: #4D8DEE;
+}
+
+.summary .info .summary-content {
+  color:#4D8DEE;
+}
+
+.summary .warning .summary-content {
+  color: #E5ED7E;
+}
+
+.summary li {
+  float: left;
+  width: 33.3333%;
+  height: 100%;
+}
+
+.summary .summary-title {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.summary .summary-content {
+  position: relative;
+  font-size: 1.5em;
+}
+
+.arrow:before {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  left: 14px;
+  top: 6px;
+  border: 6px solid transparent;
+  color: inherit;
+}
+
+.arrow-up::before {
+  border-bottom-color: inherit;  
+}
+
+.arrow-down::before {
+  top: 12px;
+  border-top-color: inherit;
+}
+
+#todaySaleChart {
+  width: 95%;
+  height: 85%;
+  margin: 70px auto 0;
+}
+
+/* TODO 地图样式 */
+#map {
+  margin-top: 35px;
+  height: 91%;
+}
+
+#company_message {
+  margin-top: 78px;
+  height: 400px;
+}
+
+#company_message h2 {
+  font-size: 18px;
+  color: #FFF;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#company_message .detail_table {
+  text-align: center;
+  color: #FFF;
+  font-weight: bold;
+  width: 100%;
+  font-size: 20px;
+}
+
+#company_message #se_bar {
+  height: 150px;
+}
+
+/* 新能源 swiper样式 */
+.imgTable {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+.swiper-container {
+  width: 100%;
+  height: 410px;
+  padding-top: 5px;
+  overflow: hidden; }
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100px!important;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.swiper-slide .slideContent {
+  width: 100%;
+}
+.swiper-slide .typeName, 
+.swiper-slide .typeValue {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+.swiper-slide .typeName > div, 
+.swiper-slide .typeValue > div {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  text-align: center;
+}
+.swiper-slide .typeName > div span,
+.swiper-slide .typeValue > div span {
+  font-family: 'UnidreamLED';
+  padding: 0 5px 0 0;
+  display: inline-block;
+}
+.swiper-slide .typeName > div.price span, 
+.swiper-slide .typeValue > div.price span {
+  color: yellow;
+}
+.swiper-slide .typeName > div.weight span,
+ .swiper-slide .typeValue > div.weight span {
+  color: #e98f6f;
+}
+.swiper-slide .typeName {
+  color: #59b2d6;
+  text-shadow: 3px 3px 3px rgba(255, 255, 255, 0.1), -3px 3px 3px rgba(255, 255, 255, 0.1); }
+.swiper-slide .typeValue {
+  margin-top: 7px; 
+}
+  .swiper-slide .typeValue:hover {
+  background: rgba(89, 178, 214, 0.3); 
+}
+/* 新能源 swiper样式 */

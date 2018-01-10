@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>售电</title>
+    <!--设置视图大小-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!--设置关键字、描述-->
+    <meta name="Keywords" content="售电"/>
+    <meta name="Description" content="四川能信科技股份有限公司"/>
+    <!--设置启用最新浏览器-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="format-detection" content="telephone=no">
+    <!--设置页面缓存-->
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <!--设置页面偏好图片-->
+    <link rel="icon" sizes="any" mask="" href="assets/images/favicon.ico">
+    <!--页面引入文件-->
+    <link type="text/css" rel="stylesheet" href="assets/css/base.css">
+    <link type="text/css" rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="templates/index/timer-count.css">
+    <link type="text/css" rel="stylesheet" href="assets/swiper.min.css">
+    <script type="text/javascript" src="assets/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/echarts/echarts-3.js"></script>
+    <script type="text/javascript" src="assets/highcharts.js"></script>
+    <script type="text/javascript" src="assets/highcharts-3d.js"></script>
+    <script type="text/javascript" src="assets/swiper.min.js"></script>
+    <script src="templates/index/timerCount.js"></script>
+</head>
+<body>
+
+<!--<iframe width="900" height="900" src="file:///C:/Users/zk-002/Desktop/%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/%E6%9C%80%E7%BB%88%E7%89%88%E6%9C%AC/dist/html/Index/index.html" frameborder="0"></iframe>-->
+<div class="container">
+    <div class="header">
+        <div class="header-box">
+            <img class="header-img" src="assets/images/header.png"/>
+            <!--<img class="left-img" src="../../assets/images/hearder-left.png"/>-->
+            <p id="data"></p>
+            <span class="title" id="topTitle">国电大渡河售电服务中心</span>
+            <p id="time"></p>
+            <!--<img class="right-img" src="../../assets/images/hearder-right.png"/>-->
+        </div>
+    </div>
+    <div class="article">
+        <!--年度销售指标-->
+        <div class="article-box">
+            <div class="graph">
+                <p><label class="title">销售指标</label></p>
+
+                <!--日发电的倒计时 -->
+                <div class="grid daily-power-counter-wrapper">
+                    <p>日发电量（万kWh）</p>
+                    <div id="daylyPower"></div>
+                </div>
+
+                <!--年度销售指标chart图-->
+                <div id="pieChart">
+                    <!--<img src="../../assets/images/pie.png" width="70%" style="margin: 45px 55px;">-->
+                </div>
+                <ul class="pie-legend">
+                    <li class="colorF">
+                        <label></label>
+                        计划合同电量
+                    </li>
+                    <li class="color4c">
+                        <label></label>
+                        跨省电量
+                    </li>
+                    <li class="color4">
+                        <label></label>
+                        直购电量
+                    </li>
+                    <li class="color1">
+                        <label></label>
+                        其他
+                    </li>
+                </ul>
+                <!--年度销售指标数据列表-->
+                <div class="chart_right">
+                    <ul class="year-sales-top-legend">
+                        <li>
+                            <p>年度计划量(kWh)</p>
+                            <b>345.00亿</b>
+                        </li>
+                        <li>
+                            <p>计划合同电量(kWh)</p>
+                            <b>145.49亿</b>
+                        </li>
+                        <li>
+                            <p>直购电量(kWh)</p>
+                            <b>87.00亿</b>
+                        </li>
+                        <li>
+                            <p>跨省电量(kWh)</p>
+                            <b>86.00亿</b>
+                        </li>
+                        <li>
+                            <p>其它(kWh)</p>
+                            <b>26.51亿</b>
+                        </li>
+                    </ul>
+                    <div class="line first" id="targetEle">
+                        <ul class="inline-list">
+                            <li>
+                                <p>年度目标(kWh)</p>
+                                <b >345.00亿</b>
+                            </li>
+                            <li>
+                                <p>已完成(kWh)</p>
+                                <b >241.96亿</b>
+                            </li>
+                            <li>
+                                <p>完成度(kWh)</p>
+                                <b>70.13%</b>
+                            </li>
+                        </ul>
+                        <ul class="inline-list">
+                            <li>
+                                <p>较去年增减</p>
+                                <b class="font-color-dd font-size-26" id="compareWithLastYear">
+                                    <img class="indicator-icon indicator-icon-up"
+                                         src="assets/images/icon-red.png"
+                                         width="10px">12.43亿</b>
+                            </li>
+                            <li>
+                                <p>同比</p>
+                                <b class="font-color-dd font-size-26" ><img
+                                        src="assets/images/icon-red.png" class="indicator-icon indicator-icon-up"
+                                        width="10px">5.42%</b>
+                            </li>
+                            <li>
+                                <p>年利用小时</p>
+                                <b class="font-size-26" id="utilizationOfYear">2256.00</b>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="line" id="lineData">
+                        <ul class="inline-list">
+                            <li>
+                                <p>月度目标(kWh)</p>
+                                <b>40.70亿</b>
+                            </li>
+                            <li>
+                                <p>已完成(kWh)</p>
+                                <b>17.80亿</b>
+                            </li>
+                            <li>
+                                <p>完成度(kWh)</p>
+                                <b>43.73%</b>
+                            </li>
+                        </ul>
+                        <ul class="inline-list">
+                            <li>
+                                <p>较全网平均</p>
+                                <b class="font-color-red font-size-26">
+                                    <img src="assets/images/icon-g.png" class="indicator-icon indicator-icon-down"
+                                         width="10px">6.21%</b>
+                            </li>
+                            <li>
+                                <p>同比</p>
+                                <b class="font-color-red font-size-26">
+                                    <img src="assets/images/icon-g.png" class="indicator-icon indicator-icon-down"
+                                         width="10px">9.67%</b>
+                            </li>
+
+                            <li>
+                                <p>环比</p>
+                                <b class="font-color-red font-size-26">
+                                    <img src="assets/images/icon-g.png" class="indicator-icon indicator-icon-down"
+                                         width="10px">6.21%</b>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--网架 MM-->
+        <div class="article-box " id="articleBox">
+            <div class="graph">
+                <!--<p><label class="title">四川省网架结构</label></p>-->
+                <p><label class="title" style="width:280px;background-size:100% 100%;">四川省电网500kV网架图</label></p>
+
+
+                <div style="position: absolute;top: 70px;left: 42px;" id="graph">
+                    <div class="battery-f battery" data-pop="瀑布沟水电站" data-id1="3" data-id2="24">
+                        <i class="first"></i>
+                        <i class="second"></i>
+                    </div>
+                    <div class="battery-s battery" data-pop="大岗岩水电站" data-id1="6" data-id2="38">
+                        <i class="first"></i>
+                        <i class="second"></i>
+                    </div>
+                    <div class="battery-first battery" data-pop="猴子岩水电站"  data-id1="7" data-id2="42">
+                        <i class="first"></i>
+                        <i class="second"></i>
+                    </div>
+                    <div class="battery-second battery" data-pop="深溪沟水电站"  data-id1="4" data-id2="26">
+                        <i class="first"></i>
+                        <i class="second"></i>
+                    </div>
+                    <div class="battery-third battery" data-pop="枕头坝水电站" data-id1="5" data-id2="40">
+                        <i class="first"></i>
+                        <i class="second"></i>
+                    </div>
+                    <div class="battery-four battery" data-pop="龚站水电站" data-id1="2" data-id2="20">
+                        <i class="first"></i>
+                        <i class="second"></i>
+                    </div>
+                    <div class="battery-fifth battery" data-pop="沙南水电站" data-id1="8" data-id2="48">
+                        <i class="first"></i>
+                        <i class="second"></i>
+                    </div>
+                    <div class="battery-sixth battery" data-pop="铜站水电站" data-id1="1" data-id2="22">
+                        <i class="first"></i>
+                        <i class="second"></i>
+                    </div>
+                    <div id="float"></div>
+                    <img src="assets/images/wj_map.png" width="530" style="margin-top: -10px;">
+                </div>
+                <div class="grid-data">
+                    <p class="grid-data-list-title">截止2017年9月</p>
+                    <ul class="grid-data-list">
+                        <li data-pop="pop1">
+                            <div>
+                                <p>装机容量（kW）</p>
+                                <b>9520.40万</b>
+                            </div>
+                        </li>
+                        <li data-pop="pop2">
+                            <div>
+                                <p>发电量（kWh）</p>
+                                <b>2267.80亿</b>
+                            </div>
+                        </li>
+                        <li data-pop="pop3">
+                            <div>
+                                <p>年利用小时数（h）</p>
+                                <b id="nian_liyong_xiaoshi_"></b>
+                            </div>
+                        </li>
+                        <li class="last" data-pop="pop4">
+                            <div>
+                                <p>外送通道容量（kW）</p>
+                                <b>3000.00万</b>
+                            </div>
+                        </li>
+                        <li class="last">
+                            <div>
+                                <p>外送电量（kWh）</p>
+                                <b>1193.8亿</b>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="popup popup1 pop1">
+                    <p>全网装机结构图</p>
+                    <div id="installChart"></div>
+                </div>
+                <div class="popup popup2 pop2">
+                    <p>全网发电量结构图</p>
+                    <div id="instChart"></div>
+                </div>
+                <div class="popup pop3">
+                    <p>年利用小时数</p>
+                    <div id="insChart"></div>
+                    <div id="insData">
+                        <label data-index="1" class="index0">
+                            <span></span>
+                            全网
+                        </label>
+                        <label data-index="2" class="index1">
+                            <span></span>
+                            国调
+                        </label>
+                        <label data-index="3" class="index2">
+                            <span></span>
+                            网调
+                        </label>
+                        <label data-index="4" class="index3">
+                            <span></span>
+                            省调
+                        </label>
+                        <label data-index="5" class="index4">
+                            <span></span>
+                            地调
+                        </label>
+                    </div>
+                </div>
+                <div class="popup pop4">
+                    <p>四川省外送通道容量</p>
+                    <div id="passChart"></div>
+                    <div id="passData">
+                        <label data-index="0" data-name="pageData1" class="index0">
+                            <span></span>
+                            二滩
+                        </label>
+                        <label data-index="0" data-name="pageData2" class="index1">
+                            <span></span>
+                            锦屏
+                        </label>
+                        <label data-index="0" data-name="pageData3" class="index2">
+                            <span></span>
+                            川网
+                        </label>
+                        <label data-index="0" data-name="pageData4" class="index3">
+                            <span></span>
+                            省网
+                        </label>
+                        <label data-index="1" data-name="pageData1"  class="index4">
+                            <span></span>
+                            德宝
+                        </label>
+                        <label data-index="1" data-name="pageData2" class="index5">
+                            <span></span>
+                            锦苏
+                        </label>
+                        <label data-index="1" data-name="pageData3"  class="index6">
+                            <span></span>
+                            复奉
+                        </label>
+                        <label data-index="1" data-name="pageData4" class="index7">
+                            <span></span>
+                            宾金
+                        </label>
+                    </div>
+                </div>
+                <div id="floatingLayer">
+                    <p class="title-f">猴子岩水电站</p>
+                    <div id="close" onclick="$('#floatingLayer').hide();"><i>X</i></div>
+                    <ul>
+                        <li>
+                            <label>装机容量(kw):</label>
+                            <b class="zj">1700.00</b>
+                        </li>
+                        <li>
+                            <label>日发电量(kWh):</label>
+                            <b class="rf">672.45</b>
+                        </li>
+                        <li>
+                            <label>月发电量(kWh):</label>
+                            <b class="yf">17654.40</b>
+                        </li>
+                        <li>
+                            <label>年发电量(kWh):</label>
+                            <b class="nf">213052.10</b>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--月度 -->
+        <div class="article-box month-article-box">
+            <div class="graph">
+                <p><label class="title">月度销售指标</label></p>
+                <!--月度销售指标数据列表-->
+                <div class="year-data" style="text-align: center;">
+                    <div class="swiper-container" id="monthPieLegend">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <ul>
+                                    <li>
+                                        <p>月度计划量(kWh)</p>
+                                        <b id="planMonth">40.70亿</b>
+                                    </li>
+                                    <li>
+                                        <p>计划合同电量(kWh)</p>
+                                        <b id="optGen">16.20亿</b>
+                                    </li>
+                                    <li>
+                                        <p>直购电计划(kWh)</p>
+                                        <b id="directGen">6.70亿</b>
+                                    </li>
+                                    <li>
+                                        <p>跨省电量计划(kWh)</p>
+                                        <b id="transProvincialGen">14.70亿</b>
+                                    </li>
+                                    <li>
+                                        <p>其他电量计划(元)</p>
+                                        <b id="otherGen">3.70亿</b>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="swiper-slide">
+                                <ul>
+                                    <li>
+                                        <p>平均电价(元)</p>
+                                        <b id="avgGen">0.2048</b>
+                                    </li>
+                                    <li>
+                                        <p>同比</p>
+                                        <b id="mom">
+                                            <img class="indicator-icon indicator-icon-up"
+                                                 src="assets/images/icon-red.png"
+                                                 style="margin-bottom:6px;"
+                                                 width="10px">
+
+                                            0.48%</b>
+                                    </li>
+                                    <li>
+                                        <p>环比</p>
+                                        <b class="font-color-red" id="yoy">
+                                            <img class="indicator-icon indicator-icon-down"
+                                                 src="assets/images/icon-g.png"
+                                                 width="10px">
+                                            0.53%</b>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="yearChart">
+                    <img src="assets/images/lind-image-20171206.png" width="100%">
+                    <!--<img src="../../assets/images/lind-image.png" width="100%">-->
+                </div>
+                <div>
+                    <ul class="month-pie-legend">
+                        <li class="color-orange">
+                            <label><img src="assets/images/first.png" width="32px"></label>
+                            计划合同电量
+                        </li>
+                        <li class="color-sky">
+                            <label><img src="assets/images/direct.png" width="32px"></label>
+                            直购电量计划
+                        </li>
+                        <li class="color-blue">
+                            <label><img src="assets/images/blue.png" width="32px"></label>
+                            跨省电量计划
+                        </li>
+                        <li class="color-green">
+                            <label><img src="assets/images/green.png" width="32px"></label>
+                            其他电量计划
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--市场及渠道 MM-->
+        <div class="article-box">
+            <div class="graph">
+                <p><a href="http://cloud.tsingsoft.com.cn:8603/login;JSESSIONID=73168173-47e6-4a37-8ea8-425197f6703a"><label class="title" style="cursor:pointer;">市场及渠道管理</label></a></p>
+                <!--市场及渠道管理数据列表-->
+                <div class="market_left">
+                    <div class="line">
+                        <p>直销渠道</p>
+                        <ul>
+                            <li>
+                                <p>售电量(kWh)</p>
+                                <b>87.00亿</b>
+                            </li>
+                            <li>
+                                <p>偏差(kWh)</p>
+                                <b>4.10亿</b>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="line">
+                        <p>分销渠道</p>
+                        <ul>
+                            <li>
+                                <p>售电量(kWh)</p>
+                                <b>9.20亿</b>
+                            </li>
+                            <li>
+                                <p>偏差(kWh)</p>
+                                <b>0.50亿</b>
+                            </li>
+                        </ul>
+                    </div>
+                    <a style="text-decoration:none;color:#f7f159" href="https://pmos.sc.sgcc.com.cn/pmos/index/login.jsp">
+                        <div class="line" >
+                            <p>交易平台</p>
+                            <ul>
+                                <li>
+                                    <p>交易量(kWh)</p>
+                                    <b>101.00亿</b>
+                                </li>
+                                <li>
+                                    <p>偏差(kWh)</p>
+                                    <b>2.30亿</b>
+                                </li>
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+
+                <div id="marketChart" class="market-chart">
+                    <img src="assets/images/3D_pie.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    <!--当前时间的计算-->
+    function getDate() {
+        var date = new Date();
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        m = m > 9 ? m : '0' + m;
+        var d = date.getDate();
+        d = d > 9 ? d : '0' + d;
+        var h = date.getHours();
+        h = h > 9 ? h : '0' + h;
+        var mi = date.getMinutes();
+        mi = mi > 9 ? mi : '0' + mi;
+        var se = date.getSeconds();
+        se = se > 9 ? se : '0' + se;
+
+        return {
+            fameData: y + '-' + m + '-' + d, /*返回当前日期*/
+            time: h + ':' + mi + ':' + se /*返回当前小时数*/
+        }
+
+    }
+
+    $('#data').text(getDate().fameData);
+    $('#time').text(getDate().time);
+
+    setInterval(function () {
+        $('#data').text(getDate().fameData);
+        $('#time').text(getDate().time);
+    }, 1000);
+
+    /*给年度销售指标添加数据*/
+    function getSaleData() {
+        var innerHTTL = '';
+
+        $('#targetEle').empty();
+        $('#lineData').empty();
+        $.get('/dataService/year?timeStart=' + getDate().fameData, function (e) {
+
+
+            innerHTTL = '<ul class="inline-list" ><li><p>年度目标(kWh)</p><b>' + (e.target / 10000).toFixed(2) + '亿</b>' +
+                '</li><li><p>已完成(kWh)</p><b>' + (e.alreadyDone / 10000).toFixed(2) + '亿</b></li><li><p>完成率(kWh)</p>' +
+                '<b>' + (e.percentOfDone * 100).toFixed(2) + '%</b></li></ul><ul class="inline-list"><li><p>较去年增减</p>';
+            if (e.compareWithLastYear * 1 > -1) {
+                innerHTTL += '<b class="font-color-dd font-size-26"><img class="indicator-icon indicator-icon-up" src="assets/images/icon-red.png" ' +
+                    'width="10px">' + (e.compareWithLastYear / 10000).toFixed(2) + '亿</b>';
+            } else {
+                innerHTTL += '<b class="font-color-red font-size-26"><img class="indicator-icon indicator-icon-down" src="assets/images/icon-g.png" ' +
+                    'width="10px">' + ((e.compareWithLastYear * -1) / 10000).toFixed(2) + '亿</b>';
+            }
+            innerHTTL += '</li><li><p>同比</p>';
+            if (e.yoy * 1 >= 1) {
+                innerHTTL += '<b class="font-color-dd font-size-26"><img src="assets/images/icon-red.png" class="indicator-icon indicator-icon-up" ' +
+                    ' width="10px">' + ((e.yoy * 1 - 1) * 100).toFixed(2) + '%</b> '
+            } else {
+                innerHTTL += '<b class="font-color-red font-size-26"><img src="assets/images/icon-g.png" class="indicator-icon indicator-icon-down" ' +
+                    ' width="10px">' + ((e.yoy * 1 - 1) * -100).toFixed(2) + '%</b> '
+            }
+            innerHTTL += '</li><li><p>年利用小时</p><b class="font-size-26">' + (e.utilizationOfYear * 1).toFixed(2) + '</b></li></ul>';
+            
+            $('#targetEle').append(innerHTTL);
+            $('#nian_liyong_xiaoshi_').text( (e.utilizationOfYear * 1).toFixed(2) );
+            
+            
+            //
+            
+        });
+        $.get('/dataService/month?timeStart=' + getDate().fameData, function (e) {
+            innerHTTL = '<ul class="inline-list" ><li><p>月度目标(kWh)</p><b>' + (e.target / 10000).toFixed(2) + '亿</b>' +
+                '</li><li><p>已完成(kWh)</p><b id="alreadyDone">' + (e.alreadyDone / 10000).toFixed(2) + '亿</b></li><li><p>完成率(kWh)</p>' +
+                '<b>' + (e.percentOfDone * 100).toFixed(2) + '%</b></li></ul><ul class="inline-list"><li><p>较去年增减</p>';
+            if (e.compareWithLastYear > -1) {
+                innerHTTL += '<b class="font-color-dd font-size-26"><img class="indicator-icon indicator-icon-up" width="10px" src="assets/images/icon-red.png"/>' +
+                    (e.compareWithLastYear / 10000).toFixed(2) + '亿</b>'
+            } else {
+                innerHTTL += '<b class="font-color-red font-size-26"><img class="indicator-icon indicator-icon-down" width="10px" src="assets/images/icon-g.png"/>' +
+                    ((e.compareWithLastYear * -1) / 10000).toFixed(2) + '亿</b>';
+            }
+            innerHTTL += '</li><li><p>同比</p> ';
+            if (e.mom * 1 >= 1) {
+                innerHTTL += '<b class="font-color-dd font-size-26"><img width="10px" src="assets/images/icon-red.png" class="indicator-icon indicator-icon-up"/>' +
+                    ((e.mom * 1 - 1 ) * 100).toFixed(2) + '%</b>'
+            } else {
+                innerHTTL += '<b class="font-color-red font-size-26"><img width="10px" src="assets/images/icon-g.png" class="indicator-icon indicator-icon-down"/>' +
+                    ((e.mom * 1 - 1) * -100).toFixed(2) + '%</b>';
+            }
+
+            innerHTTL += '</li><li><p>环比</p>';
+            if (e.yoy * 1 >= 1) {
+                innerHTTL += '<b class="font-size-26 font-color-dd"><img width="10px" class="indicator-icon indicator-icon-up" src="assets/images/icon-red.png"/>' +
+                    parseInt((e.yoy * 1 - 1) * 100).toFixed(2) + '%</b>'
+            } else {
+                innerHTTL += '<b class="font-size-26 font-color-red"><img width="10px" class="indicator-icon indicator-icon-down" src="assets/images/icon-g.png"/>' +
+                    parseInt((e.yoy * 1 - 1) * -100).toFixed(2) + '%</b>'
+            }
+            innerHTTL += '</li></ul>';
+            $('#lineData').append(innerHTTL);
+            
+            
+        });
+    }
+
+    $(function () {
+        getSaleData();
+
+    });
+
+
+</script>
+<script src="templates/index/mySwip.js"></script>
+<script src="templates/index/graph.js"></script>
+<script src="templates/index/passCharts.js"></script>
+<script src="templates/index/insOption.js"></script>
+<script type="text/javascript" src="assets/exp-echart.js"></script>

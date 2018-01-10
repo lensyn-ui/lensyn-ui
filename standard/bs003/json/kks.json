@@ -1,0 +1,614 @@
+{
+    "param": [
+        {
+            "title": "上下导瓦间隙",
+            "dashUri": "db/atatxiang-xi-shang-xia-dao-wa-jian-xi",
+            "kksCode": "EB000HP1MKC01MK012BL08J6CC001FB11"
+        },
+        {
+            "title": "上下导瓦均载",
+            "dashUri": "db/atatxiang-xi-shang-xia-dao-wa-jun-zai",
+            "kksCode": "EB000HP1MKC01MK026AL02J6EB002FB11"
+        },
+        {
+            "title": "主轴弯曲",
+            "dashUri": "db/atatxiang-xi-zhu-zhou-wan-qu",
+            "kksCode": "EB000HP1MKC01MK012ZZ02J6CC001FB11"
+        },
+        {
+            "title": "上导动态盘车",
+            "dashUri": "db/atatxiang-xi-shang-dao-dong-tai-pan-che",
+            "kksCode": "EB000HP1MKC01MK012ZZ06J6CC001FB11"
+        },
+        {
+            "title": "水导动态盘车",
+            "dashUri": "db/atatxiang-xi-shui-dao-dong-tai-pan-che",
+            "kksCode": "EB000HP1MEC01ME010ZZ05J6CC001FB11"
+        },
+        {
+            "title": "大轴窜动",
+            "dashUri": "db/atatxiang-xi-da-zhou-cuan-dong",
+            "kksCode": "EB000HP1MKD01MK012ZZ01J6CC003FB11"
+        },
+        {
+            "title": "镜板不垂直",
+            "dashUri": "db/atatxiang-xi-jing-ban-bu-chui-zhi",
+            "kksCode": "EB000HP1MKF01MK310ZZ01J6NB002FB11"
+        },
+        {
+            "title": "转子离心力",
+            "dashUri": "db/atatxiang-xi-zhuan-zi-chi-xin-li",
+            "kksCode": "EB000HP1MKB01MK007ZZ01J6CB001FB11"
+        },
+        {
+            "title": "转轮离心力",
+            "dashUri": "db/atatxiang-xi-zhuan-lun-chi-xin-li",
+            "kksCode": "EB000HP1MEC01ME029ZZ03J6CB001FB11"
+        },
+        {
+            "title": "最小气隙",
+            "dashUri": "db/atatxiang-xi-zui-xiao-qi-xi",
+            "kksCode": "EB000HP1MKB01MK016ZZ01J6CA004FB11"
+        },
+        {
+            "title": "转子离心力",
+            "dashUri": "db/atatxiang-xi-zhuan-zi-chi-xin-li",
+            "kksCode": "EB000HP1MKB01MK007ZZ01J6CB001FB11"
+        },
+        {
+            "title": "转子弹性变形",
+            "dashUri": "db/atatxiang-xi-zhuan-zi-dan-xing-bian-xing",
+            "kksCode": "EB000HP1MKB04MK007ZZ04J6CA002FB06"
+        },
+        {
+            "title": "转子不圆度",
+            "dashUri": "db/atatxiang-xi-zhuan-zi-bu-yuan-du",
+            "kksCode": "EB000HP1MKB01MK007ZZ01J6CA004FB11"
+        },
+        {
+            "title": "定转子中心偏移",
+            "dashUri": "db/atatxiang-xi-ding-zhuan-zi-zhong-xin-pian-yi",
+            "kksCode": "EB000HP1MKZ01MK012BL06J6CC001FB11"
+        },
+        {
+            "title": "定子铁芯温度",
+            "dashUri": "db/atatxiang-xi-ding-zi-tie-xin-wen-du",
+            "kksCode": "EB000HP1MKA01MK002ZZ04J6AC003FB11"
+        },
+        {
+            "title": "定子线棒温度",
+            "dashUri": "db/atatxiang-xi-ding-zi-xian-bang-wen-du",
+            "kksCode": "EB000HP1MKA01MK074ZZ01J6AC004FB11"
+        },
+        {
+            "title": "定子叠片松动",
+            "dashUri": "db/atatxiang-xi-ding-zi-die-pian-song-dong",
+            "kksCode": "EB000HP1MKA01MK002ZZ03J6CB002FB11"
+        },
+        {
+            "title": "定子线棒松动",
+            "dashUri": "db/atatxiang-xi-ding-zi-xian-bang-song-dong",
+            "kksCode": "EB000HP1MKA01MK002ZZ04J6CB001FB11"
+        },
+        {
+            "title": "定子叠片绝缘损伤",
+            "dashUri": "db/atatxiang-xi-ding-zi-die-pian-jue-yuan-sun-shang",
+            "kksCode": "EB000HP1MKA01MK002ZZ05J6AC003FB11"
+        },
+        {
+            "title": "定子铁芯水平振动",
+            "dashUri": "db/atatxiang-xi-ding-zi-tie-xin-shui-ping-zhen-dong",
+            "kksCode": "EB000HP1MKA01MK002ZZ01J6CB001FB11"
+        },
+        {
+            "title": "定子铁芯垂直振动",
+            "dashUri": "db/atatxiang-xi-ding-zi-tie-xin-chui-zhi-zhen-dong",
+            "kksCode": "EB000HP1MKA01MK002ZZ02J6CB002FB11"
+        },
+        {
+            "title": "定转子中心偏移",
+            "dashUri": "db/atatxiang-xi-ding-zhuan-zi-zhong-xin-pian-yi",
+            "kksCode": "EB000HP1MKZ01MK012BL06J6CC001FB11"
+        },
+        {
+            "title": "定子线棒铜损偏差",
+            "dashUri": "db/atatxiang-xi-ding-zi-xian-bang-tong-sun-pian-chai",
+            "kksCode": "EB000HP1MKA01MK074ZZ02J6AC004FB11"
+        },
+        {
+            "title": "空冷器平均温度差",
+            "dashUri": "db/atatxiang-xi-kong-leng-qi-xiao-lu",
+            "kksCode": "EB000HP1MKG99MK311ZZ02J6AA008FB11"
+        },
+        {
+            "title": "最小气隙",
+            "dashUri": "db/atatxiang-xi-zui-xiao-qi-xi",
+            "kksCode": "EB000HP1MKB01MK016ZZ01J6CA004FB11"
+        },
+        {
+            "title": "上导摆度",
+            "dashUri": "db/atatxiang-xi-shang-dao-bai-du",
+            "kksCode": "EB000HP1MKC01MK012ZZ01J6CC001FB11"
+        },
+        {
+            "title": "上机架水平振动",
+            "dashUri": "db/atatxiang-xi-shang-ji-jia-shui-ping-zhen-dong",
+            "kksCode": "EB000HP1MKC01MK011ZZ01J6CB001FB11"
+        },
+        {
+            "title": "上导瓦温",
+            "dashUri": "db/atatxiang-xi-shang-dao-wa-wen",
+            "kksCode": "EB000HP1MKC01MK026ZZ04J6AC002FB11"
+        },
+        {
+            "title": "上导瓦间隙不匀",
+            "dashUri": "db/atatxiang-xi-shang-dao-wa-jian-xi-bu-yun",
+            "kksCode": "EB000HP1MKC01MK026ZZ03J6AC002FB11"
+        },
+        {
+            "title": "上导支撑松动",
+            "dashUri": "db/atatxiang-xi-shang-dao-zhi-cheng-song-dong",
+            "kksCode": "EB000HP1MKC01MK011ZZ04J6CB001FB11"
+        },
+        {
+            "title": "上导动态盘车",
+            "dashUri": "db/atatxiang-xi-shang-dao-dong-tai-pan-che",
+            "kksCode": "EB000HP1MKC01MK012ZZ06J6CC001FB11"
+        },
+        {
+            "title": "下导摆度",
+            "dashUri": "db/atatxiang-xi-xia-dao-bai-du",
+            "kksCode": "EB000HP1MKD01MK011ZZ01J6CC001FB11"
+        },
+        {
+            "title": "下机架水平振动",
+            "dashUri": "db/atatxiang-xi-xia-ji-jia-shui-ping-zhen-dong",
+            "kksCode": "EB000HP1MKD01MK011ZZ01J6CB001FB11"
+        },
+        {
+            "title": "下导瓦温",
+            "dashUri": "db/atatxiang-xi-xia-dao-wa-wen",
+            "kksCode": "EB000HP1MKD01MK026ZZ04J6AC003FB11"
+        },
+        {
+            "title": "下导瓦间隙不匀",
+            "dashUri": "db/atatxiang-xi-xia-dao-wa-jian-xi-bu-yun",
+            "kksCode": "EB000HP1MKD01MK026ZZ03J6AC004FB11"
+        },
+        {
+            "title": "下导支撑松动",
+            "dashUri": "db/atatxiang-xi-xia-dao-zhi-cheng-song-dong",
+            "kksCode": "EB000HP2MKD01MK011ZZ04J6CB001FB11"
+        },
+        {
+            "title": "镜板不垂直",
+            "dashUri": "db/atatxiang-xi-jing-ban-bu-chui-zhi",
+            "kksCode": "EB000HP1MKF01MK310ZZ01J6NB002FB11"
+        },
+        {
+            "title": "推力机架垂直振动",
+            "dashUri": "db/atatxiang-xi-tui-li-ji-jia-chui-zhi-zhen-dong",
+            "kksCode": "EB000HP1MKF01MK012ZZ01J6CB002FB11"
+        },
+        {
+            "title": "推力轴承瓦温",
+            "dashUri": "db/atatxiang-xi-tui-li-zhou-cheng-wa-wen",
+            "kksCode": "EB000HP1MKF01MK026ZZ01J6AC002FB11"
+        },
+        {
+            "title": "推力支撑松动",
+            "dashUri": "db/atatxiang-xi-tui-li-zhi-cheng-song-dong",
+            "kksCode": "EB000HP1MKF01MK011ZZ04J6CB002FB11"
+        },
+        {
+            "title": "推力瓦受力不均",
+            "dashUri": "db/atatxiang-xi-tui-li-wa-shou-li-bu-yun",
+            "kksCode": " EB000HP1MKF01MK026ZZ02J6AC002FB11"
+        },
+        {
+            "title": "水导摆度",
+            "dashUri": "db/atatxiang-xi-shui-dao-bai-du",
+            "kksCode": "EB000HP1MEC01ME010ZZ01J6CC001FB11"
+        },
+        {
+            "title": "顶盖水平振动",
+            "dashUri": "db/atatxiang-xi-ding-gai-shui-ping-zhen-dong",
+            "kksCode": "EB000HP1MEC01ME029ZZ01J6CB001FB11"
+        },
+        {
+            "title": "顶盖垂直振动",
+            "dashUri": "db/atatxiang-xi-ding-gai-chui-zhi-zhen-dong",
+            "kksCode": "EB000HP1MEC01ME029ZZ02J6CB002FB11"
+        },
+        {
+            "title": "水导瓦温",
+            "dashUri": "db/atatxiang-xi-shui-dao-wa-wen",
+            "kksCode": "EB000HP1MEC01MK026ZZ04J6AC003FB11"
+        },
+        {
+            "title": "水导瓦间隙不匀",
+            "dashUri": "db/atatxiang-xi-shui-dao-wa-jian-xi-bu-yun",
+            "kksCode": "EB000HP1MEC01MK026ZZ03J6AC004FB11"
+        },
+        {
+            "title": "水导支撑松动",
+            "dashUri": "db/atatxiang-xi-shui-dao-zhi-cheng-song-dong",
+            "kksCode": "EB000HP1MEC01ME029ZZ05J6CB001FB11"
+        },
+        {
+            "title": "水导动态盘车",
+            "dashUri": "db/atatxiang-xi-shui-dao-dong-tai-pan-che",
+            "kksCode": "EB000HP1MEC01ME010ZZ05J6CC001FB11"
+        },
+        {
+            "title": "转轮离心力",
+            "dashUri": "db/atatxiang-xi-zhuan-lun-chi-xin-li",
+            "kksCode": "EB000HP1MEC01ME029ZZ03J6CB001FB11"
+        },
+        {
+            "title": "水轮机开口不匀",
+            "dashUri": "db/atatxiang-xi-shui-lun-ji-kai-kou-bu-jun",
+            "kksCode": "EB000HP1MEC99ME010ZZ08J6CC001FB11"
+        },
+        {
+            "title": "尾水管压力脉动",
+            "dashUri": "db/atatxiang-xi-wei-shui-zhui-guan-ya-li-mai-dong",
+            "kksCode": "EB000HP1MEA01ME001ZZ01J6CD001FB11"
+        },
+        {
+            "title": "主轴弯曲缓变量",
+            "dashUri": "db/atatxiang-xi-zhu-zhou-wan-qu-huan-bian-liang",
+            "kksCode": " EB000HP1MKC01MK012ZZ02J6CC001AD04"
+        },
+        {
+            "title": "上下导瓦间隙缓变量",
+            "dashUri": "db/atatxiang-xi-shang-xia-dao-wa-jian-xi-huan-bian-liang",
+            "kksCode": ""
+        },
+        {
+            "title": "镜板不垂直缓变量",
+            "dashUri": "db/atatxiang-xi-jing-ban-bu-chui-zhi-huan-bian-liang",
+            "kksCode": " EB000HP1MKF01MK310ZZ01J6NB002AD04"
+        },
+        {
+            "title": "水导动态盘车量缓变量",
+            "dashUri": "db/atatxiang-xi-shui-dao-dong-tai-pan-che-liang-huan-bian-liang",
+            "kksCode": ""
+        },
+        {
+            "title": "大轴窜动缓变量",
+            "dashUri": "db/atatxiang-xi-da-zhou-cuan-dong-huan-bian-liang",
+            "kksCode": " EB000HP1MKD01MK012ZZ01J6CC003AD04"
+        },
+        {
+            "title": "最小气隙缓变量",
+            "dashUri": "db/atatxiang-xi-zui-xiao-qi-xi-huan-bian-liang",
+            "kksCode": " EB000HP1MKB01MK016ZZ01J6CA004AD04"
+        },
+        {
+            "title": "转子离心力缓变量",
+            "dashUri": "db/atatxiang-xi-zhuan-zi-chi-xin-li-huan-bian-liang",
+            "kksCode": " EB000HP1MKB01MK007ZZ01J6CB001AD04"
+        },
+        {
+            "title": "转子不圆度缓变量",
+            "dashUri": "db/atatxiang-xi-zhuan-zi-bu-yuan-du-huan-bian-liang",
+            "kksCode": " EB000HP1MKB01MK007ZZ01J6CA004AD04"
+        },
+        {
+            "title": "转子电阻缓变量",
+            "dashUri": "db/atatxiang-xi-zhuan-zi-dian-zu-huan-bian-liang",
+            "kksCode": " EB000HP1MKB01MK174ZZ01J6LA004AD04"
+        },
+        {
+            "title": "定子铁芯温度缓变量",
+            "dashUri": "db/atatxiang-xi-ding-zi-tie-xin-wen-du-huan-bian-liang",
+            "kksCode": " EB000HP1MKA01MK002ZZ04J6AC003AD04"
+        },
+        {
+            "title": "定子弹性变形缓变量",
+            "dashUri": "db/atatxiang-xi-ding-zi-dan-xing-bian-xing-huan-bian-liang",
+            "kksCode": " EB000HP1MKA01MK002ZZ06J6CB001AD04"
+        },
+        {
+            "title": "定子线棒温度缓变量",
+            "dashUri": "db/atatxiang-xi-ding-zi-xian-bang-wen-du-huan-bian-liang",
+            "kksCode": ""
+        },
+        {
+            "title": "定子叠片松动缓变量",
+            "dashUri": "db/atatxiang-xi-ding-zi-die-pian-song-dong-huan-bian-liang",
+            "kksCode": " EB000HP1MKA01MK002ZZ03J6CB002AD04"
+        },
+        {
+            "title": "定子线棒松动缓变量",
+            "dashUri": "db/atatxiang-xi-ding-zi-xian-bang-song-dong-huan-bian-liang",
+            "kksCode": " EB000HP1MKA01MK002ZZ04J6CB001AD04"
+        },
+        {
+            "title": "定子不圆度缓变量",
+            "dashUri": "db/atatxiang-xi-ding-zi-bu-yuan-du-huan-bian-liang",
+            "kksCode": "EB000HP1MKA01MK016ZZ03J6CA004AD04"
+        },
+        {
+            "title": "上导油槽油位缓变量",
+            "dashUri": "db/atatxiang-xi-shang-dao-you-cao-you-wei-huan-bian-liang",
+            "kksCode": " EB000HP1MKC01MK013ZZ01J6BC001AD04"
+        },
+        {
+            "title": "上导支撑松动缓变量",
+            "dashUri": "db/atatxiang-xi-shang-dao-zhi-cheng-song-dong-huan-bian-liang",
+            "kksCode": "EB000HP1MKC01MK011ZZ04J6CB001AD04"
+        },
+        {
+            "title": "定子铁芯水平振动缓变量",
+            "dashUri": "db/atatxiang-xi-ding-zi-tie-xin-shui-ping-zhen-dong-huan-bian-liang",
+            "kksCode": " EB000HP1MKA01MK002ZZ01J6CB001AD04"
+        },
+        {
+            "title": "定子铁芯垂直振动缓变量",
+            "dashUri": "db/atatxiang-xi-ding-zi-tie-xin-chui-zhi-zhen-dong-huan-bian-liang",
+            "kksCode": " EB000HP1MKA01MK002ZZ02J6CB002AD04"
+        },
+        {
+            "title": "定转子中心偏移缓变量",
+            "dashUri": "db/atatxiang-xi-ding-zhuan-zi-zhong-xin-pian-yi-huan-bian-liang",
+            "kksCode": " EB000HP1MKZ01MK012BL06J6CC001AD04"
+        },
+        {
+            "title": "空冷器平均温度差缓变量",
+            "dashUri": "db/atatxiang-xi-kong-leng-qi-ping-jun-wen-du-chai-huan-bian-liang",
+            "kksCode": "EB000HP1MKG99MK311ZZ02J6AA008AD04"
+        },
+        {
+            "title": "上导摆度缓变量",
+            "dashUri": "db/atatxiang-xi-shang-dao-bai-du-huan-bian-liang",
+            "kksCode": " EB000HP1MKC01MK012ZZ01J6CC001AD04"
+        },
+        {
+            "title": "上机架振动缓变量",
+            "dashUri": "db/atatxiang-xi-shang-ji-jia-zhen-dong-huan-bian-liang",
+            "kksCode": " EB000HP1MKC01MK011ZZ01J6CB001AD04"
+        },
+        {
+            "title": "上导润滑缓变量",
+            "dashUri": "db/atatxiang-xi-shang-dao-run-hua-huan-bian-liang",
+            "kksCode": " EB000HP1MKC01MK013ZZ01J8HA019AD04"
+        },
+        {
+            "title": "下导油槽油位缓变量",
+            "dashUri": "db/atatxiang-xi-xia-dao-you-cao-you-wei-huan-bian-liang",
+            "kksCode": " EB000HP1MKD01MK013ZZ01J6BC001AD04"
+        },
+        {
+            "title": "下导摆度缓变量",
+            "dashUri": "db/atatxiang-xi-xia-dao-bai-du-huan-bian-liang",
+            "kksCode": " EB000HP1MKD01MK011ZZ01J6CC001AD04"
+        },
+        {
+            "title": "下机架振动缓变量",
+            "dashUri": "db/atatxiang-xi-xia-ji-jia-zhen-dong-huan-bian-liang",
+            "kksCode": " EB000HP1MKD01MK011ZZ01J6CB001AD04"
+        },
+        {
+            "title": "下导润滑缓变量",
+            "dashUri": "db/atatxiang-xi-xia-dao-run-hua-huan-bian-liang",
+            "kksCode": " EB000HP1MKD01MK013ZZ01J6HA019AD04"
+        },
+        {
+            "title": "下导支撑松动缓变量",
+            "dashUri": "db/atatxiang-xi-xia-dao-zhi-cheng-song-dong-huan-bian-liang",
+            "kksCode": " EB000HP1MKD01MK011ZZ04J6CB001AD04"
+        },
+        {
+            "title": "定子叠片绝缘损伤缓变量",
+            "dashUri": "db/atatxiang-xi-ding-zi-die-pian-jue-yuan-sun-shang-huan-bian-liang",
+            "kksCode": " EB000HP1MKA01MK002ZZ05J6AC003AD04"
+        },
+        {
+            "title": "水导润滑缓变量",
+            "dashUri": "db/atatxiang-xi-shui-dao-run-hua-huan-bian-liang",
+            "kksCode": " EB000HP1MEC01MC011ZZ01J6HA019AD04"
+        },
+        {
+            "title": "推力瓦沉降缓变量",
+            "dashUri": "db/atatxiang-xi-tui-li-wa-chen-jiang-huan-bian-liang",
+            "kksCode": " EB000HP1MKZ99MK012ZZ02J6CC003AD04"
+        },
+        {
+            "title": "推力支撑松动缓变量",
+            "dashUri": "db/atatxiang-xi-tui-li-zhi-cheng-song-dong-huan-bian-liang",
+            "kksCode": " EB000HP1MKF01MK011ZZ04J6CB002AD04"
+        },
+        {
+            "title": "推力机架垂直振动缓变量",
+            "dashUri": "db/atatxiang-xi-tui-li-ji-jia-chui-zhi-zhen-dong-huan-bian-liang",
+            "kksCode": " EB000HP1MKF01MK012ZZ01J6CB002AD04"
+        },
+        {
+            "title": "推力润滑缓变量",
+            "dashUri": "db/atatxiang-xi-tui-li-run-hua-huan-bian-liang",
+            "kksCode": " EB000HP1MKF01MK013ZZ01J6HA019AD04"
+        },
+        {
+            "title": "转轮离心力缓变量",
+            "dashUri": "db/atatxiang-xi-zhuan-lun-chi-xin-li-huan-bian-liang",
+            "kksCode": " EB000HP1MEC01ME029ZZ03J6CB001AD04"
+        },
+        {
+            "title": "推力油槽油位缓变量",
+            "dashUri": "db/atatxiang-xi-tui-li-you-cao-you-wei-huan-bian-liang",
+            "kksCode": " EB000HP1MKF01MK013ZZ01J6BC001AD04"
+        },
+        {
+            "title": "水导油槽油位缓变量",
+            "dashUri": "db/atatxiang-xi-shui-dao-you-cao-you-wei-huan-bian-liang",
+            "kksCode": " EB000HP1MEC01ME011ZZ01J6BC001AD04"
+        },
+        {
+            "title": "水导摆度缓变量",
+            "dashUri": "db/atatxiang-xi-shui-dao-bai-du-huan-bian-liang",
+            "kksCode": " EB000HP1MEC01ME010ZZ01J6CC001AD04"
+        },
+        {
+            "title": "顶盖水平振动缓变量",
+            "dashUri": "db/atatxiang-xi-ding-gai-shui-ping-zhen-dong-huan-bian-liang",
+            "kksCode": " EB000HP1MEC01ME029ZZ01J6CB001AD04"
+        },
+        {
+            "title": "顶盖垂直振动缓变量",
+            "dashUri": "db/atatxiang-xi-ding-gai-chui-zhi-zhen-dong-huan-bian-liang",
+            "kksCode": " EB000HP1MEC01ME029ZZ02J6CB002AD04"
+        },
+        {
+            "title": "水导支撑松动缓变量",
+            "dashUri": "db/atatxiang-xi-shui-dao-zhi-cheng-song-dong-huan-bian-liang",
+            "kksCode": " EB000HP1MEC01ME029ZZ05J6CB001AD04"
+        },
+        {
+            "title": "水轮机开口不匀缓变量",
+            "dashUri": "db/atatxiang-xi-shui-lun-ji-kai-kou-bu-yun-huan-bian-liang",
+            "kksCode": " EB000HP1MEC99ME010ZZ08J6CC001AD04"
+        },
+        {
+            "title": "尾水管压力脉动缓变量",
+            "dashUri": "db/atatxiang-xi-wei-shui-guan-ya-li-mai-dong-huan-bian-liang",
+            "kksCode": " EB000HP1MEA01ME001ZZ01J6CD001AD04"
+        },
+        {
+            "title": "水导摆度",
+            "dashUri": "db/atatshui-dao-bai-du",
+            "kksCode": "EB000HP1MEC99ME010ZZ01J6CC001FB07"
+        },
+        {
+            "title": "上导摆度",
+            "dashUri": "db/atatshang-dao-bai-du",
+            "kksCode": "EB000HP1MKC99MK012ZZ01J6CC001FB07"
+        },
+        {
+            "title": "定子铁芯水平振动",
+            "dashUri": "db/atatding-zi-tie-xin-shui-ping-zhen-dong",
+            "kksCode": "EB000HP1MKA99MK002ZZ01J6CB001FB07"
+        },
+        {
+            "title": "下导摆度",
+            "dashUri": "db/atatxia-dao-bai-du",
+            "kksCode": "EB000HP1MKD99MK012ZZ01J6CC001FB07"
+        },
+        {
+            "title": "下机架Z向振动",
+            "dashUri": "db/atatxia-ji-jia-zxiang-zhen-dong",
+            "kksCode": "EB000HP1MKD01MK011BL01J1CB002AA06"
+        },
+        {
+            "title": "上机架水平振动",
+            "dashUri": "db/atatshang-ji-jia-shui-ping-zhen-dong",
+            "kksCode": "EB000HP1MKC99MK011ZZ01J6CB003FB07"
+        },
+        {
+            "title": "顶盖水平振动",
+            "dashUri": "db/atatding-gai-shui-ping-zhen-dong",
+            "kksCode": "EB000HP1MEJ99ME029ZZ01J6CB003FB07"
+        },
+        {
+            "title": "下机架水平振动",
+            "dashUri": "db/atatxia-ji-jia-shui-ping-zhen-dong",
+            "kksCode": "EB000HP1MKD99MK011ZZ01J6CB003FB07"
+        },
+        {
+            "title": "定子机架水平振动",
+            "dashUri": "db/atatding-zi-ji-jia-shui-ping-zhen-dong",
+            "kksCode": "EB000HP1MKA99MK001ZZ01J6CB001FB07"
+        },
+        {
+            "title": "水导瓦温",
+            "dashUri": "db/atatshui-dao-wa-wen",
+            "kksCode": "EB000HP1MEC99ME039ZZ03J6AC002FB07"
+        },
+        {
+            "title": "顶盖Z向振动",
+            "dashUri": "db/atatding-gai-zxiang-zhen-dong",
+            "kksCode": "EB000HP1MEJ01ME029BL01J1CB002AA06"
+        },
+        {
+            "title": "下导瓦温",
+            "dashUri": "db/atatxia-dao-wa-wen",
+            "kksCode": "EB000HP1MKD99MK026ZZ01J6AC002FB07"
+        },
+        {
+            "title": "推力瓦温",
+            "dashUri": "db/atattui-li-wa-wen",
+            "kksCode": "EB000HP1MKF99MK026ZZ01J6AC002FB07"
+        },
+        {
+            "title": "定子线棒温度",
+            "dashUri": "db/atatding-zi-xian-bang-wen-du",
+            "kksCode": "EB000HP1MKA99MK074ZZ01J6AC003FB07"
+        },
+        {
+            "title": "定子铁芯垂直振动",
+            "dashUri": "db/atatding-zi-tie-xin-chui-zhi-zhen-dong",
+            "kksCode": "EB000HP1MKA99MK002ZZ01J6CB002FB07"
+        },
+        {
+            "title": "上导瓦温",
+            "dashUri": "db/atatshang-dao-wa-wen",
+            "kksCode": "EB000HP1MKC99MK026ZZ01J6AC002FB07"
+        },
+        {
+            "title": "定子机架Z向振动",
+            "dashUri": "db/atatding-zi-ji-jia-zxiang-zhen-dong",
+            "kksCode": "EB000HP1MKA01MK001BL02J1CB002AA06"
+        },
+        {
+            "title": "轴向窜动",
+            "dashUri": "db/atatzhou-xiang-cuan-dong",
+            "kksCode": "EB000HP1MKZ99MK012ZZ01J6CC003FB07"
+        },
+        {
+            "title": "水导油槽油位",
+            "dashUri": "db/atatshui-dao-you-cao-you-wei",
+            "kksCode": "EB000HP1MEC99ME011ZZ01J6BC002FB07"
+        },
+        {
+            "title": "定子铁芯温度",
+            "dashUri": "db/atatding-zi-tie-xin-wen-du",
+            "kksCode": "EB000HP1MKA99MK002ZZ01J6AC003FB07"
+        },
+        {
+            "title": "上导油槽油位",
+            "dashUri": "db/atatshang-dao-you-cao-you-wei",
+            "kksCode": "EB000HP1MKC99MK013ZZ01J6BC002FB07"
+        },
+        {
+            "title": "上导油温",
+            "dashUri": "db/atatshang-dao-you-wen",
+            "kksCode": "EB000HP1MKC99MK013ZZ01J6AB005FB07"
+        },
+        {
+            "title": "水导油温",
+            "dashUri": "db/atatshui-dao-you-wen",
+            "kksCode": "EB000HP1MEC99ME011ZZ01J6AB005FB07"
+        },
+        {
+            "title": "下导油槽油位",
+            "dashUri": "db/atatxia-dao-you-cao-you-wei",
+            "kksCode": "EB000HP1MKD99MK013ZZ01J6BC002FB07"
+        },
+        {
+            "title": "推力油槽油位",
+            "dashUri": "db/atattui-li-you-cao-you-wei",
+            "kksCode": "EB000HP1MKF99MK013ZZ01J6BC002FB07"
+        },
+        {
+            "title": "推力油温",
+            "dashUri": "db/atattui-li-you-wen",
+            "kksCode": "EB000HP1MKF99MK013ZZ01J6AB005FB07"
+        },
+        {
+            "title": "下导油温",
+            "dashUri": "db/atatxia-dao-you-wen",
+            "kksCode": "EB000HP1MKD99MK013ZZ01J6AB005FB07"
+        }
+    ]
+}

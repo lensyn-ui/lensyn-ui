@@ -1,0 +1,59 @@
+{
+  "data": [
+    {
+      "id": "ID001",
+      "name": "售电总览",
+      "icon": "menu-overview",
+      "link": "/overview",
+      "children": [
+        {
+          "id": "ID0011",
+          "name": "市场动态",
+          "link": "/marketDynamics"
+        },
+        {
+          "id": "ID0012",
+          "name": "经营KPI",
+          "link": "/management"
+        },
+        {
+          "id": "ID0013",
+          "name": "成交一览表",
+          "link": "/dealAnalysis"
+        }
+      ]
+    },
+    {
+      "id": "ID002",
+      "name": "客户管理",
+      "icon": "menu-customer",
+      "link": "/customer",
+      "children": [
+        {
+          "id": "ID0021",
+          "name": "用电客户管理",
+          "link": "/electricity"
+        },
+        {
+          "id": "ID0022",
+          "name": "潜在客户管理",
+          "link": "/potential"
+        },
+        {
+          "id": "ID0023",
+          "name": "电源商管理",
+          "link": "/power"
+        },
+        {
+          "id": "ID0024",
+          "name": "渠道商管理",
+          "link": "/channel"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "code": 1,
+    "message": "success"
+  }
+}
