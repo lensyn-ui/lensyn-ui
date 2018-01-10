@@ -19,3 +19,4 @@ dist/
 .classpath
 node_modules/
 checkDir/
+standard/
