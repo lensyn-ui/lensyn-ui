@@ -47,6 +47,18 @@ const Progress = () => import("../components/common/progress/Progress.vue");
 /* 分页组件 */
 const Pagination = () => import("../components/common/pagination/Pagination.vue");
 
+/* 树形组件 */
+const Tree = () => import("../components/common/tree/Tree.vue");
+
+/* 上传组件 */
+const Uploader = () => import("../components/common/uploader/Uploader.vue");
+
+/* 确认对话框组件 */
+const ConfirmDialog = () => import("../components/common/confirmdialog/ConfirmDialog.vue");
+
+/* Tooltip 组件 */
+const Tooltip = () => import("../components/common/tooltip/Tooltip.vue");
+
 /* mobile 组件 */
 const MComponent = () => import("../components/home/MComponent.vue");
 
@@ -71,7 +83,11 @@ const [WEB_CHILDREN, MOBILE_CHILDREN] = [
         { path: "/tabs", component: Tabs },
         { path: "/treeEditTable", component: Edittree },
         { path: "/progess", component: Progress },
-        { path: "/pagination", component: Pagination }
+        { path: "/pagination", component: Pagination },
+        { path: "/tree", component: Tree },
+        { path: "/uploader", component: Uploader },
+        { path: "/confirmdialog", component: ConfirmDialog },
+        { path: "/tooltip", component: Tooltip }
     ],
     [
         { path: "", component: MDroplist },

@@ -12,9 +12,9 @@
         <span class="desc">需要用手机模拟查看效果</span>
         <div id="basicLayout" class="box">
             <div class="box-content">
-                <ls-button class="button" :objProps="btnProp" @clickEvt="btnClick" name="日期下拉"></ls-button>
+                <ls-button class="button" :objProps="btnProp" @clickEvt="btnClick" name="日期选择器"></ls-button>
                 <span style="display: block; margin: 15px; font-size: 14px; color: rgb(18, 150, 219);">选择的日期是：{{pickerValue}}</span>
-                <ls-button class="button" @clickEvt="btnLClick" name="日期下拉"></ls-button>
+                <ls-button class="button" @clickEvt="btnLClick" name="数据选择器"></ls-button>
                 <span style="display: block; margin: 15px; font-size: 14px; color: rgb(18, 150, 219);">选择的列表数据是：{{pickerLValue}}</span>
             </div>
             <div class="box-tagger" ref="boxTagger" :style="[{'height': showContent ? 'auto' : '0'}]">

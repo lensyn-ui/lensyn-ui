@@ -12,6 +12,11 @@
             <span>npm install lensyn-ui --save-dev</span>
             <span>或则：npm i lensyn-ui -D</span>
         </div>
+        <span class="desc">在Vue项目中的主入口文件配置组件库的引用：</span>
+        <div class="pre-box">
+            <span>import LensynUI from 'lensyn-ui';</span>
+            <span>Vue.use(LensynUI);</span>
+        </div>
         <span class="sub">开发模板及vue2.0+webpack开发环境下载</span>
         <span class="desc">跳转到资源页面进行模板下载<router-link to="/resource">资源下载</router-link></span>
     </div>

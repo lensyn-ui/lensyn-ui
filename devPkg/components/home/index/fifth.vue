@@ -31,6 +31,12 @@
                 </div>
             </div>
         </div>
+        <div class="footer-info">
+            <span class="title">Licence</span>
+            <span class="title sub">Licence under the MIT License.</span>
+            <span class="title sub center">@2015-2017 四川能信科技股份有限公司 版权所有 公司地址：四川省成都市高新区天晖中街56号曙光国际1栋11层1127号</span>
+            <span class="title sub center">蜀ICP备009002102|技术支持：四川能信科技股份有限公司</span>
+        </div>
     </div>
 </template>
 <script>

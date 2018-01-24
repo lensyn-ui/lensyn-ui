@@ -2,14 +2,18 @@
  * Created by deming-su on 2017/11/29                                   *
  *********************************************************************/
 
-import Button from './source/Button.vue'
-import Input from './source/Input.vue'
-import Selection from './source/Selection.vue'
-import Tabs from './source/Tabs.vue'
-import TreeEditTable from "./source/TreeEditTable.vue";
-import Line from './source/Line.vue'
-import Pagination from './source/Pagination.vue'
-import MPicker from './source/MPicker.vue'
+import Button from './source/button/Button.vue'
+import Input from './source/input/Input.vue'
+import Selection from './source/selection/Selection.vue'
+import Tabs from './source/tabs/Tabs.vue'
+import TreeEditTable from "./source/treeedittable/TreeEditTable.vue";
+import Line from './source/line/Line.vue'
+import Pagination from './source/pagination/Pagination.vue'
+import MPicker from './source/mpicker/MPicker.vue'
+import Tree from "./source/tree/Tree.vue"
+import Uploader from "./source/uploader/Uploader.vue"
+import ConfirmDialog from "./source/confirmdialog/ConfirmDialog";
+import Tooltip from "./source/tooltip/tooltip";
 
 import '../../styles/templates.less'
 
@@ -23,5 +27,23 @@ module.exports = {
         Vue.component('ls-line', Line);
         Vue.component('ls-pagination', Pagination);
         Vue.component('ls-mpicker', MPicker);
+        Vue.component("ls-tree", Tree);
+        Vue.component("ls-uploader", Uploader);
+
+        this._installGlobal(Vue);
+        this._installDirective(Vue);
+    },
+
+    _installGlobal(Vue) {
+        Vue.prototype.$lensyn = {};
+        ConfirmDialog.install(Vue);        
+    },
+
+    /**
+     * ÃÌº”÷∏¡Ó
+     * @param {object} Vue 
+     */
+    _installDirective(Vue) {
+        Vue.directive("ls-tooltip", Tooltip);
     }
 };

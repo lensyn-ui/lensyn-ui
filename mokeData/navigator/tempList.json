@@ -113,5 +113,38 @@
     "hasEvt": "Y",
     "checked": false,
     "link": "#/pagination"
+  },
+
+  {
+    "id": "ID0018",
+    "name": "树形组件",
+    "cls": "txt",
+    "hasEvt": "Y",
+    "checked": false,
+    "link": "#/tree"
+  },
+  {
+    "id": "ID0019",
+    "name": "上传组件",
+    "cls": "txt",
+    "hasEvt": "Y",
+    "checked": false,
+    "link": "#/uploader"
+  },
+  {
+    "id": "ID0020",
+    "name": "确认框",
+    "cls": "txt",
+    "hasEvt": "Y",
+    "checked": false,
+    "link": "#/confirmdialog"
+  },
+  {
+    "id": "ID0021",
+    "name": "Tooltip",
+    "cls": "txt",
+    "hasEvt": "Y",
+    "checked": false,
+    "link": "#/tooltip"
   }
 ]

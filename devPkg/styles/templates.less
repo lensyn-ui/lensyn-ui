@@ -868,3 +868,285 @@
   }
 }
 /* mobile 选择器样式  ----end--- */
+
+/* tree 样式 -- start-- */
+.ls-tree-item{
+  position: relative;
+  list-style:none ;
+  &:before{
+    content: '';
+    position: absolute;
+    left: -28px;
+    top:0;
+    bottom:0;
+    //border-left: dashed 1px #f00;
+  }
+  &:last-child{
+    &:before{
+      height:12px;
+      bottom: auto;
+    }
+  }
+  > .tree-label{
+    display: block;
+    position: relative;
+    height: 24px;
+    line-height: 24px;
+    padding-left: 16px;
+    font-size: 14px;
+    color: #333;
+    &.tree-check{
+      padding-left: 32px;
+    }
+
+    .tree-label-text {
+      white-space: nowrap;
+    }
+
+    > .tree-show-label{
+
+      &:after{
+        content: '';
+        position: absolute;
+        top: 6px;
+        left: 16px;
+        width: 12px;
+        height: 12px;
+        border:solid 1px #ccc;
+        border-radius: 2px;
+      }
+      &.active{
+        &:after{
+          content: "";
+          background-color: #409eff;
+          border-color: #409eff;
+          z-index: 9;
+        }
+        &:before{
+          box-sizing: content-box;
+          content: "";
+          position: absolute;
+          top:7px;
+          left:20px;
+          width: 3px;
+          height: 7px;
+          border: 1px solid @white;
+          border-left: 0;
+          border-top: 0;
+          transform: rotate(45deg);
+          transition: transform .15s cubic-bezier(.71,-.46,.88,.6) .05s;
+          transform-origin: center;
+          z-index: 99;
+        }
+        &.tree-check{
+          &:before{
+            content: '';
+            position: absolute;
+            top: 11px;
+            left: 19px;
+            height: auto;
+            width: 4px;
+            border-left:1px solid @white;
+            border-top: 1px solid @white;
+            transform: rotate(0);
+          }
+        }
+      }
+    }
+    > .tree-icon{
+      &:after{
+        content: '';
+        position: absolute;
+        top:8px;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-top: solid 6px @black-light;
+        border-left: solid 6px transparent;
+        border-right: solid 6px transparent;
+        transform: rotate(-90deg);
+        transition: .3s;
+      }
+      &.tree-icon-select{
+        &:after{
+          transform: rotate(0);
+        }
+      }
+    }
+  }
+ 
+  .tree-list{
+    position: relative;
+    list-style: none;
+    padding-left: 28px;
+    li{
+      padding: 5px 0;
+    }
+  }
+}
+/* tree 样式 -- end-- */
+
+/* Uploader --- start --- */
+.uploader {
+  input {
+    display: none;
+  }
+}
+/* Uploader --- end --- */
+
+/* 确认弹出框 --- end --- */
+.confirm-dialog {
+  @dialog-width: 300px;
+  @dialog-height: 150px;
+  @white-spacing: 20px;
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+
+  .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: @dialog-height;
+    width: @dialog-width;
+    margin-left: -@dialog-width / 2;
+    margin-top: -@dialog-height / 2;
+    padding: @white-spacing;
+    background-color: #fff;
+    .border(); 
+    
+    .msg {
+      font-size: 1.5em;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50px;
+      padding: 0;
+      line-height: 50px;
+      border-top-width: 0;
+      text-align: center;
+      .button-temp {
+        margin-right: 0;
+        display: inline-block;
+
+        & + .button-temp {
+          margin-left: @white-spacing;
+        }
+      }
+    }
+  }
+}
+/* 确认弹出框 --- end --- */
+
+/* Tooltip --- start --- */
+.tooltip {
+  @border-color: #d9d9d9;
+  
+  .arrow(@border-width, @border-color) {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: @border-width solid;
+    border-color: @border-color;
+  }
+
+  position: fixed;
+  z-index: 999;
+  display: none;
+  .border();
+  background-color:#fff;
+  opacity: 0;
+
+  &.show {
+    display: block;
+    &.active {
+      opacity: 1;
+    }
+  }
+
+  .tooltip-content {
+    position: relative;
+    .msg {
+      padding: 5px 10px;
+    }
+    &::before {
+      .arrow(5px, @border-color transparent transparent @border-color);
+      left: 50%;
+      top: 100%;
+      margin-left: -5px;
+    }
+
+    &::after {
+      .arrow(4px, #fff transparent transparent #fff);
+      left:  calc(~"50% +" 1px);
+      top: 100%;
+      margin-left: -4px;
+    }
+  }
+
+  &.bottom {
+    .tooltip-content {
+      &::before {
+        top: auto;
+        bottom: 100%;
+        border-color: transparent transparent @border-color @border-color;
+      }
+
+      &::after {
+        top: auto;
+        bottom: 100%;
+        border-color: transparent transparent #fff #fff;
+      }
+    }
+  }
+
+  &.left {
+    .tooltip-content {
+      &::before {
+        top: 50%;
+        left: 100%;
+        margin-left: 0;
+        margin-top: -5px;
+      }
+
+      &::after {
+        top: 50%;
+        left: 100%;
+        margin-left: 0;
+        margin-top: -4px;
+      }
+    }
+  }
+
+  &.right {
+    .tooltip-content {
+      &::before {
+        top: 50%;
+        left: auto;
+        right: 100%;
+        margin-left: 0;
+        margin-top: -5px;
+        border-color: @border-color @border-color  transparent transparent;
+      }
+
+      &::after {
+        top: 50%;
+        left: auto;
+        right: 100%;
+        margin-left: 0;
+        margin-top: -4px;
+        border-color: #fff #fff transparent transparent;
+      }
+    }
+  }
+}
+/* Tooltip --- end --- */
