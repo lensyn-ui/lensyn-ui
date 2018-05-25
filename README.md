@@ -1,5 +1,5 @@
 
-# 能信前端Vue组件
+# Vue前端构架-结构目录及使用说明
 
 ## 浏览器兼容说明
 
@@ -19,7 +19,7 @@
 ## 目录结构说明
 
 ```
-├── lensyn-ui/                  （项目名字）
+├── lensyn-asyn/                （项目名字）
 ├    ├── checkDir/              （代码检查结果目录）
 ├    ├── devPkg/                （项目开发目录，存放vue、vuex开发文件的地方）
 ├    ├    ├── components/       （具体的业务模块的目录)
@@ -57,5 +57,6 @@
  `lensyn -i lensyn-asyn`
 3. 运行项目：
  `npm run start`
+ `npm run dev`
 4. 打包发布命令：
  `npm run deploy`

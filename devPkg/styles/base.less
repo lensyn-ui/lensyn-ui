@@ -1,321 +1,9 @@
-/**
- * 基础样式设置，设置了标签的基本样式和字体样式
- */
-/* 变量 */
-// 屏幕尺寸
-// Extra small screen / phone
-@screen-xs              : 1024px;
-@screen-xs-min          : @screen-xs;
-@screen-xs-max          : (@screen-xs-min - 1);
-
-// Small screen / tablet
-@screen-sm              : 1336px;
-@screen-sm-min          : @screen-sm;
-@screen-sm-max          : (@screen-sm-min - 1);
-
-// Medium screen / desktop
-@screen-md              : 1680px;
-@screen-md-min          : @screen-md;
-@screen-md-max          : (@screen-md-min - 1);
-
-// Large screen / wide desktop
-@screen-lg              : 1920px;
-@screen-lg-min          : @screen-lg;
-@screen-lg-max          : (@screen-lg-min - 1);
-
-/* lensyn =====================start */
-// Color
-@primary: #407dd1;//主题色:常用于激活状态颜色，以及主题色调
-//辅助色:常用于用户交互信息反馈或对用户操作进行色彩解释
-@complementary01: #27518d;//辅助色01
-@complementary02: #333743;//辅助色02
-@complementary03: #f5f6fa;//辅助色03
-@complementary04: #2d8d46;//辅助色04
-@complementary05: #d93b25;//辅助色05
-
-//主要字体色
-@font-hint: #407dd1;//连接、提示
-@font-text: #333;//文本、列表信息
-@font-nav: #fff;//顶部栏、一级侧栏
-@font-title: #999;//标题、辅助信息
-@font-success: #2d8d46;//成功、安全
-@font-danger: #d93b25;//禁止、危险
-
-//背景色
-@bg-basic: #27518d;//顶部栏，基层色
-@bg-nav: #333743;//一级侧栏
-@bg-fence: #41485b;//应用栏背景色
-@bg-function: #e2e7ed;//功能背景色
-@bg-thead: #2d8d46;//表头背景色
-@bg-content: #f5f6fa;//内容区背景色
-
-//按钮色
-@btn-default: #407dd1;//默认状态
-@btn-choose: #62a5ff;//选择状态
-@btn-click: #62a5ff;//点击状态
-@btn-disabled: #999999;//不可点击状态
-
-//边框
-@border-default: #dcdcdc;//边框
-/* lensyn =====================end */
-
-@primary-color          : #2d8cf0;
-@info-color             : #2db7f5;
-@success-color          : #19be6b;
-@warning-color          : #ff9900;
-@error-color            : #ed3f14;
-@link-color             : #2D8cF0;
-@link-hover-color       : tint(@link-color, 20%);
-@link-active-color      : shade(@link-color, 5%);
-@selected-color         : fade(@primary-color, 90%);
-@tooltip-color          : #fff;
-@subsidiary-color       : #80848f;
-@rate-star-color        : #f5a623;
-
-// Base
-@body-background        : #fff;
-@font-family            : "Helvetica Neue", Helvetica, Arial, sans-serif,"Microsoft YaHei";
-@code-family            : Consolas,Menlo,Courier,monospace;
-@title-color            : #1c2438;
-@text-color             : #495060;
-@font-size-base         : 14px;
-@font-size-small        : 12px;
-@line-height-base       : 1.428571429; // 20/14
-@line-height-computed   : floor((@font-size-base * @line-height-base));
-@border-radius-base     : 6px;
-@border-radius-small    : 4px;
-@cursor-disabled        : not-allowed;
-@font-size-h1           : floor((@font-size-base * 2.6)); // ~36px
-@font-size-h2           : floor((@font-size-base * 2.15)); // ~30px
-@font-size-h3           : ceil((@font-size-base * 1.7)); // ~24px
-@font-size-h4           : ceil((@font-size-base * 1.25)); // ~18px
-@font-size-h5           : @font-size-base;
-@font-size-h6           : ceil((@font-size-base * 0.85)); // ~12px
-
-// Border color
-@border-color-base      : #dddee1;  // outside
-@border-color-split     : #e9eaec;  // inside
-
-// Background color
-@background-color-base        : #f7f7f7;  // base
-@background-color-select-hover: @input-disabled-bg;
-@tooltip-bg                   : rgba(70, 76, 91, .9);
-@head-bg                      : #f9fafc;
-@table-thead-bg               : #f8f8f9;
-@table-td-stripe-bg           : #f8f8f9;
-@table-td-hover-bg            : #ebf7ff;
-@table-td-highlight-bg        : #ebf7ff;
-@menu-dark-title              : #495060;
-@menu-dark-active-bg          : #363e4f;
-@menu-dark-subsidiary-color   : rgba(255,255,255,.7);
-@menu-dark-group-title-color  : rgba(255,255,255,.36);
-@date-picker-cell-hover-bg    : #e1f0fe;
-
-// Shadow
-@shadow-color           : rgba(0, 0, 0, .2);
-@shadow-base            : @shadow-down;
-@shadow-card            : 0 1px 1px 0 rgba(0,0,0,.1);
-@shadow-up              : 0 -1px 6px @shadow-color;
-@shadow-down            : 0 1px 6px @shadow-color;
-@shadow-left            : -1px 0 6px @shadow-color;
-@shadow-right           : 1px 0 6px @shadow-color;
-
-// Button
-@btn-font-weight        : normal;
-@btn-padding-base       : 6px 15px;
-@btn-padding-large      : 6px 15px 7px 15px;
-@btn-padding-small      : 2px 7px;
-@btn-font-size          : 12px;
-@btn-font-size-large    : 14px;
-@btn-border-radius      : 4px;
-@btn-border-radius-small: 3px;
-@btn-group-border       : shade(@primary-color, 5%);
-
-@btn-disable-color      : #bbbec4;
-@btn-disable-bg         : @background-color-base;
-@btn-disable-border     : @border-color-base;
-
-@btn-default-color      : @text-color;
-@btn-default-bg         : @background-color-base;
-@btn-default-border     : @border-color-base;
-
-@btn-primary-color      : #fff;
-@btn-primary-bg         : @primary-color;
-
-@btn-ghost-color        : @text-color;
-@btn-ghost-bg           : transparent;
-@btn-ghost-border       : @border-color-base;
-
-@btn-circle-size        : 32px;
-@btn-circle-size-large  : 36px;
-@btn-circle-size-small  : 24px;
-
-// Layout and Grid
-@grid-columns           : 24;
-@grid-gutter-width      : 30px;
-
-// Legend
-@legend-color           : #999;
-
-// Input
-@input-height-base           : 32px;
-@input-height-large          : 36px;
-@input-height-small          : 24px;
-
-@input-padding-horizontal    : 7px;
-@input-padding-vertical-base : 4px;
-@input-padding-vertical-small: 1px;
-@input-padding-vertical-large: 6px;
-
-@input-placeholder-color     : @btn-disable-color;
-@input-color                 : @text-color;
-@input-border-color          : @border-color-base;
-@input-bg                    : #fff;
-
-@input-hover-border-color    : @primary-color;
-@input-focus-border-color    : @primary-color;
-@input-disabled-bg           : #f3f3f3;
-
-/* 公共函数 */
-/* 清除浮动 */
-.clearfix() {
-  zoom: 1;
-  &:before,
-  &:after {
-    content: "";
-    display: table;
-  }
-  &:after {
-    clear: both;
-    visibility: hidden;
-    font-size: 0;
-    height: 0;
-  }
-}
-
-// any value of `@grid-columns`. make grid columns
-.make-grid-columns() {
-  // Common styles for all sizes of grid columns, widths 1-12
-  .col(@index) { // initial
-    @item: ~".col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}";
-    .col((@index + 1), @item);
-  }
-  .col(@index, @list) when (@index =< @grid-columns) { // general; "=<" isn't a typo
-    @item: ~".col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}";
-    .col((@index + 1), ~"@{list}, @{item}");
-  }
-  .col(@index, @list) when (@index > @grid-columns) { // terminal
-    @{list} {
-      position: relative;
-      // Prevent columns from collapsing when empty
-      min-height: 1px;
-      // Inner gutter via padding
-      padding-left:  ceil((@grid-gutter-width / 2));
-      padding-right: floor((@grid-gutter-width / 2));
-    }
-  }
-  .col(1); // kickstart it
-}
-
-.float-grid-columns(@class) {
-  .col(@index) { // initial
-    @item: ~".col-@{class}-@{index}";
-    .col((@index + 1), @item);
-  }
-  .col(@index, @list) when (@index =< @grid-columns) { // general
-    @item: ~".col-@{class}-@{index}";
-    .col((@index + 1), ~"@{list}, @{item}");
-  }
-  .col(@index, @list) when (@index > @grid-columns) { // terminal
-    @{list} {
-      float: left;
-    }
-  }
-  .col(1); // kickstart it
-}
-
-.calc-grid-column(@index, @class, @type) when (@type = width) and (@index > 0) {
-  .col-@{class}-@{index} {
-    width: percentage((@index / @grid-columns));
-  }
-}
-.calc-grid-column(@index, @class, @type) when (@type = push) and (@index > 0) {
-  .col-@{class}-push-@{index} {
-    left: percentage((@index / @grid-columns));
-  }
-}
-.calc-grid-column(@index, @class, @type) when (@type = push) and (@index = 0) {
-  .col-@{class}-push-0 {
-    left: auto;
-  }
-}
-.calc-grid-column(@index, @class, @type) when (@type = pull) and (@index > 0) {
-  .col-@{class}-pull-@{index} {
-    right: percentage((@index / @grid-columns));
-  }
-}
-.calc-grid-column(@index, @class, @type) when (@type = pull) and (@index = 0) {
-  .col-@{class}-pull-0 {
-    right: auto;
-  }
-}
-.calc-grid-column(@index, @class, @type) when (@type = offset) {
-  .col-@{class}-offset-@{index} {
-    margin-left: percentage((@index / @grid-columns));
-  }
-}
-
-// Basic looping in LESS
-.loop-grid-columns(@index, @class, @type) when (@index >= 0) {
-  .calc-grid-column(@index, @class, @type);
-  // next iteration
-  .loop-grid-columns((@index - 1), @class, @type);
-}
-
-// Create grid for specific class
-.make-grid(@class) {
-  .float-grid-columns(@class);
-  .loop-grid-columns(@grid-columns, @class, width);
-  .loop-grid-columns(@grid-columns, @class, pull);
-  .loop-grid-columns(@grid-columns, @class, push);
-  .loop-grid-columns(@grid-columns, @class, offset);
-}
-
-// Creates a wrapper for a series of columns
-.make-row(@gutter: @grid-gutter-width) {
-  margin-left:  ceil((@gutter / -2));
-  margin-right: floor((@gutter / -2));
-  &:extend(.clearfix all);
-}
-
-.make-grid-columns();
-
-.row {
-  .make-row();
-}
-
-/* 小屏栅格 */
-.make-grid(xs);
-
-/* 中屏幕栅格 */
-@media (min-width: @screen-sm-min) and (max-width: @screen-md-max) {
-  .make-grid(sm);
-}
-/* 大屏幕栅格 */
-@media (min-width: @screen-md-min) and (max-width: @screen-lg-max) {
-  .make-grid(md);
-}
-/* 超大屏幕栅格 */
-@media (min-width: @screen-lg-min) {
-  .make-grid(lg);
-}
-
 /* 全局页面通用配置 ----start----*/
-*{
+* {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  font-family: @font-family;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   &:before,
   &:after {
     -webkit-box-sizing: border-box;
@@ -323,20 +11,22 @@
     box-sizing: border-box;
   }
 }
+
 html {
   height: 100%;
-  font-family: sans-serif;
-  font-size: 10px;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  font-size: 12px;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
 body {
   position: relative;
   height: 100%;
   margin: 0;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 10px;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  font-size: 12px;
   line-height: 1.42857143;
   color: #333;
   background-color: #fff;
@@ -356,6 +46,7 @@ body {
     display: block;
   }
 }
+
 audio,
 canvas,
 progress,
@@ -363,36 +54,49 @@ video {
   display: inline-block;
   vertical-align: baseline;
 }
+
 a {
-  text-decoration: none ;
+  text-decoration: none;
 }
+
 ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.clearfix:after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
+
+.clearfix() {
+  zoom: 1;
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+    visibility: hidden;
+    font-size: 0;
+    height: 0;
+  }
 }
-.clearfix { zoom: 1; }
+
 /* 全局页面通用配置 ----end----*/
 
-/* 滚动条设值 */
+/* 滚动条样式重写 ---start--- */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
   background-color: transparent;
   border-radius: 10px;
   z-index: 999;
 }
+
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: @white;
+  -webkit-box-shadow: #fff;
   border-radius: 10px;
   background-color: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background-color: #a5a5a5;
   border-radius: 10px;
@@ -400,3 +104,4 @@ ul {
     background-color: #5b5b5b;
   }
 }
+/* 滚动条样式重写 ---end--- */

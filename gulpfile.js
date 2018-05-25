@@ -1,7 +1,3 @@
-/*********************************************************************
- * Created by deming-su on 2018/1/10
- *********************************************************************/
-
 let gulp = require("gulp"),
     fs = require("fs"),
     readline = require("readline"),
@@ -98,7 +94,7 @@ function getAssetsName(type) {
  * index.sources
  */
 gulp.task("start-process-html", () => {
-    return gulp.src(currentProcessHtmlPath).pipe(processHtml({ list: `${TEMP_PATH}/${currentProcessHtmlName}.sources` })).pipe(revAppend()).pipe(gulp.dest(TEMP_PATH));
+    return gulp.src(currentProcessHtmlPath).pipe(processHtml({list: `${TEMP_PATH}/${currentProcessHtmlName}.sources`})).pipe(revAppend()).pipe(gulp.dest(TEMP_PATH));
 });
 
 /**
@@ -221,18 +217,9 @@ gulp.task("copy-mock-data", () => {
 });
 
 /**
- * 复制 standard 文件到 DEST_PATH 目录下
- */
-
-gulp.task("copy-standard", () => {
-    return gulp.src('./standard/**/*')
-        .pipe(gulp.dest(`${DEST_PATH}/standard`));
-});
-
-/**
  * 执行处理任务
  */
-gulp.task("process-resource", ["prepare-resources", "copy-mock-data", "copy-standard"], () => {
+gulp.task("process-resource", ["prepare-resources", "copy-mock-data"], () => {
     let htmlItem = null,
         startIndex = -1;
 
@@ -350,7 +337,7 @@ gulp.task("check-css", () => {
         failAfterError: false,
         reportOutputDir: CHECK_RESULT_FOLDER,
         reporters: [
-            { formatter: cssCheckFormatter, save: CSS_CHECK_FILE_NAME }
+            {formatter: cssCheckFormatter, save: CSS_CHECK_FILE_NAME}
         ]
     }));
 });
@@ -364,7 +351,7 @@ gulp.task("min-dist-css", () => {
 
 /* 压缩dist目录js */
 gulp.task("min-dist-js", ["min-dist-css"], () => {
-    return gulp.src([`${DEST_PATH}/**/*.js`, `!${DEST_PATH}/standard/**/*.js`])
+    return gulp.src(`${DEST_PATH}/**/*.js`)
         .pipe(uglify())
         .on('error', (err) => {
             gutil.log(gutil.colors.red('[Error]'), err.toString());
@@ -374,15 +361,15 @@ gulp.task("min-dist-js", ["min-dist-css"], () => {
 
 /* 压缩dist目录images */
 gulp.task("min-dist-img", ["min-dist-js"], () => {
-    return gulp.src([`${DEST_PATH}/**/*.png`, `${DEST_PATH}/**/*.jpg`, `!${DEST_PATH}/standard/**/*.png`, `!${DEST_PATH}/standard/**/*.jpg`])
+    return gulp.src([`${DEST_PATH}/**/*.png`, `${DEST_PATH}/**/*.jpg`])
         .pipe(minImg([
-            minImg.gifsicle({ interlaced: true }),
-            minImg.jpegtran({ progressive: true }),
-            minImg.optipng({ optimizationLevel: 10 }),
+            minImg.gifsicle({interlaced: true}),
+            minImg.jpegtran({progressive: true}),
+            minImg.optipng({optimizationLevel: 10}),
             minImg.svgo({
                 plugins: [
-                    { removeViewBox: true },
-                    { cleanupIDs: false }
+                    {removeViewBox: true},
+                    {cleanupIDs: false}
                 ]
             })
         ]))
@@ -392,7 +379,7 @@ gulp.task("min-dist-img", ["min-dist-js"], () => {
 /* 压缩dist目录html */
 gulp.task("min-dist-html", ["min-dist-img"], () => {
     return gulp.src(`${DEST_PATH}/**/*.html`)
-        .pipe(minHtml({ collapseWhitespace: true }))
+        .pipe(minHtml({collapseWhitespace: true}))
         .pipe(gulp.dest(`${DEST_PATH}`))
         .on("end", () => {
             console.log("Project contraction finished with gulp...");
@@ -402,9 +389,9 @@ gulp.task("min-dist-html", ["min-dist-img"], () => {
 /* 构建项目 */
 gulp.task("build", () => {
     fs.exists(DEST_PATH, yes => {
-        if (yes) {
+        if(yes) {
             rimraf(DEST_PATH, e => {
-                if (e) {
+                if(e) {
                     console.log(e);
                 } else {
                     gulp.start("process-resource");

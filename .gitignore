@@ -18,6 +18,4 @@ dist/
 .eslintcache
 .classpath
 node_modules/
-checkDir/
-standard/
-/standard
+package-lock.json

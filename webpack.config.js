@@ -1,14 +1,11 @@
-/*********************************************************************
- * Created by deming-su on 2017/12/30
- *********************************************************************/
-
 const path = require("path");
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ChunkCleanPlugin = require("./ChunkCleanPlugin");
 
 module.exports = {
     entry: {
-        "all.min": ["./devPkg/main.js"]
+        "all.min": "./devPkg/main.js"
     },
     output: {
         path: path.join(__dirname, './static'),
@@ -18,9 +15,12 @@ module.exports = {
         library: 'lensyn-ui',
         umdNamedDefine: true
     },
+    resolve: {
+        extensions: ['.js', '.vue', '.less', '.css']
+    },
     module: {
-        noParse: /es6-promise\.js$/,
-        rules: [{
+        rules: [
+            {
                 test: /\.vue$/,
                 loader: 'vue-loader'
             },
@@ -36,13 +36,14 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                exclude: /node_modules|vue\/dist|vue-router\/|vue-loader\/|vue-hot-reload-api\//,
+                exclude: /node_modules/,
+                include: [path.resolve(__dirname, "devPkg")],
                 loader: 'babel-loader'
             },
             {
                 test: /\.(png|jpg|gif|ttf|svg|woff|eot)$/,
                 loader: 'url-loader',
-                query: {
+                options: {
                     limit: 3000,
                     name: './images/[name].[ext]?[hash]'
                 }
@@ -50,11 +51,7 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.DefinePlugin({
-            "process.env": {
-                NODE_ENV: JSON.stringify("production")
-            }
-        }),
-        new ExtractTextPlugin('./style/[name].css')
+        new ChunkCleanPlugin(path.join(__dirname, './static')),
+        new ExtractTextPlugin('./style/main.css')
     ]
 };

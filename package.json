@@ -1,28 +1,26 @@
 {
-  "name": "lensyn-ui",
+  "name": "vue-conponents",
   "version": "1.0.0",
-  "description": "lensyn ui component",
+  "description": "vue es6 conponents",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --inline --hot --no-info --host localhost --port 9000 --profile --open-page index.html",
-    "deploy": "webpack --display-error-details --config webpack.config.js && gulp check-code && gulp build",
-    "component": "webpack --display-error-details --config webpack.comp.js"
+    "start": "set NODE_ENV=development && webpack-dev-server --inline --hot --no-info --host localhost --port 9900 --profile --open-page index.html",
+    "dev": "set NODE_ENV=development && webpack-dev-server --inline --hot --no-info --host localhost --port 9900 --profile --open-page index.html",
+    "deploy": "set NODE_ENV=production && webpack --display-error-details --config webpack.config.js && gulp check-code && gulp build"
   },
   "keywords": [
-    "lensyn",
     "vue",
-    "component",
-    "asynchronous",
-    "module"
+    "es6"
   ],
-  "author": "rdc@lensyn.com",
+  "author": "lensyn@lensyn.com",
   "license": "MIT",
   "devDependencies": {
-    "axios": "^0.17.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-import": "^1.6.3",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.26.0",
@@ -59,7 +57,6 @@
     "rimraf": "^2.6.2",
     "style-loader": "^0.19.0",
     "stylelint-checkstyle-formatter": "^0.1.1",
-    "uglifyjs-webpack-plugin": "^1.1.6",
     "url-loader": "^0.6.2",
     "vue": "^2.5.9",
     "vue-hot-reload-api": "^2.2.4",
@@ -71,5 +68,9 @@
     "vuex": "^3.0.1",
     "webpack": "^3.9.1",
     "webpack-dev-server": "^2.9.5"
+  },
+  "dependencies": {
+    "vue-class-component": "^6.2.0",
+    "vue-property-decorator": "^6.0.0"
   }
 }
