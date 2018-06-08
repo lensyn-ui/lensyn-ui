@@ -21,6 +21,10 @@
         getValue() {
             throw new Error("child must implements getValue");
         }
+
+        focus() {
+            throw new Error("child must implements focus");
+        }
     }
 
 </script>
