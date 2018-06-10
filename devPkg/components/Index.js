@@ -18,6 +18,9 @@ import MultipleSelect from "./form-widgets/select/MultipleSelect";
 // 分页
 import Pagination from "./Pagination";
 
+// 树型控件
+import Tree from "./tree/Tree";
+
 export {
     Grid,
     PaginationGrid,
@@ -26,5 +29,6 @@ export {
     Dropdown,
     DropdownSelect,
     MultipleSelect,
-    Pagination
+    Pagination,
+    Tree
 };

@@ -57,7 +57,7 @@
 
             labelProperty: {
                 type: String,
-                default: "value"
+                default: "name"
             },
 
             valueProperty: {
