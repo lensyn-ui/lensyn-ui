@@ -8,9 +8,13 @@ import PaginationGrid from "./grid/PaginationGrid";
 import PopupMixin from "./mixins/PopupMixin";
 import DraggableMixin from "./mixins/DraggableMixin";
 
+// dropdown
+import Dropdown from "./Dropdown";
+
 export {
     Grid,
     PaginationGrid,
     PopupMixin,
-    DraggableMixin
+    DraggableMixin,
+    Dropdown
 };
