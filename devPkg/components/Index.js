@@ -6,9 +6,11 @@ import PaginationGrid from "./grid/PaginationGrid";
 
 // mixins
 import PopupMixin from "./mixins/PopupMixin";
+import DraggableMixin from "./mixins/DraggableMixin";
 
 export {
     Grid,
     PaginationGrid,
-    PopupMixin
+    PopupMixin,
+    DraggableMixin
 };

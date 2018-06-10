@@ -1,3 +1,7 @@
+/***********************************************
+ * Created by zhangtao on 2018/05/16
+ ************************************************/
+
 import { Component, Vue } from "vue-property-decorator";
 
 import { isArray } from "../helper/util";
