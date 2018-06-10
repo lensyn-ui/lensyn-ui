@@ -47,31 +47,45 @@
             <ls-button :text="'按钮'"
                        :size="'large'"
                        :disable="false"
-                       :type="'error'" ></ls-button>
+                       :type="'error'"></ls-button>
             <ls-button :text="'按钮'"
                        :disable="false"
-                       :type="'error'" ></ls-button>
+                       :type="'error'"></ls-button>
             <ls-button :text="'按钮'"
                        :size="'small'"
                        :disable="true"
                        :type="'error'"></ls-button>
+        </div>
+        <div class="box">
+            <ls-input :placeholder="'请输入文字'"
+                      :focus="true"
+                      :width="300"
+                      :size="'large'"
+                      :val="val"
+                      @changeEvt="inputChange"></ls-input>
         </div>
     </div>
 </template>
 
 <script>
     import {Component, Vue} from 'vue-property-decorator';
-
     import { Pagination, DropdownSelect, MultipleSelect, Tree, DatePicker, Button } from "../../components";
+    /* 分页 */
+    import pagination from '../../components/Pagination.vue';
+    /* 按钮 */
+    import button from '../../components/Button.vue';
+    /* 输入框 */
+    import input from '../../components/Input.vue';
 
     @Component({
         components: {
-            'ls-pagination': Pagination,
+            'ls-pagination': pagination,
             "ls-dropdown-select": DropdownSelect,
             "ls-multiple-select": MultipleSelect,
             "ls-tree": Tree,
             "ls-date-picker": DatePicker,
-            "ls-button": Button
+            'ls-button': button,
+            'ls-input': input
         }
     })
     export default class HomeIndex extends Vue {
@@ -108,9 +122,14 @@
         ];
 
         datePickerValue = "";
-
+        /* 分页返回对象 */
         pageChange(e) {
             console.log(e);
+        }
+
+        /* 输入框回车事件 */
+        inputChange(val) {
+            console.log(val);
         }
     };
 </script>

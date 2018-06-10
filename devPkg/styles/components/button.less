@@ -7,15 +7,9 @@
     font-size: 12px;
     border: 1px solid #dcdcdc;
     background-color: #f0f0f0;
-    //&:hover{
-    //  background-color: #ffffff;
-    //}
     &.disable {
       color: #999999;
       cursor: not-allowed;
-      //&:hover{
-      //  background-color: #f0f0f0;
-      //}
     }
     &.large {
       width: 96px;
@@ -37,6 +31,13 @@
         background-color: #ffffff;
       }
     }
+    &.default {
+      &.disable {
+        &:hover {
+          background-color: #f0f0f0;
+        }
+      }
+    }
     &.primary {
       color: #ffffff;
       background-color: #407dd1;
@@ -47,7 +48,7 @@
         color: #c2d5f0;
         background-color: #81a5d7;
         &:hover {
-          background-color: #8cb1e3;
+          background-color: #81a5d7;
         }
       }
     }

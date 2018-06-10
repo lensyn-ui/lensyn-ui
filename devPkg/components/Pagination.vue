@@ -23,6 +23,7 @@
             <select v-model.number="displayItem">
                 <option value="10">10</option>
                 <option value="20">20</option>
+                <option value="50">50</option>
                 <option value="100">100</option>
             </select>
             <span>条记录</span>
@@ -68,7 +69,7 @@
             },
             displayItem: function (newVal) {
                 this.currentPage = 1;
-                this.$emit('on-change', {
+                this.$emit('changeEvt', {
                     currentPage: this.currentPage,
                     displayItem: this.displayItem
                 });
@@ -121,7 +122,7 @@
             setCurrent: function (idx) {
                 if (this.currentPage != idx && idx > 0 && idx < this.page + 1) {
                     this.currentPage = idx * 1;
-                    this.$emit('on-change', {
+                    this.$emit('changeEvt', {
                         currentPage: this.currentPage,
                         displayItem: this.displayItem
                     });
