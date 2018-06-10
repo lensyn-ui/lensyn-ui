@@ -10,6 +10,20 @@
 @font-color: #666; // 文字内容
 @font-color-light: #999; // 失效文字
 @border-color: #dcdcdc; // 边框色
-@bg-dark: #333743; // 背景色  深色
+@bg-color-dark: #333743; // 背景色  深色
 @bg-color: #d9dee4; // 背景色  普通
-@bg-light: #f0f0f0; // 背景色  浅色
+@bg-color-light: #f0f0f0; // 背景色  浅色
+
+/* 表单元素尺寸 */
+@form-widget-mini-height: 24px;
+@form-widget-height: 32px;
+@form-widget-big-height: 40px;
+
+/* transform */
+.transform(@type) {
+  -webkit-transform: @type;
+  -moz-transform: @type;
+  -ms-transform: @type;
+  -o-transform: @type;
+  transform: @type;
+}

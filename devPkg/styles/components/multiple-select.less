@@ -1,0 +1,169 @@
+.multiple-select {
+  @box-name: multiple-select;
+
+  min-height: @form-widget-height;
+  max-height: 128px;
+  width: 100%;
+  overflow-y: auto;
+  line-height: @form-widget-height;
+  background-color: #fff;
+
+  /* stylelint-disable-next-line */
+  > .dropdown__input {
+    min-height: inherit;
+  }
+
+  &&--mini {
+    min-height: @form-widget-mini-height - 2;
+    line-height: @form-widget-mini-height;
+
+    .@{box-name}__checked-list {
+      line-height: @form-widget-mini-height - 2;
+
+      .@{box-name}__checked-item {
+        line-height: 16px;
+      }
+    }
+  }
+
+  &&--big {
+    min-height: @form-widget-big-height;
+    line-height: @form-widget-big-height;
+
+    .@{box-name}__checked-list {
+      line-height: @form-widget-big-height - 2;
+
+      .@{box-name}__checked-item {
+        line-height: 26px;
+      }
+    }
+  }
+
+  &__input-wrapper {
+    position: relative;
+    min-height: inherit;
+    border: 1px solid @border-color;
+
+    &:after {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      right: 5px;
+      top: 50%;
+      margin-top: -8px;
+      background-image: url("../../images/components/select-arrow-icon.png");
+      background-repeat: no-repeat;
+      -webkit-background-size: 100%;
+      background-size: 100%;
+      background-position: center;
+    }
+  }
+
+  &__input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding-left: 7px;
+    text-align: left;
+    border: 1px solid @border-color;
+    color: @font-color-dark;
+    outline: none;
+
+    &:focus {
+      border-color: @primary-color;
+      -moz-box-shadow: 0 0 4px 0 @primary-color;
+      -webkit-box-shadow: 0 0 4px 0 @primary-color;
+      box-shadow: 0 0 4px 0 @primary-color;
+    }
+  }
+
+  &__filter {
+    outline: none;
+    border-width: 0;
+  }
+
+  &__checked-list {
+    width: 100%;
+    padding: 0 18px 0 5px;
+    line-height: @form-widget-height - 2;
+
+    .@{box-name}__checked-item {
+      display: inline-block;
+      padding: 0 6px;
+      line-height: 22px;
+      background-color: @bg-color-light;
+      border: 1px solid @border-color;
+
+      .@{box-name}__delete-icon {
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        padding-left: 5px;
+        cursor: pointer;
+        background-image: url("../../images/components/black-close-icon.png");
+        background-size: 100%;
+        background-color: transparent;
+      }
+
+      &.@{box-name}__checked-item--delete {
+        border: 1px solid @font-color;
+      }
+
+      & + .@{box-name}__checked-item {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  &__list {
+    max-height: 152px;
+    overflow-y: auto;
+    background-color: #fff;
+    -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .3);
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .3);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .3);
+  }
+
+  &&--max-height-size {
+    .@{box-name}__list {
+      max-height: 336px;
+    }
+  }
+
+  .select-item {
+    height: 28px;
+    line-height: 28px;
+    text-indent: 15px;
+    text-align: left;
+    color: @font-color-dark;
+    cursor: pointer;
+
+    &:hover {
+      background-color: @bg-color-light;
+    }
+
+    /* stylelint-disable-next-line */
+    &.select-item--checked {
+      position: relative;
+      color: @primary-color;
+
+      &:after {
+        content: "";
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        right: 5px;
+        top: 50%;
+        margin-top: -8px;
+        background-image: url("../../images/components/select-checked-icon.png");
+        background-repeat: no-repeat;
+        -webkit-background-size: 100%;
+        background-size: 100%;
+        background-position: center;
+      }
+    }
+  }
+}
