@@ -14,6 +14,7 @@ import Dropdown from "./Dropdown";
 // 表单控件
 import DropdownSelect from "./form-widgets/select/DropdownSelect";
 import MultipleSelect from "./form-widgets/select/MultipleSelect";
+import DatePicker from "./form-widgets/date-picker/Datepicker";
 
 // 分页
 import Pagination from "./Pagination";
@@ -30,5 +31,6 @@ export {
     DropdownSelect,
     MultipleSelect,
     Pagination,
-    Tree
+    Tree,
+    DatePicker
 };

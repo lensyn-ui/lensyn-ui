@@ -8,6 +8,8 @@
             <ls-dropdown-select :datas="selectDatas" style="margin-top: 20px;"></ls-dropdown-select>
 
             <ls-tree :isEnableChecked="true" :datas="treeDatas" style="margin-top: 20px;"></ls-tree>
+
+            <ls-date-picker v-model="datePickerValue" style="margin-top: 20px;"></ls-date-picker>
         </div>
     </div>
 </template>
@@ -16,14 +18,15 @@
     import {Component, Vue} from 'vue-property-decorator';
 
     /* 分页 */
-    import { Pagination, DropdownSelect, MultipleSelect, Tree } from "../../components";
+    import { Pagination, DropdownSelect, MultipleSelect, Tree, DatePicker } from "../../components";
 
     @Component({
         components: {
             'ls-pagination': Pagination,
             "ls-dropdown-select": DropdownSelect,
             "ls-multiple-select": MultipleSelect,
-            "ls-tree": Tree
+            "ls-tree": Tree,
+            "ls-date-picker": DatePicker
         }
     })
     export default class HomeIndex extends Vue {
@@ -58,6 +61,8 @@
                 ]
             }
         ];
+
+        datePickerValue = "";
 
         pageChange(e) {
             console.log(e);
