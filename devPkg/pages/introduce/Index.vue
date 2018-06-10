@@ -11,14 +11,58 @@
 
             <ls-date-picker v-model="datePickerValue" style="margin-top: 20px;"></ls-date-picker>
         </div>
+        <div class="box">
+            <!--按钮绑定时间自己绑定就是了，这里就相当于只剥离了一个样式-->
+            <!--disable默认false，size默认middle，type默认default，都可以不传-->
+            <ls-button :text="'按钮'"
+                       :size="'middle'"
+                       :disable="false"></ls-button>
+            <ls-button :text="'按钮'"
+                       :size="'middle'"
+                       :disable="true"></ls-button>
+            <ls-button :text="'按钮'"
+                       :size="'middle'"
+                       :disable="false"
+                       :type="'primary'"></ls-button>
+            <ls-button :text="'按钮'"
+                       :size="'middle'"
+                       :disable="true"
+                       :type="'primary'"></ls-button>
+            <ls-button :text="'按钮'"
+                       :size="'middle'"
+                       :disable="false"
+                       :type="'success'"></ls-button>
+            <ls-button :text="'按钮'"
+                       :size="'middle'"
+                       :disable="true"
+                       :type="'success'"></ls-button>
+            <ls-button :text="'按钮'"
+                       :size="'middle'"
+                       :disable="false"
+                       :type="'warning'"></ls-button>
+            <ls-button :text="'按钮'"
+                       :size="'middle'"
+                       :disable="true"
+                       :type="'warning'"></ls-button>
+            <ls-button :text="'按钮'"
+                       :size="'large'"
+                       :disable="false"
+                       :type="'error'" ></ls-button>
+            <ls-button :text="'按钮'"
+                       :disable="false"
+                       :type="'error'" ></ls-button>
+            <ls-button :text="'按钮'"
+                       :size="'small'"
+                       :disable="true"
+                       :type="'error'"></ls-button>
+        </div>
     </div>
 </template>
 
 <script>
     import {Component, Vue} from 'vue-property-decorator';
 
-    /* 分页 */
-    import { Pagination, DropdownSelect, MultipleSelect, Tree, DatePicker } from "../../components";
+    import { Pagination, DropdownSelect, MultipleSelect, Tree, DatePicker, Button } from "../../components";
 
     @Component({
         components: {
@@ -26,7 +70,8 @@
             "ls-dropdown-select": DropdownSelect,
             "ls-multiple-select": MultipleSelect,
             "ls-tree": Tree,
-            "ls-date-picker": DatePicker
+            "ls-date-picker": DatePicker,
+            "ls-button": Button
         }
     })
     export default class HomeIndex extends Vue {
