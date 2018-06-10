@@ -1,11 +1,15 @@
 <script>
-    import {Prop, Component, Vue} from "vue-property-decorator";
+    import {Component, Vue} from "vue-property-decorator";
 
-    @Component
+    @Component({
+        props: {
+            disabled: {
+                type: Boolean,
+                default: false
+            }
+        }
+    })
     export default class Widget extends Vue {
-        @Prop({type: Boolean, default: false})
-        disabled;
-
         widgetName = "";
 
         isDisabled() {

@@ -11,10 +11,20 @@ import DraggableMixin from "./mixins/DraggableMixin";
 // dropdown
 import Dropdown from "./Dropdown";
 
+// 表单控件
+import DropdownSelect from "./form-widgets/select/DropdownSelect";
+import MultipleSelect from "./form-widgets/select/MultipleSelect";
+
+// 分页
+import Pagination from "./Pagination";
+
 export {
     Grid,
     PaginationGrid,
     PopupMixin,
     DraggableMixin,
-    Dropdown
+    Dropdown,
+    DropdownSelect,
+    MultipleSelect,
+    Pagination
 };
