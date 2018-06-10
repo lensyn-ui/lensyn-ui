@@ -45,7 +45,10 @@
         setHeight() {
             let itemHeight = document.body.offsetHeight;  //取得窗口高度
             let itemArr = this.getClass('main-item');
-            itemArr.forEach((item) => {  //设定高度
+            itemArr.forEach((item) => {  //设定高度，每屏最小500px
+                if (itemHeight < 500) {
+                    itemHeight = 500;
+                }
                 item.setAttribute('style', `height: ${itemHeight}px;`);
             });
         }
