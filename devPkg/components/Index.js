@@ -23,6 +23,12 @@ import Pagination from "./Pagination";
 // 树型控件
 import Tree from "./tree/Tree";
 
+// tab
+import Tab from "./Tab";
+
+// 布局
+import LayoutContainer from "./layout/LayoutContainer";
+
 export {
     Grid,
     PaginationGrid,
@@ -34,5 +40,7 @@ export {
     Pagination,
     Tree,
     DatePicker,
-    Button
+    Button,
+    Tab,
+    LayoutContainer
 };

@@ -80,12 +80,43 @@
                       v-model="val"
                       :disabled="true"></ls-input>
         </div>
+
+        <div class="box">
+            <ls-tab :datas="tabDatas" :isEnableCreateTab="true" :isEnableDeleteTab="true"></ls-tab>
+        </div>
+
+        <div class="box" style="height: 200px;">
+            <ls-layout-container>
+                <div slot="top">
+                    <div style="height: 100px">top</div>
+                </div>
+                <div slot="left">
+                    <div style="width: 100px">left</div>
+                </div>
+                <div slot="center">
+                    <div style="width: 100px">center</div>
+                </div>
+            </ls-layout-container>
+        </div>
     </div>
 </template>
 
 <script>
     import {Component, Vue} from 'vue-property-decorator';
+<<<<<<< HEAD
     import {Pagination, DropdownSelect, MultipleSelect, Tree, DatePicker, Button} from "../../components";
+=======
+    import {
+        Pagination,
+        DropdownSelect,
+        MultipleSelect,
+        Tree,
+        DatePicker,
+        Button,
+        Tab,
+        LayoutContainer
+    } from "../../components";
+>>>>>>> 85268ab8445e424c7eb7ff75db458c541eddaa15
     /* 分页 */
     import pagination from '../../components/Pagination.vue';
     /* 按钮 */
@@ -101,7 +132,9 @@
             "ls-tree": Tree,
             "ls-date-picker": DatePicker,
             'ls-button': button,
-            'ls-input': input
+            'ls-input': input,
+            "ls-tab": Tab,
+            "ls-layout-container": LayoutContainer
         }
     })
     export default class HomeIndex extends Vue {
@@ -138,7 +171,35 @@
         ];
 
         datePickerValue = "";
+<<<<<<< HEAD
         val = '123555aaa';
+=======
+        val = '123';
+
+        tabDatas = [
+            { id: 1, name: "tab-1" },
+            { id: 2, name: "tab-2" },
+            { id: 4, name: "tab-4" },
+            { id: 5, name: "tab-5" },
+            { id: 6, name: "tab-6" },
+            { id: 7, name: "tab-7" },
+            { id: 8, name: "tab-8" },
+            { id: 9, name: "tab-9" },
+            { id: 10, name: "tab-10" },
+            { id: 11, name: "tab-11" },
+            { id: 12, name: "tab-12" },
+            { id: 13, name: "tab-13" },
+            { id: 14, name: "tab-14" },
+            { id: 15, name: "tab-15" },
+            { id: 16, name: "tab-16" },
+            { id: 17, name: "tab-17" },
+            { id: 18, name: "tab-18" },
+            { id: 19, name: "tab-19" },
+            { id: 20, name: "tab-20" },
+            { id: 21, name: "tab-21" },
+            { id: 22, name: "tab-22" },
+        ];
+>>>>>>> 85268ab8445e424c7eb7ff75db458c541eddaa15
 
         /* 分页返回对象 */
         pageChange(e) {
