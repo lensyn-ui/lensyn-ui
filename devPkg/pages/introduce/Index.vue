@@ -2,13 +2,17 @@
     <div class="introduce-main">
         <div class="box">
             <ls-pagination :total="80" :current="1" :display="10" @on-change="pageChange($event)"></ls-pagination>
-
+        </div>
+        <div class="box">
             <ls-multiple-select :datas="selectDatas" style="margin-top: 20px;"></ls-multiple-select>
-
+        </div>
+        <div class="box">
             <ls-dropdown-select :datas="selectDatas" style="margin-top: 20px;"></ls-dropdown-select>
-
+        </div>
+        <div class="box">
             <ls-tree :isEnableChecked="true" :datas="treeDatas" style="margin-top: 20px;"></ls-tree>
-
+        </div>
+        <div class="box">
             <ls-date-picker v-model="datePickerValue" style="margin-top: 20px;"></ls-date-picker>
         </div>
         <div class="box">
@@ -122,6 +126,7 @@
         ];
 
         datePickerValue = "";
+        val = '123';
         /* 分页返回对象 */
         pageChange(e) {
             console.log(e);
