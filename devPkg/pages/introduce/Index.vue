@@ -103,9 +103,7 @@
 
 <script>
     import {Component, Vue} from 'vue-property-decorator';
-
-    import {Pagination, DropdownSelect, MultipleSelect, Tree, DatePicker, Button} from "../../components";
-
+    
     import {
         Pagination,
         DropdownSelect,
@@ -198,7 +196,6 @@
             { id: 21, name: "tab-21" },
             { id: 22, name: "tab-22" },
         ];
->>>>>>> 85268ab8445e424c7eb7ff75db458c541eddaa15
 
         /* 分页返回对象 */
         pageChange(e) {
