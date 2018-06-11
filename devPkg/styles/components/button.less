@@ -7,21 +7,21 @@
     font-size: 12px;
     border: 1px solid @border-color;
     background-color: @bg-color-light;
-    &.disable {
+    &.disabled {
       color: @font-color-light;
       cursor: not-allowed;
     }
-    &.large {
+    &.big {
       padding: 0 @button-padding;
       height: @form-widget-big-height;
       line-height: @form-widget-big-height;
     }
-    &.middle {
+    &.normal {
       padding: 0 @button-padding;
       height: @form-widget-height;
       line-height: @form-widget-height;
     }
-    &.small {
+    &.mini {
       padding: 0 @button-padding;
       height: @form-widget-mini-height;
       line-height: @form-widget-mini-height;
@@ -32,7 +32,7 @@
       }
     }
     &.default {
-      &.disable {
+      &.disabled {
         &:hover {
           background-color: @bg-color-light;
         }
@@ -44,7 +44,7 @@
       &:hover {
         background-color: @bg-hover-primary;
       }
-      &.disable {
+      &.disabled {
         color: @font-disable-primary;
         background-color: @bg-disable-primary;
         &:hover {
@@ -58,7 +58,7 @@
       &:hover {
         background-color: @bg-hover-success;
       }
-      &.disable {
+      &.disabled {
         color: @font-disable-success;
         background-color: @bg-disable-success;
         &:hover {
@@ -72,7 +72,7 @@
       &:hover {
         background-color: @bg-hover-warning;
       }
-      &.disable {
+      &.disabled {
         color: @font-disable-warning;
         background-color: @bg-disable-warning;
         &:hover {
@@ -86,7 +86,7 @@
       &:hover {
         background-color: @bg-hover-error;
       }
-      &.disable {
+      &.disabled {
         color: @bg-color-white;
         background-color: @bg-disable-error;
         &:hover {

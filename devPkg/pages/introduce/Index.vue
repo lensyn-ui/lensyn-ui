@@ -17,69 +17,81 @@
         </div>
         <div class="box">
             <!--按钮绑定时间自己绑定就是了，这里就相当于只剥离了一个样式-->
-            <!--disable默认false，size默认middle，type默认default，都可以不传-->
+            <!--disabled默认false，size默认normal，type默认default，都可以不传-->
             <ls-button :text="'按钮'"
-                       :size="'middle'"
-                       :disable="false"></ls-button>
+                       :size="'normal'"
+                       :disabled="false" @buttonEvent="handleClick"></ls-button>
             <ls-button :text="'按钮'"
-                       :size="'middle'"
-                       :disable="true"></ls-button>
+                       :size="'normal'"
+                       :disabled="true"></ls-button>
             <ls-button :text="'按钮'"
-                       :size="'middle'"
-                       :disable="false"
+                       :size="'normal'"
+                       :disabled="false"
                        :type="'primary'"></ls-button>
             <ls-button :text="'按钮'"
-                       :size="'middle'"
-                       :disable="true"
+                       :size="'normal'"
+                       :disabled="true"
                        :type="'primary'"></ls-button>
             <ls-button :text="'按钮'"
-                       :size="'middle'"
-                       :disable="false"
+                       :size="'normal'"
+                       :disabled="false"
                        :type="'success'"></ls-button>
             <ls-button :text="'按钮'"
-                       :size="'middle'"
-                       :disable="true"
+                       :size="'normal'"
+                       :disabled="true"
                        :type="'success'"></ls-button>
             <ls-button :text="'按钮'"
-                       :size="'middle'"
-                       :disable="false"
+                       :size="'normal'"
+                       :disabled="false"
                        :type="'warning'"></ls-button>
             <ls-button :text="'按钮'"
-                       :size="'middle'"
-                       :disable="true"
-                       :type="'warning'"></ls-button>
+                       :size="'normal'"
+                       :disabled="true"
+                       :type="'normal'"></ls-button>
             <ls-button :text="'按钮'"
-                       :size="'large'"
-                       :disable="false"
+                       :size="'big'"
+                       :disabled="false"
                        :type="'error'"></ls-button>
             <ls-button :text="'按钮'"
-                       :disable="false"
+                       :disabled="false"
                        :type="'error'"></ls-button>
             <ls-button :text="'按钮'"
-                       :size="'small'"
-                       :disable="true"
+                       :size="'mini'"
+                       :disabled="true"
                        :type="'error'"></ls-button>
+            <ls-button :text="'按钮'"
+                       :size="'mini'"
+                       :disabled="true"
+                       :type="'error'">自定义
+            </ls-button>
         </div>
         <div class="box">
+            <ls-input ref="hello" :placeholder="'请输入文字'"
+                      :size="'big'"
+                      v-model="val"
+                      :autofocus="true"
+                      @inputEvent="inputChange"></ls-input>
             <ls-input :placeholder="'请输入文字'"
-                      :focus="true"
-                      :width="300"
-                      :size="'large'"
-                      :val="val"
-                      @changeEvt="inputChange"></ls-input>
+                      :size="'normal'"
+                      v-model="val"
+                      :widgetReadonly="true"></ls-input>
+            <ls-input :placeholder="'请输入文字'"
+                      :size="'mini'"
+                      v-model="val"
+                      :disabled="true"></ls-input>
         </div>
     </div>
 </template>
 
 <script>
     import {Component, Vue} from 'vue-property-decorator';
-    import { Pagination, DropdownSelect, MultipleSelect, Tree, DatePicker, Button } from "../../components";
+    import {Pagination, DropdownSelect, MultipleSelect, Tree, DatePicker, Button} from "../../components";
     /* 分页 */
     import pagination from '../../components/Pagination.vue';
     /* 按钮 */
-    import button from '../../components/Button.vue';
+    import button from '../../components/form-widgets/Button.vue';
     /* 输入框 */
-    import input from '../../components/Input.vue';
+    import input from '../../components/form-widgets/Input.vue';
 
     @Component({
         components: {
@@ -94,15 +106,15 @@
     })
     export default class HomeIndex extends Vue {
         selectDatas = [
-            { id: 1, value: 1, name: "select-1" },
-            { id: 2, value: 2, name: "select-2" },
-            { id: 3, value: 3, name: "select-3" },
-            { id: 4, value: 4, name: "select-4" },
-            { id: 5, value: 5, name: "select-5" },
-            { id: 6, value: 6, name: "select-6" },
-            { id: 7, value: 7, name: "select-7" },
-            { id: 8, value: 8, name: "select-8" },
-            { id: 9, value: 9, name: "select-9" }
+            {id: 1, value: 1, name: "select-1"},
+            {id: 2, value: 2, name: "select-2"},
+            {id: 3, value: 3, name: "select-3"},
+            {id: 4, value: 4, name: "select-4"},
+            {id: 5, value: 5, name: "select-5"},
+            {id: 6, value: 6, name: "select-6"},
+            {id: 7, value: 7, name: "select-7"},
+            {id: 8, value: 8, name: "select-8"},
+            {id: 9, value: 9, name: "select-9"}
         ];
 
         treeDatas = [
@@ -114,27 +126,36 @@
                         id: "1-1",
                         name: "node-1-1",
                         children: [
-                            { id: "1-1-1", name: "node-1-1-1" },
-                            { id: "1-1-2", name: "node-1-1-2" },
+                            {id: "1-1-1", name: "node-1-1-1"},
+                            {id: "1-1-2", name: "node-1-1-2"},
                         ]
                     },
-                    { id: "1-2", name: "node-1-2" },
-                    { id: "1-3", name: "node-1-3" },
-                    { id: "1-4", name: "node-1-4" }
+                    {id: "1-2", name: "node-1-2"},
+                    {id: "1-3", name: "node-1-3"},
+                    {id: "1-4", name: "node-1-4"}
                 ]
             }
         ];
 
         datePickerValue = "";
-        val = '123';
+        val = '123555aaa';
+
         /* 分页返回对象 */
         pageChange(e) {
             console.log(e);
         }
 
-        /* 输入框回车事件 */
+        /* 输入框值改变 */
         inputChange(val) {
             console.log(val);
+        }
+
+        /* 按钮点击 */
+        handleClick() {
+        }
+
+        mounted() {
+            window.hello = this;
         }
     };
 </script>
