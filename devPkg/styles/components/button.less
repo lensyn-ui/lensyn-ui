@@ -5,92 +5,92 @@
     display: inline-block;
     text-align: center;
     font-size: 12px;
-    border: 1px solid #dcdcdc;
-    background-color: #f0f0f0;
+    border: 1px solid @border-color;
+    background-color: @bg-color-light;
     &.disable {
-      color: #999999;
+      color: @font-color-light;
       cursor: not-allowed;
     }
     &.large {
-      width: 96px;
-      height: 40px;
-      line-height: 40px;
+      padding: 0 @button-padding;
+      height: @form-widget-big-height;
+      line-height: @form-widget-big-height;
     }
     &.middle {
-      width: 80px;
-      height: 32px;
-      line-height: 32px;
+      padding: 0 @button-padding;
+      height: @form-widget-height;
+      line-height: @form-widget-height;
     }
     &.small {
-      width: 64px;
-      height: 24px;
-      line-height: 24px;
+      padding: 0 @button-padding;
+      height: @form-widget-mini-height;
+      line-height: @form-widget-mini-height;
     }
     &.default {
       &:hover {
-        background-color: #ffffff;
+        background-color: @bg-color-white;
       }
     }
     &.default {
       &.disable {
         &:hover {
-          background-color: #f0f0f0;
+          background-color: @bg-color-light;
         }
       }
     }
     &.primary {
-      color: #ffffff;
-      background-color: #407dd1;
+      color: @bg-color-white;
+      background-color: @bg-button-primary;
       &:hover {
-        background-color: #62a5ff;
+        background-color: @bg-hover-primary;
       }
       &.disable {
-        color: #c2d5f0;
-        background-color: #81a5d7;
+        color: @font-disable-primary;
+        background-color: @bg-disable-primary;
         &:hover {
-          background-color: #81a5d7;
+          background-color: @bg-disable-primary;
         }
       }
     }
     &.success {
-      color: #ffffff;
-      background-color: #3cbb5b;
+      color: @bg-color-white;
+      background-color: @bg-button-success;
       &:hover {
-        background-color: #79eead;
+        background-color: @bg-hover-success;
       }
       &.disable {
-        color: #e0f4e5;
-        background-color: #8ad69d;
+        color: @font-disable-success;
+        background-color: @bg-disable-success;
         &:hover {
-          background-color: #8ad69d;
+          background-color: @bg-disable-success;
         }
       }
     }
     &.warning {
-      color: #ffffff;
-      background-color: #ff8441;
+      color: @bg-color-white;
+      background-color: @bg-button-warning;
       &:hover {
-        background-color: #ffa33f;
+        background-color: @bg-hover-warning;
       }
       &.disable {
-        color: #fff3ec;
-        background-color: #ffb58d;
+        color: @font-disable-warning;
+        background-color: @bg-disable-warning;
         &:hover {
-          background-color: #ffb58d;
+          background-color: @bg-disable-warning;
         }
       }
     }
     &.error {
-      color: #ffffff;
-      background-color: #d93b25;
+      color: @bg-color-white;
+      background-color: @bg-button-error;
       &:hover {
-        background-color: #d95326;
+        background-color: @bg-hover-error;
       }
       &.disable {
-        color: #ffffff;
-        background-color: #e8897c;
+        color: @bg-color-white;
+        background-color: @bg-disable-error;
         &:hover {
-          background-color: #e8897c;
+          background-color: @bg-disable-error;
         }
       }
     }

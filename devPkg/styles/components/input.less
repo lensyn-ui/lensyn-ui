@@ -2,8 +2,8 @@
   outline: none;
   padding: 0 8px;
   margin: 0 3px;
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color: @bg-color-white;
+  border: 1px solid @border-color-input;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
   -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
@@ -11,20 +11,20 @@
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   font-size: 12px;
   line-height: 1.42857143;
-  color: #555;
+  color: @input-font-color;
   &:focus {
-    border-color: #66afe9;
+    border-color: @border-color-focus;
     outline: 0;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
   }
   &.large {
-    height: 40px;
+    height: @form-widget-big-height;
   }
   &.middle {
-    height: 32px;
+    height: @form-widget-height;
   }
   &.small {
-    height: 24px;
+    height: @form-widget-mini-height;
   }
 }
