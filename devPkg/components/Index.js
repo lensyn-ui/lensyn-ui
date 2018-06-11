@@ -26,6 +26,9 @@ import Tree from "./tree/Tree";
 // tab
 import Tab from "./Tab";
 
+// 布局
+import LayoutContainer from "./layout/LayoutContainer";
+
 export {
     Grid,
     PaginationGrid,
@@ -38,5 +41,6 @@ export {
     Tree,
     DatePicker,
     Button,
-    Tab
+    Tab,
+    LayoutContainer
 };

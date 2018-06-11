@@ -72,6 +72,20 @@
         <div class="box">
             <ls-tab :datas="tabDatas" :isEnableCreateTab="true" :isEnableDeleteTab="true"></ls-tab>
         </div>
+
+        <div class="box" style="height: 200px;">
+            <ls-layout-container>
+                <div slot="top">
+                    <div style="height: 100px">top</div>
+                </div>
+                <div slot="left">
+                    <div style="width: 100px">left</div>
+                </div>
+                <div slot="center">
+                    <div style="width: 100px">center</div>
+                </div>
+            </ls-layout-container>
+        </div>
     </div>
 </template>
 
@@ -84,7 +98,8 @@
         Tree,
         DatePicker,
         Button,
-        Tab
+        Tab,
+        LayoutContainer
     } from "../../components";
     /* 分页 */
     import pagination from '../../components/Pagination.vue';
@@ -102,7 +117,8 @@
             "ls-date-picker": DatePicker,
             'ls-button': button,
             'ls-input': input,
-            "ls-tab": Tab
+            "ls-tab": Tab,
+            "ls-layout-container": LayoutContainer
         }
     })
     export default class HomeIndex extends Vue {
