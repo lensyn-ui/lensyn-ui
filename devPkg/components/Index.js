@@ -23,6 +23,9 @@ import Pagination from "./Pagination";
 // 树型控件
 import Tree from "./tree/Tree";
 
+// tab
+import Tab from "./Tab";
+
 export {
     Grid,
     PaginationGrid,
@@ -34,5 +37,6 @@ export {
     Pagination,
     Tree,
     DatePicker,
-    Button
+    Button,
+    Tab
 };
