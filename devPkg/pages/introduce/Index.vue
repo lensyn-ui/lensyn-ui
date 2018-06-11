@@ -103,9 +103,9 @@
 
 <script>
     import {Component, Vue} from 'vue-property-decorator';
-<<<<<<< HEAD
+
     import {Pagination, DropdownSelect, MultipleSelect, Tree, DatePicker, Button} from "../../components";
-=======
+
     import {
         Pagination,
         DropdownSelect,
@@ -116,7 +116,7 @@
         Tab,
         LayoutContainer
     } from "../../components";
->>>>>>> 85268ab8445e424c7eb7ff75db458c541eddaa15
+
     /* 分页 */
     import pagination from '../../components/Pagination.vue';
     /* 按钮 */
@@ -171,10 +171,9 @@
         ];
 
         datePickerValue = "";
-<<<<<<< HEAD
+
         val = '123555aaa';
-=======
-        val = '123';
+
 
         tabDatas = [
             { id: 1, name: "tab-1" },
@@ -213,10 +212,7 @@
 
         /* 按钮点击 */
         handleClick() {
-        }
-
-        mounted() {
-            window.hello = this;
+            alert('点击');
         }
     };
 </script>
