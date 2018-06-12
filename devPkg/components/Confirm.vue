@@ -1,24 +1,27 @@
 <template>
-    <div ref="confirm" class="confirm-box" v-if="isShow">
-        <div class="confirm-body">
-            <!--有slot-->
-            <slot v-if="isHaveCustomContent"></slot>
-            <!--无slot-->
-            <div class="confirm-content" v-else>
+    <div class="confirm-box" v-if="isShow">
+        <div ref="confirm" class="confirm-body">
+            <div class="confirm-content">
                 <div class="body">
-                    <h3>
-                        <span class="icon" :class="icon" v-if="icon!=''"></span>
-                        <span :class="icon==''?'no-icon':''">{{title}}</span>
-                    </h3>
-                    <p>{{text}}</p>
+                    <!--有slot-->
+                    <slot v-if="isHaveCustomContent"></slot>
+                    <!--无slot-->
+                    <div v-else>
+                        <h3>
+                            <span class="icon" :class="icon" v-if="icon!=''"></span>
+                            <span :class="icon==''?'no-icon':''">{{title}}</span>
+                        </h3>
+                        <p>{{text}}</p>
+                    </div>
                 </div>
                 <div class="footer">
-                    <ls-button :text="btnText[0]"
-                               :type="btnText.length>1?'default':btnType"
+                    <ls-button v-if="leftShow"
+                               :text="leftBtnText"
+                               :type="leftBtnType"
                                @buttonEvent="clickEvt('cancel')"></ls-button>
-                    <ls-button v-if="btnText.length>1"
-                               :text="btnText[1]"
-                               :type="btnType"
+                    <ls-button v-if="rightShow"
+                               :text="rightBtnText"
+                               :type="rightBtnType"
                                @buttonEvent="clickEvt('confirm')"></ls-button>
                 </div>
             </div>
@@ -38,31 +41,51 @@
             'ls-button': Button
         },
         props: {
-            isShow: {
+            isShow: {  //弹窗show
                 type: Boolean,
                 default: false
             },
-            title: {
+            title: {  //标题
                 type: String,
                 default: ''
             },
-            text: {
+            text: {  //文本
                 type: String,
                 default: ''
             },
-            icon: {
+            icon: {  //icon
                 type: String,
                 default: ''
             },
-            btnType: {
+            /* 左按钮 */
+            leftBtnType: {
+                type: String,
+                default: 'default'
+            },
+            leftBtnText: {
+                type: String,
+                default: '取消'
+            },
+            leftShow:{
+                type: Boolean,
+                default: true
+            },
+            /* 右按钮 */
+            rightBtnType: {
                 type: String,
                 default: 'primary'
             },
-            btnText: {
-                type: Array,
-                default: () => {
-                    return ['取消', '确定'];
-                }
+            rightBtnText: {
+                type: String,
+                default: '确定'
+            },
+            rightShow:{
+                type: Boolean,
+                default: true
+            },
+            popupPosition: {  //位置
+                type: [String, Array],
+                default: "windowCenter"
             }
         }
     })
@@ -74,13 +97,15 @@
         }
 
         clickEvt(type) {
-            this.emitEvent({action: 'click', type: type});
+            this.emitEvent({action: type});
         }
 
         @Watch('isShow')
         onShowConfirm(val) {
             if (val === true) {
-                this.showPopup(this.$refs.confirm);
+                this.$nextTick(() => {
+                    this.showPopup(this.$refs.confirm);
+                });
             }
         }
     }

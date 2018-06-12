@@ -113,18 +113,18 @@
                         :title="title"
                         :text="text"
                         :icon="'primary'"
-                        :btnType="'primary'"
-                        :btnText="['取消','确定']"
+                        :leftBtnType="'default'"
+                        :leftBtnText="'取消'"
+                        :leftShow="true"
+                        :rightBtnType="'primary'"
+                        :rightBtnText="'确定'"
+                        :rightShow="true"
                         @confirmEvent="confirmEvent1"></ls-confirm>
-            <ls-confirm :isShow="confirm2">
+            <ls-confirm :isShow="confirm2" @confirmEvent="confirmEvent2">
                 <div style="padding: 15px;">
                     <div style="text-align: center;">
                         <h3>自定义</h3>
-                        <p>这个弹窗里面的DOM和内容都是自定义</p>
-                    </div>
-                    <div style="text-align: center;">
-                        <ls-button :text="'取消'" @buttonEvent="cancelConfirm2"></ls-button>
-                        <ls-button :text="'确认'" :type="'primary'" @buttonEvent="cancelConfirm2"></ls-button>
+                        <p>这个弹窗里面的内容是自定义的</p>
                     </div>
                 </div>
             </ls-confirm>
@@ -262,7 +262,8 @@
             this.confirm2 = true;
         }
 
-        cancelConfirm2() {
+        confirmEvent2(val) {
+            console.log(val);
             this.confirm2 = false;
         }
     };
