@@ -9,7 +9,7 @@
                 <div class="body">
                     <slot></slot>
                 </div>
-                <div class="footer" v-if="isShowFooter">
+                <div class="footer" v-if="isHaveCustomContent">
                     <slot name="footer"></slot>
                 </div>
             </div>
@@ -51,7 +51,7 @@
         widgetName = 'modal';
 
         get isHaveCustomContent() {
-            return !!this.$slots.default;
+            return !!this.$slots.footer;
         }
 
         modalClose() {

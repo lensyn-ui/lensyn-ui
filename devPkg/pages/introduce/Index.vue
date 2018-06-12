@@ -129,20 +129,25 @@
                 </div>
             </ls-confirm>
         </div>
-        <div>
+        <div class="box">
             <ls-button :text="'弹窗'"
                        :size="'normal'"
                        :type="'primary'" @buttonEvent="showModal"></ls-button>
             <ls-modal :isShow="modalShow"
                       :title="'标题'"
                       :isShowHeader="true"
-                      :isShowFooter="true" @modalEvent="modalEvent">
+                      @modalEvent="modalEvent">
                 <div>this is body, you can defined it by yourself</div>
                 <div slot="footer" style="text-align: center;">
                     <ls-button :text="'取消'" type="default" @buttonEvent="modalEvent"></ls-button>
                     <ls-button :text="'确定'" type="primary" @buttonEvent="modalEvent"></ls-button>
                 </div>
             </ls-modal>
+        </div>
+        <div class="box">
+            <ls-button :text="'alarm'"
+                       :size="'normal'"
+                       :type="'primary'" @buttonEvent="alarmEvent"></ls-button>
         </div>
     </div>
 </template>
@@ -293,6 +298,11 @@
         modalEvent(val) {
             console.log(val);
             this.modalShow = false;
+        }
+
+        /* alarm */
+        alarmEvent() {
+            this.$lensyn.alarm.show('123');
         }
     };
 </script>

@@ -31,11 +31,10 @@ import Tab from "./Tab";
 import LayoutContainer from "./layout/LayoutContainer";
 
 // confirm
-import Confirm from "./Confirm"
+import Confirm from "./Confirm";
 
 // modal
-import Modal from "./Modal"
-
+import Modal from "./Modal";
 
 export {
     Grid,

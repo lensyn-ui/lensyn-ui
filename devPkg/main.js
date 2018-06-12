@@ -15,6 +15,10 @@ import router from './router/index.js';
 /* 引入容器页面 */
 import Index from "./pages/Index.vue";
 
+/* 加载全局组件 */
+import GlobalComponent from "./components/global.js";
+Vue.use(GlobalComponent);
+
 /* vue实例化，加载路由、状态管理器、指向模板引擎 */
 new Vue({
     el: "#mainContent",
