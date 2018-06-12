@@ -428,6 +428,12 @@
                     if (this.checkedIds.indexOf(nodeId) === -1) {
                         this.checkedIds.push(nodeId);
                     }
+                    
+                    let partIndex = this.partCheckedIds.indexOf(nodeId);
+
+                    if (partIndex !== -1) {
+                        this.partCheckedIds.splice(partIndex, 1);
+                    }
                 } else {
                     if (this.partCheckedIds.indexOf(nodeId) === -1) {
                         this.partCheckedIds.push(nodeId);
