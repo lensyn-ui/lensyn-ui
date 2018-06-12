@@ -51,18 +51,18 @@
             <ls-button :text="'按钮'"
                        :size="'big'"
                        :disabled="false"
-                       :type="'error'"></ls-button>
+                       :type="'danger'"></ls-button>
             <ls-button :text="'按钮'"
                        :disabled="false"
-                       :type="'error'"></ls-button>
+                       :type="'danger'"></ls-button>
             <ls-button :text="'按钮'"
                        :size="'mini'"
                        :disabled="true"
-                       :type="'error'"></ls-button>
+                       :type="'danger'"></ls-button>
             <ls-button :text="'按钮'"
                        :size="'mini'"
                        :disabled="true"
-                       :type="'error'">自定义
+                       :type="'danger'">自定义
             </ls-button>
         </div>
         <div class="box">
@@ -106,12 +106,17 @@
             <ls-button :text="'自定义'"
                        :size="'normal'"
                        :type="'primary'" @buttonEvent="showConfirm2"></ls-button>
-            <!--弹窗 success warning alarm三种类型-->
+            <!--弹窗 icon:primary,success warning alarm refuse四种类型,不传icon或者传''就是icon没有;
+            button: default,primary,success,warning,danger四种类型,默认default+primary;
+            btnText按钮文字: 数组从左到右,如果只传一个只有一个按钮,同时把btnType作为按钮的class-->
             <ls-confirm :isShow="confirm1"
                         :title="title"
                         :text="text"
-                        :icon="'success'" @confirmEvent="confirmEvent1"></ls-confirm>
-            <ls-confirm :isShow="confirm2"  @confirmEvent="confirmEvent2">
+                        :icon="'primary'"
+                        :btnType="'primary'"
+                        :btnText="['取消','确定']"
+                        @confirmEvent="confirmEvent1"></ls-confirm>
+            <ls-confirm :isShow="confirm2">
                 <div style="padding: 15px;">
                     <div style="text-align: center;">
                         <h3>自定义</h3>
@@ -224,8 +229,8 @@
 
         confirm1 = false;
         confirm2 = false;
-        title='是否想要删除当前账号？';
-        text='账号删除以后会退出当前系统。';
+        title = '是否想要删除当前账号？';
+        text = '账号删除以后会退出当前系统。';
 
         /* 分页返回对象 */
         pageChange(e) {
@@ -246,6 +251,7 @@
         showConfirm1() {
             this.confirm1 = true;
         }
+
         confirmEvent1(val) {
             console.log(val);
             this.confirm1 = false;
@@ -255,11 +261,9 @@
         showConfirm2() {
             this.confirm2 = true;
         }
+
         cancelConfirm2() {
             this.confirm2 = false;
-        }
-        confirmEvent2(val) {
-            console.log(val);
         }
     };
 </script>

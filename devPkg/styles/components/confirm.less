@@ -34,18 +34,27 @@
           background-repeat: no-repeat;
           background-size: 16px;
           vertical-align: middle;
+          &.primary {
+            background-image: url("../../images/components/primary.png");
+          }
           &.warning {
             background-image: url("../../images/components/warning.png");
           }
-          &.alarm {
-            background-image: url("../../images/components/alarm.png");
+          &.danger {
+            background-image: url("../../images/components/danger.png");
+          }
+          &.refuse {
+            background-image: url("../../images/components/refuse.png");
           }
           &.success {
             background-image: url("../../images/components/success.png");
           }
         }
-        p{
+        p {
           padding: 0 23px;
+        }
+        .no-icon{
+          padding-left: 23px;
         }
       }
       .footer {
