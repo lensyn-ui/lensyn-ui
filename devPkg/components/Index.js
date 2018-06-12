@@ -33,6 +33,9 @@ import LayoutContainer from "./layout/LayoutContainer";
 // confirm
 import Confirm from "./Confirm"
 
+// modal
+import Modal from "./Modal"
+
 
 export {
     Grid,
@@ -49,5 +52,6 @@ export {
     Tab,
     LayoutContainer,
     Input,
-    Confirm
+    Confirm,
+    Modal
 };

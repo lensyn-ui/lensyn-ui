@@ -1,0 +1,49 @@
+.modal-box {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+  background-color: rgba(0, 0, 0, .5) !important;
+  filter: Alpha(opacity=50);
+  .modal-main {
+    background-color: @bg-color-white;
+    position: fixed;
+    width: 540px;
+    height: auto;
+    .modal-content {
+      .header {
+        position: relative;
+        padding: 0 15px;
+        background-color: @bg-color-light;
+        .title {
+          padding: 10px 0;
+          margin: 0;
+        }
+        .close {
+          position: absolute;
+          top: 9px;
+          right: 12px;
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          background-image: url("../../images/components/close.png");
+          background-repeat: no-repeat;
+          background-position: 4px 4px;
+          cursor: pointer;
+        }
+      }
+      .body {
+        padding: 15px;
+      }
+      .footer{
+        padding: 15px;
+        padding-top: 0;
+      }
+    }
+  }
+}

@@ -129,6 +129,21 @@
                 </div>
             </ls-confirm>
         </div>
+        <div>
+            <ls-button :text="'弹窗'"
+                       :size="'normal'"
+                       :type="'primary'" @buttonEvent="showModal"></ls-button>
+            <ls-modal :isShow="modalShow"
+                      :title="'标题'"
+                      :isShowHeader="true"
+                      :isShowFooter="true" @modalEvent="modalEvent">
+                <div>this is body, you can defined it by yourself</div>
+                <div slot="footer" style="text-align: center;">
+                    <ls-button :text="'取消'" type="default" @buttonEvent="modalEvent"></ls-button>
+                    <ls-button :text="'确定'" type="primary" @buttonEvent="modalEvent"></ls-button>
+                </div>
+            </ls-modal>
+        </div>
     </div>
 </template>
 
@@ -145,7 +160,8 @@
         Tab,
         LayoutContainer,
         Input,
-        Confirm
+        Confirm,
+        Modal
     } from "../../components";
 
     /* 分页 */
@@ -162,7 +178,8 @@
             'ls-input': Input,
             "ls-tab": Tab,
             "ls-layout-container": LayoutContainer,
-            'ls-confirm': Confirm
+            'ls-confirm': Confirm,
+            'ls-modal': Modal
         }
     })
     export default class HomeIndex extends Vue {
@@ -202,7 +219,6 @@
 
         val = '123555aaa';
 
-
         tabDatas = [
             {id: 1, name: "tab-1"},
             {id: 2, name: "tab-2"},
@@ -231,6 +247,8 @@
         confirm2 = false;
         title = '是否想要删除当前账号？';
         text = '账号删除以后会退出当前系统。';
+
+        modalShow = false;
 
         /* 分页返回对象 */
         pageChange(e) {
@@ -265,6 +283,16 @@
         confirmEvent2(val) {
             console.log(val);
             this.confirm2 = false;
+        }
+
+        /* 弹窗modal */
+        showModal() {
+            this.modalShow = true;
+        }
+
+        modalEvent(val) {
+            console.log(val);
+            this.modalShow = false;
         }
     };
 </script>

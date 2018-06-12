@@ -18,11 +18,11 @@
                     <ls-button v-if="leftShow"
                                :text="leftBtnText"
                                :type="leftBtnType"
-                               @buttonEvent="clickEvt('cancel')"></ls-button>
+                               @buttonEvent="clickEvt($event, 'cancel')"></ls-button>
                     <ls-button v-if="rightShow"
                                :text="rightBtnText"
                                :type="rightBtnType"
-                               @buttonEvent="clickEvt('confirm')"></ls-button>
+                               @buttonEvent="clickEvt($event, 'confirm')"></ls-button>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
                 type: String,
                 default: '取消'
             },
-            leftShow:{
+            leftShow: {
                 type: Boolean,
                 default: true
             },
@@ -79,7 +79,7 @@
                 type: String,
                 default: '确定'
             },
-            rightShow:{
+            rightShow: {
                 type: Boolean,
                 default: true
             },
@@ -96,8 +96,8 @@
             return !!this.$slots.default;
         }
 
-        clickEvt(type) {
-            this.emitEvent({action: type});
+        clickEvt($event, type) {
+            this.emitEvent({action: type, $event: $event.$event});
         }
 
         @Watch('isShow')
