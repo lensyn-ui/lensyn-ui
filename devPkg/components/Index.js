@@ -16,6 +16,7 @@ import DropdownSelect from "./form-widgets/select/DropdownSelect";
 import MultipleSelect from "./form-widgets/select/MultipleSelect";
 import DatePicker from "./form-widgets/date-picker/Datepicker";
 import Button from "./form-widgets/Button";
+import Input from "./form-widgets/Input";
 
 // 分页
 import Pagination from "./Pagination";
@@ -28,6 +29,7 @@ import Tab from "./Tab";
 
 // 布局
 import LayoutContainer from "./layout/LayoutContainer";
+
 
 export {
     Grid,
@@ -42,5 +44,6 @@ export {
     DatePicker,
     Button,
     Tab,
-    LayoutContainer
+    LayoutContainer,
+    Input
 };

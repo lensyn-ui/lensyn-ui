@@ -103,7 +103,7 @@
 
 <script>
     import {Component, Vue} from 'vue-property-decorator';
-    
+
     import {
         Pagination,
         DropdownSelect,
@@ -112,15 +112,12 @@
         DatePicker,
         Button,
         Tab,
-        LayoutContainer
+        LayoutContainer,
+        Input
     } from "../../components";
 
     /* 分页 */
     import pagination from '../../components/Pagination.vue';
-    /* 按钮 */
-    import button from '../../components/form-widgets/Button.vue';
-    /* 输入框 */
-    import input from '../../components/form-widgets/Input.vue';
 
     @Component({
         components: {
@@ -129,8 +126,8 @@
             "ls-multiple-select": MultipleSelect,
             "ls-tree": Tree,
             "ls-date-picker": DatePicker,
-            'ls-button': button,
-            'ls-input': input,
+            'ls-button': Button,
+            'ls-input': Input,
             "ls-tab": Tab,
             "ls-layout-container": LayoutContainer
         }
