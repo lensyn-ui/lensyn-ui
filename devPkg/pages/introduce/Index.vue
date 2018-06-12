@@ -100,10 +100,29 @@
         </div>
 
         <div class="box">
-            <ls-button :text="'按钮'"
+            <ls-button :text="'默认'"
                        :size="'normal'"
-                       :type="'primary'" @buttonEvent="showConfirm"></ls-button>
-            <ls-confirm :isShow="true"></ls-confirm>
+                       :type="'primary'" @buttonEvent="showConfirm1"></ls-button>
+            <ls-button :text="'自定义'"
+                       :size="'normal'"
+                       :type="'primary'" @buttonEvent="showConfirm2"></ls-button>
+            <!--弹窗 success warning alarm三种类型-->
+            <ls-confirm :isShow="confirm1"
+                        :title="title"
+                        :text="text"
+                        :icon="'success'" @confirmEvent="confirmEvent1"></ls-confirm>
+            <ls-confirm :isShow="confirm2"  @confirmEvent="confirmEvent2">
+                <div style="padding: 15px;">
+                    <div style="text-align: center;">
+                        <h3>自定义</h3>
+                        <p>这个弹窗里面的DOM和内容都是自定义</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <ls-button :text="'取消'" @buttonEvent="cancelConfirm2"></ls-button>
+                        <ls-button :text="'确认'" :type="'primary'" @buttonEvent="cancelConfirm2"></ls-button>
+                    </div>
+                </div>
+            </ls-confirm>
         </div>
     </div>
 </template>
@@ -203,6 +222,11 @@
             {id: 22, name: "tab-22"},
         ];
 
+        confirm1 = false;
+        confirm2 = false;
+        title='是否想要删除当前账号？';
+        text='账号删除以后会退出当前系统。';
+
         /* 分页返回对象 */
         pageChange(e) {
             console.log(e);
@@ -218,9 +242,24 @@
             alert('点击');
         }
 
-        /* confirm */
-        showConfirm() {
+        /* confirm1 */
+        showConfirm1() {
+            this.confirm1 = true;
+        }
+        confirmEvent1(val) {
+            console.log(val);
+            this.confirm1 = false;
+        }
 
+        /* confirm2 */
+        showConfirm2() {
+            this.confirm2 = true;
+        }
+        cancelConfirm2() {
+            this.confirm2 = false;
+        }
+        confirmEvent2(val) {
+            console.log(val);
         }
     };
 </script>

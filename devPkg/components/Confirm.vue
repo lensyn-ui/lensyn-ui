@@ -1,13 +1,19 @@
 <template>
     <div class="confirm-box" v-if="isShow">
-        <slot v-if="isHaveCustomContent"></slot>
         <div class="confirm-body">
-            <div class="body">
-                this is body
-            </div>
-            <div class="footer">
-                <ls-button :text="'取消'"></ls-button>
-                <ls-button :text="'确认'" :type="'primary'"></ls-button>
+            <slot v-if="isHaveCustomContent"></slot>
+            <div class="confirm-content" v-else>
+                <div class="body">
+                    <h3>
+                        <span class="icon" :class="icon"></span>
+                        <span>{{title}}</span>
+                    </h3>
+                    <p>{{text}}</p>
+                </div>
+                <div class="footer">
+                    <ls-button :text="'取消'" @buttonEvent="clickEvt('cancel')"></ls-button>
+                    <ls-button :text="'确认'" :type="'primary'" @buttonEvent="clickEvt('confirm')"></ls-button>
+                </div>
             </div>
         </div>
     </div>
@@ -26,6 +32,18 @@
             isShow: {
                 type: Boolean,
                 default: false
+            },
+            title: {
+                type: String,
+                default: ''
+            },
+            text: {
+                type: String,
+                default: ''
+            },
+            icon: {
+                type: String,
+                default: ''
             }
         }
     })
@@ -33,7 +51,11 @@
         widgetName = 'confirm';
 
         get isHaveCustomContent() {
-            return !!this.$slot.default;
+            return !!this.$slots.default;
+        }
+
+        clickEvt(type) {
+            this.emitEvent({type: type});
         }
     }
 </script>

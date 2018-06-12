@@ -18,11 +18,42 @@
     height: auto;
     left: 0;
     right: 0;
+    top: 50%;
+    transform: translateY(-50%);
     margin: auto;
-    .footer{
-      text-align: center;
-      .button-box{
-        margin-right: 5px;
+    .confirm-content {
+      padding: 15px;
+      .body {
+        .icon {
+          position: relative;
+          top: 0;
+          margin-right: 3px;
+          display: inline-block;
+          width: 16px;
+          height: 16px;
+          background-repeat: no-repeat;
+          background-size: 16px;
+          vertical-align: middle;
+          &.warning {
+            background-image: url("../../images/components/warning.png");
+          }
+          &.alarm {
+            background-image: url("../../images/components/alarm.png");
+          }
+          &.success {
+            background-image: url("../../images/components/success.png");
+          }
+        }
+        p{
+          padding: 0 23px;
+        }
+      }
+      .footer {
+        margin-top: 20px;
+        text-align: center;
+        .button-box {
+          margin-right: 5px;
+        }
       }
     }
   }
