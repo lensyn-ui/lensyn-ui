@@ -30,6 +30,9 @@ import Tab from "./Tab";
 // 布局
 import LayoutContainer from "./layout/LayoutContainer";
 
+// confirm
+import Confirm from "./Confirm"
+
 
 export {
     Grid,
@@ -45,5 +48,6 @@ export {
     Button,
     Tab,
     LayoutContainer,
-    Input
+    Input,
+    Confirm
 };

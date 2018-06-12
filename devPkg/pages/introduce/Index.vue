@@ -66,7 +66,7 @@
             </ls-button>
         </div>
         <div class="box">
-            <ls-input ref="hello" :placeholder="'请输入文字'"
+            <ls-input :placeholder="'请输入文字'"
                       :size="'big'"
                       v-model="val"
                       :autofocus="true"
@@ -98,6 +98,13 @@
                 </div>
             </ls-layout-container>
         </div>
+
+        <div class="box">
+            <ls-button :text="'按钮'"
+                       :size="'normal'"
+                       :type="'primary'" @buttonEvent="showConfirm"></ls-button>
+            <ls-confirm :isShow="true"></ls-confirm>
+        </div>
     </div>
 </template>
 
@@ -113,7 +120,8 @@
         Button,
         Tab,
         LayoutContainer,
-        Input
+        Input,
+        Confirm
     } from "../../components";
 
     /* 分页 */
@@ -129,7 +137,8 @@
             'ls-button': Button,
             'ls-input': Input,
             "ls-tab": Tab,
-            "ls-layout-container": LayoutContainer
+            "ls-layout-container": LayoutContainer,
+            'ls-confirm': Confirm
         }
     })
     export default class HomeIndex extends Vue {
@@ -171,27 +180,27 @@
 
 
         tabDatas = [
-            { id: 1, name: "tab-1" },
-            { id: 2, name: "tab-2" },
-            { id: 4, name: "tab-4" },
-            { id: 5, name: "tab-5" },
-            { id: 6, name: "tab-6" },
-            { id: 7, name: "tab-7" },
-            { id: 8, name: "tab-8" },
-            { id: 9, name: "tab-9" },
-            { id: 10, name: "tab-10" },
-            { id: 11, name: "tab-11" },
-            { id: 12, name: "tab-12" },
-            { id: 13, name: "tab-13" },
-            { id: 14, name: "tab-14" },
-            { id: 15, name: "tab-15" },
-            { id: 16, name: "tab-16" },
-            { id: 17, name: "tab-17" },
-            { id: 18, name: "tab-18" },
-            { id: 19, name: "tab-19" },
-            { id: 20, name: "tab-20" },
-            { id: 21, name: "tab-21" },
-            { id: 22, name: "tab-22" },
+            {id: 1, name: "tab-1"},
+            {id: 2, name: "tab-2"},
+            {id: 4, name: "tab-4"},
+            {id: 5, name: "tab-5"},
+            {id: 6, name: "tab-6"},
+            {id: 7, name: "tab-7"},
+            {id: 8, name: "tab-8"},
+            {id: 9, name: "tab-9"},
+            {id: 10, name: "tab-10"},
+            {id: 11, name: "tab-11"},
+            {id: 12, name: "tab-12"},
+            {id: 13, name: "tab-13"},
+            {id: 14, name: "tab-14"},
+            {id: 15, name: "tab-15"},
+            {id: 16, name: "tab-16"},
+            {id: 17, name: "tab-17"},
+            {id: 18, name: "tab-18"},
+            {id: 19, name: "tab-19"},
+            {id: 20, name: "tab-20"},
+            {id: 21, name: "tab-21"},
+            {id: 22, name: "tab-22"},
         ];
 
         /* 分页返回对象 */
@@ -207,6 +216,11 @@
         /* 按钮点击 */
         handleClick() {
             alert('点击');
+        }
+
+        /* confirm */
+        showConfirm() {
+
         }
     };
 </script>
