@@ -302,7 +302,8 @@
 
         /* alarm */
         alarmEvent() {
-            this.$lensyn.alarm.show('123');
+            //1.title  2.内容  3.弹出框类型  4.title的icon  5.是否有关闭按钮
+            this.$lensyn.alarm.show('123123123123123123123123123123123123', '123123123123123123123123123123', 'success', 'success', true);
         }
     };
 </script>
