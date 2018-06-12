@@ -1,7 +1,9 @@
 <template>
     <div ref="confirm" class="confirm-box" v-if="isShow">
         <div class="confirm-body">
+            <!--有slot-->
             <slot v-if="isHaveCustomContent"></slot>
+            <!--无slot-->
             <div class="confirm-content" v-else>
                 <div class="body">
                     <h3>
@@ -25,7 +27,7 @@
 </template>
 
 <script>
-    import {Component} from "vue-property-decorator";
+    import {Component, Watch} from "vue-property-decorator";
     import {mixins} from "vue-class-component";
     import Widget from './base/Widget.vue';
     import Popup from './mixins/PopupMixin';
@@ -67,16 +69,19 @@
     export default class Confirm extends mixins(Widget, Popup) {
         widgetName = 'confirm';
 
-//        mounted() {
-//            this.showPopupInWindowCenter(this.$refs.confirm, document.body);
-//        }
-
         get isHaveCustomContent() {
             return !!this.$slots.default;
         }
 
         clickEvt(type) {
-            this.emitEvent({action: type});
+            this.emitEvent({action: 'click', type: type});
+        }
+
+        @Watch('isShow')
+        onShowConfirm(val) {
+            if (val === true) {
+                this.showPopup(this.$refs.confirm);
+            }
         }
     }
 </script>
