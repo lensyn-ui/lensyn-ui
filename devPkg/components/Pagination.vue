@@ -70,7 +70,6 @@
                 return;
             }
             this.inputPage = newVal;
-            this.emitEvent({currentPage: this.currentPage, displayItem: this.displayItem});
         }
 
         @Watch('displayItem')
@@ -80,7 +79,7 @@
         }
 
         mounted() {
-            this.$nextTick(function () {
+            this.$nextTick(() => {
                 this.currentPage = this.current;
                 this.displayItem = this.display;
             });
