@@ -1,29 +1,32 @@
-const path = require("path");
-const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const ChunkCleanPlugin = require("./ChunkCleanPlugin");
+const ChunkCleanPlugin = require("../ChunkCleanPlugin");
+const { resolvePath } = require("./helper");
 
 module.exports = {
     entry: {
-        "all.min": "./devPkg/main.js"
+        "all.min": resolvePath("devPkg/main.js")
     },
+
     output: {
-        path: path.join(__dirname, './static'),
+        path: resolvePath('static'),
         publicPath: '/static/',
         filename: '[name].js',
         libraryTarget: 'umd',
         library: 'lensyn-ui',
         umdNamedDefine: true
     },
+
     resolve: {
         extensions: ['.js', '.vue', '.less', '.css']
     },
+
     module: {
         rules: [
             {
                 test: /\.vue$/,
                 loader: 'vue-loader'
             },
+
             {
                 test: /\.less$/,
                 use: ExtractTextPlugin.extract({
@@ -34,10 +37,13 @@ module.exports = {
                     ]
                 })
             },
+
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                include: [path.resolve(__dirname, "devPkg")],
+                include: [
+                    resolvePath("devPkg")
+                ],
                 loader: 'babel-loader'
             },
             {
@@ -51,7 +57,7 @@ module.exports = {
         ]
     },
     plugins: [
-        new ChunkCleanPlugin(path.join(__dirname, './static')),
+        new ChunkCleanPlugin(resolvePath("static")),
         new ExtractTextPlugin('./style/main.css')
     ]
 };

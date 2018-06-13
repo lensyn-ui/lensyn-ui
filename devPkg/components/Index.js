@@ -4,10 +4,6 @@
 import Grid from "./grid/Grid";
 import PaginationGrid from "./grid/PaginationGrid";
 
-// mixins
-import PopupMixin from "./mixins/PopupMixin";
-import DraggableMixin from "./mixins/DraggableMixin";
-
 // dropdown
 import Dropdown from "./Dropdown";
 
@@ -39,8 +35,6 @@ import Modal from "./Modal";
 export {
     Grid,
     PaginationGrid,
-    PopupMixin,
-    DraggableMixin,
     Dropdown,
     DropdownSelect,
     MultipleSelect,

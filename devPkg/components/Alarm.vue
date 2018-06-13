@@ -43,7 +43,7 @@
                 type: String,
                 default: 'danger'
             },
-            popupPosition: {  //Î»ÖÃ
+            popupPosition: {  //Î»ï¿½ï¿½
                 type: [String, Array],
                 default: "windowCenter"
             }
