@@ -1,7 +1,7 @@
 <template>
     <div class="introduce-main">
         <div class="box">
-            <ls-pagination :total="80" :current="1" :display="10" @on-change="pageChange($event)"></ls-pagination>
+            <ls-pagination :total="80" :current="1" :display="10" @paginationEvent="pageChange"></ls-pagination>
         </div>
         <div class="box">
             <ls-multiple-select :datas="selectDatas" style="margin-top: 20px;"></ls-multiple-select>
@@ -145,10 +145,18 @@
             </ls-modal>
         </div>
         <div class="box">
-            <ls-button :text="'alarm'"
+            <ls-button :text="'alarm1'"
                        :size="'normal'"
-                       :type="'primary'" @buttonEvent="alarmEvent"></ls-button>
+                       :type="'primary'" @buttonEvent="alarmEvent1"></ls-button>
+            <ls-button :text="'alarm2'"
+                       :size="'normal'"
+                       :type="'primary'" @buttonEvent="alarmEvent2"></ls-button>
         </div>
+		<div class="box">
+			<div v-tooltip.top="'tooltip.top'">tooltip-top</div>
+			<div v-tooltip.bottom="'tooltip.bottom'">tooltip-bottom</div>
+			<!--<div v-tooltip.bottom="'tooltip.bottom'">tooltip-bottom</div>-->
+		</div>
     </div>
 </template>
 
@@ -256,8 +264,8 @@
         modalShow = false;
 
         /* 分页返回对象 */
-        pageChange(e) {
-            console.log(e);
+        pageChange(val) {
+            console.log(val);
         }
 
         /* 输入框值改变 */
@@ -301,9 +309,13 @@
         }
 
         /* alarm */
-        alarmEvent() {
+        alarmEvent1() {
             //1.title  2.内容  3.弹出框类型  4.title的icon  5.是否有关闭按钮
             this.$lensyn.alarm.show('123123123123123123123123123123123123', '123123123123123123123123123123', 'success', 'success', true);
+        }
+        alarmEvent2() {
+            //1.title  2.内容  3.弹出框类型  4.title的icon  5.是否有关闭按钮
+            this.$lensyn.alarm.show('123123123123123123123123123123123123', '123123123123123123123123123123', 'danger', 'danger', false);
         }
     };
 </script>

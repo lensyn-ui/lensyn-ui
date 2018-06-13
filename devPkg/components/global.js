@@ -1,5 +1,7 @@
-import {VueConstructor} from 'vue';
+import Vue from 'vue';
 import AlarmModal from './Alarm.vue';
+import Loading from './loading/loadingClass.js'
+import Tooltip from './tooltip/tooltipClass.js'
 
 let Alarm = {
     install(Vue) {
@@ -9,7 +11,10 @@ let Alarm = {
             _currentAlarm: null,
             _showTime: 1500,
             show(msg, subMsg, msgType, icon, iconClose) {
-                window.hello = this;
+                if (this._currentAlarm) {
+                    clearTimeout(window.alarmTimer);
+                    this._currentAlarm.visible = false;
+                }
                 this._currentAlarm = null;  //先干掉之前存在的
                 if (!msgType) {
                     msgType = "danger";
@@ -28,7 +33,7 @@ let Alarm = {
                     }
                 });
                 if (iconClose !== true) {
-                    setTimeout(() => this._currentAlarm.visible = false, this._showTime);
+                    window.alarmTimer = setTimeout(() => this._currentAlarm.visible = false, this._showTime);
                 }
             }
         };
@@ -37,11 +42,13 @@ let Alarm = {
 };
 
 let GlobalComponent = {
-    install(Vue) {
+    install() {
         if (!Vue.prototype.$lensyn) {
             Vue.prototype.$lensyn = {};
         }
         Alarm.install(Vue);
+        new Loading(Vue);
+        Vue.directive('tooltip', Tooltip)
     }
 };
 

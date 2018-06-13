@@ -43,7 +43,7 @@
                 type: String,
                 default: 'danger'
             },
-            popupPosition: {  //λ��
+            popupPosition: {  //位置
                 type: [String, Array],
                 default: "windowCenter"
             }
