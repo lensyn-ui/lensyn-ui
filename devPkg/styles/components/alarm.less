@@ -1,24 +1,25 @@
-.alarm-box{
+.alarm-box {
   position: fixed;
+  z-index: 999;
   min-width: 120px;
-  max-width:450px;
-  &.primary{
+  max-width: 450px;
+  &.primary {
     border: 1px solid @border-primary-alarm;
     background-color: @bg-primary-alarm;
   }
-  &.success{
+  &.success {
     border: 1px solid @border-success-alarm;
     background-color: @bg-success-alarm;
   }
-  &.warning{
+  &.warning {
     border: 1px solid @border-warning-alarm;
     background-color: @bg-warning-alarm;
   }
-  &.danger{
+  &.danger {
     border: 1px solid @border-danger-alarm;
     background-color: @bg-danger-alarm;
   }
-  .close{
+  .close {
     display: inline-block;
     position: absolute;
     cursor: pointer;
@@ -30,12 +31,12 @@
     background-repeat: no-repeat;
     background-position: 2px 2px;
   }
-  .text-box{
+  .text-box {
     padding: 10px 30px;
-    .text{
+    .text {
       margin: 0;
       word-break: break-all;
-      i{
+      i {
         position: relative;
         top: 0;
         margin-right: 3px;
@@ -62,7 +63,7 @@
         }
       }
     }
-    .sub-text{
+    .sub-text {
       margin-top: 5px;
     }
   }
