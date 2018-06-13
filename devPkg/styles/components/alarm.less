@@ -1,3 +1,70 @@
 .alarm-box{
+  position: fixed;
+  min-width: 120px;
+  max-width:450px;
+  &.primary{
+    border: 1px solid @border-primary-alarm;
+    background-color: @bg-primary-alarm;
+  }
+  &.success{
+    border: 1px solid @border-success-alarm;
+    background-color: @bg-success-alarm;
+  }
+  &.warning{
+    border: 1px solid @border-warning-alarm;
+    background-color: @bg-warning-alarm;
+  }
+  &.danger{
+    border: 1px solid @border-danger-alarm;
+    background-color: @bg-danger-alarm;
+  }
+  .close{
+    display: inline-block;
+    position: absolute;
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+    top: 12px;
+    right: 6px;
+    background-image: url("../../images/components/close.png");
+    background-repeat: no-repeat;
+    background-position: 2px 2px;
+  }
+  .text-box{
+    padding: 10px 30px;
+    .text{
+      margin: 0;
+      word-break: break-all;
+      i{
+        position: relative;
+        top: 0;
+        margin-right: 3px;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background-repeat: no-repeat;
+        background-size: 16px;
+        vertical-align: middle;
+        &.primary {
+          background-image: url("../../images/components/primary.png");
+        }
+        &.warning {
+          background-image: url("../../images/components/warning.png");
+        }
+        &.danger {
+          background-image: url("../../images/components/danger.png");
+        }
+        &.refuse {
+          background-image: url("../../images/components/refuse.png");
+        }
+        &.success {
+          background-image: url("../../images/components/success.png");
+        }
+      }
+    }
+    .sub-text{
+      margin-top: 5px;
+    }
+  }
 
 }

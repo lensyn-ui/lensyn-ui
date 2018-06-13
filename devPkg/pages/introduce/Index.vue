@@ -18,6 +18,7 @@
 		<div class="box">
 			<!--按钮绑定时间自己绑定就是了，这里就相当于只剥离了一个样式-->
 			<!--disabled默认false，size默认normal，type默认default，都可以不传-->
+			<div v-tooltip.top="'fwafawf'">asfawef</div>
 			<ls-button :text="'按钮'"
 					   :size="'normal'"
 					   :disabled="false" @buttonEvent="handleClick"></ls-button>
@@ -303,7 +304,8 @@
 
     /* alarm */
     alarmEvent() {
-      this.$lensyn.alarm.show('123');
+      //1.title  2.内容  3.弹出框类型  4.title的icon  5.是否有关闭按钮
+      this.$lensyn.alarm.show('123123123123123123123123123123123123', '123123123123123123123123123123', 'success', 'success', true);
     }
   };
 </script>

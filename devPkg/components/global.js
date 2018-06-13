@@ -10,7 +10,8 @@ let Alarm = {
     alarm = {
       _currentAlarm: null,
       _showTime: 1500,
-      show(msg, msgType) {
+      show(msg, subMsg, msgType, icon, iconClose) {
+        window.hello = this;
         this._currentAlarm = null;  //先干掉之前存在的
         if (!msgType) {
           msgType = "danger";
@@ -21,11 +22,16 @@ let Alarm = {
           el: container,
           propsData: {
             msg,
+            subMsg,
             msgType,
+            icon,
+            iconClose,
             visible: true
           }
         });
-        setTimeout(() => this._currentAlarm.visible = false, this._showTime);
+        if (iconClose !== true) {
+          setTimeout(() => this._currentAlarm.visible = false, this._showTime);
+        }
       }
     };
     Vue.prototype.$lensyn.alarm = alarm;
