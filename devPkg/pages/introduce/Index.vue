@@ -1,160 +1,160 @@
 <template>
-	<div class="introduce-main">
-		<div class="box">
-			<ls-pagination :total="80" :current="1" :display="10" @on-change="pageChange($event)"></ls-pagination>
-		</div>
-		<div class="box">
-			<ls-multiple-select :datas="selectDatas" style="margin-top: 20px;"></ls-multiple-select>
-		</div>
-		<div class="box">
-			<ls-dropdown-select :datas="selectDatas" style="margin-top: 20px;"></ls-dropdown-select>
-		</div>
-		<div class="box">
-			<ls-tree :isEnableChecked="true" :datas="treeDatas" style="margin-top: 20px;"></ls-tree>
-		</div>
-		<div class="box">
-			<ls-date-picker v-model="datePickerValue" style="margin-top: 20px;"></ls-date-picker>
-		</div>
-		<div class="box">
-			<!--按钮绑定时间自己绑定就是了，这里就相当于只剥离了一个样式-->
-			<!--disabled默认false，size默认normal，type默认default，都可以不传-->
-			<ls-button :text="'按钮'"
-					   :size="'normal'"
-					   :disabled="false" @buttonEvent="handleClick"></ls-button>
-			<ls-button :text="'按钮'"
-					   :size="'normal'"
-					   :disabled="true"></ls-button>
-			<ls-button :text="'按钮'"
-					   :size="'normal'"
-					   :disabled="false"
-					   :type="'primary'"></ls-button>
-			<ls-button :text="'按钮'"
-					   :size="'normal'"
-					   :disabled="true"
-					   :type="'primary'"></ls-button>
-			<ls-button :text="'按钮'"
-					   :size="'normal'"
-					   :disabled="false"
-					   :type="'success'"></ls-button>
-			<ls-button :text="'按钮'"
-					   :size="'normal'"
-					   :disabled="true"
-					   :type="'success'"></ls-button>
-			<ls-button :text="'按钮'"
-					   :size="'normal'"
-					   :disabled="false"
-					   :type="'warning'"></ls-button>
-			<ls-button :text="'按钮'"
-					   :size="'normal'"
-					   :disabled="true"
-					   :type="'normal'"></ls-button>
-			<ls-button :text="'按钮'"
-					   :size="'big'"
-					   :disabled="false"
-					   :type="'danger'"></ls-button>
-			<ls-button :text="'按钮'"
-					   :disabled="false"
-					   :type="'danger'"></ls-button>
-			<ls-button :text="'按钮'"
-					   :size="'mini'"
-					   :disabled="true"
-					   :type="'danger'"></ls-button>
-			<ls-button :text="'按钮'"
-					   :size="'mini'"
-					   :disabled="true"
-					   :type="'danger'">自定义
-			</ls-button>
-		</div>
-		<div class="box">
-			<ls-input :placeholder="'请输入文字'"
-					  :size="'big'"
-					  v-model="val"
-					  :autofocus="true"
-					  @inputEvent="inputChange"></ls-input>
-			<ls-input :placeholder="'请输入文字'"
-					  :size="'normal'"
-					  v-model="val"
-					  :widgetReadonly="true"></ls-input>
-			<ls-input :placeholder="'请输入文字'"
-					  :size="'mini'"
-					  v-model="val"
-					  :disabled="true"></ls-input>
-		</div>
+    <div class="introduce-main">
+        <div class="box">
+            <ls-pagination :total="80" :current="1" :display="10" @on-change="pageChange($event)"></ls-pagination>
+        </div>
+        <div class="box">
+            <ls-multiple-select :datas="selectDatas" style="margin-top: 20px;"></ls-multiple-select>
+        </div>
+        <div class="box">
+            <ls-dropdown-select :datas="selectDatas" style="margin-top: 20px;"></ls-dropdown-select>
+        </div>
+        <div class="box">
+            <ls-tree :isEnableChecked="true" :datas="treeDatas" style="margin-top: 20px;"></ls-tree>
+        </div>
+        <div class="box">
+            <ls-date-picker v-model="datePickerValue" style="margin-top: 20px;"></ls-date-picker>
+        </div>
+        <div class="box">
+            <!--按钮绑定时间自己绑定就是了，这里就相当于只剥离了一个样式-->
+            <!--disabled默认false，size默认normal，type默认default，都可以不传-->
+            <ls-button :text="'按钮'"
+                       :size="'normal'"
+                       :disabled="false" @buttonEvent="handleClick"></ls-button>
+            <ls-button :text="'按钮'"
+                       :size="'normal'"
+                       :disabled="true"></ls-button>
+            <ls-button :text="'按钮'"
+                       :size="'normal'"
+                       :disabled="false"
+                       :type="'primary'"></ls-button>
+            <ls-button :text="'按钮'"
+                       :size="'normal'"
+                       :disabled="true"
+                       :type="'primary'"></ls-button>
+            <ls-button :text="'按钮'"
+                       :size="'normal'"
+                       :disabled="false"
+                       :type="'success'"></ls-button>
+            <ls-button :text="'按钮'"
+                       :size="'normal'"
+                       :disabled="true"
+                       :type="'success'"></ls-button>
+            <ls-button :text="'按钮'"
+                       :size="'normal'"
+                       :disabled="false"
+                       :type="'warning'"></ls-button>
+            <ls-button :text="'按钮'"
+                       :size="'normal'"
+                       :disabled="true"
+                       :type="'normal'"></ls-button>
+            <ls-button :text="'按钮'"
+                       :size="'big'"
+                       :disabled="false"
+                       :type="'danger'"></ls-button>
+            <ls-button :text="'按钮'"
+                       :disabled="false"
+                       :type="'danger'"></ls-button>
+            <ls-button :text="'按钮'"
+                       :size="'mini'"
+                       :disabled="true"
+                       :type="'danger'"></ls-button>
+            <ls-button :text="'按钮'"
+                       :size="'mini'"
+                       :disabled="true"
+                       :type="'danger'">自定义
+            </ls-button>
+        </div>
+        <div class="box">
+            <ls-input :placeholder="'请输入文字'"
+                      :size="'big'"
+                      v-model="val"
+                      :autofocus="true"
+                      @inputEvent="inputChange"></ls-input>
+            <ls-input :placeholder="'请输入文字'"
+                      :size="'normal'"
+                      v-model="val"
+                      :widgetReadonly="true"></ls-input>
+            <ls-input :placeholder="'请输入文字'"
+                      :size="'mini'"
+                      v-model="val"
+                      :disabled="true"></ls-input>
+        </div>
 
-		<div class="box">
-			<ls-tab :datas="tabDatas" :isEnableCreateTab="true" :isEnableDeleteTab="true"></ls-tab>
-		</div>
+        <div class="box">
+            <ls-tab :datas="tabDatas" :isEnableCreateTab="true" :isEnableDeleteTab="true"></ls-tab>
+        </div>
 
-		<div class="box" style="height: 200px;">
-			<ls-layout-container>
-				<div slot="top">
-					<div style="height: 100px">top</div>
-				</div>
-				<div slot="left">
-					<div style="width: 100px">left</div>
-				</div>
-				<div slot="center">
-					<div style="width: 100px">center</div>
-				</div>
-			</ls-layout-container>
-		</div>
+        <div class="box" style="height: 200px;">
+            <ls-layout-container>
+                <div slot="top">
+                    <div style="height: 100px">top</div>
+                </div>
+                <div slot="left">
+                    <div style="width: 100px">left</div>
+                </div>
+                <div slot="center">
+                    <div style="width: 100px">center</div>
+                </div>
+            </ls-layout-container>
+        </div>
 
-		<div class="box">
-			<ls-button :text="'默认'"
-					   :size="'normal'"
-					   :type="'primary'" @buttonEvent="showConfirm1"></ls-button>
-			<ls-button :text="'自定义'"
-					   :size="'normal'"
-					   :type="'primary'" @buttonEvent="showConfirm2"></ls-button>
-			<!--弹窗 icon:primary,success warning alarm refuse四种类型,不传icon或者传''就是icon没有;
-			button: default,primary,success,warning,danger四种类型,默认default+primary;
-			btnText按钮文字: 数组从左到右,如果只传一个只有一个按钮,同时把btnType作为按钮的class-->
-			<ls-confirm :isShow="confirm1"
-						:title="title"
-						:text="text"
-						:icon="'primary'"
-						:leftBtnType="'default'"
-						:leftBtnText="'取消'"
-						:leftShow="true"
-						:rightBtnType="'primary'"
-						:rightBtnText="'确定'"
-						:rightShow="true"
-						@confirmEvent="confirmEvent1"></ls-confirm>
-			<ls-confirm :isShow="confirm2" @confirmEvent="confirmEvent2">
-				<div style="padding: 15px;">
-					<div style="text-align: center;">
-						<h3>自定义</h3>
-						<p>这个弹窗里面的内容是自定义的</p>
-					</div>
-				</div>
-			</ls-confirm>
-		</div>
-		<div class="box">
-			<ls-button :text="'弹窗'"
-					   :size="'normal'"
-					   :type="'primary'" @buttonEvent="showModal"></ls-button>
-			<ls-modal :isShow="modalShow"
-					  :title="'标题'"
-					  :isShowHeader="true"
-					  @modalEvent="modalEvent">
-				<div>this is body, you can defined it by yourself</div>
-				<div slot="footer" style="text-align: center;">
-					<ls-button :text="'取消'" type="default" @buttonEvent="modalEvent"></ls-button>
-					<ls-button :text="'确定'" type="primary" @buttonEvent="modalEvent"></ls-button>
-				</div>
-			</ls-modal>
-		</div>
-		<div class="box">
-			<ls-button :text="'alarm'"
-					   :size="'normal'"
-					   :type="'primary'" @buttonEvent="alarmEvent"></ls-button>
-		</div>
-		<div class="box">
-			<div v-tooltip.top="'tooltip.top'">tooltip-top</div>
-			<div v-tooltip.bottom="'tooltip.bottom'">tooltip-bottom</div>
-			<!--<div v-tooltip.bottom="'tooltip.bottom'">tooltip-bottom</div>-->
-		</div>
-	</div>
+        <div class="box">
+            <ls-button :text="'默认'"
+                       :size="'normal'"
+                       :type="'primary'" @buttonEvent="showConfirm1"></ls-button>
+            <ls-button :text="'自定义'"
+                       :size="'normal'"
+                       :type="'primary'" @buttonEvent="showConfirm2"></ls-button>
+            <!--弹窗 icon:primary,success warning alarm refuse四种类型,不传icon或者传''就是icon没有;
+            button: default,primary,success,warning,danger四种类型,默认default+primary;
+            btnText按钮文字: 数组从左到右,如果只传一个只有一个按钮,同时把btnType作为按钮的class-->
+            <ls-confirm :isShow="confirm1"
+                        :title="title"
+                        :text="text"
+                        :icon="'primary'"
+                        :leftBtnType="'default'"
+                        :leftBtnText="'取消'"
+                        :leftShow="true"
+                        :rightBtnType="'primary'"
+                        :rightBtnText="'确定'"
+                        :rightShow="true"
+                        @confirmEvent="confirmEvent1"></ls-confirm>
+            <ls-confirm :isShow="confirm2" @confirmEvent="confirmEvent2">
+                <div style="padding: 15px;">
+                    <div style="text-align: center;">
+                        <h3>自定义</h3>
+                        <p>这个弹窗里面的内容是自定义的</p>
+                    </div>
+                </div>
+            </ls-confirm>
+        </div>
+        <div class="box">
+            <ls-button :text="'弹窗'"
+                       :size="'normal'"
+                       :type="'primary'" @buttonEvent="showModal"></ls-button>
+            <ls-modal :isShow="modalShow"
+                      :title="'标题'"
+                      :isShowHeader="true"
+                      @modalEvent="modalEvent">
+                <div>this is body, you can defined it by yourself</div>
+                <div slot="footer" style="text-align: center;">
+                    <ls-button :text="'取消'" type="default" @buttonEvent="modalEvent"></ls-button>
+                    <ls-button :text="'确定'" type="primary" @buttonEvent="modalEvent"></ls-button>
+                </div>
+            </ls-modal>
+        </div>
+        <div class="box">
+            <ls-button :text="'alarm'"
+                       :size="'normal'"
+                       :type="'primary'" @buttonEvent="alarmEvent"></ls-button>
+        </div>
+        <div class="box">
+            <div v-tooltip.top="'tooltip.top'">tooltip-top</div>
+            <div v-tooltip.bottom="'tooltip.bottom'">tooltip-bottom</div>
+            <!--<div v-tooltip.bottom="'tooltip.bottom'">tooltip-bottom</div>-->
+        </div>
+    </div>
 </template>
 
 <script>
@@ -310,6 +310,10 @@
     alarmEvent() {
       //1.title  2.内容  3.弹出框类型  4.title的icon  5.是否有关闭按钮
       this.$lensyn.alarm.show('123123123123123123123123123123123123', '123123123123123123123123123123', 'success', 'success', true);
+      this.$lensyn.loading.show('ffff');
+      setTimeout(() => {
+        this.$lensyn.loading.hide();
+      }, 1000)
     }
   };
 </script>

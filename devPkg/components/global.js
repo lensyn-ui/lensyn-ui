@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import AlarmModal from './Alarm.vue';
-import Loading from './loading/loadingClass.js'
+import Loading from './loading/loading.js'
 import Tooltip from './tooltip/tooltipClass.js'
 
 let Alarm = {
@@ -44,7 +44,7 @@ let GlobalComponent = {
       Vue.prototype.$lensyn = {};
     }
     Alarm.install(Vue);
-    new Loading(Vue);
+    Loading.install(Vue);
     Vue.directive('tooltip', Tooltip)
   }
 };

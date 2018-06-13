@@ -1,17 +1,13 @@
-import loadingVue from './loading'
+import loadingVue from './Loading.vue'
 
-class LoadingClass {
-  constructor(vue) {
-    this.initLoading(vue)
-  }
-
-  initLoading(vue) {
+let Loading = {
+  install(vue) {
     let loadingCons = vue.extend(loadingVue);
     let loaded = null;
     let container = document.createElement("div");
-    document.body.appendChild(container);
     vue.prototype.$lensyn.loading = {
       show: function (describe, fixed, bgColor) {
+        document.body.appendChild(container);
         loaded = new loadingCons({
           el: container,
           propsData: {
@@ -23,10 +19,11 @@ class LoadingClass {
         })
       },
       hide: function () {
-        loaded.showLoading = false
+        // loaded.$destroy();
+        loaded.showLoading = false;
       }
     }
   }
-}
+};
 
-export default LoadingClass;
+export default Loading;
