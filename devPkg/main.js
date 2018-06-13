@@ -17,21 +17,22 @@ import Index from "./pages/Index.vue";
 
 /* 加载全局组件 */
 import GlobalComponent from "./components/global.js";
+
 Vue.use(GlobalComponent);
 
 /* vue实例化，加载路由、状态管理器、指向模板引擎 */
 new Vue({
-    el: "#mainContent",
-    router,
-    render(createElement) {
-        if (this.$route.path === "/") {
-            return createElement("div");
-        }
-        let routeMeta = this.$route.meta,
-            props = {layout: ''};
-        if (routeMeta && routeMeta.layout) {
-            props.layout = routeMeta.layout;
-        }
-        return createElement(Index, {props});
+  el: "#mainContent",
+  router,
+  render(createElement) {
+    if (this.$route.path === "/") {
+      return createElement("div");
     }
+    let routeMeta = this.$route.meta,
+      props = {layout: ''};
+    if (routeMeta && routeMeta.layout) {
+      props.layout = routeMeta.layout;
+    }
+    return createElement(Index, {props});
+  }
 });

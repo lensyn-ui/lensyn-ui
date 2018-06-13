@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import loadingVue from './loading'
 
 class LoadingClass {
@@ -11,12 +10,12 @@ class LoadingClass {
     let loaded = null;
     let container = document.createElement("div");
     document.body.appendChild(container);
-    vue.prototype.loading = {
-      show: function (name, fixed, bgColor) {
+    vue.prototype.$lensyn.loading = {
+      show: function (describe, fixed, bgColor) {
         loaded = new loadingCons({
           el: container,
           propsData: {
-            name,
+            describe,
             fixed,
             bgColor,
             showLoading: true
@@ -30,4 +29,4 @@ class LoadingClass {
   }
 }
 
-export default new LoadingClass(Vue);
+export default LoadingClass;
