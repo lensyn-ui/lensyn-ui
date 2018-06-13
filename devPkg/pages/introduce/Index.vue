@@ -18,7 +18,6 @@
 		<div class="box">
 			<!--按钮绑定时间自己绑定就是了，这里就相当于只剥离了一个样式-->
 			<!--disabled默认false，size默认normal，type默认default，都可以不传-->
-			<div v-tooltip.top="'fwafawf'">asfawef</div>
 			<ls-button :text="'按钮'"
 					   :size="'normal'"
 					   :disabled="false" @buttonEvent="handleClick"></ls-button>
@@ -149,6 +148,11 @@
 			<ls-button :text="'alarm'"
 					   :size="'normal'"
 					   :type="'primary'" @buttonEvent="alarmEvent"></ls-button>
+		</div>
+		<div class="box">
+			<div v-tooltip.top="'tooltip.top'">tooltip-top</div>
+			<div v-tooltip.bottom="'tooltip.bottom'">tooltip-bottom</div>
+			<!--<div v-tooltip.bottom="'tooltip.bottom'">tooltip-bottom</div>-->
 		</div>
 	</div>
 </template>

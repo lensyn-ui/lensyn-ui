@@ -3,7 +3,7 @@ class TooltipClass {
     this.currentElement = el;  // tooltip 的元素
     this.bindValue = bind.value; // tooltip 的内容
     this.bindPosition = bind.rawName.split('.')[1]; // tooltip 定位的位置
-    this.tooltipPadding = 10; // tooltip 距离元素的距离
+    this.tooltipPadding = 0; // tooltip 距离元素的距离
     this.tooltip = null;
     this._init = null;
     this.timer = null;
