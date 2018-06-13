@@ -1,6 +1,6 @@
 <template>
-    <div ref="alarm" v-show="visible" class="alarm-box" :class="msgType">
-        <i v-if="iconClose" class="close" @click="closeEvt"></i>
+    <div ref="alarm" v-if="isShow" class="alarm-box" :class="msgType">
+        <i v-if="isAutoClose" class="close" @click="closeEvt"></i>
         <div class="text-box">
             <h3 class="text">
                 <i v-if="icon" :class="icon"></i>
@@ -19,7 +19,7 @@
 
     @Component({
         props: {
-            visible: {
+            isShow: {
                 type: Boolean,
                 default: false
             },
@@ -33,9 +33,9 @@
             },
             icon: {
                 type: String,
-                default: 'primary'
+                default: 'danger'
             },
-            iconClose: {
+            isAutoClose: {
                 type: Boolean,
                 default: false
             },
@@ -52,21 +52,22 @@
     export default class Alarm extends mixins(Widget, Popup) {
         widgetName = 'alarm';
 
-        @Watch('visible')
+        @Watch('isShow')
         onShowAlarm(val) {
-            if(val === true){
+            if (val === true) {
                 this.show();
             }
         }
 
         mounted() {
-            if (this.visible) {
+            if (this.isShow) {
                 this.show();
             }
         }
 
         closeEvt() {
-            this.visible = false;
+            this.isShow = false;
+            this.emitEvent({action:'close'});
         }
 
         show() {

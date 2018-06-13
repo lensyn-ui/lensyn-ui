@@ -10,12 +10,8 @@ let Alarm = {
         alarm = {
             _currentAlarm: null,
             _showTime: 1500,
-            show(msg, subMsg, msgType, icon, iconClose) {
-                if (this._currentAlarm) {
-                    clearTimeout(window.alarmTimer);
-                    this._currentAlarm.visible = false;
-                }
-                this._currentAlarm = null;  //先干掉之前存在的
+            show(msg, subMsg, msgType, icon, isAutoClose) {
+                this.destroyEvt();  //先干掉之前存在的
                 if (!msgType) {
                     msgType = "danger";
                 }
@@ -28,12 +24,19 @@ let Alarm = {
                         subMsg,
                         msgType,
                         icon,
-                        iconClose,
-                        visible: true
+                        isAutoClose,
+                        isShow: true
                     }
                 });
-                if (iconClose !== true) {
-                    window.alarmTimer = setTimeout(() => this._currentAlarm.visible = false, this._showTime);
+                if (isAutoClose !== true) {
+                    window.alarmTimer = setTimeout(() => this._currentAlarm.isShow = false, this._showTime);
+                }
+            },
+            destroyEvt() {
+                if (this._currentAlarm) {
+                    clearTimeout(window.alarmTimer);
+                    this._currentAlarm.isShow = false;
+                    // this._currentAlarm.$destroy();
                 }
             }
         };
