@@ -1,29 +1,41 @@
 import loadingVue from './Loading.vue'
 
 let Loading = {
-  install(vue) {
-    let loadingCons = vue.extend(loadingVue);
-    let loaded = null;
-    let container = document.createElement("div");
-    vue.prototype.$lensyn.loading = {
-      show: function (describe, fixed, bgColor) {
-        document.body.appendChild(container);
-        loaded = new loadingCons({
-          el: container,
-          propsData: {
-            describe,
-            fixed,
-            bgColor,
-            showLoading: true
-          }
-        })
-      },
-      hide: function () {
-        // loaded.$destroy();
-        loaded.showLoading = false;
-      }
+    install(Vue) {
+        let loadingCons = vue.extend(loadingVue),
+            loaded = null,
+            container = null;
+
+        Vue.prototype.$lensyn.loading = {
+            show: function (describe, fixed, bgColor) {
+                if (container === null) {
+                    container = document.createElement("div");
+                    document.body.appendChild(container);
+                }
+                let loadingContainer = document.createElement("div");
+
+                container.appendChild(loadingContainer);
+
+                loaded = new loadingCons({
+                    el: loadingContainer,
+                    propsData: {
+                        describe,
+                        fixed,
+                        bgColor,
+                        showLoading: true
+                    }
+                })
+            },
+
+            hide: function () {
+                if (loaded !== null) {
+                    loaded.$destroy();
+                    container.removeChild(loaded.$el);
+                    loaded = null;
+                }
+            }
+        }
     }
-  }
 };
 
 export default Loading;
