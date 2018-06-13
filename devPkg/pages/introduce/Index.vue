@@ -145,9 +145,12 @@
             </ls-modal>
         </div>
         <div class="box">
-            <ls-button :text="'alarm'"
+            <ls-button :text="'alarm1'"
                        :size="'normal'"
-                       :type="'primary'" @buttonEvent="alarmEvent"></ls-button>
+                       :type="'primary'" @buttonEvent="alarmEvent1"></ls-button>
+            <ls-button :text="'alarm2'"
+                       :size="'normal'"
+                       :type="'primary'" @buttonEvent="alarmEvent2"></ls-button>
         </div>
 		<div class="box">
 			<div v-tooltip.top="'tooltip.top'">tooltip-top</div>
@@ -306,9 +309,13 @@
         }
 
         /* alarm */
-        alarmEvent() {
+        alarmEvent1() {
             //1.title  2.内容  3.弹出框类型  4.title的icon  5.是否有关闭按钮
             this.$lensyn.alarm.show('123123123123123123123123123123123123', '123123123123123123123123123123', 'success', 'success', true);
+        }
+        alarmEvent2() {
+            //1.title  2.内容  3.弹出框类型  4.title的icon  5.是否有关闭按钮
+            this.$lensyn.alarm.show('123123123123123123123123123123123123', '123123123123123123123123123123', 'danger', 'danger', false);
         }
     };
 </script>

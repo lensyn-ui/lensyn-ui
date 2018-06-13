@@ -11,6 +11,10 @@ let Alarm = {
             _currentAlarm: null,
             _showTime: 1500,
             show(msg, subMsg, msgType, icon, iconClose) {
+                if (this._currentAlarm) {
+                    clearTimeout(window.alarmTimer);
+                    this._currentAlarm.visible = false;
+                }
                 this._currentAlarm = null;  //先干掉之前存在的
                 if (!msgType) {
                     msgType = "danger";
@@ -29,7 +33,7 @@ let Alarm = {
                     }
                 });
                 if (iconClose !== true) {
-                    setTimeout(() => this._currentAlarm.visible = false, this._showTime);
+                    window.alarmTimer = setTimeout(() => this._currentAlarm.visible = false, this._showTime);
                 }
             }
         };
