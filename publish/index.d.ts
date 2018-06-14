@@ -7,7 +7,7 @@ declare class LensynUI {
 }
 
 interface Alarm {
-    show(msg: string, subMsg: string, msgType?: string, icon?: string, iconClose?: string): void;
+    show(msg: string, subMsg: string, msgType?: string, icon?: string, isAutoClose?: boolean): void;
 }
 
 interface Loading {
