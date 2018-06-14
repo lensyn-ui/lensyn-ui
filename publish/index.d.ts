@@ -10,10 +10,16 @@ interface Alarm {
     show(msg: string, subMsg: string, msgType?: string, icon?: string, iconClose?: string): void;
 }
 
+interface Loading {
+    show(describe?: string, fixed?: boolean, bgColor?: string): void;
+    hide(): void
+}
+
 declare module "vue/types/vue" {
     export interface Vue {
         $lensyn: {
-            alarm: Alarm
+            alarm: Alarm,
+            loading: Loading
         }
     }
 }
