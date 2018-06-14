@@ -6,11 +6,7 @@ import Tooltip from './tooltip/tooltipClass.js'
 let Alarm = {
     install(Vue) {
         let Constructor = Vue.extend(AlarmModal),
-<<<<<<< HEAD
           alarm = null;
-=======
-            alarm = null;
->>>>>>> 7af4fec0c7ec85fbcfa68929413a241ea1d6ea5f
         alarm = {
             _currentAlarm: null,
             _showTime: 1500,

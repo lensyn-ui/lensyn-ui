@@ -2,7 +2,7 @@ import loadingVue from './Loading.vue'
 
 let Loading = {
     install(Vue) {
-        let loadingCons = vue.extend(loadingVue),
+        let loadingCons = Vue.extend(loadingVue),
             loaded = null,
             container = null;
 
