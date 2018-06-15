@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import AlarmModal from './Alarm.vue';
 import Loading from './loading/loading.js'
-import Tooltip from './tooltip/tooltipClass.js'
+import Tooltip from './tooltip/TooltipClass.js'
 
 let Alarm = {
     install(Vue) {
