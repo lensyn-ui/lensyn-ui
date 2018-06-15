@@ -27,14 +27,14 @@ let Alarm = {
                     }
                 });
                 if (isAutoClose !== true) {
-                    timer = setTimeout(() => this._currentAlarm.isShow = false, this._showTime);
+                    timer = setTimeout(() => this.destroyEvt(), this._showTime);
                 }
             },
             destroyEvt() {
                 if (this._currentAlarm) {
                     clearTimeout(timer);
                     this._currentAlarm.isShow = false;
-                    document.body.removeChild(this._currentAlarm.$el);  //这一句加不加有什么影响？
+                    // document.body.removeChild(this._currentAlarm.$el);  //这一句加不加有什么影响？
                     // this._currentAlarm.$destroy();
                 }
             }
