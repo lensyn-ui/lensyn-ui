@@ -161,9 +161,6 @@
                        :type="'primary'" v-tooltip.left="'tooltip'"></ls-button>
             <ls-button :text="'tooltip'" :size="'normal'"
                        :type="'primary'" v-tooltip.right="'tooltip'"></ls-button>
-            <br>
-            <br>
-            <!--<div v-tooltip.bottom="'tooltip.bottom'">tooltip-bottom</div>-->
         </div>
     </div>
 </template>
