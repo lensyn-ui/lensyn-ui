@@ -1,52 +1,7 @@
 import Vue from 'vue';
 import Loading from './loading/loading.js'
-<<<<<<< HEAD
-import Tooltip from './tooltip/TooltipClass.js'
-
-let Alarm = {
-    install(Vue) {
-        let Constructor = Vue.extend(AlarmModal),
-          alarm = null;
-        alarm = {
-            _currentAlarm: null,
-            _showTime: 1500,
-            show(msg, subMsg, msgType, icon, isAutoClose) {
-                this.destroyEvt();  //先干掉之前存在的
-                if (!msgType) {
-                    msgType = "danger";
-                }
-                let container = document.createElement("div");
-                document.body.appendChild(container);
-                this._currentAlarm = new Constructor({
-                    el: container,
-                    propsData: {
-                        msg,
-                        subMsg,
-                        msgType,
-                        icon,
-                        isAutoClose,
-                        isShow: true
-                    }
-                });
-                if (isAutoClose !== true) {
-                    window.alarmTimer = setTimeout(() => this._currentAlarm.isShow = false, this._showTime);
-                }
-            },
-            destroyEvt() {
-                if (this._currentAlarm) {
-                    clearTimeout(window.alarmTimer);
-                    this._currentAlarm.isShow = false;
-                    // this._currentAlarm.$destroy();
-                }
-            }
-        };
-        Vue.prototype.$lensyn.alarm = alarm;
-    }
-};
-=======
-import Tooltip from './tooltip/tooltipClass.js'
 import Alarm from './alarm/alarm.js'
->>>>>>> 6507ab69fdd0131b1a659c362f64825fcec49d70
+import Tooltip from './tooltip/TooltipClass.js'
 
 let GlobalComponent = {
     install() {
