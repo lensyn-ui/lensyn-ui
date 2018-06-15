@@ -1,12 +1,10 @@
-import Vue from 'vue';
-import Loading from './loading/loading.js'
-<<<<<<< HEAD
-import Tooltip from './tooltip/TooltipClass.js'
+import AlarmModal from './Alarm.vue';
 
 let Alarm = {
     install(Vue) {
         let Constructor = Vue.extend(AlarmModal),
-          alarm = null;
+            timer = null,
+            alarm = null;
         alarm = {
             _currentAlarm: null,
             _showTime: 1500,
@@ -29,13 +27,14 @@ let Alarm = {
                     }
                 });
                 if (isAutoClose !== true) {
-                    window.alarmTimer = setTimeout(() => this._currentAlarm.isShow = false, this._showTime);
+                    timer = setTimeout(() => this._currentAlarm.isShow = false, this._showTime);
                 }
             },
             destroyEvt() {
                 if (this._currentAlarm) {
-                    clearTimeout(window.alarmTimer);
+                    clearTimeout(timer);
                     this._currentAlarm.isShow = false;
+                    document.body.removeChild(this._currentAlarm.$el);  //这一句加不加有什么影响？
                     // this._currentAlarm.$destroy();
                 }
             }
@@ -43,20 +42,5 @@ let Alarm = {
         Vue.prototype.$lensyn.alarm = alarm;
     }
 };
-=======
-import Tooltip from './tooltip/tooltipClass.js'
-import Alarm from './alarm/alarm.js'
->>>>>>> 6507ab69fdd0131b1a659c362f64825fcec49d70
 
-let GlobalComponent = {
-    install() {
-        if (!Vue.prototype.$lensyn) {
-            Vue.prototype.$lensyn = {};
-        }
-        Alarm.install(Vue);
-        Loading.install(Vue);
-        Vue.directive('tooltip', Tooltip)
-    }
-};
-
-export default GlobalComponent;
+export default Alarm;
