@@ -153,8 +153,16 @@
                        :type="'primary'" @buttonEvent="alarmEvent2"></ls-button>
         </div>
         <div class="box">
-            <div v-tooltip.top="'tooltip.top'">tooltip-top</div>
-            <div v-tooltip.bottom="'tooltip.bottom'">tooltip-bottom</div>
+            <ls-button :text="'tooltip'" :size="'normal'"
+                       :type="'primary'" v-tooltip.top="'tooltip'"></ls-button>
+            <ls-button :text="'tooltip'" :size="'normal'"
+                       :type="'primary'" v-tooltip.bottom="'tooltip'"></ls-button>
+            <ls-button :text="'tooltip'" :size="'normal'"
+                       :type="'primary'" v-tooltip.left="'tooltip'"></ls-button>
+            <ls-button :text="'tooltip'" :size="'normal'"
+                       :type="'primary'" v-tooltip.right="'tooltip'"></ls-button>
+            <br>
+            <br>
             <!--<div v-tooltip.bottom="'tooltip.bottom'">tooltip-bottom</div>-->
         </div>
     </div>
