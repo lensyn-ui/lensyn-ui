@@ -14,8 +14,8 @@
 <script>
     import {Component, Watch} from "vue-property-decorator";
     import {mixins} from "vue-class-component";
-    import Widget from './base/Widget.vue';
-    import Popup from './mixins/PopupMixin';
+    import Widget from '../base/Widget.vue';
+    import Popup from '../mixins/PopupMixin';
 
     @Component({
         props: {
@@ -67,7 +67,6 @@
 
         closeEvt() {
             this.isShow = false;
-            this.emitEvent({action:'close'});
         }
 
         show() {
