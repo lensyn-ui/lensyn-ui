@@ -2,17 +2,20 @@
     <div class="page-box">
         <div class="total" v-if="isShowTotal">共 <span class="red">{{ total }}</span> 条数据</div>
         <ul class="pagination">
-            <li :class="{'disabled': currentPage == 1}" v-if="isHFShow"><a href="javascript:;" @click="setCurrent(1)">
-                首页 </a></li>
-            <li :class="{'disabled': currentPage == 1}"><a href="javascript:;" @click="setCurrent(currentPage - 1)">
-                上一页 </a></li>
-            <li v-for="p in grouplist" :class="{'active': currentPage == p.val}"><a href="javascript:;"
-                                                                                    @click="setCurrent(p.val)">
-                {{ p.text }} </a></li>
-            <li :class="{'disabled': currentPage == page}"><a href="javascript:;" @click="setCurrent(currentPage + 1)">
-                下一页</a></li>
-            <li :class="{'disabled': currentPage == page}" v-if="isHFShow"><a href="javascript:;"
-                                                                              @click="setCurrent(page)"> 尾页 </a>
+            <li :class="{'disabled': currentPage == 1}" v-if="isHFShow">
+                <a href="javascript:;" @click="setCurrent(1)"> 首页 </a>
+            </li>
+            <li :class="{'disabled': currentPage == 1}">
+                <a href="javascript:;" @click="setCurrent(currentPage - 1)"> 上一页 </a>
+            </li>
+            <li v-for="p in grouplist" :class="{'active': currentPage == p.val}">
+                <a href="javascript:;" @click="setCurrent(p.val)">{{ p.text }} </a>
+            </li>
+            <li :class="{'disabled': currentPage == page}">
+                <a href="javascript:;" @click="setCurrent(currentPage + 1)"> 下一页 </a>
+            </li>
+            <li :class="{'disabled': currentPage == page}" v-if="isHFShow">
+                <a href="javascript:;" @click="setCurrent(page)"> 尾页 </a>
             </li>
         </ul>
         <div class="pagination" v-if="isGoShow">
@@ -88,7 +91,8 @@
 
         currentPage = 1;  //当前页
         inputPage = ''; //输入框页数
-        displayItem = 10;  //每页多少条
+        displayItem = this.display || this.displayLists[0].value;  //每页多少条
+//        displayItem = 10;  //每页多少条
 
         @Watch('inputPage')
         onInputPage(newVal) {
@@ -109,11 +113,14 @@
         mounted() {
             this.$nextTick(() => {
                 this.currentPage = this.current;
-                this.displayItem = this.display;
+//                this.displayItem = this.display;
             });
         }
 
         setCurrent(idx) {
+            if (this.currentPage == idx * 1) {  //当前页等于点击页时，不触发
+                return;
+            }
             if (this.currentPage != idx && idx > 0 && idx < this.page + 1) {
                 this.currentPage = idx * 1;
             } else {

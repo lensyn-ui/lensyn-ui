@@ -14,9 +14,7 @@ let Alarm = {
             show(msg, msgType, subMsg, isAutoClose, showTime) {
                 if (this._containerElement === null) {
                     this._containerElement = document.createElement("div");
-
                     this._containerElement.setAttribute("data-ls-component-type", "alarm-container");
-
                     document.body.appendChild(this._containerElement);
                 }
 
@@ -25,9 +23,7 @@ let Alarm = {
                 }
 
                 let container = document.createElement("div");
-
                 this._containerElement.appendChild(container);
-
                 this._currentAlarm = new Constructor({
                     el: container,
                     propsData: {
