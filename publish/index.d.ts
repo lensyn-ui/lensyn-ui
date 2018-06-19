@@ -15,11 +15,16 @@ interface Loading {
     hide(): void
 }
 
+interface Confirm {
+    show(options: any): {hide: (event: any) => void}
+}
+
 declare module "vue/types/vue" {
     export interface Vue {
         $lensyn: {
             alarm: Alarm,
-            loading: Loading
+            loading: Loading,
+            confirm: Confirm
         }
     }
 }
