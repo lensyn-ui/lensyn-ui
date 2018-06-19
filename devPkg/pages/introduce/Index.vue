@@ -24,7 +24,6 @@
             <ls-date-picker v-model="rangeDatePickerValue" style="margin-top: 20px;"></ls-date-picker>
         </div>
         <div class="box">
-            <!--按钮绑定时间自己绑定就是了，这里就相当于只剥离了一个样式-->
             <!--disabled默认false，size默认normal，type默认default，都可以不传-->
             <ls-button :text="'按钮'"
                        :size="'normal'"
