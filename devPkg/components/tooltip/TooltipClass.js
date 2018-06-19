@@ -5,8 +5,7 @@ class TooltipClass {
         this.bindPosition = bind.rawName.split('.')[1]; // tooltip 定位的位置
         this.tooltipPadding = 5; // tooltip 距离元素的距离
         this.tooltip = null;
-        this._init = null;
-        this.timer = null;
+        this._init = false;
         this.addListen();
     }
 
@@ -15,16 +14,11 @@ class TooltipClass {
         if (!this._init) {
             this.init();
         }
-        clearTimeout(this.timer);
         this.tooltip.setAttribute('class', 'lensyn_tooltip show');
     }
 
     hide() {
         this.tooltip.setAttribute('class', 'lensyn_tooltip');
-        this.timer = setTimeout(() => {
-            this._init = false;
-            document.body.removeChild(this.tooltip);
-        }, 10000)
     }
 
     // 删除 tooltip
@@ -149,11 +143,13 @@ const tooltipOptions = {
         let tooltip = new TooltipClass(el, binding);
         el._tooltip = tooltip;
     },
+
     componentUpdated(el, binding) {
         if (binding.oldValue !== binding.value) {
             el._tooltip.setContent(binding.value);
         }
     },
+
     unbind(el) {
         el._tooltip.destroy();
     }
