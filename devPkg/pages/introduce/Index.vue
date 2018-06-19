@@ -113,6 +113,9 @@
             <ls-button :text="'自定义'"
                        :size="'normal'"
                        :type="'primary'" @buttonEvent="showConfirm2"></ls-button>
+            <ls-button text="原型链"
+                        size="normal"
+                        type="primary" @buttonEvent="showConfirm3"></ls-button>
             <!--弹窗 icon:primary,success warning alarm refuse四种类型,不传icon或者传''就是icon没有;
             button: default,primary,success,warning,danger四种类型,默认default+primary;
             btnText按钮文字: 数组从左到右,如果只传一个只有一个按钮,同时把btnType作为按钮的class-->
@@ -315,6 +318,20 @@
         /* confirm2 */
         showConfirm2() {
             this.confirm2 = true;
+        }
+
+        showConfirm3() {
+            let dialog = this.$lensyn.confirm.show({
+                title: "Confirm Title",
+                text: "Confirm Text",
+                confirmCallback() {
+                    dialog.hide();
+                },
+
+                cancelCallback() {
+                    dialog.hide();
+                }
+            });
         }
 
         confirmEvent2(val) {

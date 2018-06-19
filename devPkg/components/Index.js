@@ -31,7 +31,7 @@ import Tab from "./Tab";
 import LayoutContainer from "./layout/LayoutContainer";
 
 // confirm
-import Confirm from "./Confirm";
+import Confirm from "./confirm/Confirm.vue";
 
 // modal
 import Modal from "./Modal";
