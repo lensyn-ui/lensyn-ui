@@ -45,6 +45,9 @@ import Loading from "./loading/Loading.vue";
 // panel
 import Panel from "./Panel";
 
+// DrawerLayout
+import DrawerLayout from "./DrawerLayout";
+
 export {
     Grid,
     PaginationGrid,
@@ -64,5 +67,6 @@ export {
     Modal,
     Alarm,
     Loading,
-    Panel
+    Panel,
+    DrawerLayout
 };
