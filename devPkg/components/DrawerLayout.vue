@@ -4,7 +4,7 @@
 <template>
     <transition name="drawerlayout">
         <div v-show="isShow" class="drawerlayout" :class="{'drawerlayout--right': position === 'right'}" :style="contentStyle">
-            <div class="content">
+            <div class="drawerlayout__content">
                 <slot></slot>
             </div>
         </div>

@@ -47,6 +47,7 @@ import Panel from "./Panel";
 
 // DrawerLayout
 import DrawerLayout from "./DrawerLayout";
+import PanelDrawerLayout from "./PanelDrawerLayout";
 
 export {
     Grid,
@@ -68,5 +69,6 @@ export {
     Alarm,
     Loading,
     Panel,
-    DrawerLayout
+    DrawerLayout,
+    PanelDrawerLayout
 };

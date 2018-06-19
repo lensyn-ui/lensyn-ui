@@ -187,6 +187,18 @@
                 </div>
             </ls-panel>
         </div>
+
+        <div class="box">
+            <ls-button text="显示 panel" @buttonEvent="onClickDrawerLayoutBtn"></ls-button>
+            <ls-panel-drawer-layout
+                    :isShow="isShowPanelDrawerLayout"
+                    :isEnableResize="true"
+                    @panelDrawerLayoutEvent="onPanelDrawerLayoutEvent">
+                <div slot="content">
+                    <h1>dd</h1>
+                </div>
+            </ls-panel-drawer-layout>
+        </div>
     </div>
 </template>
 
@@ -205,7 +217,8 @@
         Input,
         Confirm,
         Modal,
-        Panel
+        Panel,
+        PanelDrawerLayout
     } from "../../components";
 
     /* 分页 */
@@ -224,7 +237,8 @@
             "ls-layout-container": LayoutContainer,
             'ls-confirm': Confirm,
             'ls-modal': Modal,
-            "ls-panel": Panel
+            "ls-panel": Panel,
+            "ls-panel-drawer-layout": PanelDrawerLayout
         }
     })
     export default class HomeIndex extends Vue {
@@ -308,6 +322,8 @@
 
         modalShow = false;
 
+        isShowPanelDrawerLayout = false;
+
         /* 分页返回对象 */
         pageChange(val) {
             console.log(val);
@@ -376,6 +392,16 @@
         alarmEvent2() {
             //1.title  2.弹出框类型 3. 消息详情  4.是否自动关闭 5. 显示时间
             this.$lensyn.alarm.show('title', 'danger', 'subMsg', true, 3000);
+        }
+
+        onClickDrawerLayoutBtn() {
+            this.isShowPanelDrawerLayout = true;
+        }
+
+        onPanelDrawerLayoutEvent({action}) {
+            if (action === "close") {
+                this.isShowPanelDrawerLayout = false;
+            }
         }
     };
 </script>
