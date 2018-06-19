@@ -88,7 +88,7 @@
 
         currentPage = 1;  //当前页
         inputPage = ''; //输入框页数
-        displayItem = 10;  //每页多少条
+        displayItem = this.display || this.displayLists[0].value;  //每页多少条
 
         @Watch('inputPage')
         onInputPage(newVal) {
@@ -109,7 +109,6 @@
         mounted() {
             this.$nextTick(() => {
                 this.currentPage = this.current;
-                this.displayItem = this.display;
             });
         }
 
