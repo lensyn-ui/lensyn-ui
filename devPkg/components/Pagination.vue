@@ -116,8 +116,11 @@
         setCurrent(idx) {
             if (this.currentPage != idx && idx > 0 && idx < this.page + 1) {
                 this.currentPage = idx * 1;
-                this.emitEvent({action: 'page', currentPage: this.currentPage, displayItem: this.displayItem});
+            } else {
+                this.inputPage = 1;
+                this.currentPage = 1;
             }
+            this.emitEvent({action: 'page', currentPage: this.currentPage, displayItem: this.displayItem});
         }
 
         get page() { // 总页数
