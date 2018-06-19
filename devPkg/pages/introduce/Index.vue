@@ -21,6 +21,7 @@
         </div>
         <div class="box">
             <ls-date-picker v-model="datePickerValue" style="margin-top: 20px;"></ls-date-picker>
+            <ls-date-picker v-model="rangeDatePickerValue" style="margin-top: 20px;"></ls-date-picker>
         </div>
         <div class="box">
             <!--按钮绑定时间自己绑定就是了，这里就相当于只剥离了一个样式-->
@@ -256,6 +257,7 @@
         ];
 
         datePickerValue = "";
+        rangeDatePickerValue = [];
 
         val = '123555aaa';
 
