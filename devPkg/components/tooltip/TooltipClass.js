@@ -14,6 +14,10 @@ class TooltipClass {
     show() {
         if (!this._init) {
             this.init();
+        } else {
+            setTimeout(() => {
+                this.getTooltipPosition(this.bindPosition);
+            })
         }
         clearTimeout(this.timer);
         this.tooltip.setAttribute('class', 'lensyn_tooltip show');
@@ -90,7 +94,9 @@ class TooltipClass {
     setTooltipPositionTop() {
         const info = this.currentElement.getBoundingClientRect();
         const t = info.top - this.tooltip.offsetHeight - this.tooltipPadding;
-        const l = (info.width - this.tooltip.offsetWidth) / 2 + info.left;
+        let l = (info.width - this.tooltip.offsetWidth) / 2 + info.left;
+        if (l <= 0) l = 0;
+        if (l >= window.innerWidth - this.tooltip.offsetWidth) l = window.innerWidth - this.tooltip.offsetWidth;
         if (t < 0) {
             this.setTooltipPositionBottom();
             return
@@ -104,7 +110,9 @@ class TooltipClass {
     setTooltipPositionBottom() {
         const info = this.currentElement.getBoundingClientRect();
         const b = info.top + info.height + this.tooltipPadding;
-        const l = (info.width - this.tooltip.offsetWidth) / 2 + info.left;
+        let l = (info.width - this.tooltip.offsetWidth) / 2 + info.left;
+        if (l <= 0) l = 0;
+        if (l >= window.innerWidth - this.tooltip.offsetWidth) l = window.innerWidth - this.tooltip.offsetWidth;
         if (b + this.tooltip.offsetHeight > window.innerHeight) {
             this.setTooltipPositionTop();
             return;
