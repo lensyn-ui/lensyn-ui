@@ -22,7 +22,7 @@ let Loading = {
                         describe,
                         fixed,
                         bgColor,
-                        showLoading: true
+                        isShow: true
                     }
                 })
             },

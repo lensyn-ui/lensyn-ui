@@ -1,7 +1,14 @@
 <template>
     <div class="introduce-main">
         <div class="box">
-            <ls-pagination :total="80" :current="1" :display="10" @paginationEvent="pageChange"></ls-pagination>
+            <ls-pagination :isShowTotal="true"
+                           :isGoShow="true"
+                           :isHFShow="true"
+                           :total="80"
+                           :current="1"
+                           :display="20"
+                           :displayLists="displayLists"
+                           @paginationEvent="pageChange"></ls-pagination>
         </div>
         <div class="box">
             <ls-multiple-select :datas="selectDatas" style="margin-top: 20px;"></ls-multiple-select>
@@ -161,9 +168,6 @@
                        :type="'primary'" v-tooltip.left="'tooltip'"></ls-button>
             <ls-button :text="'tooltip'" :size="'normal'"
                        :type="'primary'" v-tooltip.right="'tooltip'"></ls-button>
-            <br>
-            <br>
-            <!--<div v-tooltip.bottom="'tooltip.bottom'">tooltip-bottom</div>-->
         </div>
     </div>
 </template>
@@ -204,6 +208,18 @@
         }
     })
     export default class HomeIndex extends Vue {
+        displayLists = [
+            {
+                label: 10, value: 10
+            },
+            {
+                label: 20, value: 20
+            },
+            {
+                label: 30, value: 30
+            }
+        ];
+
         selectDatas = [
             {id: 1, value: 1, name: "select-1"},
             {id: 2, value: 2, name: "select-2"},
@@ -318,22 +334,13 @@
 
         /* alarm */
         alarmEvent1() {
-            //1.title  2.内容  3.弹出框类型  4.title的icon  5.是否有关闭按钮
-            this.$lensyn.alarm.show('123123123123123123123123123123123123', '123123123123123123123123123123', 'success', 'success', true, (res) => {
-                console.log(res)
-            });
-            this.$lensyn.alarm.click((res) => {
-                console.log(res)
-            })
-            this.$lensyn.loading.show('ffff');
-            setTimeout(() => {
-                this.$lensyn.loading.hide();
-            }, 1000);
+            //1.title  2.弹出框类型 3. 消息详情  4.是否自动关闭
+            this.$lensyn.alarm.show('title', 'success', '', false);
         }
 
         alarmEvent2() {
-            //1.title  2.内容  3.弹出框类型  4.title的icon  5.是否有关闭按钮
-            this.$lensyn.alarm.show('123123123123123123123123123123123123', '123123123123123123123123123123', 'danger', 'danger', false);
+            //1.title  2.弹出框类型 3. 消息详情  4.是否自动关闭 5. 显示时间
+            this.$lensyn.alarm.show('title', 'danger', 'subMsg', true, 3000);
         }
     };
 </script>

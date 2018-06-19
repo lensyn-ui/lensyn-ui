@@ -36,6 +36,12 @@ import Confirm from "./Confirm";
 // modal
 import Modal from "./Modal";
 
+// alarm
+import Alarm from "./alarm/Alarm.vue";
+
+// loading
+import Loading from "./loading/Loading.vue";
+
 export {
     Grid,
     PaginationGrid,
@@ -52,5 +58,7 @@ export {
     LayoutContainer,
     Input,
     Confirm,
-    Modal
+    Modal,
+    Alarm,
+    Loading
 };

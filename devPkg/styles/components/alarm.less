@@ -6,18 +6,50 @@
   &.primary {
     border: 1px solid @border-primary-alarm;
     background-color: @bg-primary-alarm;
+
+    .text-box {
+      .text {
+        .icon {
+          background-image: url("../../images/components/primary.png");
+        }
+      }
+    }
   }
+
   &.success {
     border: 1px solid @border-success-alarm;
     background-color: @bg-success-alarm;
+    .text-box {
+      .text {
+        .icon {
+          background-image: url("../../images/components/success.png");
+        }
+      }
+    }
   }
+
   &.warning {
     border: 1px solid @border-warning-alarm;
     background-color: @bg-warning-alarm;
+    .text-box {
+      .text {
+        .icon {
+          background-image: url("../../images/components/warning.png");
+        }
+      }
+    }
   }
+
   &.danger {
     border: 1px solid @border-danger-alarm;
     background-color: @bg-danger-alarm;
+    .text-box {
+      .text {
+        .icon {
+          background-image: url("../../images/components/danger.png");
+        }
+      }
+    }
   }
   .close {
     display: inline-block;
@@ -46,21 +78,6 @@
         background-repeat: no-repeat;
         background-size: 16px;
         vertical-align: middle;
-        &.primary {
-          background-image: url("../../images/components/primary.png");
-        }
-        &.warning {
-          background-image: url("../../images/components/warning.png");
-        }
-        &.danger {
-          background-image: url("../../images/components/danger.png");
-        }
-        &.refuse {
-          background-image: url("../../images/components/refuse.png");
-        }
-        &.success {
-          background-image: url("../../images/components/success.png");
-        }
       }
     }
     .sub-text {

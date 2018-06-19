@@ -4,6 +4,10 @@ export function isArray(data) {
     return toString.call(data) === "[object Array]";
 };
 
+export function isNumber(data) {
+    return typeof data === "number";
+};
+
 export const tree = {
     _forEachTreeItem(data, childKey = "children", callback, parent) {
         callback(data, parent);

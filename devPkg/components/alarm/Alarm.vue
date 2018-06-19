@@ -1,12 +1,17 @@
 <template>
     <div ref="alarm" v-if="isShow" class="alarm-box" :class="msgType">
-        <i v-if="isAutoClose" class="close" @click="closeEvt"></i>
-        <div class="text-box">
+        <i v-if="!isAutoClose" class="close" @click="closeEvt($event)"></i>
+
+        <div class="text-box" v-if="isHaveCustomContent">
+            <slot></slot>
+        </div>
+
+        <div class="text-box" v-else>
             <h3 class="text">
-                <i v-if="icon" :class="icon"></i>
+                <i class="icon"></i>
                 {{msg}}
             </h3>
-            <div class="sub-text">{{subMsg}}</div>
+            <div v-if="subMsg !== ''" class="sub-text">{{subMsg}}</div>
         </div>
     </div>
 </template>
@@ -23,26 +28,27 @@
                 type: Boolean,
                 default: false
             },
+
             msg: {
                 type: String,
                 default: ''
             },
+
             subMsg: {
                 type: String,
                 default: ''
             },
-            icon: {
-                type: String,
-                default: 'danger'
-            },
+
             isAutoClose: {
                 type: Boolean,
-                default: false
+                default: true
             },
+
             msgType: {
                 type: String,
                 default: 'danger'
             },
+
             popupPosition: {  //位置
                 type: [String, Array],
                 default: "windowCenter"
@@ -51,6 +57,10 @@
     })
     export default class Alarm extends mixins(Widget, Popup) {
         widgetName = 'alarm';
+
+        get isHaveCustomContent() {
+            return !!this.$slots.default;
+        }
 
         @Watch('isShow')
         onShowAlarm(val) {
@@ -65,8 +75,9 @@
             }
         }
 
-        closeEvt() {
-            this.isShow = false;
+        closeEvt($event) {
+            this.$emit("update:isShow", false);
+            this.emitEvent({action: "hide", $event});
         }
 
         show() {
