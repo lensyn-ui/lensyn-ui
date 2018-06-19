@@ -1,8 +1,9 @@
 <template>
     <div class="page-box">
-        <div class="total">共 <span class="red">{{ total }}</span> 条数据</div>
+        <div class="total" v-if="isShowTotal">共 <span class="red">{{ total }}</span> 条数据</div>
         <ul class="pagination">
-            <li :class="{'disabled': currentPage == 1}"><a href="javascript:;" @click="setCurrent(1)"> 首页 </a></li>
+            <li :class="{'disabled': currentPage == 1}" v-if="isHFShow"><a href="javascript:;" @click="setCurrent(1)">
+                首页 </a></li>
             <li :class="{'disabled': currentPage == 1}"><a href="javascript:;" @click="setCurrent(currentPage - 1)">
                 上一页 </a></li>
             <li v-for="p in grouplist" :class="{'active': currentPage == p.val}"><a href="javascript:;"
@@ -10,10 +11,11 @@
                 {{ p.text }} </a></li>
             <li :class="{'disabled': currentPage == page}"><a href="javascript:;" @click="setCurrent(currentPage + 1)">
                 下一页</a></li>
-            <li :class="{'disabled': currentPage == page}"><a href="javascript:;" @click="setCurrent(page)"> 尾页 </a>
+            <li :class="{'disabled': currentPage == page}" v-if="isHFShow"><a href="javascript:;"
+                                                                              @click="setCurrent(page)"> 尾页 </a>
             </li>
         </ul>
-        <div class="pagination">
+        <div class="pagination" v-if="isGoShow">
             <span>跳转到: </span>
             <input type="text" v-model.trim="inputPage" @keyup.enter="setCurrent(inputPage)"/>
             <span class="btn" @click="setCurrent(inputPage)">go</span>
@@ -21,10 +23,7 @@
         <div class="pagination">
             <span>每页显示</span>
             <select v-model.number="displayItem">
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
+                <option v-for="item in displayLists" :value="item.value">{{item.label}}</option>
             </select>
             <span>条记录</span>
         </div>
@@ -37,6 +36,18 @@
 
     @Component({
         props: {
+            isShowTotal: {
+                type: Boolean,
+                default: true
+            },
+            isGoShow: {
+                type: Boolean,
+                default: true
+            },
+            isHFShow: {
+                type: Boolean,
+                default: true
+            },
             total: {            // 数据总条数
                 type: Number,
                 default: 0
@@ -44,6 +55,23 @@
             display: {            // 每页显示条数
                 type: Number,
                 default: 10
+            },
+            displayLists: {
+                type: Array,
+                default: () => [
+                    {
+                        label: 10, value: 10
+                    },
+                    {
+                        label: 20, value: 20
+                    },
+                    {
+                        label: 50, value: 50
+                    },
+                    {
+                        label: 100, value: 100
+                    }
+                ]
             },
             current: {            // 当前页码
                 type: Number,
@@ -75,7 +103,7 @@
         @Watch('displayItem')
         onDisplayItem() {
             this.currentPage = 1;
-            this.emitEvent({currentPage: this.currentPage, displayItem: this.displayItem});
+            this.emitEvent({action: 'page', currentPage: this.currentPage, displayItem: this.displayItem});
         }
 
         mounted() {
@@ -88,7 +116,7 @@
         setCurrent(idx) {
             if (this.currentPage != idx && idx > 0 && idx < this.page + 1) {
                 this.currentPage = idx * 1;
-                this.emitEvent({currentPage: this.currentPage, displayItem: this.displayItem});
+                this.emitEvent({action: 'page', currentPage: this.currentPage, displayItem: this.displayItem});
             }
         }
 

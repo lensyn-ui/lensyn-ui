@@ -1,7 +1,14 @@
 <template>
     <div class="introduce-main">
         <div class="box">
-            <ls-pagination :total="80" :current="1" :display="10" @paginationEvent="pageChange"></ls-pagination>
+            <ls-pagination :isShowTotal="true"
+                           :isGoShow="true"
+                           :isHFShow="true"
+                           :total="80"
+                           :current="1"
+                           :display="20"
+                           :displayLists="displayLists"
+                           @paginationEvent="pageChange"></ls-pagination>
         </div>
         <div class="box">
             <ls-multiple-select :datas="selectDatas" style="margin-top: 20px;"></ls-multiple-select>
@@ -201,6 +208,18 @@
         }
     })
     export default class HomeIndex extends Vue {
+        displayLists = [
+            {
+                label: 10, value: 10
+            },
+            {
+                label: 20, value: 20
+            },
+            {
+                label: 30, value: 30
+            }
+        ];
+
         selectDatas = [
             {id: 1, value: 1, name: "select-1"},
             {id: 2, value: 2, name: "select-2"},
