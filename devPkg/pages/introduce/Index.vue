@@ -173,6 +173,21 @@
             <ls-button :text="'tooltip'" :size="'normal'"
                        :type="'primary'" v-tooltip.right="'tooltip'"></ls-button>
         </div>
+
+        <div class="box">
+            <ls-panel title="header">
+                <div slot="body">
+                    <h1>body</h1>
+                </div>
+            </ls-panel>
+
+            <ls-panel style="margin-top: 30px;">
+                <span slot="header">customer header</span>
+                <div slot="body">
+                    <h1>body</h1>
+                </div>
+            </ls-panel>
+        </div>
     </div>
 </template>
 
@@ -190,7 +205,8 @@
         LayoutContainer,
         Input,
         Confirm,
-        Modal
+        Modal,
+        Panel
     } from "../../components";
 
     /* 分页 */
@@ -208,7 +224,8 @@
             "ls-tab": Tab,
             "ls-layout-container": LayoutContainer,
             'ls-confirm': Confirm,
-            'ls-modal': Modal
+            'ls-modal': Modal,
+            "ls-panel": Panel
         }
     })
     export default class HomeIndex extends Vue {

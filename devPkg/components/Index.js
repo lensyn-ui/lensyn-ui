@@ -42,6 +42,9 @@ import Alarm from "./alarm/Alarm.vue";
 // loading
 import Loading from "./loading/Loading.vue";
 
+// panel
+import Panel from "./Panel";
+
 export {
     Grid,
     PaginationGrid,
@@ -60,5 +63,6 @@ export {
     Confirm,
     Modal,
     Alarm,
-    Loading
+    Loading,
+    Panel
 };
