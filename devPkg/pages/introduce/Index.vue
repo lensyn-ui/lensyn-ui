@@ -315,17 +315,13 @@
 
         /* alarm */
         alarmEvent1() {
-            //1.title  2.内容  3.弹出框类型  4.title的icon  5.是否有关闭按钮
-            this.$lensyn.alarm.show('123123123123123123123123123123123123', '123123123123123123123123123123', 'success', 'success', true);
-            this.$lensyn.loading.show('ffff');
-            setTimeout(() => {
-                this.$lensyn.loading.hide();
-            }, 1000);
+            //1.title  2.弹出框类型 3. 消息详情  4.是否自动关闭
+            this.$lensyn.alarm.show('title', 'success', '', false);
         }
 
         alarmEvent2() {
-            //1.title  2.内容  3.弹出框类型  4.title的icon  5.是否有关闭按钮
-            this.$lensyn.alarm.show('123123123123123123123123123123123123', '123123123123123123123123123123', 'danger', 'danger', false);
+            //1.title  2.弹出框类型 3. 消息详情  4.是否自动关闭 5. 显示时间
+            this.$lensyn.alarm.show('title', 'danger', 'subMsg', true, 3000);
         }
     };
 </script>

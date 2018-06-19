@@ -3,39 +3,66 @@ import AlarmModal from './Alarm.vue';
 let Alarm = {
     install(Vue) {
         let Constructor = Vue.extend(AlarmModal),
-            timer = null,
             alarm = null;
+
         alarm = {
             _currentAlarm: null,
-            _showTime: 1500,
-            show(msg, subMsg, msgType, icon, isAutoClose) {
-                this.destroyEvt();  //先干掉之前存在的
-                if (!msgType) {
-                    msgType = "danger";
+            _containerElement: null,
+            _defaultShowTime: 1500,
+            _delayJob: null,
+
+            show(msg, msgType, subMsg, isAutoClose, showTime) {
+                if (this._containerElement === null) {
+                    this._containerElement = document.createElement("div");
+
+                    this._containerElement.setAttribute("data-ls-component-type", "alarm-container");
+
+                    document.body.appendChild(this._containerElement);
                 }
+
+                if (this._currentAlarm !== null) {
+                    this.destroyEvt();
+                }
+
                 let container = document.createElement("div");
-                document.body.appendChild(container);
+
+                this._containerElement.appendChild(container);
+
                 this._currentAlarm = new Constructor({
                     el: container,
                     propsData: {
                         msg,
                         subMsg,
                         msgType,
-                        icon,
                         isAutoClose,
                         isShow: true
                     }
                 });
-                if (isAutoClose !== true) {
-                    timer = setTimeout(() => this.destroyEvt(), this._showTime);
+
+                this._currentAlarm.$on("alarmEvent", ({action}) => {
+                    if (action === "hide") {
+                        this.destroyEvt();
+                    }
+                });
+
+                if (isAutoClose === true) {
+                    if (!showTime) {
+                        showTime = this._defaultShowTime;
+                    }
+                    this._delayJob = setTimeout(() => this.destroyEvt(), showTime);
                 }
             },
+
             destroyEvt() {
-                if (this._currentAlarm) {
-                    clearTimeout(timer);
-                    this._currentAlarm.isShow = false;
-                    // document.body.removeChild(this._currentAlarm.$el);  //这一句加不加有什么影响？
-                    // this._currentAlarm.$destroy();
+                if (this._delayJob !== null) {
+                    clearTimeout(this._delayJob);
+                    this._delayJob = null;
+                }
+
+                if (this._currentAlarm !== null) {
+                    this._currentAlarm.$destroy();
+                    this._containerElement.removeChild(this._currentAlarm.$el);
+                    this._currentAlarm = null;
                 }
             }
         };
