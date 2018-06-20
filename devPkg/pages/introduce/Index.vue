@@ -161,9 +161,9 @@
         </div>
         <div class="box">
             <ls-button :text="'tooltip'" :size="'normal'"
-                       :type="'primary'" v-tooltip.top="'tooltip'"></ls-button>
+                       :type="'primary'" v-tooltip="'tooltip'"></ls-button>
             <ls-button :text="'tooltip'" :size="'normal'"
-                       :type="'primary'" v-tooltip.bottom="'tooltip'"></ls-button>
+                       :type="'primary'" v-tooltip="'tooltip'"></ls-button>
             <ls-button :text="'tooltip'" :size="'normal'"
                        :type="'primary'" v-tooltip.left="'tooltip'"></ls-button>
             <ls-button :text="'tooltip'" :size="'normal'"
