@@ -31,7 +31,7 @@ import Tab from "./Tab";
 import LayoutContainer from "./layout/LayoutContainer";
 
 // confirm
-import Confirm from "./Confirm";
+import Confirm from "./confirm/Confirm.vue";
 
 // modal
 import Modal from "./Modal";
@@ -41,6 +41,13 @@ import Alarm from "./alarm/Alarm.vue";
 
 // loading
 import Loading from "./loading/Loading.vue";
+
+// panel
+import Panel from "./Panel";
+
+// DrawerLayout
+import DrawerLayout from "./DrawerLayout";
+import PanelDrawerLayout from "./PanelDrawerLayout";
 
 export {
     Grid,
@@ -60,5 +67,8 @@ export {
     Confirm,
     Modal,
     Alarm,
-    Loading
+    Loading,
+    Panel,
+    DrawerLayout,
+    PanelDrawerLayout
 };

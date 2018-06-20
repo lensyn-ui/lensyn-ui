@@ -68,3 +68,9 @@
   -o-transform: @type;
   transform: @type;
 }
+
+.transition(@type: all;@time: .2s;@status: linear) {
+  -webkit-transition: @type @time @status;
+  -o-transition: @type @time @status;
+  transition: @type @time @status;
+}

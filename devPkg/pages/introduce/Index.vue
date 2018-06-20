@@ -21,9 +21,9 @@
         </div>
         <div class="box">
             <ls-date-picker v-model="datePickerValue" style="margin-top: 20px;"></ls-date-picker>
+            <ls-date-picker v-model="rangeDatePickerValue" style="margin-top: 20px;"></ls-date-picker>
         </div>
         <div class="box">
-            <!--按钮绑定时间自己绑定就是了，这里就相当于只剥离了一个样式-->
             <!--disabled默认false，size默认normal，type默认default，都可以不传-->
             <ls-button :text="'按钮'"
                        :size="'normal'"
@@ -113,6 +113,9 @@
             <ls-button :text="'自定义'"
                        :size="'normal'"
                        :type="'primary'" @buttonEvent="showConfirm2"></ls-button>
+            <ls-button text="原型链"
+                        size="normal"
+                        type="primary" @buttonEvent="showConfirm3"></ls-button>
             <!--弹窗 icon:primary,success warning alarm refuse四种类型,不传icon或者传''就是icon没有;
             button: default,primary,success,warning,danger四种类型,默认default+primary;
             btnText按钮文字: 数组从左到右,如果只传一个只有一个按钮,同时把btnType作为按钮的class-->
@@ -169,6 +172,33 @@
             <ls-button :text="'tooltip'" :size="'normal'"
                        :type="'primary'" v-tooltip.right="'tooltip'"></ls-button>
         </div>
+
+        <div class="box">
+            <ls-panel title="header">
+                <div slot="body">
+                    <h1>body</h1>
+                </div>
+            </ls-panel>
+
+            <ls-panel style="margin-top: 30px;">
+                <span slot="header">customer header</span>
+                <div slot="body">
+                    <h1>body</h1>
+                </div>
+            </ls-panel>
+        </div>
+
+        <div class="box">
+            <ls-button text="显示 panel" @buttonEvent="onClickDrawerLayoutBtn"></ls-button>
+            <ls-panel-drawer-layout
+                    :isShow="isShowPanelDrawerLayout"
+                    :isEnableResize="true"
+                    @panelDrawerLayoutEvent="onPanelDrawerLayoutEvent">
+                <div slot="content">
+                    <h1>dd</h1>
+                </div>
+            </ls-panel-drawer-layout>
+        </div>
     </div>
 </template>
 
@@ -186,7 +216,9 @@
         LayoutContainer,
         Input,
         Confirm,
-        Modal
+        Modal,
+        Panel,
+        PanelDrawerLayout
     } from "../../components";
 
     /* 分页 */
@@ -204,7 +236,9 @@
             "ls-tab": Tab,
             "ls-layout-container": LayoutContainer,
             'ls-confirm': Confirm,
-            'ls-modal': Modal
+            'ls-modal': Modal,
+            "ls-panel": Panel,
+            "ls-panel-drawer-layout": PanelDrawerLayout
         }
     })
     export default class HomeIndex extends Vue {
@@ -253,6 +287,7 @@
         ];
 
         datePickerValue = "";
+        rangeDatePickerValue = [];
 
         val = '123555aaa';
 
@@ -287,6 +322,8 @@
 
         modalShow = false;
 
+        isShowPanelDrawerLayout = false;
+
         /* 分页返回对象 */
         pageChange(val) {
             console.log(val);
@@ -317,6 +354,20 @@
             this.confirm2 = true;
         }
 
+        showConfirm3() {
+            let dialog = this.$lensyn.confirm.show({
+                title: "Confirm Title",
+                text: "Confirm Text",
+                confirmCallback() {
+                    dialog.hide();
+                },
+
+                cancelCallback() {
+                    dialog.hide();
+                }
+            });
+        }
+
         confirmEvent2(val) {
             console.log(val);
             this.confirm2 = false;
@@ -341,6 +392,16 @@
         alarmEvent2() {
             //1.title  2.弹出框类型 3. 消息详情  4.是否自动关闭 5. 显示时间
             this.$lensyn.alarm.show('title', 'danger', 'subMsg', true, 3000);
+        }
+
+        onClickDrawerLayoutBtn() {
+            this.isShowPanelDrawerLayout = true;
+        }
+
+        onPanelDrawerLayoutEvent({action}) {
+            if (action === "close") {
+                this.isShowPanelDrawerLayout = false;
+            }
         }
     };
 </script>

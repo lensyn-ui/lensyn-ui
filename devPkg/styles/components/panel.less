@@ -1,0 +1,22 @@
+.panel {
+  @panel-header-height: 40px;
+  @panel-horizontal-padding: 20px;
+  @panel-footer-vertical-padding: 22px;
+
+  background-color: #fff;
+  border: 1px solid @border-color;
+
+  /* stylelint-disable-next-line */
+  .panel__header {
+    height: @panel-header-height;
+    line-height: @panel-header-height;
+    padding-left: @panel-horizontal-padding;
+    border-bottom: 1px solid @border-color;
+    color: @font-color;
+  }
+
+  /* stylelint-disable-next-line */
+  .panel__body {
+    padding: @panel-horizontal-padding @panel-horizontal-padding 0;
+  }
+}

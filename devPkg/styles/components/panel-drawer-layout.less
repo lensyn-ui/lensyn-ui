@@ -1,0 +1,35 @@
+.panel-drawer-layout {
+  /* stylelint-disable-next-line */
+  .drawerlayout__content {
+    height: 100%;
+
+    .panel {
+      height: 100%;
+    }
+  }
+
+  /* stylelint-disable-next-line */
+  .panel-drawer-layout__close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 12px;
+    height: 12px;
+    background-image: url("../../images/components/close.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    cursor: pointer;
+  }
+
+  /* stylelint-disable-next-line */
+  .panel-drawer-layout__resize-handler {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 10px;
+    height: 30px;
+    margin-top: -10px;
+    background-color: @border-color;
+    cursor: w-resize;
+  }
+}

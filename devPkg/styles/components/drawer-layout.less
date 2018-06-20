@@ -1,0 +1,39 @@
+.drawerlayout {
+  position: fixed;
+  top: 50px;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  z-index: 100;
+  background: #fff;
+
+  &.drawerlayout--right {
+    left: auto;
+    right: 0;
+
+    &.drawerlayout-enter,
+    &.drawerlayout-leave-to {
+      .transform(translateX(100%));
+    }
+
+    &.drawerlayout-enter-to,
+    &.drawerlayout-leave {
+      .transform(translate(0));
+    }
+  }
+
+  &.drawerlayout-enter-active,
+  &.drawerlayout-leave-active {
+    .transition(transform, .6s, ease);
+  }
+
+  &.drawerlayout-enter,
+  &.drawerlayout-leave-to {
+    .transform(translateX(-100%));
+  }
+
+  &.drawerlayout-enter-to,
+  &.drawerlayout-leave {
+    .transform(translate(0));
+  }
+}
