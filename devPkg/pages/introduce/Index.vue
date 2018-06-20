@@ -114,8 +114,8 @@
                        :size="'normal'"
                        :type="'primary'" @buttonEvent="showConfirm2"></ls-button>
             <ls-button text="原型链"
-                        size="normal"
-                        type="primary" @buttonEvent="showConfirm3"></ls-button>
+                       size="normal"
+                       type="primary" @buttonEvent="showConfirm3"></ls-button>
             <!--弹窗 icon:primary,success warning alarm refuse四种类型,不传icon或者传''就是icon没有;
             button: default,primary,success,warning,danger四种类型,默认default+primary;
             btnText按钮文字: 数组从左到右,如果只传一个只有一个按钮,同时把btnType作为按钮的class-->
@@ -164,9 +164,9 @@
         </div>
         <div class="box">
             <ls-button :text="'tooltip'" :size="'normal'"
-                       :type="'primary'" v-tooltip="'tooltip'"></ls-button>
+                       :type="'primary'" v-tooltip.top="'tooltip'"></ls-button>
             <ls-button :text="'tooltip'" :size="'normal'"
-                       :type="'primary'" v-tooltip="'tooltip'"></ls-button>
+                       :type="'primary'" v-tooltip.bottom="'tooltip'"></ls-button>
             <ls-button :text="'tooltip'" :size="'normal'"
                        :type="'primary'" v-tooltip.left="'tooltip'"></ls-button>
             <ls-button :text="'tooltip'" :size="'normal'"

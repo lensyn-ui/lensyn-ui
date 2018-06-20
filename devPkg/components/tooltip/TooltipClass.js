@@ -2,7 +2,14 @@ class TooltipClass {
     constructor(el, bind) {
         this.currentElement = el;  // tooltip 的元素
         this.bindValue = bind.value; // tooltip 的内容
-        this.bindPosition = bind.rawName.split('.')[1] || 'top'; // tooltip 定位的位置
+        this.bindPosition = 'top'; // tooltip 定位的位置
+        for (let key in bind.modifiers) {
+            if (bind.modifiers[key] === true) {
+                this.bindPosition = key; // tooltip 定位的位置
+                break
+            }
+        }
+        console.log(this.bindPosition);
         this.tooltipPadding = 5; // tooltip 距离元素的距离
         this.tooltip = null;
         this._init = false;
