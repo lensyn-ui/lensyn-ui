@@ -49,6 +49,9 @@ import Panel from "./Panel";
 import DrawerLayout from "./DrawerLayout";
 import PanelDrawerLayout from "./PanelDrawerLayout";
 
+// CheckBox
+import CheckBox from './form-widgets/CheckBox.vue';
+
 export {
     Grid,
     PaginationGrid,
@@ -70,5 +73,6 @@ export {
     Loading,
     Panel,
     DrawerLayout,
-    PanelDrawerLayout
+    PanelDrawerLayout,
+    CheckBox
 };

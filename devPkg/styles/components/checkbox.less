@@ -1,0 +1,44 @@
+.check-box {
+  cursor: pointer;
+  .check-input {
+    position: relative;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    vertical-align: middle;
+    overflow: hidden;
+    border: 1px solid @border-color;
+    background-color: @bg-color-white;
+    &.checked {
+      background-color: @primary-color;
+      border-color: @primary-color;
+      &:before {
+        content: "";
+        position: absolute;
+        left: 3px;
+        top: 0;
+        width: 6px;
+        height: 10px;
+        background-color: transparent;
+        border-style: solid;
+        border-color: #fff;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+      }
+    }
+    &.disabled {
+      background-color: #f0f0f0;
+      border-color: #dcdcdc;
+      &:before {
+        border-color: #ccc;
+      }
+    }
+  }
+  .check-text {
+    display: inline-block;
+    vertical-align: middle;
+  }
+}

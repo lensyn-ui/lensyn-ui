@@ -23,6 +23,13 @@
             <ls-date-picker v-model="datePickerValue" style="margin-top: 20px;"></ls-date-picker>
             <ls-date-picker v-model="rangeDatePickerValue" style="margin-top: 20px;"></ls-date-picker>
         </div>
+        <div class="box" style="padding-left: 20px;">
+            <ls-checkbox :checked="false"
+                         :disabled="false"
+                         :label="'测试'"
+                         @checkboxEvent="checkEvt"
+            ></ls-checkbox>
+        </div>
         <div class="box">
             <!--disabled默认false，size默认normal，type默认default，都可以不传-->
             <ls-button :text="'按钮'"
@@ -72,6 +79,7 @@
                        :type="'danger'">自定义
             </ls-button>
         </div>
+
         <div class="box">
             <ls-input :placeholder="'请输入文字'"
                       :size="'big'"
@@ -179,7 +187,6 @@
                     <h1>body</h1>
                 </div>
             </ls-panel>
-
             <ls-panel style="margin-top: 30px;">
                 <span slot="header">customer header</span>
                 <div slot="body">
@@ -218,7 +225,8 @@
         Confirm,
         Modal,
         Panel,
-        PanelDrawerLayout
+        PanelDrawerLayout,
+        CheckBox
     } from "../../components";
 
     /* 分页 */
@@ -238,7 +246,8 @@
             'ls-confirm': Confirm,
             'ls-modal': Modal,
             "ls-panel": Panel,
-            "ls-panel-drawer-layout": PanelDrawerLayout
+            "ls-panel-drawer-layout": PanelDrawerLayout,
+            'ls-checkbox': CheckBox
         }
     })
     export default class HomeIndex extends Vue {
@@ -402,6 +411,11 @@
             if (action === "close") {
                 this.isShowPanelDrawerLayout = false;
             }
+        }
+
+        /* checkbox */
+        checkEvt(action) {
+            console.log(action);
         }
     };
 </script>
