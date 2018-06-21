@@ -29,7 +29,8 @@
         </div>
 
         <div class="box" style="padding-left: 20px;">
-            <ls-checkbox v-for="item in checkArr"
+            <ls-checkbox v-for="(item,index) in checkArr"
+                         :key="index"
                          :checked="item.checked"
                          :disabled="item.disabled"
                          :label="item.label"
@@ -39,7 +40,8 @@
 
         <div class="box" style="padding-left: 20px;">
             <!--value需要是唯一标识-->
-            <ls-radio v-for="item in radioArr"
+            <ls-radio v-for="(item,index) in radioArr"
+                      :key="index"
                       :checked="item.checked"
                       :name="item.name"
                       :value="item.value"
