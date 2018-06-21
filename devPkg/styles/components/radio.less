@@ -1,44 +1,38 @@
-.check-box {
+.radio-box {
   cursor: pointer;
   margin: 0 5px;
-  .check-input {
+  .radio-input {
     position: relative;
     display: inline-block;
     width: @input-chose-width;
     height: @input-chose-width;
     vertical-align: middle;
-    overflow: hidden;
-    border: 1px solid @border-color;
+    text-align: center;
     background-color: @bg-color-white;
+    border: 1px solid @primary-color;
+    border-radius: 50%;
     &.checked {
-      background-color: @primary-color;
-      border-color: @primary-color;
       &:before {
         content: "";
         position: absolute;
+        top: 3px;
         left: 3px;
-        top: 0;
         width: 6px;
-        height: 10px;
-        background-color: transparent;
-        border-style: solid;
-        border-color: #fff;
-        border-width: 0 2px 2px 0;
-        transform: rotate(45deg);
-        -moz-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-        -o-transform: rotate(45deg);
+        height: 6px;
+        background-color: @primary-color;
+        border-radius: 50%;
       }
     }
     &.disabled {
       background-color: @bg-color-light;
       border-color: @border-color;
       &:before {
+        background-color: @border-color-input;
         border-color: @border-color-input;
       }
     }
   }
-  .check-text {
+  .label-text {
     position: relative;
     display: inline-block;
     vertical-align: middle;

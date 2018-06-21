@@ -52,6 +52,9 @@ import PanelDrawerLayout from "./PanelDrawerLayout";
 // CheckBox
 import CheckBox from './form-widgets/CheckBox.vue';
 
+// Radio
+import Radio from './form-widgets/Radio.vue';
+
 export {
     Grid,
     PaginationGrid,
@@ -74,5 +77,6 @@ export {
     Panel,
     DrawerLayout,
     PanelDrawerLayout,
-    CheckBox
+    CheckBox,
+    Radio
 };
