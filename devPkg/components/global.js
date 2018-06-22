@@ -17,7 +17,7 @@ let GlobalComponent = {
     },
 
     registerDirective() {
-        Vue.directive('tooltip', Tooltip)
+        Vue.directive('tooltip', Tooltip);
     }
 };
 

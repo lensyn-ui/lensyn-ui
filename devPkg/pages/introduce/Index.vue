@@ -10,19 +10,46 @@
                            :displayLists="displayLists"
                            @paginationEvent="pageChange"></ls-pagination>
         </div>
+
         <div class="box">
             <ls-multiple-select :datas="selectDatas" style="margin-top: 20px;"></ls-multiple-select>
         </div>
+
         <div class="box">
             <ls-dropdown-select :datas="selectDatas" style="margin-top: 20px;"></ls-dropdown-select>
         </div>
+
         <div class="box">
             <ls-tree :isEnableChecked="true" :datas="treeDatas" style="margin-top: 20px;"></ls-tree>
         </div>
+
         <div class="box">
             <ls-date-picker v-model="datePickerValue" style="margin-top: 20px;"></ls-date-picker>
             <ls-date-picker v-model="rangeDatePickerValue" style="margin-top: 20px;"></ls-date-picker>
         </div>
+
+        <div class="box" style="padding-left: 20px;">
+            <ls-checkbox v-for="(item,index) in checkArr"
+                         :key="index"
+                         :checked="item.checked"
+                         :disabled="item.disabled"
+                         :label="item.label"
+                         @checkboxEvent="checkEvt($event,item)"
+            ></ls-checkbox>
+        </div>
+
+        <div class="box" style="padding-left: 20px;">
+            <!--value需要是唯一标识-->
+            <ls-radio v-for="(item,index) in radioArr"
+                      :key="index"
+                      :checked="item.checked"
+                      :name="item.name"
+                      :value="item.value"
+                      :label="item.label"
+                      @radioEvent="radioEvt($event,item)"
+            ></ls-radio>
+        </div>
+
         <div class="box">
             <!--disabled默认false，size默认normal，type默认default，都可以不传-->
             <ls-button :text="'按钮'"
@@ -72,6 +99,7 @@
                        :type="'danger'">自定义
             </ls-button>
         </div>
+
         <div class="box">
             <ls-input :placeholder="'请输入文字'"
                       :size="'big'"
@@ -139,6 +167,7 @@
                 </div>
             </ls-confirm>
         </div>
+
         <div class="box">
             <ls-button :text="'弹窗'"
                        :size="'normal'"
@@ -154,6 +183,7 @@
                 </div>
             </ls-modal>
         </div>
+
         <div class="box">
             <ls-button :text="'alarm1'"
                        :size="'normal'"
@@ -162,6 +192,7 @@
                        :size="'normal'"
                        :type="'primary'" @buttonEvent="alarmEvent2"></ls-button>
         </div>
+
         <div class="box">
             <ls-button :text="'tooltip'" :size="'normal'"
                        :type="'primary'" v-tooltip="'tooltip'"></ls-button>
@@ -179,7 +210,6 @@
                     <h1>body</h1>
                 </div>
             </ls-panel>
-
             <ls-panel style="margin-top: 30px;">
                 <span slot="header">customer header</span>
                 <div slot="body">
@@ -230,7 +260,9 @@
         Modal,
         Panel,
         PanelDrawerLayout,
-        Tag
+        Tag,
+        CheckBox,
+        Radio
     } from "../../components";
 
     /* 分页 */
@@ -251,7 +283,9 @@
             'ls-modal': Modal,
             "ls-panel": Panel,
             "ls-panel-drawer-layout": PanelDrawerLayout,
-            'ls-tag': Tag
+            'ls-tag': Tag,
+            'ls-checkbox': CheckBox,
+            'ls-radio': Radio
         }
     })
     export default class HomeIndex extends Vue {
@@ -337,6 +371,18 @@
 
         isShowPanelDrawerLayout = false;
 
+        checkArr = [
+            {label: '测试1', checked: false, disabled: false},
+            {label: '测试2', checked: true},
+            {label: '测试3', checked: true, disabled: true},
+            {label: '测试4', checked: false, disabled: true}
+        ];
+
+        radioArr = [
+            {label: '男', checked: true, name: 'sex', value: 0},
+            {label: '女', checked: false, name: 'sex', value: 1},
+        ];
+
         /* 分页返回对象 */
         pageChange(val) {
             console.log(val);
@@ -415,6 +461,23 @@
             if (action === "close") {
                 this.isShowPanelDrawerLayout = false;
             }
+        }
+
+        /* checkbox */
+        checkEvt($event, item) {
+            item.checked = $event.checked;
+            console.log(this.checkArr);
+        }
+
+        /* radio */
+        radioEvt($event, item) {
+            this.radioArr.map((it) => {
+                it.checked = false;
+                if (it.value === item.value) {
+                    it.checked = $event.checked;
+                }
+            });
+            console.log(this.radioArr)
         }
     };
 </script>

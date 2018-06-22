@@ -52,6 +52,12 @@ import Tag from './tag/Tag'
 import DrawerLayout from "./DrawerLayout";
 import PanelDrawerLayout from "./PanelDrawerLayout";
 
+// CheckBox
+import CheckBox from './form-widgets/CheckBox.vue';
+
+// Radio
+import Radio from './form-widgets/Radio.vue';
+
 export {
     Grid,
     PaginationGrid,
@@ -74,5 +80,7 @@ export {
     Panel,
     Tag,
     DrawerLayout,
-    PanelDrawerLayout
+    PanelDrawerLayout,
+    CheckBox,
+    Radio
 };
