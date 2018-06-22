@@ -45,6 +45,9 @@ import Loading from "./loading/Loading.vue";
 // panel
 import Panel from "./Panel";
 
+// tag
+import Tag from './tag/Tag'
+
 // DrawerLayout
 import DrawerLayout from "./DrawerLayout";
 import PanelDrawerLayout from "./PanelDrawerLayout";
@@ -69,6 +72,7 @@ export {
     Alarm,
     Loading,
     Panel,
+    Tag,
     DrawerLayout,
     PanelDrawerLayout
 };

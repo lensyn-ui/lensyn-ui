@@ -1,0 +1,78 @@
+.tag {
+  display: inline-block;
+  border: 1px solid transparent;
+  border-radius: @tab-radius;
+  padding: 0 @tab-padding;
+  &.mini {
+    height: @tag-height-mini;
+    line-height: @tag-height-mini;
+  }
+  &.normal {
+    height: @tag-height-normal;
+    line-height: @tag-height-normal;
+  }
+  &.big {
+    height: @tag-height-big;
+    line-height: @tag-height-big;
+  }
+  &.primary {
+    background-color: @font-disable-primary;
+    color: @bg-button-primary;
+    border-color: @bg-button-primary;
+  }
+  &.success {
+    background-color: @font-disable-success;
+    color: @bg-button-success;
+    border-color: @bg-button-success;
+  }
+  &.warning {
+    background-color: @font-disable-warning;
+    color: @bg-button-warning;
+    border-color: @bg-button-warning;
+  }
+  &.error {
+    background-color: @bg-disable-error;
+    color: @bg-button-error;
+    border-color: @bg-button-error;
+  }
+  .close {
+    float: right;
+    width: 16px;
+    height: 100%;
+    position: relative;
+    margin: 0 -8px 0 5px;
+    span {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      margin: auto;
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      line-height: 16px;
+      overflow: hidden;
+      font-size: 12px;
+      cursor: pointer;
+      border-radius: 50%;
+      text-align: center;
+      &.primary:hover {
+        background-color: @bg-hover-primary;
+        color: @bg-color-white;
+      }
+      &.success:hover {
+        background-color: @bg-hover-success;
+        color: @bg-color-white;
+      }
+      &.warning:hover {
+        background-color: @bg-hover-warning;
+        color: @bg-color-white;
+      }
+      &.error:hover {
+        background-color: @bg-hover-error;
+        color: @bg-color-white;
+      }
+    }
+  }
+}

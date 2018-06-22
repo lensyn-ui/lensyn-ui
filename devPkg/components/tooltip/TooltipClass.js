@@ -9,7 +9,6 @@ class TooltipClass {
                 break
             }
         }
-        console.log(this.bindPosition);
         this.tooltipPadding = 5; // tooltip 距离元素的距离
         this.tooltip = null;
         this._init = false;

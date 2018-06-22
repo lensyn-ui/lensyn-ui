@@ -164,7 +164,7 @@
         </div>
         <div class="box">
             <ls-button :text="'tooltip'" :size="'normal'"
-                       :type="'primary'" v-tooltip.top="'tooltip'"></ls-button>
+                       :type="'primary'" v-tooltip="'tooltip'"></ls-button>
             <ls-button :text="'tooltip'" :size="'normal'"
                        :type="'primary'" v-tooltip.bottom="'tooltip'"></ls-button>
             <ls-button :text="'tooltip'" :size="'normal'"
@@ -199,6 +199,17 @@
                 </div>
             </ls-panel-drawer-layout>
         </div>
+
+        <div class="box">
+            <ls-tag>标签一</ls-tag>
+            <ls-tag :close="true" :type="'success'">标签二</ls-tag>
+            <ls-tag :close="true" :type="'warning'">标签三</ls-tag>
+            <ls-tag :close="true" :type="'error'">标签四</ls-tag>
+            <ls-tag :close="true">标签五</ls-tag>
+            <ls-tag :close="true" :size="'mini'">标签六</ls-tag>
+            <ls-tag :close="true" :size="'normal'">标签七</ls-tag>
+            <ls-tag :close="true" :size="'big'">标签八</ls-tag>
+        </div>
     </div>
 </template>
 
@@ -218,7 +229,8 @@
         Confirm,
         Modal,
         Panel,
-        PanelDrawerLayout
+        PanelDrawerLayout,
+        Tag
     } from "../../components";
 
     /* 分页 */
@@ -238,7 +250,8 @@
             'ls-confirm': Confirm,
             'ls-modal': Modal,
             "ls-panel": Panel,
-            "ls-panel-drawer-layout": PanelDrawerLayout
+            "ls-panel-drawer-layout": PanelDrawerLayout,
+            'ls-tag': Tag
         }
     })
     export default class HomeIndex extends Vue {
