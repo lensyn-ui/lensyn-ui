@@ -5,7 +5,12 @@ export function isArray(data) {
 };
 
 export function isNumber(data) {
-    return typeof data === "number";
+    return typeof data === "number" && !isNaN(data);
+};
+
+const EMPTY_VALUE = ["", null, undefined];
+export function isEmpty(value) {
+    return EMPTY_VALUE.indexOf(value) !== -1;
 };
 
 export const tree = {

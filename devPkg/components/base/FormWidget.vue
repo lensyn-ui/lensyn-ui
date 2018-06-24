@@ -54,6 +54,10 @@
         focus() {
             throw new Error("child must implements focus");
         }
+
+        validate() {
+            return true;
+        }
     }
 
 </script>

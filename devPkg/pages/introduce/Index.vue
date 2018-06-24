@@ -103,6 +103,7 @@
         <div class="box">
             <ls-input :placeholder="'请输入文字'"
                       :size="'big'"
+                      :rule="{required: true, name: 'hello', min: 1, max: 2 }"
                       v-model="val"
                       :autofocus="true"
                       @inputEvent="inputChange"></ls-input>

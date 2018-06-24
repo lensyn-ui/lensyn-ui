@@ -16,6 +16,10 @@ export { default as DraggableMixin } from "./mixins/DraggableMixin";
 import GlobalComponent from "./global";
 /* 全局 --- end --- */
 
+/* 验证规则 --- start --- */
+import Validator from "./validator/Validator";
+/* 验证规则 --- end --- */
+
 const COMPONENT_PREFIX = "ls";
 const HYPHENATE_RE = /\B([A-Z])/g;
 const hyphenate = (str) => {
@@ -38,6 +42,10 @@ let Lensyn = {
 
     getComponentName(component) {
         return `${COMPONENT_PREFIX}-${hyphenate(component)}`;
+    },
+
+    registerValidator(name, validator) {
+        Validator.registerValidator(name, validator);
     }
 };
 
