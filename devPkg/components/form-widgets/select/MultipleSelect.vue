@@ -29,7 +29,6 @@
             </template>
             <template v-else>
                 <ls-select-item v-for="item in showDatas"
-                                :isChecked="isCheckedItem(item)"
                                 :value="getItemValue(item)"
                                 :id="getItemId(item)"
                                 :key="getItemId(item)"
@@ -100,6 +99,12 @@
             filterDelayTime: {
                 type: Number,
                 default: 100
+            }
+        },
+
+        provide() {
+            return {
+                isCheckedById: this.isCheckedById
             }
         }
     })
@@ -229,6 +234,10 @@
             let item = this.findItemById(id);
 
             return this.isItemEnableDelete(item);
+        }
+
+        isCheckedById(id) {
+            return this.checkedIds.indexOf(id) !== -1;
         }
 
         isItemEnableDelete(item) {

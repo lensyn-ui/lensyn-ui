@@ -20,7 +20,6 @@
                 <ls-select-item v-for="item in showDatas"
                                 :key="getItemId(item)"
                                 :id="getItemId(item)"
-                                :isChecked="isItemChecked(item)"
                                 :value="getItemValue(item)">
                     {{getItemLabel(item)}}
                 </ls-select-item>
@@ -93,6 +92,12 @@
                 type: Boolean,
                 default: false
             }
+        },
+
+        provide() {
+            return {
+                isCheckedById: this.isCheckedById
+            };
         }
     })
     export default class DropdownSelect extends FormWidget {
@@ -283,6 +288,15 @@
                 return item[this.valueProperty];
             }
             return this.getItemId(item);
+        }
+
+        isCheckedById(id) {
+            if (id === this.noMatchValue) {
+                return false;
+            }
+            let item = this.findItemById(id);
+
+            return this.isItemChecked(item);
         }
 
         isItemChecked(item) {

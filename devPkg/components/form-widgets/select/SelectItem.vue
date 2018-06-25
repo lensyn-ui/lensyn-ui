@@ -21,15 +21,16 @@
             id: {
                 type: [Number, String],
                 required: true
-            },
-
-            isChecked: {
-                type: Boolean,
-                default: false
             }
-        }
+        },
+
+        inject: ["isCheckedById"]
     })
     export default class SelectItem extends Widget {
+        get isChecked() {
+            return this.isCheckedById(this.id);
+        }
+
         onClickItem($event) {
             let parent = this.$parent.$parent;
 
