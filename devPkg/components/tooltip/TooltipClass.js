@@ -34,9 +34,11 @@ class TooltipClass {
     // 删除 tooltip
     destroy() {
         this._init = false;
-        document.body.removeChild(this.tooltip);
-        this.currentElement.removeEventListener('mouseenter', this.show);
-        this.currentElement.removeEventListener('mouseleave', this.hide);
+        if (this._init) {
+            document.body.removeChild(this.tooltip);
+            this.currentElement.removeEventListener('mouseenter', this.show);
+            this.currentElement.removeEventListener('mouseleave', this.hide);
+        }
     }
 
     setContent(msg) {
