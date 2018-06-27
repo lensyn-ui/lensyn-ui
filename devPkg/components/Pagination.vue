@@ -23,7 +23,7 @@
             <input type="text" v-model.trim="inputPage" @keyup.enter="setCurrent(inputPage)"/>
             <span class="btn" @click="setCurrent(inputPage)">go</span>
         </div>
-        <div class="pagination">
+        <div class="pagination" v-if="isItemShow">
             <span>每页显示</span>
             <select v-model.number="displayItem">
                 <option v-for="item in displayLists" :value="item.value">{{item.label}}</option>
@@ -48,6 +48,10 @@
                 default: true
             },
             isHFShow: {
+                type: Boolean,
+                default: true
+            },
+            isItemShow: {
                 type: Boolean,
                 default: true
             },
