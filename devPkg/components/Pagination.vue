@@ -118,6 +118,12 @@
         }
 
         setCurrent(idx) {
+            if (idx == 0) {
+                return;
+            }
+            if (idx >= this.page + 1) {
+                return;
+            }
             if (this.currentPage == idx * 1) {  //当前页等于点击页时，不触发
                 return;
             }
