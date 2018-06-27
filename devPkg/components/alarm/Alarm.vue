@@ -51,7 +51,7 @@
 
             popupPosition: {  //位置
                 type: [String, Array],
-                default: "windowCenter"
+                default: "windowTop"
             }
         }
     })

@@ -241,6 +241,35 @@
             <ls-tag :close="true" :size="'normal'">标签七</ls-tag>
             <ls-tag :close="true" :size="'big'">标签八</ls-tag>
         </div>
+
+        <div class="box">
+            <ls-row :gutter="16">
+                <ls-column :col="4">
+                    <ls-input style="width: 100%;" placeholder="请输入文字"></ls-input>
+                </ls-column>
+                <ls-column :col="4">
+                    <ls-input style="width: 100%;" placeholder="请输入文字"></ls-input>
+                </ls-column>
+                <ls-column :col="4">
+                    <ls-input style="width: 100%;" placeholder="请输入文字"></ls-input>
+                </ls-column>
+                <ls-column :col="4">
+                    <ls-input style="width: 100%;" placeholder="请输入文字"></ls-input>
+                </ls-column>
+                <ls-column :col="4">
+                    <ls-input style="width: 100%;" placeholder="请输入文字"></ls-input>
+                </ls-column>
+                <ls-column :col="4">
+                    <ls-input style="width: 100%;" placeholder="请输入文字"></ls-input>
+                </ls-column>
+                <ls-column :col="4">
+                    <ls-input style="width: 100%;" placeholder="请输入文字"></ls-input>
+                </ls-column>
+                <ls-column :col="4">
+                    <ls-button :text="'按钮'" :size="'normal'" :type="'primary'"></ls-button>
+                </ls-column>
+            </ls-row>
+        </div>
     </div>
 </template>
 
@@ -263,7 +292,9 @@
         PanelDrawerLayout,
         Tag,
         CheckBox,
-        Radio
+        Radio,
+        Row,
+        Column
     } from "../../components";
 
     /* 分页 */
@@ -286,7 +317,9 @@
             "ls-panel-drawer-layout": PanelDrawerLayout,
             'ls-tag': Tag,
             'ls-checkbox': CheckBox,
-            'ls-radio': Radio
+            'ls-radio': Radio,
+            "ls-row": Row,
+            "ls-column": Column
         }
     })
     export default class HomeIndex extends Vue {

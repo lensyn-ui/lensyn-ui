@@ -4,9 +4,8 @@
 import Grid from "./grid/Grid";
 import PaginationGrid from "./grid/PaginationGrid";
 
-// mixins
-import PopupMixin from "./mixins/PopupMixin";
-import DraggableMixin from "./mixins/DraggableMixin";
+// popup
+import Popup from "./base/Popup";
 
 // dropdown
 import Dropdown from "./Dropdown";
@@ -29,6 +28,8 @@ import Tab from "./Tab";
 
 // 布局
 import LayoutContainer from "./layout/LayoutContainer";
+import Row from "./layout/Row";
+import Column from "./layout/Column";
 
 // confirm
 import Confirm from "./confirm/Confirm.vue";
@@ -61,8 +62,6 @@ import Radio from './form-widgets/Radio.vue';
 export {
     Grid,
     PaginationGrid,
-    PopupMixin,
-    DraggableMixin,
     Dropdown,
     DropdownSelect,
     MultipleSelect,
@@ -72,6 +71,8 @@ export {
     Button,
     Tab,
     LayoutContainer,
+    Row,
+    Column,
     Input,
     Confirm,
     Modal,

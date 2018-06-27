@@ -224,7 +224,7 @@
             }
 
             if (typeof this.isMatchSearchValue !== "undefined") {
-                return this.isMatchSearchValue(item);
+                return this.isMatchSearchValue(this.inputValue, item);
             }
 
             return this.defaultIsMatchSearchValue(item);
