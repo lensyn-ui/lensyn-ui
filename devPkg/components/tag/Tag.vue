@@ -37,8 +37,7 @@
             if (!this.close) {
                 return;
             }
-            this.tagShow = false;
-            this.emitEvent({active: 'click', $event})
+            this.emitEvent({active: 'close', $event})
         }
     }
 </script>
