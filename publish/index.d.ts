@@ -4,6 +4,7 @@ export = LensynUI;
 
 declare class LensynUI {
     public static install: PluginFunction<any>;
+    public static registerValidator: (name: string, validator: any) => void;
 }
 
 interface Alarm {

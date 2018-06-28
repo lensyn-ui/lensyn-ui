@@ -28,7 +28,7 @@
                 required: true
             },
 
-            onClick: {
+            onWidgetEvent: {
                 type: Function,
                 default: () => {}
             },
@@ -37,6 +37,14 @@
                 type: String,
                 default: ""
             }
+        },
+
+        data() {
+            return {
+                innerEventMap: {
+                    "clickEvt": "onClick"
+                }
+            };
         },
 
         render(createElement) {
@@ -52,9 +60,6 @@
                     case "link":
                         result = this.getLinkWidget(createElement, widget);
                         break;
-                    case "custom":
-                        result = this.getCustomWidget(createElement, widget);
-                        break;
                     case "icon":
                         result = this.getIconWidget(createElement, widget);
                         break;
@@ -62,6 +67,7 @@
                         result = this.getLabelWidget(createElement, widget);
                         break;
                     default:
+                        result = this.getCustomWidget(createElement, widget);
                         break;
                 }
 
@@ -69,6 +75,8 @@
             },
 
             getIconWidget(createElement, widget) {
+                let listener = this.getWidgetEventListener(this.innerEventMap);
+
                 return createElement(Icon, {
                     "class": this.extraClass,
                     props: {
@@ -76,13 +84,13 @@
                         disabled: this.isWidgetDisabled(widget)
                     },
                     directives: widget.directives,
-                    on: {
-                        clickEvt: (event) => this.onClick({event, widget})
-                    }
+                    on: listener
                 });
             },
 
             getLinkWidget(createElement, widget) {
+                let listener = this.getWidgetEventListener(this.innerEventMap);
+
                 return createElement(Link, {
                     "class": this.extraClass,
                     props: {
@@ -91,14 +99,13 @@
                         disabled: this.isWidgetDisabled(widget)
                     },
                     directives: widget.directives,
-                    on: {
-                        clickEvt: (event) => this.onClick({event, widget})
-                    }
+                    on: listener
                 });
             },
 
             getLabelWidget(createElement, widget) {
-                let data = this.rowData[this.column.field];
+                let data = this.rowData[this.column.field],
+                    listener = this.getWidgetEventListener(this.innerEventMap);
 
                 if (this.column.format) {
                     data = this.column.format(data, this.rowData);
@@ -109,9 +116,7 @@
                         data,
                         ...this.getCustomWidgetProps(widget)
                     },
-                    on: {
-                        clickEvt: (event) => this.onClick({event, widget})
-                    }
+                    on: listener
                 });
             },
 
@@ -135,15 +140,43 @@
             },
 
             getCustomWidget(createElement, widget) {
-                return createElement(widget, {
+                let listener = this.getWidgetEventListener(widget.listenerMap);
+
+                return createElement(widget.type, {
                     "class": `${widget.className ? widget.className : ''} ${this.extraClass}`,
                     style: widget.style,
                     props: this.getCustomWidgetProps(widget),
                     directives: widget.directives,
-                    on: {
-                        clickEvt: (event) => this.onClick({event, widget})
-                    }
+                    on: listener
                 });
+            },
+
+            getWidgetEventListener(eventMap) {
+                let result = {};
+                if (eventMap) {
+                    let listenerMap = eventMap;
+
+                    if (Util.isArray(eventMap)) {
+                        listenerMap = Util.covertArrayToMap(eventMap);
+                    }
+
+                    for (let key in listenerMap) {
+                        if (listenerMap.hasOwnProperty(key)) {
+                            result[key] = (...event) => {
+                                if (event.length === 1) {
+                                    event = event[0];
+                                }
+                                return this.handleWidgetEvent(listenerMap[key], event);
+                            }
+                        }
+                    }
+                }
+
+                return result;
+            },
+
+            handleWidgetEvent(listenerName, event) {
+                this.onWidgetEvent({listenerName, event, widget: this.widget});
             },
 
             isWidgetVisible(widget) {

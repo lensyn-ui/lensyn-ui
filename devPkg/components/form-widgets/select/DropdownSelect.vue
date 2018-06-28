@@ -242,6 +242,7 @@
 
         onClickItem(event) {
             if (event.id === this.noMatchValue) {
+                this.emitEvent({action: "clickNoMatchItem"});
                 return;
             }
             let item = this.findItemById(event.id),
@@ -255,6 +256,7 @@
                 this.refreshInputValue();
             }
             dropdown.collapse();
+            this.emitEvent({action: "clickItem", data: item});
         }
 
         findItemById(id) {

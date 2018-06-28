@@ -110,7 +110,7 @@
                     },
 
                     on: {
-                        clickSub: (event) => this.handleClickSubCell(event)
+                        subEvent: (event) => this.handleWidgetEvent(event)
                     }
                 });
             },
@@ -136,7 +136,7 @@
                         widget: this.column.widget,
                         rowData: this.rowData,
                         column: this.column,
-                        onClick: (event) => this.handleWidgetClick(event)
+                        onWidgetEvent: (event) => this.handleWidgetEvent(event)
                     }
                 });
             },
@@ -171,15 +171,9 @@
                 this.triggerSelect({...event, rowData: this.rowData});
             },
 
-            handleClickSubCell({event, widget}) {
-                if (widget.onClick) {
-                    widget.onClick(this.rowData, this.column, event);
-                }
-            },
-
-            handleWidgetClick({event, widget}) {
-                if (widget.onClick) {
-                    widget.onClick(this.rowData, this.column, event);
+            handleWidgetEvent({listenerName, event, widget}) {
+                if (widget[listenerName]) {
+                    widget[listenerName](this.rowData, this.column, event);
                 }
             },
 

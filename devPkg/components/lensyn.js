@@ -8,6 +8,7 @@ import * as LensynComponents from "./index";
 /* 组件 --- end --- */
 
 /* mixins --- start --- */
+export { default as Popup } from "./base/Popup";
 export { default as PopupMixin } from  "./mixins/PopupMixin";
 export { default as DraggableMixin } from "./mixins/DraggableMixin";
 /* mixins --- end --- */

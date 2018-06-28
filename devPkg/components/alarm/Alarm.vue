@@ -18,9 +18,7 @@
 
 <script>
     import {Component, Watch} from "vue-property-decorator";
-    import {mixins} from "vue-class-component";
-    import Widget from '../base/Widget.vue';
-    import Popup from '../mixins/PopupMixin';
+    import Popup from '../base/Popup';
 
     @Component({
         props: {
@@ -52,10 +50,15 @@
             popupPosition: {  //位置
                 type: [String, Array],
                 default: "windowTop"
+            },
+
+            verticalOffset: {
+                type: Number,
+                default: 80
             }
         }
     })
-    export default class Alarm extends mixins(Widget, Popup) {
+    export default class Alarm extends Popup {
         widgetName = 'alarm';
 
         get isHaveCustomContent() {

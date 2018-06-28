@@ -1,5 +1,8 @@
 <template>
     <div class="introduce-main">
+        <div class="bod">
+            <ls-grid :columns="gridColumns" :datas="gridDatas" :isShowFooter="true" ></ls-grid>
+        </div>
         <div class="box">
             <ls-pagination :isShowTotal="true"
                            :isGoShow="true"
@@ -277,6 +280,7 @@
     import {Component, Vue} from 'vue-property-decorator';
 
     import {
+        Grid,
         Pagination,
         DropdownSelect,
         MultipleSelect,
@@ -300,8 +304,17 @@
     /* 分页 */
     import pagination from '../../components/Pagination.vue';
 
+    import Validator from "../../components/validator/Validator";
+
+    Validator.registerValidator("hello", {
+        validate() {
+            return {status: false, msg: "dd"}
+        }
+    })
+
     @Component({
         components: {
+            "ls-grid": Grid,
             'ls-pagination': pagination,
             "ls-dropdown-select": DropdownSelect,
             "ls-multiple-select": MultipleSelect,
@@ -323,6 +336,93 @@
         }
     })
     export default class HomeIndex extends Vue {
+        gridColumns = [
+            { label: "ID", field: "id" },
+            {
+                label: "Name",
+                field: "name",
+                footerSub: [
+                    {
+                        type: Button,
+                        props: { text: "hello" },
+                        listenerMap: ["buttonEvent"],
+                        buttonEvent: (...arg) => {
+                            console.log(arg);
+                        }
+                    }
+                ]
+            },
+            { label: "Email", field: "email" },
+            { label: "Address", field: "address" },
+            {
+                label: "Admin",
+                field: "isAdmin",
+                type: "widget",
+                widget: {
+                    type: CheckBox,
+                    listenerMap: ["checkboxEvent"],
+                    checkboxEvent: (...arg) => {
+                        console.log(arg);
+                    },
+                    propsRowDataMap: {
+                        checked: "isAdmin"
+                    }
+                }
+            },
+            {
+                label: "Status",
+                field: "status",
+                type: "widget",
+                widget: {
+                    type: "label",
+                    props: {
+                        status: "primary"
+                    },
+                    onClick: (...arg) => {
+                        console.log(arg);
+                    }
+                }
+            },
+            {
+                label: "Operate",
+                field: "operate",
+                sub: [
+                    {
+                        type: "icon",
+                        iconClass: "demo-font"
+                    },
+                    {
+                        type: "label",
+                        props: {
+                            status: "primary"
+                        },
+                        onClick: (...arg) => {
+                            console.log(arg);
+                        },
+                        visible: "#{id} !== 1",
+                        propsRowDataMap: {
+                            data: "status"
+                        }
+                    },
+                    {
+                        type: CheckBox,
+                        listenerMap: {checkboxEvent: "normalEvent", hello: "helloEvent"},
+                        normalEvent: (...arg) => {
+                            console.log(arg);
+                        },
+                        helloEvent: (...arg) => {
+                            console.log(arg);
+                        }
+                    }
+                ]
+            }
+        ];
+        gridDatas = [
+            { id: 1, name: "test-user-1", email: "test-email-1", address: "test-address-1", isAdmin: true, status: "test-status-1" },
+            { id: 2, name: "test-user-2", email: "test-email-2", address: "test-address-2", isAdmin: false, status: "test-status-2" },
+            { id: 3, name: "test-user-3", email: "test-email-3", address: "test-address-3", isAdmin: false, status: "test-status-3" },
+            { id: 4, name: "test-user-4", email: "test-email-4", address: "test-address-4", isAdmin: false, status: "test-status-4" }
+        ];
         displayLists = [
             {
                 label: 10, value: 10

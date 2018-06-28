@@ -66,6 +66,17 @@ const Util  = {
         });
     },
 
+    /**
+     * 将数组转换为 map
+     * @param {string[]} array
+     * @returns {object}
+     */
+    covertArrayToMap(array) {
+        let result = {};
+        array.reduce((previous, current) => previous[current] = current, result);
+        return result;
+    },
+
     isArray(data) {
         return toString.call(data) === "[object Array]";
     },
