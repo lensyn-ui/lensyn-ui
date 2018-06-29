@@ -1,19 +1,27 @@
 <template>
     <div class="vue-grid" :class="{'fixed-grid': isFixedHeight, 'footer-grid': isShowFooter}">
-        <grid-header ref="header" :headerColumns="headerColumns" :headerData="headerData"
-                     :isColumnSetGrid="isColumnSetGrid" :selectedAllCheckboxData="selectedAllCheckboxData" />
-        <grid-body ref="body" :datas="tableDatas" :columns="contentColumns" :isColumnSetGrid="isColumnSetGrid"
-            :idProperty="idProperty"
-            :checkboxSelected="checkboxSelected"
-            :activeRowIds="activeRowIds"
-            :radioSelected="radioSelected"
-            :rowClassNameFn="rowClassNameFn"
-            :isShowNoticeMsg="isShowNoticeMsg"
-            :noticeMsg="noticeMsg"
-            @contentHorizontalScroll="handleContentHorizontalScroll"
-            @contentScrollbarWidth="handleContentScrollbarWidth" />
+        <grid-header ref="header"
+                     :headerColumns="headerColumns"
+                     :contentColumns="contentColumns"
+                     :headerData="headerData"
+                     :isColumnSetGrid="isColumnSetGrid"
+                     :selectedAllCheckboxData="selectedAllCheckboxData" />
 
-        <grid-footer v-if="isShowFooter"
+        <grid-body ref="body"
+                   :datas="tableDatas"
+                   :columns="contentColumns"
+                   :isColumnSetGrid="isColumnSetGrid"
+                   :idProperty="idProperty"
+                   :checkboxSelected="checkboxSelected"
+                   :activeRowIds="activeRowIds"
+                   :radioSelected="radioSelected"
+                   :rowClassNameFn="rowClassNameFn"
+                   :isShowNoticeMsg="isShowNoticeMsg"
+                   :noticeMsg="noticeMsg"
+                   @contentHorizontalScroll="handleContentHorizontalScroll"
+                   @contentScrollbarWidth="handleContentScrollbarWidth" />
+
+        <grid-footer ref="footer" v-if="isShowFooter"
                      :footerColumns="contentColumns"
                      :footerData="footerData"
                      :isColumnSetGrid="isColumnSetGrid"
@@ -34,7 +42,6 @@
 
     import IdMixin from "./mixins/IdMixin";
     import EventBusMixin from "./mixins/EventBusMixin";
-    import PaginationMixin from "./mixins/PaginationMixin";
 
     import Header from "./Header.vue";
     import Body from "./Body.vue";
@@ -427,6 +434,9 @@
 
             handleContentHorizontalScroll(event) {
                 this.$refs.header.setHeaderRowScrollLeft(event);
+                if (this.isShowFooter) {
+                    this.$refs.footer.setFooterRowScrollLeft(event);
+                }
             },
 
             handleContentScrollbarWidth(event) {

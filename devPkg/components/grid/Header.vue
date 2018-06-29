@@ -1,21 +1,32 @@
 <template>
     <div class="grid-header" :style="{paddingRight: paddingRight}">
-        <table>
-            <column-set-row v-if="isColumnSetGrid" :columns="headerColumns"
-                            :rowData="headerData" cellType="headerCell" :selectorData="selectedAllCheckboxData" />
-            <row v-else v-for="(columns, index) in headerColumns" :key="index" :columns="columns" cellType="headerCell"
-                :rowData="headerData" :selectorData="selectedAllCheckboxData"/>
-        </table>
+        <column-set-row v-if="isColumnSetGrid"
+                        :columns="headerColumns"
+                        :rowData="headerData"
+                        cellType="headerCell"
+                        :selectorData="selectedAllCheckboxData" />
+
+        <simple-column-row v-else
+                           :columns="headerColumns"
+                           :layoutColumns="contentColumns"
+                           cellType="headerCell"
+                           :rowData="headerData"
+                           :selectorData="selectedAllCheckboxData"/>
     </div>
 </template>
 
 <script>
     import ColumnSetRow from "./ColumnSetRow.vue";
-    import Row from "./Row.vue";
+    import SimpleColumnRow from "./SimpleColumnRow.vue";
 
     export default {
         props: {
             headerColumns: {
+                type: Array,
+                required: true
+            },
+
+            contentColumns: {
                 type: Array,
                 required: true
             },
@@ -37,7 +48,7 @@
         },
 
         components: {
-            "row": Row,
+            "simple-column-row": SimpleColumnRow,
             "column-set-row": ColumnSetRow
         },
 
@@ -61,7 +72,7 @@
             },
 
             positionSetHeaderScrollLeft: function (data) {
-                let setRows = this.$el.querySelectorAll(".column-set-" + data.setIndex);
+                let setRows = this.$el.querySelectorAll(`.column-set-${data.setIndex} .column-set-wrapper`);
 
                 for (let i = 0, j = setRows.length; i < j; ++i) {
                     setRows[i].scrollLeft = data.scrollLeft;

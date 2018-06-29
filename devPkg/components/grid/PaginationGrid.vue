@@ -143,7 +143,7 @@
                 }, (error) => {
                     this.isShowNoticeMsg = true;
                     this.noticeMsg = this.queryDataErrorMsg;
-                    this.$emit("gridError", {action: "loadData", error});
+                    this.emitEvent({action: "loadDataError", error});
                 });
             },
 

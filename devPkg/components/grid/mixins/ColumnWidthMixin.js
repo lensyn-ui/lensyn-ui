@@ -27,7 +27,7 @@ export default {
 
                 return columnWidth;
             }
-            return "auto";
+            return "";
         }
     }
 };

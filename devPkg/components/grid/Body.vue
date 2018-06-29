@@ -2,11 +2,11 @@
     <div class="grid-body">
         <div class="grid-content-wrapper" ref="contentWrapper">
             <div ref="content" class="grid-content" @scroll="handleContentScroll">
-                <table>
-                    <component :is="rowConstructor" v-for="(data, index) in datas" :key="getId(data)" :rowData="data" :columns="columns"
-                        cellType="bodyCell" :selectorData="getRowDataSelected(data)" :rowClassNameFn="rowClassNameFn"
-                        :rowNumber="index + 1" :isActive="isRowActived(data)" @clickRow="handleClickRow"/>
-                </table>
+                <div v-for="(data, index) in datas" :key="getId(data)" :class="getRowClassName(data)">
+                    <component :is="rowConstructor" :rowData="data" :columns="columns"
+                               cellType="bodyCell" :selectorData="getRowDataSelected(data)"
+                               :rowNumber="index + 1" @clickRow="handleClickRow"/>
+                </div>
             </div>
             <div class="notice-msg" v-show="haveNoticeMsg" > {{noticeMsgContent}} </div>
         </div>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-    import Row from "./Row.vue";
+    import SimpleColumnRow from "./SimpleColumnRow";
     import ColumnSetRow from "./ColumnSetRow.vue";
     import IdMixin from "./mixins/IdMixin";
     import EventBusMixin from "./mixins/EventBusMixin";
@@ -72,7 +72,7 @@
 
             activeRowIds: {
                 type: Array,
-                default: []
+                default: () => []
             }
         },
 
@@ -81,18 +81,19 @@
                 previousSetScrollBarPosition: {},
                 previousContentScrollPosition: 0,
                 haveNoticeMsg: false,
-                noticeMsgContent: ""
+                noticeMsgContent: "",
+                defaultRowClassName: "grid-row"
             };
         },
 
         components: {
-            "row": Row,
+            "simple-column-row": SimpleColumnRow,
             "column-set-row": ColumnSetRow
         },
 
         computed: {
             rowConstructor() {
-                return this.isColumnSetGrid ? "column-set-row" : "row";
+                return this.isColumnSetGrid ? "column-set-row" : "simple-column-row";
             }
         },
 
@@ -104,7 +105,7 @@
                 });
             },
 
-            isShowNoticeMsg(currentValue) {
+            isShowNoticeMsg() {
                 this.refreshNoticeMsg();
             }
         },
@@ -124,6 +125,25 @@
                 }
             },
 
+            getRowClassName(rowData) {
+                let str = this.defaultRowClassName;
+
+                if (this.rowClassNameFn) {
+                    let extra = "";
+                    if (Util.isFunction(this.rowClassNameFn)) {
+                        extra = this.rowClassNameFn(rowData);
+                    } else {
+                        extra = Util.getExpressionValue(rowData, this.rowClassNameFn);
+                    }
+                    str = `${str} ${extra}`;
+                }
+
+                if (this.isRowActived(rowData)) {
+                    str = `${str} active`;
+                }
+                return str;
+            },
+
             refreshNoticeMsg() {
                 if (this.datas.length === 0) {
                     this.haveNoticeMsg = true;
@@ -135,7 +155,7 @@
             },
             
             setContentRowScrollLeft(setIndex, scrollLeft) {
-                let setRows = this.$refs.content.querySelectorAll(".column-set-" + setIndex);
+                let setRows = this.$refs.content.querySelectorAll(`.column-set-${setIndex} .column-set-wrapper`);
 
                 for (let i = 0, j = setRows.length; i < j; ++i) {
                     setRows[i].scrollLeft = scrollLeft;
@@ -143,24 +163,33 @@
             },
 
             resizeSetScrollbar() {
-                let firstRow = this.$refs.content.children[0].children[0];
+                let firstTable = this.$refs.content.children[0].children[0],
+                    firstRow = firstTable.children[0].children[0];
 
                 if (firstRow) {
                     let setCount = this.columns.length,
-                        scrollbarContainer = this.$refs.setScrollbar;
+                        scrollbarContainer = this.$refs.setScrollbar,
+                        isHaveScrollbar = false;
+
 
                     for (let i = 0; i < setCount; ++i) {
                         let scrollbar = scrollbarContainer.querySelector(".set-scrollbar-" + i),
-                            set = firstRow.children[i],
+                            set = firstRow.children[i].children[0],
                             wrapperWidth = set.offsetWidth,
                             contentWidth = set.children[0].offsetWidth;
 
                         scrollbar.style.width = wrapperWidth + "px";
 
                         if (contentWidth > wrapperWidth) {
+                            isHaveScrollbar = true;
                             scrollbar.style.display = "";
                             scrollbar.children[0].style.width = contentWidth + "px";
                         }
+                    }
+                    if (isHaveScrollbar) {
+                        scrollbarContainer.style.display = "";
+                    } else {
+                        scrollbarContainer.style.display = "none";
                     }
                 }
             },

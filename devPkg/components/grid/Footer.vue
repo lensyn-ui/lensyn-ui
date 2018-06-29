@@ -1,9 +1,7 @@
 <template>
     <div class="grid-footer">
-        <table>
-            <component :is="rowConstructor" :rowData="footerData" :columns="footerColumns" 
-                cellType="footerCell" :selectorData="selectedAllCheckboxData" />
-        </table>
+        <component :is="rowConstructor" :rowData="footerData" :columns="footerColumns"
+            cellType="footerCell" :selectorData="selectedAllCheckboxData" />
 
         <pagination v-if="isEnablePagination"
                     :total="totalRows"
@@ -18,7 +16,7 @@
     import EventBusMixin from "./mixins/EventBusMixin";
 
     import ColumnSetRow from "./ColumnSetRow.vue";
-    import Row from "./Row.vue";
+    import SimpleColumnRow from "./SimpleColumnRow.vue";
     import Pagination from "./Pagination.vue";
 
     export default {
@@ -71,7 +69,7 @@
         },
 
         components: {
-            "row": Row,
+            "simple-column-row": SimpleColumnRow,
             "column-set-row": ColumnSetRow,
             "pagination": Pagination
         },
@@ -79,11 +77,31 @@
 
         computed: {
             rowConstructor() {
-                return this.isColumnSetGrid ? "column-set-row" : "row";
+                return this.isColumnSetGrid ? "column-set-row" : "simple-column-row";
             }
         },
 
         methods: {
+            setFooterRowScrollLeft(data) {
+                if (data.type === "set") {
+                    this.positionSetHeaderScrollLeft(data);
+                } else {
+                    this.positionSimpleHeaderScrollLeft(data);
+                }
+            },
+
+            positionSetHeaderScrollLeft(data) {
+                let setRows = this.$el.querySelectorAll(`.column-set-${data.setIndex} .column-set-wrapper`);
+
+                for (let i = 0, j = setRows.length; i < j; ++i) {
+                    setRows[i].scrollLeft = data.scrollLeft;
+                }
+            },
+
+            positionSimpleHeaderScrollLeft(data) {
+                this.$el.scrollLeft = data.scrollLeft;
+            },
+
             onPaginationEvent(event) {
                 this.triggerPagination(event);
             }

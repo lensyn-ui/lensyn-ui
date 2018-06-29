@@ -61,6 +61,14 @@
     }
   }
 
+  .column-set {
+    .column-set-wrapper {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+  }
+
   .grid-header {
     background-color: @header-bg-color;
     border-bottom: 1px solid @border-color;
@@ -79,12 +87,13 @@
           height: @header-height / 2;
         }
 
-        .layout-row {
-          height: 0;
-          .header-cell {
-            height: 0;
-          }
-        }
+      }
+    }
+
+    .layout-row {
+      height: 0;
+      .header-cell {
+        height: 0;
       }
     }
   }
@@ -102,9 +111,12 @@
     .grid-content {
       width: 100%;
       overflow-x: auto;
+      font-size: 0;
     }
 
     .grid-row {
+      display: inline-block;
+      font-size: 12px;
       border-bottom: 1px solid @border-color;
 
       .body-cell {
@@ -124,7 +136,7 @@
         border-bottom-width: 0;
       }
     }
-    
+
     .set-scrollbar-container {
       font-size: 0;
       overflow: hidden;
@@ -144,6 +156,7 @@
     position: relative;
     background-color: @footer-bg-color;
     border-top: 1px solid @border-color;
+    overflow: hidden;
 
     .grid-row {
       .footer-cell {

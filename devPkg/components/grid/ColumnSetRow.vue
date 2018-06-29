@@ -1,19 +1,26 @@
 <template>
-    <tr :class="getRowClassName()" @click="handleClickRow($event)">
-        <td v-for="(set, setIndex) in columns" :key="setIndex" :class="getSetColumnsClassName(setIndex)" >
-            <table>
-                <row v-if="cellType === 'headerCell'" defaultClassName="layout-row" 
-                        :columns="getLayoutColumns(set)" :rowData="{}" :cellType="cellType" />
+    <table>
+        <tbody>
+            <tr>
+                <td v-for="(set, setIndex) in columns" :key="setIndex" :class="getSetColumnsClassName(setIndex)" >
+                    <div class="column-set-wrapper">
+                        <table>
+                            <tbody>
+                                <row v-if="cellType === 'headerCell'" class="layout-row"
+                                     :columns="getLayoutColumns(set)" :rowData="{}" :cellType="cellType" />
 
-                <row v-for="(columns, index) in set" :key="index" :columns="columns" :rowData="rowData" 
-                        :cellType="cellType" :defaultClassName="''" :selectorData="selectorData" :rowNumber="rowNumber" />
-            </table>
-        </td>
-    </tr>
+                                <row v-for="(columns, index) in set" :key="index" :columns="columns" :rowData="rowData"
+                                     :cellType="cellType" :selectorData="selectorData" :rowNumber="rowNumber" />
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </template>
 
 <script>
-    import Util from "./helper/GridUtil";
     import Row from "./Row.vue";
 
     export default {
@@ -33,27 +40,13 @@
                 required: true
             },
 
-            defaultClassName: {
-                type: String,
-                default: "grid-row"
-            },
-
             selectorData: {
                 type: Object,
                 default: () => {}
             },
 
-            rowClassNameFn: {
-                type: [String, Function]
-            },
-
             rowNumber: {
                 type: Number
-            },
-
-            isActive: {
-                type: Boolean,
-                default: false
             }
         },
 
@@ -62,29 +55,6 @@
         },
 
         methods: {
-            handleClickRow($event) {
-                this.$emit("clickRow", {rowData: this.rowData, rowNumber: this.rowNumber, $event});
-            },
-
-            getRowClassName() {
-                let str = this.defaultClassName;
-
-                if (this.rowClassNameFn) {
-                    let extra = "";
-                    if (Util.isFunction(this.rowClassNameFn)) {
-                        extra = this.rowClassNameFn(this.rowData);
-                    } else {
-                        extra = Util.getExpressionValue(this.rowData, this.rowClassNameFn);
-                    }
-                    str = `${str} ${extra}`;
-                }
-
-                if (this.isActive) {
-                    str = `${str} active`;
-                }
-                return str;
-            },
-
             getSetColumnsClassName(index) {
                 return `column-set column-set-${index}`;
             },

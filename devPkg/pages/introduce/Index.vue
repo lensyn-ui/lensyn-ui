@@ -1,7 +1,7 @@
 <template>
     <div class="introduce-main">
-        <div class="bod">
-            <ls-grid :columns="gridColumns" :datas="gridDatas" :pageSelections="gridPageSelections" ></ls-grid>
+        <div class="box">
+            <ls-grid :columns="gridColumns" :datas="gridDatas" :isShowFooter="true" ></ls-grid>
         </div>
         <div class="box">
             <ls-pagination :isShowTotal="true"
@@ -108,7 +108,6 @@
                       :size="'big'"
                       :rule="{required: true, name: 'hello', min: 1, max: 2 }"
                       v-model="val"
-                      :autofocus="true"
                       @inputEvent="inputChange"></ls-input>
             <ls-input :placeholder="'请输入文字'"
                       :size="'normal'"
@@ -315,7 +314,7 @@
 
     @Component({
         components: {
-            "ls-grid": PaginationGrid,
+            "ls-grid": Grid,
             'ls-pagination': pagination,
             "ls-dropdown-select": DropdownSelect,
             "ls-multiple-select": MultipleSelect,
@@ -338,10 +337,10 @@
     })
     export default class HomeIndex extends Vue {
         gridColumns = [
-            { label: "ID", field: "id" },
             {
-                label: "Name",
-                field: "name",
+                label: "ID",
+                field: "id",
+                width: "300px",
                 footerSub: [
                     {
                         type: Button,
@@ -353,12 +352,15 @@
                     }
                 ]
             },
-            { label: "Email", field: "email" },
-            { label: "Address", field: "address" },
+            { label: "FirstName", field: "firstName", width: "300px" },
+            { label: "LastName", field: "lastName", width: "300px" },
+            { label: "Email", field: "email", width: "300px" },
+            { label: "Address", field: "address", width: "300px" },
             {
                 label: "Admin",
                 field: "isAdmin",
                 type: "widget",
+                width: "300px",
                 widget: {
                     type: Checkbox,
                     listenerMap: ["checkboxEvent"],
@@ -374,6 +376,7 @@
                 label: "Status",
                 field: "status",
                 type: "widget",
+                width: "300px",
                 widget: {
                     type: "label",
                     props: {
@@ -387,6 +390,7 @@
             {
                 label: "Operate",
                 field: "operate",
+                width: "300px",
                 sub: [
                     {
                         type: "icon",
@@ -419,10 +423,10 @@
             }
         ];
         gridDatas = [
-            { id: 1, name: "test-user-1", email: "test-email-1", address: "test-address-1", isAdmin: true, status: "test-status-1" },
-            { id: 2, name: "test-user-2", email: "test-email-2", address: "test-address-2", isAdmin: false, status: "test-status-2" },
-            { id: 3, name: "test-user-3", email: "test-email-3", address: "test-address-3", isAdmin: false, status: "test-status-3" },
-            { id: 4, name: "test-user-4", email: "test-email-4", address: "test-address-4", isAdmin: false, status: "test-status-4" }
+            { id: 1, firstName: "first-name-1", lastName: "last-name-1", email: "test-email-1", address: "test-address-1", isAdmin: true, status: "test-status-1" },
+            { id: 2, firstName: "first-name-2", lastName: "last-name-2", email: "test-email-2", address: "test-address-2", isAdmin: false, status: "test-status-2" },
+            { id: 3, firstName: "first-name-3", lastName: "last-name-3", email: "test-email-3", address: "test-address-3", isAdmin: false, status: "test-status-3" },
+            { id: 4, firstName: "first-name-4", lastName: "last-name-4", email: "test-email-4", address: "test-address-4", isAdmin: false, status: "test-status-4" }
         ];
         gridPageSelections = [
             { text: 300, value: 300 },
