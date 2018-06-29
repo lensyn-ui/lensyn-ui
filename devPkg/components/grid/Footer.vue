@@ -5,7 +5,12 @@
                 cellType="footerCell" :selectorData="selectedAllCheckboxData" />
         </table>
 
-        <pagination v-if="isEnablePagination" :total="totalRows" :initPage="initPage" :rows="perpageCount" @paginationEvt="onPaginationEvent" />
+        <pagination v-if="isEnablePagination"
+                    :total="totalRows"
+                    :initPage="initPage"
+                    :pageSelections="pageSelections"
+                    :rows="perpageCount"
+                    @paginationEvt="onPaginationEvent" />
     </div>
 </template>
 
@@ -43,6 +48,10 @@
             isEnablePagination: {
                 type: Boolean,
                 default: false
+            },
+
+            pageSelections: {
+                type: Array
             },
 
             totalRows: {

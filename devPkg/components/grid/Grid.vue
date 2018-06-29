@@ -13,10 +13,16 @@
             @contentHorizontalScroll="handleContentHorizontalScroll"
             @contentScrollbarWidth="handleContentScrollbarWidth" />
 
-        <grid-footer v-if="isShowFooter" :footerColumns="contentColumns" :footerData="footerData" 
-            :isColumnSetGrid="isColumnSetGrid" :selectedAllCheckboxData="selectedAllCheckboxData"
-            :totalRows="totalRows" :perpageCount="perpageCount" :isEnablePagination="isEnablePagination"
-            :initPage="initPage" />
+        <grid-footer v-if="isShowFooter"
+                     :footerColumns="contentColumns"
+                     :footerData="footerData"
+                     :isColumnSetGrid="isColumnSetGrid"
+                     :selectedAllCheckboxData="selectedAllCheckboxData"
+                     :totalRows="totalRows"
+                     :perpageCount="perpageCount"
+                     :isEnablePagination="isEnablePagination"
+                     :pageSelections="pageSelections"
+                     :initPage="initPage" />
     </div>
 </template>
 
@@ -35,7 +41,7 @@
     import Footer from "./Footer.vue";
 
     export default {
-        mixins: [IdMixin, EventBusMixin, PaginationMixin],
+        mixins: [IdMixin, EventBusMixin],
 
         props: {
             columns: {
@@ -79,6 +85,20 @@
             activeRowMode: {
                 type: String,
                 default: "single"
+            },
+
+
+            // 分页
+            pageSelections: {
+                type: Array
+            },
+            perpageCount: {
+                type: Number,
+                default: 10
+            },
+            isEnablePagination: {
+                type: Boolean,
+                default: false
             }
         },
 
@@ -110,7 +130,11 @@
                 activeRowIds: [],
                 radioSelected: {},
                 eventBus: new Vue(),
-                editorVisibleMap: {}
+                editorVisibleMap: {},
+
+                // 分页
+                totalRows: 0,
+                initPage: 1
             }
         },
 

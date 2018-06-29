@@ -7,17 +7,12 @@
     export default {
         extends: Grid,
         props: {
-            isEnablePagination: {
+            isShowFooter: {
                 type: Boolean,
                 default: true
             },
 
-            perpageCount: {
-                type: Number,
-                default: 10
-            },
-
-            isShowFooter: {
+            isEnablePagination: {
                 type: Boolean,
                 default: true
             },
@@ -48,8 +43,6 @@
 
         data() {
             return {
-                totalRows: 0,
-                initPage: 1,
                 queryCondition: {}
             }
         },

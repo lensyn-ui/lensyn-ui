@@ -1,7 +1,7 @@
 <template>
     <div class="introduce-main">
         <div class="bod">
-            <ls-grid :columns="gridColumns" :datas="gridDatas" :isShowFooter="true" ></ls-grid>
+            <ls-grid :columns="gridColumns" :datas="gridDatas" :pageSelections="gridPageSelections" ></ls-grid>
         </div>
         <div class="box">
             <ls-pagination :isShowTotal="true"
@@ -281,6 +281,7 @@
 
     import {
         Grid,
+        PaginationGrid,
         Pagination,
         DropdownSelect,
         MultipleSelect,
@@ -295,7 +296,7 @@
         Panel,
         PanelDrawerLayout,
         Tag,
-        CheckBox,
+        Checkbox,
         Radio,
         Row,
         Column
@@ -314,7 +315,7 @@
 
     @Component({
         components: {
-            "ls-grid": Grid,
+            "ls-grid": PaginationGrid,
             'ls-pagination': pagination,
             "ls-dropdown-select": DropdownSelect,
             "ls-multiple-select": MultipleSelect,
@@ -329,7 +330,7 @@
             "ls-panel": Panel,
             "ls-panel-drawer-layout": PanelDrawerLayout,
             'ls-tag': Tag,
-            'ls-checkbox': CheckBox,
+            'ls-checkbox': Checkbox,
             'ls-radio': Radio,
             "ls-row": Row,
             "ls-column": Column
@@ -359,7 +360,7 @@
                 field: "isAdmin",
                 type: "widget",
                 widget: {
-                    type: CheckBox,
+                    type: Checkbox,
                     listenerMap: ["checkboxEvent"],
                     checkboxEvent: (...arg) => {
                         console.log(arg);
@@ -405,7 +406,7 @@
                         }
                     },
                     {
-                        type: CheckBox,
+                        type: Checkbox,
                         listenerMap: {checkboxEvent: "normalEvent", hello: "helloEvent"},
                         normalEvent: (...arg) => {
                             console.log(arg);
@@ -423,6 +424,11 @@
             { id: 3, name: "test-user-3", email: "test-email-3", address: "test-address-3", isAdmin: false, status: "test-status-3" },
             { id: 4, name: "test-user-4", email: "test-email-4", address: "test-address-4", isAdmin: false, status: "test-status-4" }
         ];
+        gridPageSelections = [
+            { text: 300, value: 300 },
+            { text: 400, value: 400 }
+        ];
+
         displayLists = [
             {
                 label: 10, value: 10
