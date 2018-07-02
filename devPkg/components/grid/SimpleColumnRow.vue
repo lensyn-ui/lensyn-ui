@@ -18,6 +18,7 @@
             <row :rowData="rowData"
                  :columns="columns"
                  :cellType="cellType"
+                 :treeLabelIndent="treeLabelIndent"
                  :selectorData="selectorData"
                  :rowNumber="rowNumber"></row>
         </tbody>
@@ -57,6 +58,10 @@
 
             rowNumber: {
                 type: Number
+            },
+
+            treeLabelIndent: {
+                type: String
             }
         },
 

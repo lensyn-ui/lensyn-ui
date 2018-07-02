@@ -43,7 +43,8 @@
 
         data() {
             return {
-                queryCondition: {}
+                queryCondition: {},
+                gridType: "paginationGrid"
             }
         },
 

@@ -9,8 +9,14 @@
                                 <row v-if="cellType === 'headerCell'" class="layout-row"
                                      :columns="getLayoutColumns(set)" :rowData="{}" :cellType="cellType" />
 
-                                <row v-for="(columns, index) in set" :key="index" :columns="columns" :rowData="rowData"
-                                     :cellType="cellType" :selectorData="selectorData" :rowNumber="rowNumber" />
+                                <row v-for="(columns, index) in set"
+                                     :key="index"
+                                     :columns="columns"
+                                     :rowData="rowData"
+                                     :cellType="cellType"
+                                     :selectorData="selectorData"
+                                     :treeLabelIndent="treeLabelIndent"
+                                     :rowNumber="rowNumber" />
                             </tbody>
                         </table>
                     </div>
@@ -47,6 +53,10 @@
 
             rowNumber: {
                 type: Number
+            },
+
+            treeLabelIndent: {
+                type: String
             }
         },
 

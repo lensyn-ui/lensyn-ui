@@ -44,6 +44,11 @@
 				default: 1
 			},
 
+			initPerpage: {
+			    type: Number,
+				default: 10
+			},
+
 			pageSelections: {
 				type: Array,
 				default: () => {
@@ -98,11 +103,18 @@
 				this.currentPage = this.initPage;
 				this.refreshTotalPage();
 				this.refreshShowPages();
+			},
+
+			initPerpage() {
+			    this.perpage = this.initPerpage;
+                this.refreshTotalPage();
+                this.refreshShowPages();
 			}
 		},
 
 		created() {
 			this.currentPage = this.initPage;
+			this.perpage = this.initPerpage;
 			this.refreshTotalPage();
 			this.refreshShowPages();
 		},

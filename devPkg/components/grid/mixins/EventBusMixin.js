@@ -3,6 +3,7 @@ const PAGINATION_EVENT = "vue-grid.pagination-event";
 const EDITOR_EVENT = "vue-grid.editor-event";
 const EDITOR_VISIBLE_EVENT = "vue-grid.editor-visible-event";
 const CLICK_ROW_EVENT = "vue-grid.click-row-event";
+const CLICK_TREE_LABEL = "vue-grid.click-tree-label";
 
 export default {
     methods: {
@@ -57,6 +58,15 @@ export default {
 
         triggerClickRow(...args) {
             args.unshift(CLICK_ROW_EVENT);
+            this.eventBus.$emit.apply(this.eventBus, args);
+        },
+
+        listenClickTreeLabel(callback) {
+            this.eventBus.$on(CLICK_TREE_LABEL, callback);
+        },
+
+        triggerClickTreeLabel(...args) {
+            args.unshift(CLICK_TREE_LABEL);
             this.eventBus.$emit.apply(this.eventBus, args);
         }
     }

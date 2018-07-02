@@ -1,7 +1,12 @@
 <template>
     <tr>
-        <component :is="cellType" v-for="(column, index) in columns" :column="column" :key="index"
-                   :rowData="rowData" :checked="isColumnChecked(column)" :rowNumber="rowNumber" />
+        <component :is="cellType" v-for="(column, index) in columns"
+                   :column="column"
+                   :key="index"
+                   :rowData="rowData"
+                   :checked="isColumnChecked(column)"
+                   :treeLabelIndent="treeLabelIndent"
+                   :rowNumber="rowNumber" />
     </tr>
 </template>
 
@@ -34,6 +39,10 @@
 
             rowNumber: {
                 type: Number
+            },
+
+            treeLabelIndent: {
+                type: String
             }
         },
 

@@ -3,6 +3,7 @@
 // 表格
 import Grid from "./grid/Grid";
 import PaginationGrid from "./grid/PaginationGrid";
+import TreeGrid from "./grid/TreeGrid";
 
 // dropdown
 import Dropdown from "./Dropdown";
@@ -59,6 +60,7 @@ import Radio from './form-widgets/Radio.vue';
 export {
     Grid,
     PaginationGrid,
+    TreeGrid,
     Dropdown,
     DropdownSelect,
     MultipleSelect,

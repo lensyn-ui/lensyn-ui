@@ -1,7 +1,27 @@
 <template>
     <div class="introduce-main">
         <div class="box">
-            <ls-grid :columns="gridColumns" :datas="gridDatas" :isShowFooter="true" ></ls-grid>
+            <ls-tree-grid
+                    ref="treeGrid"
+                    :columns="gridColumns"
+                    :datas="gridDatas"
+                    :isEnableActiveRow="true"
+                    :isShowFooter="true" >
+                <!--
+                <div class="hello" slot="childTemplate" slot-scope="data">
+                    <ls-button :text="testTreeBtnLabel" @buttonEvent="handleTreeGridChildEvent"></ls-button>
+                </div>
+                -->
+            </ls-tree-grid>
+
+            <ls-pagination-grid
+                    ref="paginationGrid"
+                    :isEnableActiveRow="true"
+                    :columns="paginationGridColumns"
+                    :initPerpage="50"
+                    :datas="gridDatas"
+                    style="margin-top: 30px;" >
+            </ls-pagination-grid>
         </div>
         <div class="box">
             <ls-pagination :isShowTotal="true"
@@ -281,6 +301,7 @@
     import {
         Grid,
         PaginationGrid,
+        TreeGrid,
         Pagination,
         DropdownSelect,
         MultipleSelect,
@@ -314,7 +335,8 @@
 
     @Component({
         components: {
-            "ls-grid": Grid,
+            "ls-tree-grid": TreeGrid,
+            "ls-pagination-grid": PaginationGrid,
             'ls-pagination': pagination,
             "ls-dropdown-select": DropdownSelect,
             "ls-multiple-select": MultipleSelect,
@@ -336,11 +358,13 @@
         }
     })
     export default class HomeIndex extends Vue {
+        testTreeBtnLabel = "test";
         gridColumns = [
             {
                 label: "ID",
                 field: "id",
                 width: "300px",
+                type: "treeLabel",
                 footerSub: [
                     {
                         type: Button,
@@ -352,8 +376,26 @@
                     }
                 ]
             },
-            { label: "FirstName", field: "firstName", width: "300px" },
-            { label: "LastName", field: "lastName", width: "300px" },
+            {
+                label: "checkbox",
+                field: "checkboxId",
+                width: "300px",
+                type: "checkbox"
+            },
+            {
+                label: "radio",
+                field: "radioId",
+                width: "300px",
+                type: "radio"
+            },
+            {
+                label: "Name",
+                field: "name",
+                children: [
+                    { label: "FirstName", field: "firstName", width: "300px" },
+                    { label: "LastName", field: "lastName", width: "300px" }
+                ]
+            },
             { label: "Email", field: "email", width: "300px" },
             { label: "Address", field: "address", width: "300px" },
             {
@@ -394,7 +436,91 @@
                 sub: [
                     {
                         type: "icon",
-                        iconClass: "demo-font"
+                        props: {
+                            iconClass: "demo-font"
+                        }
+                    },
+                    {
+                        type: "label",
+                        props: {
+                            status: "primary"
+                        },
+                        onClick: (...arg) => {
+                            console.log(arg);
+                        },
+                        visible: "#{id} !== 1",
+                        propsRowDataMap: {
+                            data: "status"
+                        }
+                    },
+                    {
+                        type: Checkbox,
+                        listenerMap: {checkboxEvent: "normalEvent", hello: "helloEvent"},
+                        normalEvent: (...arg) => {
+                            console.log(arg);
+                        },
+                        helloEvent: (...arg) => {
+                            console.log(arg);
+                        }
+                    }
+                ]
+            }
+        ];
+        paginationGridColumns = [
+            {
+                label: "ID",
+                field: "id",
+                type: "checkbox",
+                width: "300px"
+            },
+            {
+                label: "Name",
+                field: "name",
+                children: [
+                    { label: "FirstName", field: "firstName", width: "300px" },
+                    { label: "LastName", field: "lastName", width: "300px" }
+                ]
+            },
+            { label: "Email", field: "email", width: "300px" },
+            { label: "Address", field: "address", width: "300px" },
+            {
+                label: "Admin",
+                field: "isAdmin",
+                type: "widget",
+                widget: {
+                    type: Checkbox,
+                    listenerMap: ["checkboxEvent"],
+                    checkboxEvent: (...arg) => {
+                        console.log(arg);
+                    },
+                    propsRowDataMap: {
+                        checked: "isAdmin"
+                    }
+                }
+            },
+            {
+                label: "Status",
+                field: "status",
+                type: "widget",
+                widget: {
+                    type: "label",
+                    props: {
+                        status: "primary"
+                    },
+                    onClick: (...arg) => {
+                        console.log(arg);
+                    }
+                }
+            },
+            {
+                label: "Operate",
+                field: "operate",
+                sub: [
+                    {
+                        type: "icon",
+                        props: {
+                            iconClass: "demo-font"
+                        }
                     },
                     {
                         type: "label",
@@ -423,10 +549,87 @@
             }
         ];
         gridDatas = [
-            { id: 1, firstName: "first-name-1", lastName: "last-name-1", email: "test-email-1", address: "test-address-1", isAdmin: true, status: "test-status-1" },
-            { id: 2, firstName: "first-name-2", lastName: "last-name-2", email: "test-email-2", address: "test-address-2", isAdmin: false, status: "test-status-2" },
-            { id: 3, firstName: "first-name-3", lastName: "last-name-3", email: "test-email-3", address: "test-address-3", isAdmin: false, status: "test-status-3" },
-            { id: 4, firstName: "first-name-4", lastName: "last-name-4", email: "test-email-4", address: "test-address-4", isAdmin: false, status: "test-status-4" }
+            {
+                id: 1,
+                checkboxId: 1,
+                radioId: 1,
+                firstName: "first-name-1",
+                lastName: "last-name-1",
+                email: "test-email-1",
+                address: "test-address-1",
+                isAdmin: true,
+                status: "test-status-1",
+                children: [
+                    {
+                        id: 11,
+                        checkboxId: 11,
+                        radioId: 11,
+                        firstName: "first-name-1-1",
+                        lastName: "last-name-1-1",
+                        email: "test-email-1-1",
+                        address: "test-address-1-1",
+                        isAdmin: true,
+                        status: "test-status-1-1",
+                        children: [
+                            {
+
+                                id: 111,
+                                checkboxId: 111,
+                                radioId: 111,
+                                firstName: "first-name-1-1-1",
+                                lastName: "last-name-1-1-1",
+                                email: "test-email-1-1-1",
+                                address: "test-address--1-1",
+                                isAdmin: true,
+                                status: "test-status-1-1-1",
+                            }
+                        ]
+                    },
+                    {
+                        id: 12,
+                        checkboxId: 12,
+                        radioId: 12,
+                        firstName: "first-name-1-2",
+                        lastName: "last-name-1-2",
+                        email: "test-email-1-2",
+                        address: "test-address-1-2",
+                        isAdmin: true,
+                        status: "test-status-1-2"
+                    }
+                ]
+            },
+            {
+                id: 2,
+                checkboxId: 2,
+                radioId: 2,
+                firstName: "first-name-2",
+                lastName: "last-name-2",
+                email: "test-email-2",
+                address: "test-address-2",
+                isAdmin: false,
+                status: "test-status-2"
+            },
+            {
+                id: 3,
+                checkboxId: 3,
+                radioId: 3,
+                firstName: "first-name-3",
+                lastName: "last-name-3",
+                email: "test-email-3",
+                address: "test-address-3",
+                isAdmin: false,
+                status: "test-status-3"
+            },
+            {
+                id: 4,
+                checkboxId: 4,
+                firstName: "first-name-4",
+                lastName: "last-name-4",
+                email: "test-email-4",
+                address: "test-address-4",
+                isAdmin: false,
+                status: "test-status-4"
+            }
         ];
         gridPageSelections = [
             { text: 300, value: 300 },
@@ -526,6 +729,13 @@
             {label: '男', checked: true, name: 'sex', value: 0},
             {label: '女', checked: false, name: 'sex', value: 1},
         ];
+
+        handleTreeGridChildEvent() {
+        }
+
+        mounted() {
+            window.hello = this;
+        }
 
         /* 分页返回对象 */
         pageChange(val) {

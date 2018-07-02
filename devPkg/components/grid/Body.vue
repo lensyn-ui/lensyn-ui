@@ -2,11 +2,36 @@
     <div class="grid-body">
         <div class="grid-content-wrapper" ref="contentWrapper">
             <div ref="content" class="grid-content" @scroll="handleContentScroll">
-                <div v-for="(data, index) in datas" :key="getId(data)" :class="getRowClassName(data)">
-                    <component :is="rowConstructor" :rowData="data" :columns="columns"
-                               cellType="bodyCell" :selectorData="getRowDataSelected(data)"
-                               :rowNumber="index + 1" @clickRow="handleClickRow"/>
-                </div>
+                <template v-if="isTreeGrid">
+                    <tree-row v-for="(data, index) in datas" :key="getItemId(data)"
+                              :rowData="data"
+                              :columns="columns"
+                              :selectorData="getRowDataSelected(data)"
+                              :rowNumber="index + 1"
+                              :isColumnSetGrid="isColumnSetGrid"
+                              :treeChildProperty="treeChildProperty"
+                              :isParentRow="isParentRow"
+                              :treeIndent="treeIndent"
+                              :treeChildTemplate="treeChildTemplate"
+                              @clickTreeRow="handleClickTreeRow">
+                    </tree-row>
+
+                </template>
+                <template v-else>
+                    <div v-for="(data, index) in datas"
+                         :class="getRowClassName(data)"
+                         :key="getItemId(data)"
+                         @click="handleClickRow(data)">
+
+                        <body-row :rowData="data"
+                                  :columns="columns"
+                                  :selectorData="getRowDataSelected(data)"
+                                  :rowNumber="index + 1"
+                                  :isColumnSetGrid="isColumnSetGrid">
+                        </body-row>
+                    </div>
+
+                </template>
             </div>
             <div class="notice-msg" v-show="haveNoticeMsg" > {{noticeMsgContent}} </div>
         </div>
@@ -21,14 +46,13 @@
 </template>
 
 <script>
-    import SimpleColumnRow from "./SimpleColumnRow";
-    import ColumnSetRow from "./ColumnSetRow.vue";
+    import BodyRow from "./BodyRow";
+    import TreeRow from "./TreeRow";
     import IdMixin from "./mixins/IdMixin";
     import EventBusMixin from "./mixins/EventBusMixin";
 
     export default {
-        mixins: [IdMixin, EventBusMixin],
-        inject: ["eventBus"],
+        mixins: [EventBusMixin],
 
         props: {
             datas: {
@@ -73,6 +97,26 @@
             activeRowIds: {
                 type: Array,
                 default: () => []
+            },
+
+            gridType: {
+                type: String
+            },
+
+            treeChildProperty: {
+                type: String
+            },
+
+            isParentRow: {
+                type: [String, Function]
+            },
+
+            treeIndent: {
+                type: Number
+            },
+
+            treeChildTemplate: {
+                type: Function
             }
         },
 
@@ -87,15 +131,11 @@
         },
 
         components: {
-            "simple-column-row": SimpleColumnRow,
-            "column-set-row": ColumnSetRow
+            "tree-row": TreeRow,
+            "body-row": BodyRow
         },
 
-        computed: {
-            rowConstructor() {
-                return this.isColumnSetGrid ? "column-set-row" : "simple-column-row";
-            }
-        },
+        inject: ["eventBus", "isRowActived", "getItemId"],
 
         watch: {
             datas() {
@@ -107,6 +147,12 @@
 
             isShowNoticeMsg() {
                 this.refreshNoticeMsg();
+            }
+        },
+
+        computed: {
+            isTreeGrid() {
+                return this.gridType === "treeGrid";
             }
         },
 
@@ -224,8 +270,12 @@
                 }
             },
 
-            handleClickRow(eventData) {
-                this.triggerClickRow(eventData);
+            handleClickTreeRow(event) {
+                this.handleClickRow(event.rowData);
+            },
+
+            handleClickRow(rowData) {
+                this.triggerClickRow({rowData});
             },
 
             getScrollbarClass(index) {
@@ -240,7 +290,7 @@
             },
 
             getRowDataCheckboxSelected(rowData) {
-                let id = this.getId(rowData),
+                let id = this.getItemId(rowData),
                     result = {};
 
                 for (let key in this.checkboxSelected) {
@@ -257,7 +307,7 @@
             },
 
             getRowDataRadioSelected(rowData) {
-                let id = this.getId(rowData),
+                let id = this.getItemId(rowData),
                     result = {};
 
                 for (let key in this.radioSelected) {
@@ -269,12 +319,6 @@
                 }
 
                 return result;
-            },
-
-            isRowActived(rowData) {
-                let id = this.getId(rowData);
-
-                return this.activeRowIds.indexOf(id) !== -1;
             }
         }
     };

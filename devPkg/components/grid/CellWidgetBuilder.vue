@@ -80,8 +80,7 @@
                 return createElement(Icon, {
                     "class": this.extraClass,
                     props: {
-                        iconClass: widget.iconClass,
-                        disabled: this.isWidgetDisabled(widget)
+                        ...this.getCustomWidgetProps(widget)
                     },
                     directives: widget.directives,
                     on: listener
@@ -94,9 +93,7 @@
                 return createElement(Link, {
                     "class": this.extraClass,
                     props: {
-                        label: widget.label,
-                        href: widget.href,
-                        disabled: this.isWidgetDisabled(widget)
+                        ...this.getCustomWidgetProps(widget)
                     },
                     directives: widget.directives,
                     on: listener

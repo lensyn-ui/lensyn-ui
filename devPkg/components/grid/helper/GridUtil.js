@@ -9,6 +9,13 @@ const Util  = {
     isContainVariable(property) {
         return this.VARIABLE_PLACEHOLDER_REG.test(property);
     },
+
+    getFunctionOrExpressionValue(obj, expression) {
+        if (this.isFunction(expression)) {
+            return expression(obj);
+        }
+        return this.getExpressionValue(obj, expression);
+    },
     
     /**
      * 获取表达式的值

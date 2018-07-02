@@ -2,6 +2,7 @@
     import SubCellContainer from "./SubCellContainer.vue";
     import SelectorContainer from "./SelectorContainer.vue";
     import EditorContainer from "./EditorContainer.vue";
+    import TreeLabelContainer from "./TreeLabelContainer.vue";
     import CellWidgetBuilder from "./CellWidgetBuilder.vue";
 
     import CellStatusMixin from "./mixins/CellStatusMixin";
@@ -22,9 +23,13 @@
 
             rowNumber: {
                 type: Number
+            },
+
+            treeLabelIndent: {
+                type: String
             }
         },
-        inject: ["eventBus", "grid"],
+        inject: ["eventBus", "grid", "isRowColumnSelected"],
 
         render(createElement) {
             return createElement("td", {
@@ -86,6 +91,10 @@
                     return this.renderSelectorCell(createElement);
                 }
 
+                if (column.type === "treeLabel") {
+                    return this.renderTreeLabel(createElement);
+                }
+
                 if (column.type === "widget") {
                     return this.renderWidgetCell(createElement);
                 }
@@ -120,12 +129,25 @@
                     props: {
                         rowData: this.rowData,
                         column: this.column,
-                        checked: this.checked,
+                        checked: this.isRowColumnSelected(this.rowData, this.column),
                         disabled: !this.isEnableSelect()
                     },
 
                     on: {
                         selectEvt: (event) => this.handleSelectedEvent(event)
+                    }
+                });
+            },
+
+            renderTreeLabel(createElement) {
+                return createElement(TreeLabelContainer, {
+                    props: {
+                        rowData: this.rowData,
+                        column: this.column,
+                        treeLabelIndent: this.treeLabelIndent
+                    },
+                    on: {
+                        clickTreeLabel: (event) => this.handleTreeLabelEvent(event)
                     }
                 });
             },
@@ -165,6 +187,10 @@
                     return formatValue;
                 }
                 return this.rowData[this.column.field];
+            },
+
+            handleTreeLabelEvent(event) {
+                this.triggerClickTreeLabel({...event, rowData: this.rowData});
             },
 
             handleSelectedEvent(event) {

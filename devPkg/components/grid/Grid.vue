@@ -18,6 +18,11 @@
                    :rowClassNameFn="rowClassNameFn"
                    :isShowNoticeMsg="isShowNoticeMsg"
                    :noticeMsg="noticeMsg"
+                   :gridType="gridType"
+                   :treeChildProperty="treeChildProperty"
+                   :isParentRow="isParentRow"
+                   :treeIndent="treeIndent"
+                   :treeChildTemplate="treeChildTemplate"
                    @contentHorizontalScroll="handleContentHorizontalScroll"
                    @contentScrollbarWidth="handleContentScrollbarWidth" />
 
@@ -28,6 +33,7 @@
                      :selectedAllCheckboxData="selectedAllCheckboxData"
                      :totalRows="totalRows"
                      :perpageCount="perpageCount"
+                     :initPerpage="initPerpage"
                      :isEnablePagination="isEnablePagination"
                      :pageSelections="pageSelections"
                      :initPage="initPage" />
@@ -106,6 +112,25 @@
             isEnablePagination: {
                 type: Boolean,
                 default: false
+            },
+            initPerpage: {
+                type: Number
+            },
+
+            // 树
+            treeChildProperty: {
+                type: String,
+                default: "children"
+            },
+
+            isParentRow: {
+                type: [String, Function],
+                default: "typeof #{children} !== 'undefined'"
+            },
+
+            treeIndent: {
+                type: Number,
+                default: 10
             }
         },
 
@@ -120,7 +145,9 @@
                 eventBus: this.eventBus,
                 grid: this,
                 getItemId: (item) => this.getId(item),
-                editorVisibleMap: this.editorVisibleMap
+                editorVisibleMap: this.editorVisibleMap,
+                isRowActived: (rowData) => this.isRowActived(rowData),
+                isRowColumnSelected: (rowData, column) => this.isRowColumnSelected(rowData, column)
             };
         },
 
@@ -138,6 +165,7 @@
                 radioSelected: {},
                 eventBus: new Vue(),
                 editorVisibleMap: {},
+                gridType: "grid",
 
                 // 分页
                 totalRows: 0,
@@ -164,6 +192,10 @@
                 }
 
                 return result;
+            },
+
+            treeChildTemplate() {
+                return this.$scopedSlots.childTemplate;
             }
         },
 
@@ -252,6 +284,12 @@
                 this.activeRowIds.splice(0, this.activeRowIds.length);
             },
 
+            isRowActived(rowData) {
+                let id = this.getId(rowData);
+
+                return this.activeRowIds.indexOf(id) !== -1;
+            },
+
             /**
              * 设置某些列被选中
              * @param {string} field - 对应的字段
@@ -323,6 +361,28 @@
             },
 
             /**
+             * 判断一行数据是否被选中
+             * @param {object} rowData
+             * @param {object} column
+             */
+            isRowColumnSelected(rowData, column) {
+                let type = column.type,
+                    id = this.getId(rowData);
+
+                if (type === "checkbox") {
+                    if (this.checkboxSelected[column.field]) {
+                        return this.checkboxSelected[column.field].indexOf(id) !== -1;
+                    }
+                    return false;
+                }
+
+                if (type === "radio") {
+                    return this.radioSelected[column.field] === id;
+                }
+                return false;
+            },
+
+            /**
              * 根据 field 查找列
              * @param {string} field
              */
@@ -358,6 +418,10 @@
                 if (this.isEnablePagination) {
                     this.listenPagination(this.handlePaginationEvent);
                 }
+
+                if (this.gridType === "treeGrid") {
+                    this.listenClickTreeLabel(this.handleClickTreeLabelEvent);
+                }
                 this.listenEditor(this.handleEditorEvent);
                 this.listenEditorVisible(this.handleEditorVisibleEvent);
                 this.listenClickRow(this.handleClickRow);
@@ -390,7 +454,6 @@
             },
 
             handleCheckboxSelectAllEvent({field, checked}) {
-                window.hello = this;
                 if (Util.isUndefined(this.checkboxSelected[field])) {
                     this.$set(this.checkboxSelected, field, []);
                 }
