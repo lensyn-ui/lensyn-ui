@@ -3,11 +3,12 @@ import loadingVue from './Loading.vue'
 let Loading = {
     install(Vue) {
         let loadingCons = Vue.extend(loadingVue),
-            loaded = null,
-            container = null;
+          loaded = null,
+          container = null;
 
         Vue.prototype.$lensyn.loading = {
             show: function (describe, fixed, bgColor) {
+                this.hide();
                 if (container === null) {
                     container = document.createElement("div");
                     document.body.appendChild(container);
