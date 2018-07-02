@@ -313,8 +313,8 @@
             /**
              * 将当前数据的默认顺序保存下来
              */
-            cacheDefaultDataOrder() {
-                this.defaultDataOrder = this.tableDatas.map((item) => this.getId(item));
+            cacheDefaultDataOrder(datas) {
+                this.defaultDataOrder = datas.map((item) => this.getId(item));
             },
 
             /**
@@ -322,7 +322,7 @@
              */
             sortData() {
                 if (this.defaultDataOrder === null) {
-                    this.cacheDefaultDataOrder();
+                    this.cacheDefaultDataOrder(this.tableDatas);
                 }
 
                 if (this.sortFn) {

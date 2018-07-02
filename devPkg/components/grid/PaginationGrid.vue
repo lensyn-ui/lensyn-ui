@@ -83,7 +83,7 @@
             sortData() {
                 if (!this.store) {
                     if (this.defaultDataOrder === null) {
-                        this.cacheDefaultDataOrder();
+                        this.cacheDefaultDataOrder(this.datas);
                     }
                 }
                 if (this.gridSortMode === "single") {
