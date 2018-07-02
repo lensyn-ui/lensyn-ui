@@ -365,6 +365,8 @@
                 field: "id",
                 width: "300px",
                 type: "treeLabel",
+                sortType: "number",
+                sort: true,
                 footerSub: [
                     {
                         type: Button,
@@ -386,13 +388,19 @@
                 label: "radio",
                 field: "radioId",
                 width: "300px",
-                type: "radio"
+                type: "radio",
+                sort: true
             },
             {
                 label: "Name",
                 field: "name",
                 children: [
-                    { label: "FirstName", field: "firstName", width: "300px" },
+                    {
+                        label: "FirstName",
+                        field: "firstName",
+                        width: "300px",
+                        sort: true
+                    },
                     { label: "LastName", field: "lastName", width: "300px" }
                 ]
             },
@@ -471,7 +479,8 @@
                 label: "ID",
                 field: "id",
                 type: "checkbox",
-                width: "300px"
+                width: "300px",
+                sort: true
             },
             {
                 label: "Name",
@@ -610,6 +619,16 @@
                 status: "test-status-2"
             },
             {
+                id: 4,
+                checkboxId: 4,
+                firstName: "first-name-4",
+                lastName: "last-name-4",
+                email: "test-email-4",
+                address: "test-address-4",
+                isAdmin: false,
+                status: "test-status-4"
+            },
+            {
                 id: 3,
                 checkboxId: 3,
                 radioId: 3,
@@ -619,16 +638,6 @@
                 address: "test-address-3",
                 isAdmin: false,
                 status: "test-status-3"
-            },
-            {
-                id: 4,
-                checkboxId: 4,
-                firstName: "first-name-4",
-                lastName: "last-name-4",
-                email: "test-email-4",
-                address: "test-address-4",
-                isAdmin: false,
-                status: "test-status-4"
             }
         ];
         gridPageSelections = [

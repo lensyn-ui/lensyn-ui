@@ -98,6 +98,12 @@
       .header-cell {
         height: 0;
       }
+
+      .sort-cell {
+        .sort-icon {
+          display: none;
+        }
+      }
     }
   }
 
@@ -453,6 +459,35 @@
   .vue-grid-icon {
     &.disabled {
       cursor: not-allowed;
+    }
+  }
+
+  .sort-cell {
+    cursor: pointer;
+    .sort-icon {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      margin-left: 5px;
+      vertical-align: middle;
+      background-image: url("../../images/components/sort-default.png");
+      background-repeat: no-repeat;
+      background-size: 100%;
+      background-position: center;
+    }
+
+    &.asc {
+      .sort-icon {
+        background-image: url("../../images/components/sort.png");
+      }
+    }
+
+    &.desc {
+      .sort-icon {
+        -ms-transform: rotate(180deg);
+        transform: rotate(180deg);
+        background-image: url("../../images/components/sort.png");
+      }
     }
   }
 

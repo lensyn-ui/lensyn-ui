@@ -44,6 +44,7 @@
     import Vue from "vue";
     
     import Util from "./helper/GridUtil";
+    import SortUtil from "./helper/GridSort";
     import ColumnStructure from "./helper/ColumnStructure";
 
     import IdMixin from "./mixins/IdMixin";
@@ -131,6 +132,15 @@
             treeIndent: {
                 type: Number,
                 default: 10
+            },
+
+            gridSortMode: {
+                type: String,
+                default: "single"
+            },
+
+            sortFn: {
+                type: Function
             }
         },
 
@@ -147,7 +157,8 @@
                 getItemId: (item) => this.getId(item),
                 editorVisibleMap: this.editorVisibleMap,
                 isRowActived: (rowData) => this.isRowActived(rowData),
-                isRowColumnSelected: (rowData, column) => this.isRowColumnSelected(rowData, column)
+                isRowColumnSelected: (rowData, column) => this.isRowColumnSelected(rowData, column),
+                getColumnSortOrder: (field) => this.getColumnSortOrder(field)
             };
         },
 
@@ -165,6 +176,8 @@
                 radioSelected: {},
                 eventBus: new Vue(),
                 editorVisibleMap: {},
+                sortFieldMap: {},
+                defaultDataOrder: null,
                 gridType: "grid",
 
                 // 分页
@@ -265,6 +278,13 @@
                 return this.tableDatas.filter((item) => this.activeRowIds.indexOf(this.getId(item)) !== -1);
             },
 
+            getColumnSortOrder(field) {
+                if (this.sortFieldMap[field]) {
+                    return this.sortFieldMap[field].order;
+                }
+                return null;
+            },
+
             setRowBeActive(data) {
                 let id = this.getId(data),
                     index = this.activeRowIds.indexOf(id);
@@ -288,6 +308,48 @@
                 let id = this.getId(rowData);
 
                 return this.activeRowIds.indexOf(id) !== -1;
+            },
+
+            /**
+             * 将当前数据的默认顺序保存下来
+             */
+            cacheDefaultDataOrder() {
+                this.defaultDataOrder = this.tableDatas.map((item) => this.getId(item));
+            },
+
+            /**
+             * 对数据进行排序
+             */
+            sortData() {
+                if (this.defaultDataOrder === null) {
+                    this.cacheDefaultDataOrder();
+                }
+
+                if (this.sortFn) {
+                    this.tableDatas = this.sortFn(this.tableDatas, this.sortFieldMap);
+                    return;
+                }
+
+                if (this.gridSortMode === "single") {
+                    let condition = null;
+
+                    for (let key in this.sortFieldMap) {
+                        if (this.sortFieldMap.hasOwnProperty(key)) {
+                            condition = this.sortFieldMap[key];
+                            break;
+                        }
+                    }
+
+                    if (condition) {
+                        if (condition.order === "default") {
+                            this.tableDatas = SortUtil.sortByFieldValue(this.tableDatas, (data) => this.getId(data), this.defaultDataOrder);
+                        } else {
+                            this.tableDatas = SortUtil.sort(this.tableDatas, condition);
+                        }
+                    }
+                } else {
+                    throw new Error("grid is not support multiple sort");
+                }
             },
 
             /**
@@ -425,6 +487,7 @@
                 this.listenEditor(this.handleEditorEvent);
                 this.listenEditorVisible(this.handleEditorVisibleEvent);
                 this.listenClickRow(this.handleClickRow);
+                this.listenClickSort(this.handleClickSort);
             },
 
             handleSelectorEvent(event) {
@@ -515,6 +578,24 @@
 
             handleActiveRow(rowData) {
                 this.setRowBeActive(rowData);
+            },
+
+            handleClickSort(event) {
+                let column = event.column,
+                    sortInfo = {
+                        field: column.field,
+                        sortType: event.sortType,
+                        order: event.order,
+                        priority: event.sortPriority,
+                        oldOrder: event.oldOrder
+                    };
+
+                if (this.gridSortMode === "multiple") {
+                    this.$set(this.sortFieldMap, column.field, sortInfo);
+                } else {
+                    this.$set(this, "sortFieldMap", {[column.field]: sortInfo});
+                }
+                this.sortData();
             },
 
             emitEvent(action, data) {

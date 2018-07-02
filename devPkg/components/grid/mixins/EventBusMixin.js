@@ -4,6 +4,7 @@ const EDITOR_EVENT = "vue-grid.editor-event";
 const EDITOR_VISIBLE_EVENT = "vue-grid.editor-visible-event";
 const CLICK_ROW_EVENT = "vue-grid.click-row-event";
 const CLICK_TREE_LABEL = "vue-grid.click-tree-label";
+const CLICK_SORT = "vue-grid.click-sort";
 
 export default {
     methods: {
@@ -67,6 +68,15 @@ export default {
 
         triggerClickTreeLabel(...args) {
             args.unshift(CLICK_TREE_LABEL);
+            this.eventBus.$emit.apply(this.eventBus, args);
+        },
+
+        listenClickSort(callback) {
+            this.eventBus.$on(CLICK_SORT, callback);
+        },
+
+        triggerClickSort(...args) {
+            args.unshift(CLICK_SORT);
             this.eventBus.$emit.apply(this.eventBus, args);
         }
     }

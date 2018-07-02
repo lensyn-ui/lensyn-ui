@@ -26,17 +26,51 @@
             }
         },
 
-        inject: ["eventBus"],
+        inject: ["eventBus", "getColumnSortOrder"],
+
+        data() {
+            return {
+                orderMode: {
+                    asc: ["default", "asc", "desc"],
+                    desc: ["default", "desc", "asc"]
+                }
+            }
+        },
+
+        computed: {
+            isEnableSort() {
+                return this.column.sort;
+            },
+
+            cellModifier() {
+                let result = ["header-cell", `cell-${this.column.field}`];
+
+                if (this.isEnableSort) {
+                    result.push("sort-cell");
+
+                    let order = this.getColumnSortOrder(this.column.field);
+
+                    if (order !== null) {
+                        result.push(order);
+                    }
+                }
+
+                return result.join(" ");
+            }
+        },
 
         render(createElement) {
             return createElement("th", {
                 attrs: {
-                    "class": `header-cell cell-${this.column.field}`,
+                    "class": this.cellModifier,
                     colspan: this.column.colSpan,
                     rowspan: this.column.rowSpan
                 },
                 style: {
                     width: this.getColumnWidth(this.column)
+                },
+                on: {
+                    click: ($event) => this.onClickHeaderCell($event)
                 }
             }, [this.getCellContent(createElement)]);
         },
@@ -47,13 +81,29 @@
 
                 if (column.type === "checkbox" && column.showInHeader) {
                     return this.renderSelectorCell(createElement);
-                } else if (column.renderHeaderCell) {
+                }
+
+                if (column.renderHeaderCell) {
                     return column.renderHeaderCell(createElement, this.rowData, column);
-                } else if (column.headerSub) {
+                }
+
+                if (column.headerSub) {
                     return this.renderSubCell(createElement);
                 }
 
+                if (column.sort) {
+                    return this.renderSortCell(createElement);
+                }
+
                 return this.rowData[column.field];
+            },
+
+            renderSortCell(createElement) {
+                let icon = createElement("i", {
+                    "class": "sort-icon"
+                });
+
+                return [this.rowData[this.column.field], icon];
             },
 
             renderSelectorCell(createElement) {
@@ -94,6 +144,47 @@
                 if (widget.onClick) {
                     widget.onClick(this.rowData, this.column, event);
                 }
+            },
+
+            onClickHeaderCell($event) {
+                if (this.isEnableSort) {
+                    this.handleSortEvent($event);
+                }
+            },
+
+            getNextSortOrder(currentOrder) {
+                let mode = this.column.orderMode ? this.orderMode[this.column.orderMode] : this.orderMode.asc,
+                    index = mode.indexOf(currentOrder);
+
+                if (currentOrder === null) {
+                    return mode[1];
+                }
+
+                if (index === mode.length - 1) {
+                    return mode[0];
+                }
+                return mode[index + 1];
+            },
+
+            handleSortEvent($event) {
+                let column = this.column,
+                    sortField = column.sortField ? column.sortField : column.field,
+                    sortType = column.sortType,
+                    sortPriority = column.sortPriority,
+                    currentOrder = this.getColumnSortOrder(column.field),
+                    nextOrder = this.getNextSortOrder(currentOrder);
+
+                this.triggerClickSort({
+                    action: "clickSort",
+                    $event,
+                    sortField,
+                    sortType,
+                    sortPriority,
+                    order: nextOrder,
+                    oldOrder: currentOrder,
+                    rowData: this.rowData,
+                    column: this.column
+                });
             }
         }
     };

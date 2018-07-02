@@ -3,6 +3,7 @@
 *************************************************/
 <script>
     import Grid from "./Grid";
+    import SortUtil from "./helper/GridSort";
 
     export default {
         extends: Grid,
@@ -79,6 +80,29 @@
                 }
             },
 
+            sortData() {
+                if (!this.store) {
+                    if (this.defaultDataOrder === null) {
+                        this.cacheDefaultDataOrder();
+                    }
+                }
+                if (this.gridSortMode === "single") {
+                    let condition = null;
+
+                    for (let key in this.sortFieldMap) {
+                        if (this.sortFieldMap.hasOwnProperty(key)) {
+                            condition = this.sortFieldMap[key];
+                            break;
+                        }
+                    }
+
+                    if (condition !== null) {
+                        this.updateGrid({sort: condition});
+                    }
+                } else {
+                    this.updateGrid({sort: this.sortFieldMap});
+                }
+            },
 
             getPaginationCondition(data) {
                 let result = {},
@@ -133,10 +157,16 @@
             },
 
             updateGridDataByStore(condition) {
+                let copyCondition = JSON.parse(JSON.stringify(condition));
+
                 this.isShowNoticeMsg = false;
                 this.noticeMsg = "";
 
-                this.store.query(condition, (data) => {
+                if (copyCondition.sort && copyCondition.sort.order === "default") {
+                    delete copyCondition.sort;
+                }
+
+                this.store.query(copyCondition, (data) => {
                     let result = this.formatQueryData(data);
 
                     this.tableDatas = result.datas;
@@ -150,10 +180,23 @@
 
             updateGridDataByLocal(condition) {
                 let start = (condition.page - 1) * condition.rows,
-                    end = condition.page * condition.rows;
+                    end = condition.page * condition.rows,
+                    datas = this.datas,
+                    sort = condition.sort;
 
-                this.totalRows = this.datas.length;
-                this.tableDatas = this.datas.slice(start, end);
+                if (sort) {
+                    if (this.sortFn) {
+                        datas = this.sortFn(datas, condition.sort);
+                    } else {
+                        if (sort.order === "default") {
+                            datas = SortUtil.sortByFieldValue(datas, (item) => this.getId(item), this.defaultDataOrder);
+                        } else {
+                            datas = SortUtil.sort(datas, sort);
+                        }
+                    }
+                }
+                this.totalRows = datas.length;
+                this.tableDatas = datas.slice(start, end);
             },
 
             getQueryCondition() {
