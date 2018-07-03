@@ -13,6 +13,7 @@
                               :isParentRow="isParentRow"
                               :treeIndent="treeIndent"
                               :treeChildTemplate="treeChildTemplate"
+                              :isAlwaysExpand="isAlwaysExpand"
                               @clickTreeRow="handleClickTreeRow">
                     </tree-row>
 
@@ -117,6 +118,10 @@
 
             treeChildTemplate: {
                 type: Function
+            },
+
+            isAlwaysExpand: {
+                type: Boolean
             }
         },
 

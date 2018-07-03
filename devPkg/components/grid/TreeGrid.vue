@@ -126,6 +126,9 @@
             },
 
             isParentRowData(rowData) {
+                if (this.isAlwaysExpand) {
+                    return true;
+                }
                 return Util.getFunctionOrExpressionValue(rowData, this.isParentRow);
             }
         }

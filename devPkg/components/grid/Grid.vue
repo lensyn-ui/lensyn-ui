@@ -22,6 +22,7 @@
                    :treeChildProperty="treeChildProperty"
                    :isParentRow="isParentRow"
                    :treeIndent="treeIndent"
+                   :isAlwaysExpand="isAlwaysExpand"
                    :treeChildTemplate="treeChildTemplate"
                    @contentHorizontalScroll="handleContentHorizontalScroll"
                    @contentScrollbarWidth="handleContentScrollbarWidth" />
@@ -134,6 +135,12 @@
                 default: 10
             },
 
+            isAlwaysExpand: {
+                type: Boolean,
+                default: false
+            },
+
+            // 排序
             gridSortMode: {
                 type: String,
                 default: "single"

@@ -6,12 +6,12 @@
                     :columns="gridColumns"
                     :datas="gridDatas"
                     :isEnableActiveRow="true"
+                    :isAlwaysExpand="true"
                     :isShowFooter="true" >
-                <!--
                 <div class="hello" slot="childTemplate" slot-scope="data">
                     <ls-button :text="testTreeBtnLabel" @buttonEvent="handleTreeGridChildEvent"></ls-button>
+                    <ls-button :text="data.parentRowData ? data.parentRowData.firstName : 'null'" @buttonEvent="handleTreeGridChildEvent"></ls-button>
                 </div>
-                -->
             </ls-tree-grid>
 
             <ls-pagination-grid

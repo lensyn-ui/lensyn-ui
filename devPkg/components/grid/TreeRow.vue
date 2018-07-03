@@ -52,6 +52,16 @@
 
             treeChildTemplate: {
                 type: Function
+            },
+
+            isAlwaysExpand: {
+                type: Boolean,
+                default: false
+            },
+
+            parentRowData: {
+                type: Object,
+                default: null
             }
         },
 
@@ -95,15 +105,11 @@
 
         methods: {
             renderTreeRow(createElement) {
-                if (this.isParent) {
+                if (this.isAlwaysExpand || this.isParent) {
                     return this.renderParentRow(createElement);
                 } else {
                     if (this.treeChildTemplate) {
-                        let child = this.treeChildTemplate({
-                            rowData: this.rowData,
-                            treeLabelIndent: this.treeLabelIndent,
-                            treeIndent: this.treeIndent
-                        });
+                        let child = this.renderChildTemplateRow();
 
                         return [this.renderGridRow(createElement, [child])];
                     }
@@ -114,7 +120,11 @@
             renderParentRow(createElement) {
                 let child = [this.renderDefaultRow(createElement)];
 
-                child = child.concat(this.renderTreeChildRow(createElement));
+                if (this.isParent) {
+                    child = child.concat(this.renderTreeChildRow(createElement));
+                } else {
+                    child = child.concat(this.renderAlwaysChildTemplateRow(createElement));
+                }
 
                 return child;
             },
@@ -130,6 +140,7 @@
                     row = createElement("tree-row", {
                         props: {
                             rowData: item,
+                            parentRowData: this.rowData,
                             columns: this.columns,
                             selectorData: this.selectorData,
                             rowNumber: i,
@@ -138,6 +149,7 @@
                             treeLevel: this.treeLevel + 1,
                             treeIndent: this.treeIndent,
                             isParentRow: this.isParentRow,
+                            isAlwaysExpand: this.isAlwaysExpand,
                             treeChildTemplate: this.treeChildTemplate
                         },
                         on: {
@@ -153,6 +165,23 @@
                 }, childs);
 
                 return container;
+            },
+
+            renderChildTemplateRow() {
+                return this.treeChildTemplate({
+                    rowData: this.rowData,
+                    parentRowData: this.parentRowData,
+                    treeLabelIndent: this.treeLabelIndent,
+                    treeIndent: this.treeIndent
+                });
+            },
+
+            renderAlwaysChildTemplateRow(createElement) {
+                let child = this.renderChildTemplateRow();
+
+                return createElement("div", {
+                    "class": "tree-child-container"
+                }, [child]);
             },
 
             renderDefaultRow(createElement) {
