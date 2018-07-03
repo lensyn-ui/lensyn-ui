@@ -157,18 +157,13 @@
         },
 
         mounted() {
-            this.resize();
             this.refreshHeaderByScrollbarWidth();
             this.refreshNoticeMsg();
         },
 
         methods: {
-            resize() {
-                if (this.isColumnSetGrid) {
-                    this.$nextTick(() => {
-                        this.resizeSetScrollbar();
-                    });
-                }
+            resizeColumnSetGrid(data) {
+                this.resizeSetScrollbar(data);
             },
 
             getRowClassName(rowData) {
@@ -208,35 +203,26 @@
                 }
             },
 
-            resizeSetScrollbar() {
-                let firstTable = this.$refs.content.children[0].children[0],
-                    firstRow = firstTable.children[0].children[0];
+            resizeSetScrollbar(size) {
+                let isHaveScrollbar = false,
+                    scrollbarContainer = this.$refs.setScrollbar;
 
-                if (firstRow) {
-                    let setCount = this.columns.length,
-                        scrollbarContainer = this.$refs.setScrollbar,
-                        isHaveScrollbar = false;
+                for (let i = 0, j = size.length; i < j; ++i) {
+                    let item = size[i];
 
+                    if (item.setWidth < item.contentWidth) {
+                        let scrollbar = scrollbarContainer.querySelector(".set-scrollbar-" + item.index);
 
-                    for (let i = 0; i < setCount; ++i) {
-                        let scrollbar = scrollbarContainer.querySelector(".set-scrollbar-" + i),
-                            set = firstRow.children[i].children[0],
-                            wrapperWidth = set.offsetWidth,
-                            contentWidth = set.children[0].offsetWidth;
-
-                        scrollbar.style.width = wrapperWidth + "px";
-
-                        if (contentWidth > wrapperWidth) {
-                            isHaveScrollbar = true;
-                            scrollbar.style.display = "";
-                            scrollbar.children[0].style.width = contentWidth + "px";
-                        }
+                        isHaveScrollbar = true;
+                        scrollbar.style.display = "";
+                        scrollbar.style.width = item.setWidth + "px";
+                        scrollbar.children[0].style.width = item.contentWidth + "px";
                     }
-                    if (isHaveScrollbar) {
-                        scrollbarContainer.style.display = "";
-                    } else {
-                        scrollbarContainer.style.display = "none";
-                    }
+                }
+                if (isHaveScrollbar) {
+                    scrollbarContainer.style.display = "";
+                } else {
+                    scrollbarContainer.style.display = "none";
                 }
             },
 

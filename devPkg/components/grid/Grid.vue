@@ -230,9 +230,34 @@
         mounted() {
             this.refreshTableDatas(this.datas);
             this.bindEventListener();
+            this.resize();
         },
 
         methods: {
+            resize() {
+                if (this.isColumnSetGrid) {
+                    this.resizeColumnSetGrid();
+                }
+            },
+
+            resizeColumnSetGrid() {
+                let sets = this.$refs.header.$el.querySelectorAll(".column-set"),
+                    size = [];
+
+                for (let i = 0, j = sets.length; i < j; ++i) {
+                    let set = sets[i],
+                        table = set.querySelector("table");
+
+                    size.push({
+                        index: i,
+                        setWidth: set.offsetWidth,
+                        contentWidth: table.offsetWidth
+                    });
+                }
+
+                this.$refs.body.resizeColumnSetGrid(size);
+            },
+
             refreshTableDatas(value) {
                 if (this.isNotCopyData) {
                     this.tableDatas = value;
