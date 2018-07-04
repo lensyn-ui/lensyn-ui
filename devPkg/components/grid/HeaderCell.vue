@@ -6,6 +6,8 @@
     import EventBusMixin from "./mixins/EventBusMixin";
     import ColumnWidthMixin from "./mixins/ColumnWidthMixin";
 
+    import Util from "./helper/GridUtil";
+
     export default {
         mixins: [EventBusMixin, CellStatusMixin, ColumnWidthMixin],
 
@@ -78,6 +80,14 @@
         methods: {
             getCellContent(createElement) {
                 let column = this.column;
+
+                if (!Util.isUndefined(column.hide)) {
+                    let hide = Util.isFunction(column.hide) ? column.hide() : column.hide;
+
+                    if (hide) {
+                        this.triggerHideColumn({field: column.field});
+                    }
+                }
 
                 if (column.type === "checkbox" && column.showInHeader) {
                     return this.renderSelectorCell(createElement);

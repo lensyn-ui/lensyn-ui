@@ -490,8 +490,14 @@
                     { label: "LastName", field: "lastName", width: "300px" }
                 ]
             },
-            { label: "Email", field: "email", width: "300px" },
-            { label: "Address", field: "address", width: "300px" },
+            { label: "Email", field: "email", width: "300px", hide: true },
+            {
+                label: "Address",
+                field: "address",
+                width: "300px", hide: () => {
+                    return true;
+                }
+            },
             {
                 label: "Admin",
                 field: "isAdmin",

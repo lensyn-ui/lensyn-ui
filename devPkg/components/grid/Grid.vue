@@ -1,5 +1,5 @@
 <template>
-    <div class="vue-grid" :class="{'fixed-grid': isFixedHeight, 'footer-grid': isShowFooter}">
+    <div class="vue-grid" :class="gridModifier">
         <grid-header ref="header"
                      :headerColumns="headerColumns"
                      :contentColumns="contentColumns"
@@ -47,6 +47,7 @@
     import Util from "./helper/GridUtil";
     import SortUtil from "./helper/GridSort";
     import ColumnStructure from "./helper/ColumnStructure";
+    import StyleSheet from "./helper/StyleSheet";
 
     import IdMixin from "./mixins/IdMixin";
     import EventBusMixin from "./mixins/EventBusMixin";
@@ -55,10 +56,17 @@
     import Body from "./Body.vue";
     import Footer from "./Footer.vue";
 
+    const GRID_NAME_PREFIX = "vue-grid-";
+    let gridCount = 0;
+
     export default {
         mixins: [IdMixin, EventBusMixin],
 
         props: {
+            uniqueName: {
+                type: String,
+            },
+
             columns: {
                 type: Array,
                 required: true
@@ -171,6 +179,10 @@
 
         data() {
             return {
+                gridUniqueName: "",
+                gridStyleSheet: null,
+                columnStatusMap: {},
+
                 tableDatas: [],
                 isShowNoticeMsg: false,
                 noticeMsg: "",
@@ -194,6 +206,21 @@
         },
 
         computed: {
+            gridModifier() {
+                let result = [this.gridUniqueName];
+
+                if (this.isFixedHeight) {
+                    result.push("fixed-grid");
+                }
+
+                if (this.isShowFooter) {
+                    result.push("footer-grid");
+                }
+
+                return result;
+
+            },
+
             isColumnSetGrid() {
                 return Util.isArray(this.columns[0]);
             },
@@ -230,14 +257,25 @@
         },
 
         created() {
-            ColumnStructure.configureStructure(this.columns, this.headerColumns, 
+            this.bindEventListener();
+            ColumnStructure.configureStructure(this.columns, this.headerColumns,
                     this.headerData, this.contentColumns, this.isColumnSetGrid);
+            if (this.uniqueName) {
+                this.gridUniqueName = this.uniqueName;
+            } else {
+                this.gridUniqueName = this.getDefaultUniqueGridName();
+            }
         },
 
         mounted() {
             this.refreshTableDatas(this.datas);
-            this.bindEventListener();
             this.resize();
+        },
+
+        beforeDestroy() {
+            if (this.gridStyleSheet) {
+                this.gridStyleSheet.destroy();
+            }
         },
 
         methods: {
@@ -317,6 +355,10 @@
                 return null;
             },
 
+            getDefaultUniqueGridName() {
+                return GRID_NAME_PREFIX + gridCount++;
+            },
+
             setRowBeActive(data) {
                 let id = this.getId(data),
                     index = this.activeRowIds.indexOf(id);
@@ -330,6 +372,61 @@
                         this.activeRowIds.push(id);
                     }
                 }
+            },
+
+            /**
+             * 隐藏列
+             * @todo 支持子列，因为隐藏了子列后，父列的 colSpan 未变，因此仍会占据以前的宽度
+             * @param {string} fieldName
+             */
+            hideColumn(field) {
+                if (this.columnStatusMap[field] && this.columnStatusMap[field].hide === true) {
+                    return this.columnStatusMap[field].visibleRule;
+                }
+                if (this.gridStyleSheet === null) {
+                    this.gridStyleSheet = new StyleSheet(this.gridUniqueName);
+                }
+
+                if (!this.columnStatusMap[field]) {
+                    this.columnStatusMap[field] = {};
+                }
+
+                if (this.columnStatusMap[field].visibleRule) {
+                    let rule = this.columnStatusMap[field].visibleRule;
+
+                    rule.set("display", "none");
+
+                } else {
+                    let columnClass = this.buildColumnClassNameByField(field),
+                        style = "display: none",
+                        rule = this.gridStyleSheet.addRule("." + columnClass, style);
+
+                    this.columnStatusMap[field].visibleRule = rule;
+                }
+
+                this.columnStatusMap[field].hide = true;
+            },
+
+            /**
+             * 显示列
+             * @param {string} fieldName
+             * 因为列默认都为显示，因此只有隐藏后才会调用显示
+             * 此时 rule 已经添加
+             */
+            showColumn(field) {
+                if (!this.columnStatusMap[field] || !this.columnStatusMap[field].hide) {
+                    return;
+                }
+                let rule = this.columnStatusMap[field].visibleRule;
+
+                if (rule) {
+                    rule.set("display", "");
+                }
+                this.columnStatusMap[field].hide = false;
+            },
+
+            buildColumnClassNameByField(field) {
+                return `cell-${field}`;
             },
 
             clearActiveRow() {
@@ -520,6 +617,7 @@
                 this.listenEditorVisible(this.handleEditorVisibleEvent);
                 this.listenClickRow(this.handleClickRow);
                 this.listenClickSort(this.handleClickSort);
+                this.listenHideColumn(this.handleHideColumnEvent);
             },
 
             handleSelectorEvent(event) {
@@ -628,6 +726,10 @@
                     this.$set(this, "sortFieldMap", {[column.field]: sortInfo});
                 }
                 this.sortData();
+            },
+
+            handleHideColumnEvent(event) {
+                this.hideColumn(event.field);
             },
 
             emitEvent(action, data) {

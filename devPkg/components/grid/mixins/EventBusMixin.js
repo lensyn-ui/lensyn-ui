@@ -5,6 +5,7 @@ const EDITOR_VISIBLE_EVENT = "vue-grid.editor-visible-event";
 const CLICK_ROW_EVENT = "vue-grid.click-row-event";
 const CLICK_TREE_LABEL = "vue-grid.click-tree-label";
 const CLICK_SORT = "vue-grid.click-sort";
+const HIDE_COLUMN = "vue-grid.hide-column";
 
 export default {
     methods: {
@@ -77,6 +78,15 @@ export default {
 
         triggerClickSort(...args) {
             args.unshift(CLICK_SORT);
+            this.eventBus.$emit.apply(this.eventBus, args);
+        },
+
+        listenHideColumn(callback) {
+            this.eventBus.$on(HIDE_COLUMN, callback);
+        },
+
+        triggerHideColumn(...args) {
+            args.unshift(HIDE_COLUMN);
             this.eventBus.$emit.apply(this.eventBus, args);
         }
     }
