@@ -52,7 +52,7 @@
         mounted() {
             this.refreshPaginationCondition({
                 page: this.page,
-                rows: this.perpageCount
+                rows: this.initPerpage ? this.initPerpage : this.perpageCount
             });
         },
 

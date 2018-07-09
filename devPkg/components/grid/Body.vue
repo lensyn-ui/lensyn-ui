@@ -213,14 +213,14 @@
                     scrollbarContainer = this.$refs.setScrollbar;
 
                 for (let i = 0, j = size.length; i < j; ++i) {
-                    let item = size[i];
+                    let item = size[i],
+                        scrollbar = scrollbarContainer.querySelector(".set-scrollbar-" + item.index);
+
+                    scrollbar.style.display = "";
+                    scrollbar.style.width = item.setWidth + "px";
 
                     if (item.setWidth < item.contentWidth) {
-                        let scrollbar = scrollbarContainer.querySelector(".set-scrollbar-" + item.index);
-
                         isHaveScrollbar = true;
-                        scrollbar.style.display = "";
-                        scrollbar.style.width = item.setWidth + "px";
                         scrollbar.children[0].style.width = item.contentWidth + "px";
                     }
                 }

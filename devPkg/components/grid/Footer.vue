@@ -1,7 +1,9 @@
 <template>
     <div class="grid-footer">
-        <component :is="rowConstructor" :rowData="footerData" :columns="footerColumns"
-            cellType="footerCell" :selectorData="selectedAllCheckboxData" />
+        <div class="grid-row">
+            <component :is="rowConstructor" :rowData="footerData" :columns="footerColumns"
+                       cellType="footerCell" :selectorData="selectedAllCheckboxData" />
+        </div>
 
         <pagination v-if="isEnablePagination"
                     :total="totalRows"

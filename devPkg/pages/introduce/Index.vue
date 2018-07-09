@@ -19,7 +19,7 @@
                     :isEnableActiveRow="true"
                     :columns="paginationGridColumns"
                     :initPerpage="50"
-                    :datas="gridDatas"
+                    :store="gridStore"
                     style="margin-top: 30px;" >
             </ls-pagination-grid>
         </div>
@@ -325,6 +325,7 @@
     /* 分页 */
     import pagination from '../../components/Pagination.vue';
 
+    import GridStore from "../../api/pagination-grid-store";
     import Validator from "../../components/validator/Validator";
 
     Validator.registerValidator("hello", {
@@ -476,10 +477,16 @@
         ];
         paginationGridColumns = [
             {
+                label: "",
+                field: "rowNumberId",
+                type: "rowNumber",
+                width: "50px"
+            },
+            {
                 label: "ID",
                 field: "id",
                 type: "checkbox",
-                width: "300px",
+                width: "100px",
                 sort: true
             },
             {
@@ -490,32 +497,20 @@
                     { label: "LastName", field: "lastName", width: "300px" }
                 ]
             },
-            { label: "Email", field: "email", width: "300px", hide: true },
+            { label: "Email", field: "email", width: "200px", hide: false },
             {
                 label: "Address",
                 field: "address",
-                width: "300px", hide: () => {
-                    return true;
+                width: "200px", hide: () => {
+                    return false;
                 }
             },
-            {
-                label: "Admin",
-                field: "isAdmin",
-                type: "widget",
-                widget: {
-                    type: Checkbox,
-                    listenerMap: ["checkboxEvent"],
-                    checkboxEvent: (...arg) => {
-                        console.log(arg);
-                    },
-                    propsRowDataMap: {
-                        checked: "isAdmin"
-                    }
-                }
-            },
+            { label: "Phone", field: "phone", width: "100px" },
+            { label: "Company", field: "company", width: "100px" },
             {
                 label: "Status",
                 field: "status",
+                width: "100px",
                 type: "widget",
                 widget: {
                     type: "label",
@@ -530,6 +525,7 @@
             {
                 label: "Operate",
                 field: "operate",
+                width: "100px",
                 sub: [
                     {
                         type: "icon",
@@ -563,6 +559,7 @@
                 ]
             }
         ];
+        gridStore = GridStore;
         gridDatas = [
             {
                 id: 1,
@@ -749,7 +746,7 @@
         }
 
         mounted() {
-            window.hello = this;
+            this.$refs.paginationGrid.updateGrid();
         }
 
         /* 分页返回对象 */
