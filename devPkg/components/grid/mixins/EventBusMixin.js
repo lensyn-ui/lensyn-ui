@@ -6,6 +6,7 @@ const CLICK_ROW_EVENT = "vue-grid.click-row-event";
 const CLICK_TREE_LABEL = "vue-grid.click-tree-label";
 const CLICK_SORT = "vue-grid.click-sort";
 const HIDE_COLUMN = "vue-grid.hide-column";
+const FOCUS_EDITOR = "vue-grid.focus-editor";
 
 export default {
     methods: {
@@ -87,6 +88,15 @@ export default {
 
         triggerHideColumn(...args) {
             args.unshift(HIDE_COLUMN);
+            this.eventBus.$emit.apply(this.eventBus, args);
+        },
+
+        listenerFocusEditor(callback) {
+            this.eventBus.$on(FOCUS_EDITOR, callback);
+        },
+
+        triggerFocusEditor(...args) {
+            args.unshift(FOCUS_EDITOR);
             this.eventBus.$emit.apply(this.eventBus, args);
         }
     }

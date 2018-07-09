@@ -98,6 +98,10 @@ const Util  = {
 
     isString(data) {
         return typeof data === "string";
+    },
+
+    isObject(data) {
+        return typeof data === "object" && data !== null;
     }
 };
 

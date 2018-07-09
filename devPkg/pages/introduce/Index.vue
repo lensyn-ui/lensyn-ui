@@ -497,7 +497,7 @@
                     { label: "LastName", field: "lastName", width: "300px" }
                 ]
             },
-            { label: "Email", field: "email", width: "200px", hide: false },
+            { label: "Email", field: "email", width: "200px", hide: false, editor: "input" },
             {
                 label: "Address",
                 field: "address",

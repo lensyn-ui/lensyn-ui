@@ -425,6 +425,30 @@
                 this.columnStatusMap[field].hide = false;
             },
 
+            /**
+             * 根据行数据和列设置某个编辑控件获取焦点
+             * @param {string | number | object} rowData - 行数据
+             * @param {string} field
+             */
+            setEditorFocusByRowData(rowData, field) {
+                let rowId = Util.isObject(rowData) ? this.getId(rowData) : rowData;
+                this.triggerFocusEditor(rowId, field);
+            },
+
+            /**
+             * 根据行号和列设置某个编辑控件获取焦点
+             * @param {number} rowNumber
+             * @param {string} field
+             */
+            setEditorFocusByRowNumber(rowNumber, field) {
+                let data = this.findShowRowDataByIndex(rowNumber - 1);
+
+                if (data) {
+                    let rowId = this.getId(data);
+                    this.triggerFocusEditor(rowId, field);
+                }
+            },
+
             buildColumnClassNameByField(field) {
                 return `cell-${field}`;
             },
@@ -602,6 +626,10 @@
                     }
                 }
                 return null;
+            },
+
+            findShowRowDataByIndex(index) {
+                return this.tableDatas[index];
             },
 
             bindEventListener() {

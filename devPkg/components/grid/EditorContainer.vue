@@ -41,6 +41,10 @@
             };
         },
 
+        mounted() {
+            this.bindEventHandler();
+        },
+
         render(createElement) {
             return createElement("div", {
                 attrs: {
@@ -51,6 +55,35 @@
         },
 
         methods: {
+            bindEventHandler() {
+                this.listenerFocusEditor(this.handleFocusEditorEvent);
+            },
+
+            handleFocusEditorEvent(id, field) {
+                let currentId = this.getItemId(this.rowData);
+
+                if (currentId === id) {
+                    if (this.isShowEditor()) {
+                        this.setEditorFocus();
+
+                    }
+                }
+            },
+
+            setEditorFocus() {
+                let editor = this.getEditorComponent();
+
+                if (editor && editor.focus) {
+                    setTimeout(() => {
+                        editor.focus();
+                    }, 0);
+                }
+            },
+
+            getEditorComponent() {
+                return this.$children[0];
+            },
+
             getEditorContent(createElement) {
                 if (this.isShowEditor()) {
                     let widget = null;
