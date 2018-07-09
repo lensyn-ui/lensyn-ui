@@ -644,6 +644,7 @@
                 } else {
                     this.checkboxSelected[field] = this.checkboxSelected[field].filter((item) => item !== id);
                 }
+                this.emitEvent("checkCheckbox", {field, rowData, checked});
             },
 
             handleCheckboxSelectAllEvent({field, checked}) {
@@ -657,16 +658,24 @@
                 } else {
                     this.checkboxSelected[field] = [];
                 }
+                this.emitEvent({action: "checkAll", checked});
             },
 
             handleRadioSelectEvent({field, checked, rowData}) {
-                let id = this.getId(rowData);
+                let id = this.getId(rowData),
+                    previousId = this.radioSelected[field],
+                    previousData = null;
+
+                if (Util.isUndefined(oldId)) {
+                    previousData = this.findRowDataById(previousId);
+                }
 
                 if (Util.isUndefined(this.radioSelected[field])) {
                     this.$set(this.radioSelected, field, id);
                 } else {
                     this.radioSelected[field] = id;
                 }
+                this.emitEvent({action: "checkRadio", field, rowData, previousData});
             },
 
             handleEditorEvent(event) {
