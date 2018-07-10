@@ -285,6 +285,10 @@
                 }
             },
 
+            getAllData() {
+                return this.tableDatas;
+            },
+
             resizeColumnSetGrid() {
                 let sets = this.$refs.header.$el.querySelectorAll(".column-set"),
                     size = [];
@@ -321,13 +325,21 @@
             },
 
             getCheckboxSelected(field) {
-                let selected = this.checkboxSelected[field];
+                let selected = this.checkboxSelected[field],
+                    result = [];
 
                 if (selected) {
-                    return this.tableDatas.filter((item) => selected.indexOf(this.getId(item)) !== -1);
+                    for (let i = 0, j = selected.length; i < j; ++i) {
+                        let item = this.findRowDataById(selected[i]);
+
+                        if (item) {
+                            result.push(item);
+                        }
+                    }
                 } else {
                     return [];
                 }
+                return result;
             },
 
             getRadioSelected(field) {
@@ -342,10 +354,19 @@
             },
 
             getActiveRow() {
-                if (this.activeRowIds.length === 0) {
-                    return [];
+                let result = [],
+                    activeRowIds = this.activeRowIds;
+
+                if (activeRowIds.length > 0) {
+                    for (let i = 0, j = activeRowIds.length; i < j; ++i) {
+                        let item = this.findRowDataById(activeRowIds[i]);
+
+                        if (item) {
+                            result.push(item);
+                        }
+                    }
                 }
-                return this.tableDatas.filter((item) => this.activeRowIds.indexOf(this.getId(item)) !== -1);
+                return result;
             },
 
             getColumnSortOrder(field) {
@@ -620,9 +641,11 @@
             },
 
             findRowDataById(id) {
-                for (let i = 0, j = this.datas.length; i < j; ++i) {
-                    if (this.getId(this.datas[i]) === id) {
-                        return this.datas[i];
+                let datas = this.getAllData();
+
+                for (let i = 0, j = datas.length; i < j; ++i) {
+                    if (this.getId(datas[i]) === id) {
+                        return datas[i];
                     }
                 }
                 return null;
@@ -694,7 +717,7 @@
                     previousId = this.radioSelected[field],
                     previousData = null;
 
-                if (Util.isUndefined(oldId)) {
+                if (!Util.isUndefined(previousId)) {
                     previousData = this.findRowDataById(previousId);
                 }
 

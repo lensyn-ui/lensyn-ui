@@ -49,6 +49,12 @@
             }
         },
 
+        computed: {
+            isRemoteLoadData() {
+                return !!this.store;
+            }
+        },
+
         mounted() {
             this.refreshPaginationCondition({
                 page: this.page,
@@ -57,6 +63,16 @@
         },
 
         methods: {
+            /**
+             * @override
+             */
+            getAllData() {
+                if (this.isRemoteLoadData) {
+                    return this.tableDatas;
+                }
+                return this.datas;
+            },
+
             refreshTableDatas() {
             },
 
@@ -148,7 +164,7 @@
             },
 
             updateGridData(condition) {
-                if (this.store) {
+                if (this.isRemoteLoadData) {
                     this.updateGridDataByStore(condition);
                 } else {
                     this.updateGridDataByLocal(condition);

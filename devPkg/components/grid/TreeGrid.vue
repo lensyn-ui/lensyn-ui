@@ -35,55 +35,20 @@
         },
 
         methods: {
-            getCheckboxSelected(field) {
-                let selected = this.checkboxSelected[field],
-                    result = [];
-
-                if (selected) {
-                    tree.forEachArrayTree(this.tableDatas, (item) => {
-                        let id = this.getId(item);
-
-                        if (selected.indexOf(id) !== -1) {
-                            result.push(item);
-                        }
-                    }, this.childProperty);
-                }
-
-                return result;
-            },
-
-            getRadioSelected(field) {
-                let id = this.radioSelected[field],
+            /**
+             * @override
+             * @param {string | number} id - 行 id
+             * @returns {object} - 行数据
+             */
+            findRowDataById(id) {
+                let datas = this.getAllData(),
                     result = null;
 
-                if (!Util.isUndefined(id)) {
-
-                    tree.forEachArrayTree(this.tableDatas, (item) => {
-                        if (result === null) {
-                            let itemId = this.getId(item);
-
-                            if (itemId === id) {
-                                result = item;
-                            }
-                        }
-
-                    }, this.childProperty);
-                }
-                return result;
-            },
-
-            getActiveRow() {
-                let result = [];
-                if (this.activeRowIds.length > 0) {
-                    tree.forEachArrayTree(this.tableDatas, (item) => {
-                        let id = this.getId(item);
-
-                        if (this.activeRowIds.indexOf(id) !== -1) {
-                            result.push(item);
-                        }
-
-                    }, this.childProperty);
-                }
+                tree.forEachArrayTree(datas, (item) => {
+                    if (result === null && this.getId(item) === id) {
+                        result = item;
+                    }
+                });
                 return result;
             },
 
