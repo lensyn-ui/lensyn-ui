@@ -65,7 +65,6 @@
                 if (currentId === id) {
                     if (this.isShowEditor()) {
                         this.setEditorFocus();
-
                     }
                 }
             },

@@ -14,13 +14,14 @@
                               :treeIndent="treeIndent"
                               :treeChildTemplate="treeChildTemplate"
                               :isAlwaysExpand="isAlwaysExpand"
+                              :rowClassNameFn="rowClassNameFn"
                               @clickTreeRow="handleClickTreeRow">
                     </tree-row>
 
                 </template>
                 <template v-else>
                     <div v-for="(data, index) in datas"
-                         :class="getRowClassName(data)"
+                         :class="getRowClassName(data, index)"
                          :key="getItemId(data)"
                          @click="handleClickRow(data)">
 
@@ -49,8 +50,8 @@
 <script>
     import BodyRow from "./BodyRow";
     import TreeRow from "./TreeRow";
-    import IdMixin from "./mixins/IdMixin";
     import EventBusMixin from "./mixins/EventBusMixin";
+    import Util from "./helper/GridUtil";
 
     export default {
         mixins: [EventBusMixin],
@@ -171,13 +172,13 @@
                 this.resizeSetScrollbar(data);
             },
 
-            getRowClassName(rowData) {
+            getRowClassName(rowData, index) {
                 let str = this.defaultRowClassName;
 
                 if (this.rowClassNameFn) {
                     let extra = "";
                     if (Util.isFunction(this.rowClassNameFn)) {
-                        extra = this.rowClassNameFn(rowData);
+                        extra = this.rowClassNameFn(rowData, index);
                     } else {
                         extra = Util.getExpressionValue(rowData, this.rowClassNameFn);
                     }

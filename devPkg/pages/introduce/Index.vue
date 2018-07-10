@@ -7,6 +7,7 @@
                     :datas="gridDatas"
                     :isEnableActiveRow="true"
                     :isAlwaysExpand="true"
+                    :rowClassNameFn="treeGridRowClassName"
                     :isShowFooter="true" >
                 <div class="hello" slot="childTemplate" slot-scope="data">
                     <ls-button :text="testTreeBtnLabel" @buttonEvent="handleTreeGridChildEvent"></ls-button>
@@ -18,6 +19,7 @@
                     ref="paginationGrid"
                     :isEnableActiveRow="true"
                     :columns="paginationGridColumns"
+                    :rowClassNameFn="paginationGridRowClassName"
                     :initPerpage="50"
                     :store="gridStore"
                     style="margin-top: 30px;" >
@@ -747,6 +749,14 @@
 
         mounted() {
             this.$refs.paginationGrid.updateGrid();
+        }
+
+        treeGridRowClassName(rowData) {
+            return rowData.firstName;
+        }
+
+        paginationGridRowClassName(rowData, index) {
+            return `${rowData.firstName} ${index % 2 === 0 ? "even" : "odd"}`;
         }
 
         /* 分页返回对象 */

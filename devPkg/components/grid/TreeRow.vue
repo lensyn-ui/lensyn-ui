@@ -62,6 +62,10 @@
             parentRowData: {
                 type: Object,
                 default: null
+            },
+
+            rowClassNameFn: {
+                type: [Function, String]
             }
         },
 
@@ -150,7 +154,8 @@
                             treeIndent: this.treeIndent,
                             isParentRow: this.isParentRow,
                             isAlwaysExpand: this.isAlwaysExpand,
-                            treeChildTemplate: this.treeChildTemplate
+                            treeChildTemplate: this.treeChildTemplate,
+                            rowClassNameFn: this.rowClassNameFn
                         },
                         on: {
                             clickTreeRow: (event) => this.handleClickTreeRow(event)
@@ -215,6 +220,9 @@
                     result += " active";
                 }
 
+                if (!Util.isUndefined(this.rowClassNameFn)) {
+                    result += " " + Util.getFunctionOrExpressionValue(this.rowData, this.rowClassNameFn);
+                }
                 return result;
             },
 
