@@ -489,6 +489,7 @@
                 field: "id",
                 type: "checkbox",
                 width: "100px",
+                showInHeader: true,
                 sort: true
             },
             {
