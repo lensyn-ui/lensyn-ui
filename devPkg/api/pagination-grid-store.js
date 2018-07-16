@@ -21,10 +21,13 @@ let store = {
         let rows = param.rows,
             datas = [];
 
+        console.log("------------------------");
+        console.log(param);
         for (let i = 0; i < rows; ++i) {
             datas.push(buildItem());
         }
-        success({total: 100, datas});
+        success({total: 200, datas});
+
     }
 };
 

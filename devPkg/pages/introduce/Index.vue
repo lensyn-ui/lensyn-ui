@@ -18,11 +18,14 @@
             <ls-pagination-grid
                     ref="paginationGrid"
                     :isEnableActiveRow="true"
+                    :isEnablePagination="false"
+                    :isEnableScrollPagination="true"
+                    :isAppendStoreData="true"
                     :columns="paginationGridColumns"
                     :rowClassNameFn="paginationGridRowClassName"
                     :initPerpage="50"
                     :store="gridStore"
-                    style="margin-top: 30px;" >
+                    style="margin-top: 30px; height: 300px;" >
             </ls-pagination-grid>
         </div>
         <div class="box">

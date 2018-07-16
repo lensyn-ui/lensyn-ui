@@ -7,6 +7,7 @@ const CLICK_TREE_LABEL = "vue-grid.click-tree-label";
 const CLICK_SORT = "vue-grid.click-sort";
 const HIDE_COLUMN = "vue-grid.hide-column";
 const FOCUS_EDITOR = "vue-grid.focus-editor";
+const GRID_CONTENT_VERTICAL_SCROLL = "vue-grid.content-vertical-scroll";
 
 export default {
     methods: {
@@ -97,6 +98,15 @@ export default {
 
         triggerFocusEditor(...args) {
             args.unshift(FOCUS_EDITOR);
+            this.eventBus.$emit.apply(this.eventBus, args);
+        },
+
+        listenerContentVerticalScroll(callback) {
+            this.eventBus.$on(GRID_CONTENT_VERTICAL_SCROLL, callback);
+        },
+
+        triggerContentVerticalScroll(...args) {
+            args.unshift(GRID_CONTENT_VERTICAL_SCROLL);
             this.eventBus.$emit.apply(this.eventBus, args);
         }
     }

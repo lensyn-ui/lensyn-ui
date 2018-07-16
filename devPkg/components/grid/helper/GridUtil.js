@@ -102,6 +102,32 @@ const Util  = {
 
     isObject(data) {
         return typeof data === "object" && data !== null;
+    },
+
+    isFirefox() {
+        return window.navigator.userAgent.toLowerCase().indexOf("firefox") !== -1;
+    },
+
+    getMouseScrollEventName() {
+        if (this.isFirefox()) {
+            return "DOMMouseScroll";
+        }
+        return "mousewheel";
+    },
+
+    debounce(fn, delay) {
+        let delayJob = null;
+
+        return function(...args) {
+            if (delayJob !== null) {
+                clearTimeout(delayJob);
+            }
+
+            delayJob = setTimeout(() => {
+                fn.apply(this, args);
+                delayJob = null;
+            }, delay);
+        }
     }
 };
 

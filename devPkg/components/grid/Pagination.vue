@@ -34,21 +34,6 @@
 				default: 100
 			},
 
-			rows: {
-				type: Number,
-				default: 20
-			},
-
-			initPage: {
-				type: Number,
-				default: 1
-			},
-
-			initPerpage: {
-			    type: Number,
-				default: 10
-			},
-
 			pageSelections: {
 				type: Array,
 				default: () => {
@@ -65,13 +50,21 @@
 			showPageCount: {
 				type: Number,
 				default: 4
+			},
+
+			currentPage: {
+			    type: Number,
+				default: 1
+			},
+
+			perpageCount: {
+			    type: Number
 			}
 		},
 
 		data() {
 			return {
 				perpage: 10,
-				currentPage: 1,
 				totalPage: 0,
 				jumpPage: "",
 				showPages: []
@@ -94,27 +87,19 @@
 				this.refreshShowPages();
 			},
 
-			rows() {
-				this.refreshTotalPage();
-				this.refreshShowPages();
-			},
-
-			initPage() {
-				this.currentPage = this.initPage;
-				this.refreshTotalPage();
-				this.refreshShowPages();
-			},
-
-			initPerpage() {
-			    this.perpage = this.initPerpage;
+			perpageCount() {
+			    this.perpage = this.perpageCount;
                 this.refreshTotalPage();
                 this.refreshShowPages();
+			},
+
+			currentPage() {
+			    this.refreshShowPages();
 			}
 		},
 
 		created() {
-			this.currentPage = this.initPage;
-			this.perpage = this.initPerpage;
+			this.perpage = this.perpageCount;
 			this.refreshTotalPage();
 			this.refreshShowPages();
 		},
@@ -168,15 +153,10 @@
 			},
 
 			jumpToPage(page) {
-				this.currentPage = page;
-				this.refreshShowPages();
-				this.emitEvent("jump");
+				this.emitEvent("jump", {toPage: page});
 			},
 
 			onChangePerpage() {
-				this.currentPage = 1;
-				this.refreshTotalPage();
-				this.refreshShowPages();
 				this.emitEvent("perpage");
 			},
 
@@ -191,8 +171,12 @@
 				}
 			},
 
-			emitEvent(action) {
-				this.$emit("paginationEvt", {action, page: this.currentPage, rows: this.perpage});
+			emitEvent(action, event) {
+			    let data = {action, page: this.currentPage, rows: this.perpage, totalPage: this.totalPage};
+			    if (event) {
+			        data = {...data, ...event};
+				}
+				this.$emit("paginationEvt", data);
 			}
 		}
 	}

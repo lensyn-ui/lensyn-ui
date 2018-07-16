@@ -25,7 +25,8 @@
                    :isAlwaysExpand="isAlwaysExpand"
                    :treeChildTemplate="treeChildTemplate"
                    @contentHorizontalScroll="handleContentHorizontalScroll"
-                   @contentScrollbarWidth="handleContentScrollbarWidth" />
+                   @contentScrollbarWidth="handleContentScrollbarWidth"
+                   @contentVerticalScroll="handleContentVerticalScroll"/>
 
         <grid-footer ref="footer" v-if="isShowFooter"
                      :footerColumns="contentColumns"
@@ -34,10 +35,9 @@
                      :selectedAllCheckboxData="selectedAllCheckboxData"
                      :totalRows="totalRows"
                      :perpageCount="perpageCount"
-                     :initPerpage="initPerpage"
                      :isEnablePagination="isEnablePagination"
                      :pageSelections="pageSelections"
-                     :initPage="initPage" />
+                     :currentPage="currentPage"/>
     </div>
 </template>
 
@@ -110,14 +110,9 @@
                 default: "single"
             },
 
-
             // 分页
             pageSelections: {
                 type: Array
-            },
-            perpageCount: {
-                type: Number,
-                default: 10
             },
             isEnablePagination: {
                 type: Boolean,
@@ -201,7 +196,8 @@
 
                 // 分页
                 totalRows: 0,
-                initPage: 1
+                currentPage: 1,
+                perpageCount: 10
             }
         },
 
@@ -757,6 +753,10 @@
 
             handleContentScrollbarWidth(event) {
                 this.$refs.header.setHeaderPaddingByContentScrollbar(event);
+            },
+
+            handleContentVerticalScroll(event) {
+                this.triggerContentVerticalScroll(event);
             },
 
             handleClickRow(eventData) {

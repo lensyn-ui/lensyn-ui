@@ -132,7 +132,9 @@
                 previousContentScrollPosition: 0,
                 haveNoticeMsg: false,
                 noticeMsgContent: "",
-                defaultRowClassName: "grid-row"
+                defaultRowClassName: "grid-row",
+                mouseScrollListener: null,
+                onGridContentScrollHandler: null
             };
         },
 
@@ -163,11 +165,37 @@
         },
 
         mounted() {
+            this.bindEventListener();
             this.refreshHeaderByScrollbarWidth();
             this.refreshNoticeMsg();
         },
 
+        beforeDestroy() {
+            this.$refs.contentWrapper.removeEventListener(Util.getMouseScrollEventName(), this.onGridContentScrollHandler);
+        },
+
         methods: {
+            bindEventListener() {
+                this.onGridContentScrollHandler = this.onGridContentVerticalScroll.bind(this);
+                this.mouseDownListener =
+                    this.$refs.contentWrapper.addEventListener(Util.getMouseScrollEventName(), this.onGridContentScrollHandler);
+            },
+
+            setContentVerticalScrollToTop() {
+                this.setContentVerticalScrollPosition(0);
+            },
+
+            setContentVerticalScrollToBottom() {
+                let element = this.$refs.contentWrapper,
+                    offsetHeight = element.offsetHeight,
+                    scrollHeight = element.scrollHeight;
+                this.setContentVerticalScrollPosition(scrollHeight - offsetHeight);
+            },
+
+            setContentVerticalScrollPosition(top) {
+                this.$refs.contentWrapper.scrollTop = top;
+            },
+
             resizeColumnSetGrid(data) {
                 this.resizeSetScrollbar(data);
             },
@@ -311,6 +339,10 @@
                 }
 
                 return result;
+            },
+
+            onGridContentVerticalScroll($event) {
+                this.$emit("contentVerticalScroll", {$event, contentWrapper: this.$refs.contentWrapper});
             }
         }
     };

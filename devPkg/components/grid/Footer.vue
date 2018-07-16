@@ -6,11 +6,11 @@
         </div>
 
         <pagination v-if="isEnablePagination"
+                    ref="pagination"
                     :total="totalRows"
-                    :initPage="initPage"
-                    :initPerpage="initPerpage"
+                    :currentPage="currentPage"
+                    :perpageCount="perpageCount"
                     :pageSelections="pageSelections"
-                    :rows="perpageCount"
                     @paginationEvt="onPaginationEvent" />
     </div>
 </template>
@@ -61,16 +61,10 @@
             },
 
             perpageCount: {
-                type: Number,
-                default: 10
+                type: Number
             },
 
-            initPage: {
-                type: Number,
-                default: 1
-            },
-
-            initPerpage: {
+            currentPage: {
                 type: Number
             }
         },

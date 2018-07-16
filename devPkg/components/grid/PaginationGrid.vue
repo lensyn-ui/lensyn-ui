@@ -4,9 +4,11 @@
 <script>
     import Grid from "./Grid";
     import SortUtil from "./helper/GridSort";
+    import ScrollPaginationMixin from "./mixins/ScrollPaginationMixin";
 
     export default {
         extends: Grid,
+        mixins: [ScrollPaginationMixin],
         props: {
             isShowFooter: {
                 type: Boolean,
@@ -16,11 +18,6 @@
             isEnablePagination: {
                 type: Boolean,
                 default: true
-            },
-
-            page: {
-                type: Number,
-                default: 1
             },
 
             store: {
@@ -39,12 +36,18 @@
 
             paginationQueryConditionMap: {
                 type: Object
+            },
+
+            isAppendStoreData: {
+                type: Boolean,
+                default: false
             }
         },
 
         data() {
             return {
                 queryCondition: {},
+                defaultPerpageCount: 10,
                 gridType: "paginationGrid"
             }
         },
@@ -55,11 +58,12 @@
             }
         },
 
+        created() {
+            this.perpageCount = typeof this.initPerpage === "undefined" ? this.defaultPerpage : this.initPerpage;
+        },
+
         mounted() {
-            this.refreshPaginationCondition({
-                page: this.page,
-                rows: this.initPerpage ? this.initPerpage : this.perpageCount
-            });
+            this.refreshInitPaginationCondition();
         },
 
         methods: {
@@ -77,23 +81,75 @@
             },
 
             handlePaginationEvent(event) {
-                this.refreshPaginationCondition(event);
+                if (event.action === "jump") {
+                    this.currentPage = event.toPage;
+                }
+
+                if (event.action === "perpage") {
+                    this.currentPage = 1;
+                    this.perpageCount = event.rows;
+                }
+
+                this.refreshPaginationCondition({page: this.currentPage, rows: this.perpageCount});
                 this.updateGridData(this.queryCondition);
             },
 
-            refreshPaginationCondition(data) {
-                let map = this.paginationQueryConditionMap;
+            /**
+             * 跳转到下一页
+             * 当加载完数据之后，将滚动条设置到顶部
+             */
+            goNextPage() {
+                let total = this.getTotalPage();
 
-                if (map) {
-                    for (let key in map) {
-                        if (map.hasOwnProperty(key)) {
-                            this.queryCondition[map[key]] = data[key];
-                        }
-                    }
-                } else {
-                    this.queryCondition.page = data.page;
-                    this.queryCondition.rows = data.rows;
+                if (this.currentPage === total) {
+                    return this.emitEvent({action: "scrollToLastPage"});
                 }
+                this.jumpToPage(this.currentPage + 1).then(() => {
+                    this.$nextTick(() => {
+                        if (!this.isAppendStoreData) {
+                            this.$refs.body.setContentVerticalScrollToTop();
+                        }
+                    });
+                });
+            },
+
+            /**
+             * 跳转到上一页
+             * 当加载数据完成后，将滚动条设置到底部
+             */
+            goPreviousPage() {
+                if (this.currentPage === 1) {
+                    return this.emitEvent({action: "scrollToFirstPage"});
+                }
+                this.jumpToPage(this.currentPage - 1).then(() => {
+                    this.$nextTick(() => {
+                        if (!this.isAppendStoreData) {
+                            this.$refs.body.setContentVerticalScrollToBottom();
+                        }
+                    });
+                });
+            },
+
+            jumpToPage(page) {
+                this.currentPage = page;
+                this.refreshPaginationCondition({page: this.currentPage, rows: this.perpageCount});
+                return this.refreshGrid();
+            },
+
+            getTotalPage() {
+                return Math.ceil(this.totalRows / this.perpageCount);
+            },
+
+            refreshInitPaginationCondition() {
+                this.refreshPaginationCondition({
+                    page: this.currentPage,
+                    rows: this.initPerpage ? this.initPerpage : this.perpageCount
+                });
+            },
+
+            refreshPaginationCondition(data) {
+                this.queryCondition.page = data.page;
+                this.queryCondition.rows = data.rows;
             },
 
             sortData() {
@@ -121,55 +177,50 @@
             },
 
             getPaginationCondition(data) {
-                let result = {},
-                    map = this.paginationQueryConditionMap;
-
-                if (map) {
-                    for (let key in map) {
-                        if (map.hasOwnProperty(key)) {
-                            result[map[key]] = data[map[key]];
-                        }
-                    }
-                } else {
-                    result = {
-                        page: data.page,
-                        rows: data.rows
-                    }
-                }
-
-                return result;
+                return  {
+                    page: data.page,
+                    rows: data.rows
+                };
             },
 
             updateGrid(condition, isOverride) {
                 if (isOverride) {
                     let paginationCondition = this.getPaginationCondition(this.queryCondition);
 
-                    this.queryCondition = Object.assign(condition, paginationCondition);
+                    if (condition) {
+                        this.queryCondition = Object.assign(condition, paginationCondition);
+                    } else {
+                        this.queryCondition = paginationCondition;
+                    }
                 } else if (condition) {
                     this.queryCondition = Object.assign(this.queryCondition, condition);
                 }
-                this.updateGridData(this.queryCondition);
+                return this.updateGridData(this.queryCondition);
             },
 
+            /**
+             * 强制刷新时，将当前页数设置为第一页且每页行数设置为默认值
+             * @param {object} params
+             */
             forceUpdateGrid(params) {
-                this.initPage = 0;
-                this.$nextTick(() => this.initPage = 1);
+                this.currentPage = 1;
+                this.perpageCount = typeof this.initPerpage === "undefined" ? this.defaultPerpage : this.initPerpage;
 
-                this.refreshPaginationCondition({page: 1, rows: this.perpageCount});
-                this.updateGrid(params, true);
+                this.refreshInitPaginationCondition();
+                return this.updateGrid(params, true);
             },
 
             refreshGrid() {
-                this.updateGrid(this.queryCondition);
+                return this.updateGrid(this.queryCondition);
             },
 
             updateGridData(condition) {
-                if (this.isRemoteLoadData) {
-                    this.updateGridDataByStore(condition);
-                } else {
-                    this.updateGridDataByLocal(condition);
-                }
                 this.checkboxSelected = {};
+                if (this.isRemoteLoadData) {
+                    return this.updateGridDataByStore(condition);
+                } else {
+                    return this.updateGridDataByLocal(condition);
+                }
             },
 
             updateGridDataByStore(condition) {
@@ -182,16 +233,26 @@
                     delete copyCondition.sort;
                 }
 
-                this.store.query(copyCondition, (data) => {
-                    let result = this.formatQueryData(data);
+                let def = new Promise((resovlve, reject) => {
+                    this.store.query(copyCondition, (data) => {
+                        let result = this.formatQueryData(data);
 
-                    this.tableDatas = result.datas;
-                    this.totalRows = result.total;
-                }, (error) => {
-                    this.isShowNoticeMsg = true;
-                    this.noticeMsg = this.queryDataErrorMsg;
-                    this.emitEvent({action: "loadDataError", error});
+                        if (this.isAppendStoreData && !this.isEnablePagination) {
+                            this.tableDatas = this.tableDatas.concat(result.datas);
+                        } else {
+                            this.tableDatas = result.datas;
+                        }
+                        this.totalRows = result.total;
+
+                        resovlve({data: data});
+                    }, (error) => {
+                        this.isShowNoticeMsg = true;
+                        this.noticeMsg = this.queryDataErrorMsg;
+                        this.emitEvent({action: "loadDataError", error});
+                        reject({error: error});
+                    });
                 });
+                return def;
             },
 
             updateGridDataByLocal(condition) {
@@ -200,19 +261,32 @@
                     datas = this.datas,
                     sort = condition.sort;
 
-                if (sort) {
-                    if (this.sortFn) {
-                        datas = this.sortFn(datas, condition.sort);
-                    } else {
-                        if (sort.order === "default") {
-                            datas = SortUtil.sortByFieldValue(datas, (item) => this.getId(item), this.defaultDataOrder);
+                let def = new Promise((resolve) => {
+                    if (sort) {
+                        if (this.sortFn) {
+                            datas = this.sortFn(datas, condition.sort);
                         } else {
-                            datas = SortUtil.sort(datas, sort);
+                            if (sort.order === "default") {
+                                datas = SortUtil.sortByFieldValue(datas, (item) => this.getId(item), this.defaultDataOrder);
+                            } else {
+                                datas = SortUtil.sort(datas, sort);
+                            }
                         }
                     }
-                }
-                this.totalRows = datas.length;
-                this.tableDatas = datas.slice(start, end);
+                    this.totalRows = datas.length;
+
+                    let currentDatas = datas.slice(start, end);
+
+                    if (this.isAppendStoreData && !this.isEnablePagination) {
+                        this.tableDatas = this.tableDatas.concat(currentDatas);
+                    } else {
+                        this.tableDatas = currentDatas;
+                    }
+
+                    resolve({datas: this.datas});
+                });
+
+                return def;
             },
 
             getQueryCondition() {
