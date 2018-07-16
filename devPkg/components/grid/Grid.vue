@@ -365,6 +365,21 @@
                 return result;
             },
 
+            /**
+             * 根据行数据或者行 id 设置某行数据为活动行
+             * @param {string | number | object} rowData - 行数据或行 id
+             */
+            setRowBeActive(rowData) {
+                if (Util.isObject(rowData)) {
+                    this.handleActiveRow(rowData);
+                }
+
+                rowData = this.findRowDataById(rowData);
+                if (rowData) {
+                    this.handleActiveRow(rowData);
+                }
+            },
+
             getColumnSortOrder(field) {
                 if (this.sortFieldMap[field]) {
                     return this.sortFieldMap[field].order;
