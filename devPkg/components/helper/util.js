@@ -191,3 +191,17 @@ export const tree = {
         return paths;
     }
 };
+export function debounce(fn, delay) {
+    let delayJob = null;
+
+    return function(...args) {
+        if (delayJob !== null) {
+            clearTimeout(delayJob);
+        }
+
+        delayJob = setTimeout(() => {
+            fn.apply(this, args);
+            delayJob = null;
+        }, delay);
+    }
+};
