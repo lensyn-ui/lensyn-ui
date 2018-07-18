@@ -59,11 +59,8 @@
         },
 
         created() {
-            this.perpageCount = typeof this.initPerpage === "undefined" ? this.defaultPerpage : this.initPerpage;
-        },
-
-        mounted() {
-            this.refreshInitPaginationCondition();
+            this.perpageCount = typeof this.initPerpage === "undefined" ? this.defaultPerpageCount : this.initPerpage;
+            this.refreshPaginationCondition({page: this.currentPage, rows: this.perpageCount});
         },
 
         methods: {
@@ -140,13 +137,6 @@
                 return Math.ceil(this.totalRows / this.perpageCount);
             },
 
-            refreshInitPaginationCondition() {
-                this.refreshPaginationCondition({
-                    page: this.currentPage,
-                    rows: this.initPerpage ? this.initPerpage : this.perpageCount
-                });
-            },
-
             refreshPaginationCondition(data) {
                 this.queryCondition.page = data.page;
                 this.queryCondition.rows = data.rows;
@@ -204,9 +194,9 @@
              */
             forceUpdateGrid(params) {
                 this.currentPage = 1;
-                this.perpageCount = typeof this.initPerpage === "undefined" ? this.defaultPerpage : this.initPerpage;
+                this.perpageCount = typeof this.initPerpage === "undefined" ? this.defaultPerpageCount : this.initPerpage;
 
-                this.refreshInitPaginationCondition();
+                this.refreshPaginationCondition({page: this.currentPage, rows: this.perpageCount});
                 return this.updateGrid(params, true);
             },
 
