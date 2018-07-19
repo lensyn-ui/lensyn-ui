@@ -8,6 +8,7 @@
                     :isEnableActiveRow="true"
                     :isAlwaysExpand="true"
                     :rowClassNameFn="treeGridRowClassName"
+                    @gridEvent="handleTreeGridEvent"
                     :isShowFooter="true" >
                 <div class="hello" slot="childTemplate" slot-scope="data">
                     <ls-button :text="testTreeBtnLabel" @buttonEvent="handleTreeGridChildEvent"></ls-button>
@@ -757,6 +758,10 @@
 
         treeGridRowClassName(rowData) {
             return rowData.firstName;
+        }
+
+        handleTreeGridEvent(event) {
+            console.log(event);
         }
 
         paginationGridRowClassName(rowData, index) {

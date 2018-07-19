@@ -720,7 +720,7 @@
                 } else {
                     this.checkboxSelected[field] = [];
                 }
-                this.emitEvent({action: "checkAll", checked});
+                this.emitEvent("checkAll", {checked});
             },
 
             handleRadioSelectEvent({field, checked, rowData}) {
@@ -737,7 +737,7 @@
                 } else {
                     this.radioSelected[field] = id;
                 }
-                this.emitEvent({action: "checkRadio", field, rowData, previousData});
+                this.emitEvent("checkRadio", {field, rowData, previousData});
             },
 
             handleEditorEvent(event) {
