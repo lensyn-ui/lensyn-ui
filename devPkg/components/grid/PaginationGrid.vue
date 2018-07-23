@@ -65,7 +65,10 @@
 
         methods: {
             /**
+             * 获取所有表格的数据
+             * 是覆写父级的方法
              * @override
+             * @public
              */
             getAllData() {
                 if (this.isRemoteLoadData) {
@@ -74,9 +77,20 @@
                 return this.datas;
             },
 
+            /**
+             * 刷新表格的数据
+             * @override
+             * @private
+             * @todo
+             */
             refreshTableDatas() {
             },
 
+            /**
+             * 处理分布控件的事件
+             * @private
+             * @param {object} event
+             */
             handlePaginationEvent(event) {
                 if (event.action === "jump") {
                     this.currentPage = event.toPage;
@@ -94,6 +108,7 @@
             /**
              * 跳转到下一页
              * 当加载完数据之后，将滚动条设置到顶部
+             * @private
              */
             goNextPage() {
                 let total = this.getTotalPage();
@@ -113,6 +128,7 @@
             /**
              * 跳转到上一页
              * 当加载数据完成后，将滚动条设置到底部
+             * @private
              */
             goPreviousPage() {
                 if (this.currentPage === 1) {
@@ -127,21 +143,41 @@
                 });
             },
 
+            /**
+             * 跳转到指定的页数
+             * @private
+             * @param {number} page - 页数
+             */
             jumpToPage(page) {
                 this.currentPage = page;
                 this.refreshPaginationCondition({page: this.currentPage, rows: this.perpageCount});
                 return this.refreshGrid();
             },
 
+            /**
+             * 获取所有的页数
+             * @private
+             * @return - 所有的页数
+             */
             getTotalPage() {
                 return Math.ceil(this.totalRows / this.perpageCount);
             },
 
+            /**
+             * 刷新分页的条件
+             * @private
+             * @param {object} data
+             */
             refreshPaginationCondition(data) {
                 this.queryCondition.page = data.page;
                 this.queryCondition.rows = data.rows;
             },
 
+            /**
+             * 对数据进行排序
+             * @private
+             * @override
+             */
             sortData() {
                 if (!this.store) {
                     if (this.defaultDataOrder === null) {
@@ -166,6 +202,11 @@
                 }
             },
 
+            /**
+             * 获取分页的条件
+             * @private
+             * @param {object} data
+             */
             getPaginationCondition(data) {
                 return  {
                     page: data.page,
@@ -173,6 +214,12 @@
                 };
             },
 
+            /**
+             * 刷新表格的数据
+             * @public
+             * @param {object} condition - 刷新的条件
+             * @param {boolean} isOverride - 是否覆盖之前的条件
+             */
             updateGrid(condition, isOverride) {
                 if (isOverride) {
                     let paginationCondition = this.getPaginationCondition(this.queryCondition);
@@ -190,6 +237,7 @@
 
             /**
              * 强制刷新时，将当前页数设置为第一页且每页行数设置为默认值
+             * @public
              * @param {object} params
              */
             forceUpdateGrid(params) {
@@ -200,10 +248,21 @@
                 return this.updateGrid(params, true);
             },
 
+            /**
+             * 以已有的查询条件刷新表格
+             * @public
+             */
             refreshGrid() {
                 return this.updateGrid(this.queryCondition);
             },
 
+            /**
+             * 实际执行刷新的方法
+             * 如果是远端分页，则直接调用 store 的 query，否则执行本地分页
+             * @todo 本地分页并未处理按条件查询的过滤，只是分页，后续看是否需要支持
+             * @private
+             * @param {object} condition - 查询条件
+             */
             updateGridData(condition) {
                 this.checkboxSelected = {};
                 if (this.isRemoteLoadData) {
@@ -213,6 +272,13 @@
                 }
             },
 
+            /**
+             * 根据条件调用 store 的 query 进行查询
+             * query 接收三个参数，第一个是查询条件，第二个是成功的回调，第三个是失败的回调
+             * @private
+             * @param condition
+             * @returns {Promise<any>}
+             */
             updateGridDataByStore(condition) {
                 let copyCondition = JSON.parse(JSON.stringify(condition));
 
@@ -245,6 +311,13 @@
                 return def;
             },
 
+            /**
+             * 本地分页
+             * @todo 后续可能支持条件过滤
+             * @private
+             * @param {object} condition - 查询条件
+             * @returns {Promise<any>}
+             */
             updateGridDataByLocal(condition) {
                 let start = (condition.page - 1) * condition.rows,
                     end = condition.page * condition.rows,
@@ -279,6 +352,11 @@
                 return def;
             },
 
+            /**
+             * 获取查询条件
+             * @public
+             * @returns {object} - 查询条件
+             */
             getQueryCondition() {
                 return this.queryCondition;
             }

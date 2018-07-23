@@ -286,16 +286,29 @@
         },
 
         methods: {
+            /**
+             * 重新计算表格的布局
+             * @public
+             */
             resize() {
                 if (this.isColumnSetGrid) {
                     this.resizeColumnSetGrid();
                 }
             },
 
+            /**
+             * 获取表格的所有数据
+             * @public
+             * @return - 表格的所有数据
+             */
             getAllData() {
                 return this.tableDatas;
             },
 
+            /**
+             * 重新计算多子表的布局
+             * @private
+             */
             resizeColumnSetGrid() {
                 let sets = this.$refs.header.$el.querySelectorAll(".column-set"),
                     size = [];
@@ -314,6 +327,11 @@
                 this.$refs.body.resizeColumnSetGrid(size);
             },
 
+            /**
+             * 刷新表格的数据
+             * @private
+             * @param {object[]} - 新的表格的数据
+             */
             refreshTableDatas(value) {
                 if (this.isNotCopyData) {
                     this.tableDatas = value;
@@ -322,6 +340,10 @@
                 }
             },
 
+            /**
+             * 重置表格的列
+             * @public
+             */
             refreshTableColumns() {
                 this.headerColumns = [];
                 this.headerData = {};
@@ -331,6 +353,12 @@
                     this.headerData, this.contentColumns, this.isColumnSetGrid);
             },
 
+            /**
+             * 根据列的 field 获取 checkbox 当前选中的数据
+             * @public
+             * @param {string} - 对应列的 field 字段
+             * @return - 选中的行的数据
+             */
             getCheckboxSelected(field) {
                 let selected = this.checkboxSelected[field],
                     result = [];
@@ -349,6 +377,12 @@
                 return result;
             },
 
+            /**
+             * 根据列的 field 获取 radio 当前选中的数据
+             * @public
+             * @param {string} - 对应列的 field 值
+             * @return - 被选中行的数据
+             */
             getRadioSelected(field) {
                 if (!Util.isUndefined(this.radioSelected[field])) {
                     return this.findRowDataById(this.radioSelected[field]);
@@ -356,6 +390,11 @@
                 return null;
             },
 
+            /**
+             * 获取当前的活动行
+             * @public
+             * @return - 当前活动行的数据
+             */
             getActiveRow() {
                 let result = [],
                     activeRowIds = this.activeRowIds;
@@ -374,6 +413,7 @@
 
             /**
              * 根据行数据或者行 id 设置某行数据为活动行
+             * @public
              * @param {string | number | object} rowData - 行数据或行 id
              */
             setRowBeActiveByRowData(rowData) {
@@ -387,6 +427,10 @@
                 }
             },
 
+            /**
+             * 根据 field 获取对应的 order
+             * @private
+             */
             getColumnSortOrder(field) {
                 if (this.sortFieldMap[field]) {
                     return this.sortFieldMap[field].order;
@@ -394,10 +438,20 @@
                 return null;
             },
 
+            /**
+             * 获取表格的默认的惟一名字
+             * @private
+             * @return - 表格的惟一名
+             */
             getDefaultUniqueGridName() {
                 return GRID_NAME_PREFIX + gridCount++;
             },
 
+            /**
+             * 根据行数据设置某行为活动行
+             * @public
+             * @param {object} data - 对应的行数据
+             */
             setRowBeActive(data) {
                 let id = this.getId(data),
                     index = this.activeRowIds.indexOf(id);
@@ -416,7 +470,8 @@
             /**
              * 隐藏列
              * @todo 支持子列，因为隐藏了子列后，父列的 colSpan 未变，因此仍会占据以前的宽度
-             * @param {string} fieldName
+             * @public
+             * @param {string} field - 对应列的 field
              */
             hideColumn(field) {
                 if (this.columnStatusMap[field] && this.columnStatusMap[field].hide === true) {
@@ -448,9 +503,10 @@
 
             /**
              * 显示列
-             * @param {string} fieldName
              * 因为列默认都为显示，因此只有隐藏后才会调用显示
              * 此时 rule 已经添加
+             * @public
+             * @param {string} field - 对应列的 field
              */
             showColumn(field) {
                 if (!this.columnStatusMap[field] || !this.columnStatusMap[field].hide) {
@@ -466,6 +522,7 @@
 
             /**
              * 根据行数据和列设置某个编辑控件获取焦点
+             * @public
              * @param {string | number | object} rowData - 行数据
              * @param {string} field
              */
@@ -476,6 +533,7 @@
 
             /**
              * 根据行号和列设置某个编辑控件获取焦点
+             * @public
              * @param {number} rowNumber
              * @param {string} field
              */
@@ -496,6 +554,12 @@
                 this.activeRowIds.splice(0, this.activeRowIds.length);
             },
 
+            /**
+             * 判断一行数据是否为活动行
+             * @private
+             * @param {object} - rowData
+             * @return - true 为活动行, false 为非活动行
+             */
             isRowActived(rowData) {
                 let id = this.getId(rowData);
 
@@ -504,6 +568,9 @@
 
             /**
              * 将当前数据的默认顺序保存下来
+             * 以供后续排序时恢复默认顺序时使用
+             * @private
+             * @param {object[]} - 表格的所有数据
              */
             cacheDefaultDataOrder(datas) {
                 this.defaultDataOrder = datas.map((item) => this.getId(item));
@@ -511,6 +578,7 @@
 
             /**
              * 对数据进行排序
+             * @private
              */
             sortData() {
                 if (this.defaultDataOrder === null) {
@@ -546,6 +614,7 @@
 
             /**
              * 设置某些列被选中
+             * @public
              * @param {string} field - 对应的字段
              * @param {string[] | string | number | number[]} ids - 要被选中的 id
              * @param {boolean} isCheckbox - 对应的字段是否为 checkbox
@@ -575,6 +644,7 @@
 
             /**
              * 取消某些列被选中
+             * @public
              * @param {string} field - 对应的字段
              * @param {string[] | string | number | number[]} ids - 要被选中的 id
              * @param {boolean} isCheckbox - 对应的字段是否为 checkbox
@@ -596,6 +666,7 @@
 
             /**
              * 判断一条数据是否可选中
+             * @private
              * @param {object} rowData
              * @param {string} field
              */
@@ -616,6 +687,7 @@
 
             /**
              * 判断一行数据是否被选中
+             * @private
              * @param {object} rowData
              * @param {object} column
              */
@@ -647,6 +719,7 @@
 
             /**
              * 根据 field 查找列
+             * @private
              * @param {string} field
              */
             findColumnByField(field) {
@@ -667,6 +740,12 @@
                 return null;
             },
 
+            /**
+             * 根据 id 查找对应的行数据
+             * @private
+             * @param {string | number}id - 行 id
+             * @returns {object} - 对应的行数据
+             */
             findRowDataById(id) {
                 let datas = this.getAllData();
 
@@ -678,10 +757,20 @@
                 return null;
             },
 
+            /**
+             * 根据下标查找对应的行数据
+             * @private
+             * @param {number} index - 数据的下标
+             * @returns {object} - 对应的行数据
+             */
             findShowRowDataByIndex(index) {
                 return this.tableDatas[index];
             },
 
+            /**
+             * 绑定事件监听
+             * @private
+             */
             bindEventListener() {
                 this.listenSelect(this.handleSelectorEvent);
                 if (this.isEnablePagination) {
@@ -698,6 +787,11 @@
                 this.listenHideColumn(this.handleHideColumnEvent);
             },
 
+            /**
+             * 处理选中事件
+             * @private
+             * @param {object} event
+             */
             handleSelectorEvent(event) {
                 if (event.type === "checkbox") {
                     if (event.action === "selectedAll") {
@@ -710,6 +804,13 @@
                 }
             },
 
+            /**
+             * 处理 checkbox 的选中事件
+             * @private
+             * @param {string} field - 对应的字段
+             * @param {boolean} checked - 是否选中
+             * @param {object} rowData - 对应的行数据
+             */
             handleCheckboxSelectEvent({field, checked, rowData}) {
                 let id = this.getId(rowData);
 
@@ -725,6 +826,12 @@
                 this.emitEvent("checkCheckbox", {field, rowData, checked});
             },
 
+            /**
+             * 处理选中全部的事件
+             * @private
+             * @param {string} field - 对应的字段
+             * @param {boolean} checked - 是否选中
+             */
             handleCheckboxSelectAllEvent({field, checked}) {
                 if (Util.isUndefined(this.checkboxSelected[field])) {
                     this.$set(this.checkboxSelected, field, []);
@@ -739,6 +846,13 @@
                 this.emitEvent("checkAll", {checked});
             },
 
+            /**
+             * 处理 radio 的选中事件
+             * @private
+             * @param {string} field - 对应列的字段
+             * @param {boolean} checked - 是否选中
+             * @param {object} rowData - 行数据
+             */
             handleRadioSelectEvent({field, checked, rowData}) {
                 let id = this.getId(rowData),
                     previousId = this.radioSelected[field],
@@ -756,6 +870,12 @@
                 this.emitEvent("checkRadio", {field, rowData, previousData});
             },
 
+            /**
+             * 处理编辑控件更新值的事件
+             * 如果有判断是否允许更新值的方法则调用，通过验证之后再修改行数据
+             * @private
+             * @param {object} event - 对应的事件
+             */
             handleEditorEvent(event) {
                 if (!this.isAllowEditorChange || this.isAllowEditorChange(event)) {
                     this.emitEvent("editorUpdate", {...event});
@@ -763,6 +883,11 @@
                 }
             },
 
+            /**
+             * 处理编辑器是否可见的事件
+             * @private
+             * @param {object} - event: action 对应的是显示隐藏，id 编辑控件对应的内部 id
+             */
             handleEditorVisibleEvent({action, id}) {
                 if (action === "show") {
                     /// 如果不允许显示多个编辑控件，则将之前的所有显示的编辑控件隐藏
@@ -786,6 +911,12 @@
                 }
             },
 
+            /**
+             * 处理内容区的滚动条滚动事件
+             * 当内容区滚动时，同时滚动表头，如果有表尾则也滚动表尾
+             * @private
+             * @param {object} event
+             */
             handleContentHorizontalScroll(event) {
                 this.$refs.header.setHeaderRowScrollLeft(event);
                 if (this.isShowFooter) {
@@ -793,14 +924,30 @@
                 }
             },
 
+            /**
+             * 处理内容区是否有滚动条的事件
+             * 当内容区有滚动条时，需要给表头一个右边的 padding 以对齐
+             * @private
+             * @param {object} - event
+             */
             handleContentScrollbarWidth(event) {
                 this.$refs.header.setHeaderPaddingByContentScrollbar(event);
             },
 
+            /**
+             * @private
+             * @param {object} - event
+             */
             handleContentVerticalScroll(event) {
                 this.triggerContentVerticalScroll(event);
             },
 
+            /**
+             * 处理点击行的事件
+             * 当启用了活动行，则将对应的行设置为活动行
+             * @private
+             * @param {object} eventData
+             */
             handleClickRow(eventData) {
                 if (this.isEnableActiveRow) {
                     this.handleActiveRow(eventData.rowData);
@@ -808,10 +955,20 @@
                 this.emitEvent("clickRow", eventData);
             },
 
+            /**
+             * 处理活动行的
+             * @private
+             * @param {object} rowData
+             */
             handleActiveRow(rowData) {
                 this.setRowBeActive(rowData);
             },
 
+            /**
+             * 处理排序
+             * @private
+             * @param {object} event
+             */
             handleClickSort(event) {
                 let column = event.column,
                     sortInfo = {
@@ -830,10 +987,21 @@
                 this.sortData();
             },
 
+            /**
+             * 处理隐藏列的事件
+             * @private
+             * @param {object} event
+             */
             handleHideColumnEvent(event) {
                 this.hideColumn(event.field);
             },
 
+            /**
+             * 统一对外的广播事件的方法
+             * @private
+             * @param {string} action - 对应的动作
+             * @param {object} data - 对应的数据
+             */
             emitEvent(action, data) {
                 this.$emit("gridEvent", {action, data});
             }

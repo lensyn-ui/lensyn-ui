@@ -36,6 +36,7 @@
 
         methods: {
             /**
+             * @private
              * @override
              * @param {string | number} id - 行 id
              * @returns {object} - 行数据
@@ -52,6 +53,11 @@
                 return result;
             },
 
+            /**
+             * 判断一行是否是展开
+             * @private
+             * @param {object} rowData
+             */
             isExpandRow(rowData) {
                 let id = this.getId(rowData);
 
@@ -61,6 +67,11 @@
                 return true;
             },
 
+            /**
+             * 展开行
+             * @private
+             * @param {object} rowData
+             */
             expandRow(rowData) {
                 let id = this.getId(rowData);
 
@@ -68,6 +79,11 @@
                 this.emitEvent({action: "expandRow", rowData});
             },
 
+            /**
+             * 收起行
+             * @private
+             * @param {object} rowData
+             */
             collapseRow(rowData) {
                 let id = this.getId(rowData),
                     index = this.expandRowDataIds.indexOf(id);
@@ -78,6 +94,11 @@
                 }
             },
 
+            /**
+             * 处理点击 treeLabel 的事件
+             * @private
+             * @param {object} event
+             */
             handleClickTreeLabelEvent(event) {
                 if (event.action === "click") {
                     let rowData = event.rowData;
@@ -90,6 +111,13 @@
                 }
             },
 
+            /**
+             * 判断是否为父级数据
+             * 如果配置有 isAlwaysExpand 则所有行都可以展开
+             * @private
+             * @param {object} rowData - 行数据
+             * @returns {boolean}
+             */
             isParentRowData(rowData) {
                 if (this.isAlwaysExpand) {
                     return true;
