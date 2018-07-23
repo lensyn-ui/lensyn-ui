@@ -500,11 +500,11 @@
                 label: "Name",
                 field: "name",
                 children: [
-                    { label: "FirstName", field: "firstName", width: "300px" },
-                    { label: "LastName", field: "lastName", width: "300px" }
+                    { label: "FirstName", field: "firstName", width: "300px", editor: "input", editOn: "click" },
+                    { label: "LastName", field: "lastName", width: "300px", editor: "input", editOn: "click" }
                 ]
             },
-            { label: "Email", field: "email", width: "200px", hide: false, editor: "input" },
+            { label: "Email", field: "email", width: "200px", hide: false, editor: "input", editOn: "click" },
             {
                 label: "Address",
                 field: "address",

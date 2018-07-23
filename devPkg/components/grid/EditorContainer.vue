@@ -33,7 +33,7 @@
             }
         },
 
-        inject: ["getItemId", "eventBus", "editorVisibleMap"],
+        inject: ["getItemId", "eventBus", "editorVisibleMap", "isAutoFocusEditor"],
 
         data() {
             return {
@@ -93,7 +93,14 @@
                         widget = this.column.editor;
                     }
 
-                    return this.createEditor(createElement, widget);
+                    let editor = this.createEditor(createElement, widget);
+
+                    if (this.isControlVisibleEditor && this.isAutoFocusEditor) {
+                        this.$nextTick(() => {
+                            this.setEditorFocus();
+                        });
+                    }
+                    return editor;
                 } else {
                     return this.getTextContent();
                 }
@@ -144,7 +151,8 @@
                     props: this.getEditorProps(),
                     on: {
                         ...this.column.on,
-                        input: (value) =>  this.onEditorValueChange(value),
+                        input: (value) =>  this.handleEditorValueChange(value),
+                        blur: (value) => this.handleEditorBlur(value),
                         hideEditor: () => this.dispatchHideEditorEvent()
                     }
                 });
@@ -192,16 +200,32 @@
                 return this.$children[0];
             },
 
-            onEditorValueChange(value) {
+            handleEditorValueChange(value) {
+                this.updateEditorValue(value);
+                if (this.isControlVisibleEditor) {
+                    this.dispatchHideEditorEvent();
+                }
+            },
+
+            handleEditorBlur(value) {
+                let currentValue = this.rowData[this.column.field];
+
+                if (value !== currentValue && this.column.isUpdateValueWhenBlur) {
+                    this.updateEditorValue(value);
+                }
+
+                if (this.isControlVisibleEditor) {
+                    this.dispatchHideEditorEvent();
+                }
+            },
+
+            updateEditorValue(value) {
                 let editor = this.getEditorInstance();
 
                 if (!editor ||
                     !editor.validate ||
                     (editor.validate && editor.validate(value, this.rowData))) {
                     this.$emit("valueChange", value);
-                    if (this.isControlVisibleEditor) {
-                        this.dispatchHideEditorEvent();
-                    }
                 }
             }
         }

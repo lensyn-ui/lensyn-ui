@@ -86,6 +86,16 @@
                 type: Function
             },
 
+            editorMode: {
+                type: String,
+                default: "single"
+            },
+
+            isAutoFocusEditor: {
+                type: Boolean,
+                default: true
+            },
+
             rowClassNameFn: {
                 type: [String, Function]
             },
@@ -164,6 +174,7 @@
             return {
                 eventBus: this.eventBus,
                 grid: this,
+                isAutoFocusEditor: this.isAutoFocusEditor,
                 getItemId: (item) => this.getId(item),
                 editorVisibleMap: this.editorVisibleMap,
                 isRowActived: (rowData) => this.isRowActived(rowData),
@@ -343,10 +354,6 @@
                     return this.findRowDataById(this.radioSelected[field]);
                 }
                 return null;
-            },
-
-            getGridData() {
-                return this.tableDatas;
             },
 
             getActiveRow() {
@@ -630,6 +637,15 @@
             },
 
             /**
+             * 判断是否允许显示多个编辑控件
+             * 当前只针对于 editOn 配置的控件
+             * @private
+             */
+            isAllowShowMultipleEditor() {
+                return this.editorMode === "multiple";
+            },
+
+            /**
              * 根据 field 查找列
              * @param {string} field
              */
@@ -749,13 +765,24 @@
 
             handleEditorVisibleEvent({action, id}) {
                 if (action === "show") {
+                    /// 如果不允许显示多个编辑控件，则将之前的所有显示的编辑控件隐藏
+                    if (!this.isAllowShowMultipleEditor()) {
+                        Object.keys(this.editorVisibleMap).
+                                filter((item) => this.editorVisibleMap[item] && item !== id).
+                                forEach((key) => {
+                                    this.editorVisibleMap[key] = false;
+                                }
+                        );
+                    }
                    if (Util.isUndefined(this.editorVisibleMap[id])) {
                        this.$set(this.editorVisibleMap, id, true);
                    } else {
                        this.editorVisibleMap[id] = true;
                    }
                 } else {
-                    this.editorVisibleMap[id] = false;
+                    if (this.editorVisibleMap[id]) {
+                        this.editorVisibleMap[id] = false;
+                    }
                 }
             },
 

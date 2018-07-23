@@ -1,6 +1,10 @@
 <template>
     <div class="input-editor" :class="inputModifier">
-        <input v-model="editorValue" @change="onValueChange" :readonly="readonly" :disabled="disabled" />
+        <input v-model="editorValue"
+               @change="onValueChange"
+               @blur="onBlurEvent($event)"
+               :readonly="readonly"
+               :disabled="disabled" />
         <span class="input-error-msg" v-if="isShowValidateFailedMsg">{{validateFailedMsg}}</span>
     </div>
 </template>
@@ -69,6 +73,10 @@
         methods: {
             onValueChange() {
                 this.$emit("input", this.editorValue);
+            },
+
+            onBlurEvent() {
+                this.$emit("blur", this.editorValue);
             },
 
             validate(value, rowData) {
