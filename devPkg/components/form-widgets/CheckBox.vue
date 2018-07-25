@@ -1,12 +1,12 @@
 <template>
-    <label class="check-box" @click="checkEvt">
-        <span class="check-input" :class="{checked:isChecked,disabled:isDisabled}"></span>
-        <span v-if="label" class="check-text">{{label}}</span>
+    <label class="checkbox" @click="onClickCheckbox" :class="checkboxModifier">
+        <span class="checkbox__input"></span>
+        <span v-if="isShowLabel" class="checkbox__text">{{label}}</span>
     </label>
 </template>
 
 <script>
-    import {Component} from "vue-property-decorator";
+    import {Component, Watch} from "vue-property-decorator";
     import FormWidget from '../base/FormWidget.vue';
 
     @Component({
@@ -15,28 +15,66 @@
                 type: Boolean,
                 default: false
             },
-            disabled: {
-                type: Boolean,
-                default: false
-            },
+
             label: {
                 type: String,
-                default: ''
+                default: ""
             }
+        },
+
+        model: {
+            prop: "checked",
+            event: "input"
         }
     })
-    export default class CheckBox extends FormWidget {
-        widgetName = 'checkbox';
+    export default class Checkbox extends FormWidget {
+        widgetName = "checkbox";
 
-        isChecked = this.checked;
-        isDisabled = this.disabled;
+        isChecked = false;
 
-        checkEvt() {
-            if (this.isDisabled) {  //disable不让点击
+        get checkboxModifier() {
+            let result = [];
+
+            if (this.isDisabled()) {
+                result.push("checkbox--disabled");
+            }
+
+            if (this.isChecked) {
+                result.push("checkbox--checked");
+            }
+
+            return result;
+        }
+
+        get isShowLabel() {
+            return this.label !== "";
+        }
+
+        @Watch("checked")
+        onCheckedChange() {
+            this.isChecked = this.checked;
+        }
+
+        mounted() {
+            this.isChecked = this.checked;
+        }
+
+        onClickCheckbox() {
+            if (this.isDisabled()) {
                 return;
             }
-            this.isChecked = !this.isChecked;
-            this.emitEvent({action: 'check', checked: this.isChecked});
+            let newValue = !this.isChecked;
+            this.$emit("input", newValue);
+            this.emitEvent({action: 'check', checked: newValue, oldValue: this.isChecked});
+        }
+
+        /**
+         * 获取值
+         * @public
+         * @returns {boolean}
+         */
+        getValue() {
+            return this.isChecked;
         }
     }
 </script>

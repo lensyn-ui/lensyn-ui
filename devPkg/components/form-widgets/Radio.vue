@@ -1,7 +1,7 @@
 <template>
-    <label class="radio-box" @click="radioCheck">
-        <span class="radio-input" :class="{checked:isChecked,disabled:isDisabled}"></span>
-        <span v-if="label" class="label-text">{{label}}</span>
+    <label class="radio" @click="clickRadioCheck" :class="radioModifier">
+        <span class="radio__input"></span>
+        <span v-if="isShowLabel" class="radio__label">{{label}}</span>
     </label>
 </template>
 
@@ -15,38 +15,44 @@
                 type: Boolean,
                 default: false
             },
-            disabled: {
-                type: Boolean,
-                default: false
-            },
+
             name: {
                 type: String,
-                required: true,
-                default: ''
+                required: true
             },
-            value: {
-                type: [String, Number],
-                required: true,
-                default: ''
-            },
+
             label: {
                 type: String,
-                default: ''
+                default: ""
             }
+        },
+
+        model: {
+            prop: "checked",
+            event: "input"
         }
     })
-    export default class CheckBox extends FormWidget {
-        widgetName = 'radio';
+    export default class Radio extends FormWidget {
+        widgetName = "radio";
 
-        isChecked = this.checked;
-        isDisabled = this.disabled;
+        isChecked = false;
 
-        radioCheck() {
-            if (this.isDisabled) {  //disable不让点击
-                return;
+        get radioModifier() {
+            let result = [];
+
+            if (this.isDisabled()) {
+                result.push("radio--disabled");
             }
-            this.isChecked = true;
-            this.emitEvent({action: 'radio', checked: this.isChecked, name: this.name, value: this.value});
+
+            if (this.isChecked) {
+                result.push("radio--checked");
+            }
+
+            return result;
+        }
+
+        get isShowLabel() {
+            return this.label !== "";
         }
 
         @Watch('checked')
@@ -54,9 +60,27 @@
             this.isChecked = value;
         }
 
-        @Watch('disabled')
-        onDisabledChange(value) {
-            this.isDisabled = value;
+        mounted() {
+            this.isChecked = this.checked;
+        }
+
+        clickRadioCheck() {
+            if (this.isDisabled()) {
+                return;
+            }
+            let newValue = !this.isChecked;
+
+            this.$emit("input", newValue);
+            this.emitEvent({action: "check", checked: newValue, oldValue: this.isChecked, name: this.name});
+        }
+
+        /**
+         * 获取值
+         * @public
+         * @returns {boolean}
+         */
+        getValue() {
+            return this.isChecked;
         }
     }
 </script>

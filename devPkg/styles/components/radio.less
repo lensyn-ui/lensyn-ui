@@ -1,7 +1,9 @@
-.radio-box {
-  cursor: pointer;
+.radio {
+  @box-name: radio;
   margin: 0 5px;
-  .radio-input {
+  cursor: pointer;
+
+  &__input {
     position: relative;
     display: inline-block;
     width: @input-chose-width;
@@ -11,7 +13,16 @@
     background-color: @bg-color-white;
     border: 1px solid @primary-color;
     border-radius: 50%;
-    &.checked {
+  }
+
+  &__label {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &&--checked {
+    .@{box-name}__input {
       &:before {
         content: "";
         position: absolute;
@@ -23,7 +34,10 @@
         border-radius: 50%;
       }
     }
-    &.disabled {
+  }
+
+  &&--disabled {
+    .@{box-name}__input {
       background-color: @bg-color-light;
       border-color: @border-color;
       &:before {
@@ -31,10 +45,5 @@
         border-color: @border-color-input;
       }
     }
-  }
-  .label-text {
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
   }
 }

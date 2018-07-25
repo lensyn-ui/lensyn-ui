@@ -1,7 +1,10 @@
-.check-box {
+.checkbox {
+  @box-name: checkbox;
+
   cursor: pointer;
   margin: 0 5px;
-  .check-input {
+
+  &__input {
     position: relative;
     display: inline-block;
     width: @input-chose-width;
@@ -10,7 +13,16 @@
     overflow: hidden;
     border: 1px solid @border-color;
     background-color: @bg-color-white;
-    &.checked {
+  }
+
+  &__text {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &&--checked {
+    .@{box-name}__input {
       background-color: @primary-color;
       border-color: @primary-color;
       &:before {
@@ -30,17 +42,15 @@
         -o-transform: rotate(45deg);
       }
     }
-    &.disabled {
+  }
+
+  &&--disabled {
+    .@{box-name}__input {
       background-color: @bg-color-light;
       border-color: @border-color;
       &:before {
         border-color: @border-color-input;
       }
     }
-  }
-  .check-text {
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
   }
 }

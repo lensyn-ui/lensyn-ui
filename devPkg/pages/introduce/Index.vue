@@ -59,8 +59,8 @@
 
         <div class="box" style="padding-left: 20px;">
             <ls-checkbox v-for="(item,index) in checkArr"
+                         v-model="item.checked"
                          :key="index"
-                         :checked="item.checked"
                          :disabled="item.disabled"
                          :label="item.label"
                          @checkboxEvent="checkEvt($event,item)"
@@ -71,9 +71,8 @@
             <!--value需要是唯一标识-->
             <ls-radio v-for="(item,index) in radioArr"
                       :key="index"
-                      :checked="item.checked"
+                      v-model="item.checked"
                       :name="item.name"
-                      :value="item.value"
                       :label="item.label"
                       @radioEvent="radioEvt($event,item)"
             ></ls-radio>
@@ -754,6 +753,7 @@
 
         mounted() {
             this.$refs.paginationGrid.updateGrid();
+            window.hello = this.checkArr;
         }
 
         treeGridRowClassName(rowData) {
@@ -850,7 +850,6 @@
 
         /* checkbox */
         checkEvt($event, item) {
-            item.checked = $event.checked;
             console.log(this.checkArr);
         }
 
