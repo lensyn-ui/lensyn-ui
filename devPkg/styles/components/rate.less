@@ -1,0 +1,34 @@
+.rate {
+  @box-name: rate;
+
+  &__list {
+    .clearfix;
+  }
+
+  &__item {
+    float: left;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    background-image: url("../../images/components/star.png");
+    -webkit-background-size: 100%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+    & + .@{box-name}__item {
+      margin-left: 4px;
+    }
+
+    &&--checked {
+      background-image: url("../../images/components/star-checked.png");
+    }
+
+    &&--hover {
+      background-image: url("../../images/components/star-checked.png");
+    }
+
+    &&--no-hover {
+      background-image: url("../../images/components/star.png");
+    }
+  }
+}

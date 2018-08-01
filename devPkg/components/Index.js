@@ -11,9 +11,13 @@ import Dropdown from "./Dropdown";
 // 表单控件
 import DropdownSelect from "./form-widgets/select/DropdownSelect";
 import MultipleSelect from "./form-widgets/select/MultipleSelect";
+import SelectItem from "./form-widgets/select/SelectItem";
 import DatePicker from "./form-widgets/date-picker/Datepicker";
 import Button from "./form-widgets/Button";
 import Input from "./form-widgets/Input";
+import Rate from "./form-widgets/Rate";
+import Radio from "./form-widgets/Radio";
+import Checkbox from "./form-widgets/CheckBox";
 
 // 分页
 import Pagination from "./Pagination";
@@ -52,10 +56,8 @@ import DrawerLayout from "./DrawerLayout";
 import PanelDrawerLayout from "./PanelDrawerLayout";
 
 // CheckBox
-import Checkbox from './form-widgets/CheckBox.vue';
 
 // Radio
-import Radio from './form-widgets/Radio.vue';
 
 export {
     Grid,
@@ -64,6 +66,7 @@ export {
     Dropdown,
     DropdownSelect,
     MultipleSelect,
+    SelectItem,
     Pagination,
     Tree,
     DatePicker,
@@ -82,5 +85,6 @@ export {
     DrawerLayout,
     PanelDrawerLayout,
     Checkbox,
-    Radio
+    Radio,
+    Rate
 };

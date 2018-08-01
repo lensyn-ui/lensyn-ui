@@ -42,6 +42,24 @@
 
         <div class="box">
             <ls-multiple-select :datas="selectDatas" style="margin-top: 20px;"></ls-multiple-select>
+
+            <ls-multiple-select
+                    style="margin-top: 30px;"
+                    valueProperty="star"
+                    v-model="levelSelectValue"
+                    :userCustomList="true"
+                    :datas="levelSelectDatas">
+
+                <ls-select-item v-for="item in levelSelectDatas"
+                                :key="item.id"
+                                :value="item.star"
+                                :id="item.id">
+                    <div class="rate-select">
+                        <ls-rate :value="item.star"></ls-rate>
+                    </div>
+                </ls-select-item>
+
+            </ls-multiple-select>
         </div>
 
         <div class="box">
@@ -297,6 +315,11 @@
                 </ls-column>
             </ls-row>
         </div>
+
+        <div class="box">
+            <ls-rate :isEnableHover="true"></ls-rate>
+            <ls-rate :isEnableHover="true" :value="3"></ls-rate>
+        </div>
     </div>
 </template>
 
@@ -310,6 +333,7 @@
         Pagination,
         DropdownSelect,
         MultipleSelect,
+        SelectItem,
         Tree,
         DatePicker,
         Button,
@@ -324,7 +348,8 @@
         Checkbox,
         Radio,
         Row,
-        Column
+        Column,
+        Rate
     } from "../../components";
 
     /* 分页 */
@@ -346,6 +371,7 @@
             'ls-pagination': pagination,
             "ls-dropdown-select": DropdownSelect,
             "ls-multiple-select": MultipleSelect,
+            "ls-select-item": SelectItem,
             "ls-tree": Tree,
             "ls-date-picker": DatePicker,
             'ls-button': Button,
@@ -360,7 +386,8 @@
             'ls-checkbox': Checkbox,
             'ls-radio': Radio,
             "ls-row": Row,
-            "ls-column": Column
+            "ls-column": Column,
+            "ls-rate": Rate
         }
     })
     export default class HomeIndex extends Vue {
@@ -677,6 +704,15 @@
             {id: 8, value: 8, name: "select-8"},
             {id: 9, value: 9, name: "select-9"}
         ];
+
+        levelSelectDatas = [
+            { id: 1, star: 1, name: "1" },
+            { id: 2, star: 2, name: "2" },
+            { id: 3, star: 3, name: "3" },
+            { id: 4, star: 4, name: "4" },
+            { id: 5, star: 5, name: "5" }
+        ];
+        levelSelectValue = [];
 
         treeDatas = [
             {
