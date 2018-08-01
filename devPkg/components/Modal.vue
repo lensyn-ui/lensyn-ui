@@ -3,13 +3,17 @@
         <div ref="modal" class="modal-main">
             <div class="modal-content">
                 <div class="header" v-if="isShowHeader">
-                    <h3 class="title">{{title}}</h3>
+                    <div v-if="haveCustomTitle" class="title">
+                        <slot name="header"></slot>
+                    </div>
+                    <h3 v-else class="title">{{title}}</h3>
+
                     <i class="close" @click="modalClose"></i>
                 </div>
                 <div class="body">
                     <slot></slot>
                 </div>
-                <div class="footer" v-if="isHaveCustomContent">
+                <div class="footer" v-if="isHaveFooter">
                     <slot name="footer"></slot>
                 </div>
             </div>
@@ -27,18 +31,17 @@
                 type: Boolean,
                 default: false
             },
+
             title: {  //标题
                 type: String,
-                default: ''
+                default: ""
             },
+
             isShowHeader: {
                 type: Boolean,
                 default: true
             },
-            isShowFooter: {
-                type: Boolean,
-                default: true
-            },
+
             popupPosition: {  //位置
                 type: [String, Array],
                 default: "windowTop"
@@ -49,10 +52,14 @@
             }
         }
     })
-    export default class Confirm extends Popup {
-        widgetName = 'modal';
+    export default class Modal extends Popup {
+        widgetName = "modal";
 
-        get isHaveCustomContent() {
+        get haveCustomTitle() {
+            return !!this.$slots.header;
+        }
+
+        get isHaveFooter() {
             return !!this.$slots.footer;
         }
 
