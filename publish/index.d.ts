@@ -1,4 +1,4 @@
-import { PluginFunction } from "vue";
+import Vue, {PluginFunction, VueConstructor} from "vue";
 
 export = LensynUI;
 
@@ -46,6 +46,10 @@ declare namespace LensynUI {
     }
 
     export interface TreeGrid extends Grid {
+    }
+
+    export class Popup extends Vue {
+        showPopup(popupElement: HTMLElement, targetElement?: HTMLElement): void;
     }
 }
 
