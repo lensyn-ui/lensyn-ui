@@ -92,6 +92,11 @@
             return this.datas[0] && !isObject(this.datas[0]);
         }
 
+        @Watch("datas")
+        onDatasChange() {
+            this.setInitData();
+        }
+
         @Watch("searchSourceKeyValue")
         onSearchSourceKeyValueChange() {
             this.refreshShowSourceListDatas();

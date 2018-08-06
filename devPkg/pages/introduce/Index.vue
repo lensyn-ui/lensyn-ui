@@ -806,14 +806,14 @@
             {label: '女', checked: false, name: 'sex', value: 1},
         ];
 
-        transferDatas = ListData(20);
+        transferDatas = [];
 
         handleTreeGridChildEvent() {
         }
 
         mounted() {
             this.$refs.paginationGrid.updateGrid();
-            window.hello = this.checkArr;
+            this.transferDatas = ListData(20);
         }
 
         treeGridRowClassName(rowData) {
