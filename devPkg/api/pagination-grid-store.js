@@ -1,7 +1,5 @@
 import faker from "faker";
 
-// faker.locale = "zh-CN";
-
 let buildItem = () => {
     return {
         id: faker.random.uuid(),
@@ -21,13 +19,10 @@ let store = {
         let rows = param.rows,
             datas = [];
 
-        console.log("------------------------");
-        console.log(param);
         for (let i = 0; i < rows; ++i) {
             datas.push(buildItem());
         }
         success({total: 200, datas});
-
     }
 };
 

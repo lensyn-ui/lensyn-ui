@@ -8,6 +8,10 @@ export function isNumber(data) {
     return typeof data === "number" && !isNaN(data);
 };
 
+export function isObject(data) {
+    return typeof data === "object" && data !== null;
+};
+
 const EMPTY_VALUE = ["", null, undefined];
 export function isEmpty(value) {
     return EMPTY_VALUE.indexOf(value) !== -1;

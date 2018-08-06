@@ -320,6 +320,25 @@
             <ls-rate :isEnableHover="true"></ls-rate>
             <ls-rate :isEnableHover="true" :value="3"></ls-rate>
         </div>
+
+        <div class="box transfer-box">
+            <ls-transfer :datas="transferDatas">
+            </ls-transfer>
+
+            <ls-transfer :datas="transferDatas" style="margin-top: 30px;" :isEnableSourceFilter="false">
+                <div class="custom-header" slot-scope="header" slot="sourceHeader">
+                    <span>剩余条数为 {{header.sourceList.length}}</span>
+                </div>
+                <ul class="custom__body" slot-scope="list" slot="sourceList">
+                    <li v-for="item in list.showSourceList"
+                        :key="item.id"
+                        :class="{'checked': list.checkedData.indexOf(item.id) !== -1}"
+                        @click="handleClickCustomTransferSourceItem(item, list.vm)">
+                        <span>custom -<ls-tag size="mini">{{item.name}}</ls-tag></span>
+                    </li>
+                </ul>
+            </ls-transfer>
+        </div>
     </div>
 </template>
 
@@ -349,13 +368,15 @@
         Radio,
         Row,
         Column,
-        Rate
+        Rate,
+        Transfer
     } from "../../components";
 
     /* 分页 */
     import pagination from '../../components/Pagination.vue';
 
     import GridStore from "../../api/pagination-grid-store";
+    import ListData from "../../api/list-data";
     import Validator from "../../components/validator/Validator";
 
     Validator.registerValidator("hello", {
@@ -387,7 +408,8 @@
             'ls-radio': Radio,
             "ls-row": Row,
             "ls-column": Column,
-            "ls-rate": Rate
+            "ls-rate": Rate,
+            "ls-transfer": Transfer
         }
     })
     export default class HomeIndex extends Vue {
@@ -784,6 +806,8 @@
             {label: '女', checked: false, name: 'sex', value: 1},
         ];
 
+        transferDatas = ListData(20);
+
         handleTreeGridChildEvent() {
         }
 
@@ -898,6 +922,10 @@
                 }
             });
             console.log(this.radioArr)
+        }
+
+        handleClickCustomTransferSourceItem(data, vm) {
+            vm.toggleCheckSourceData(data);
         }
     };
 </script>

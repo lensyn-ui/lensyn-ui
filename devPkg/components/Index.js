@@ -33,6 +33,9 @@ import LayoutContainer from "./layout/LayoutContainer";
 import Row from "./layout/Row";
 import Column from "./layout/Column";
 
+// 弹出
+import Transfer from "./Transfer";
+
 // confirm
 import Confirm from "./confirm/Confirm.vue";
 
@@ -86,5 +89,6 @@ export {
     PanelDrawerLayout,
     Checkbox,
     Radio,
-    Rate
+    Rate,
+    Transfer
 };

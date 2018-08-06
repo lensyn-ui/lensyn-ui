@@ -70,10 +70,20 @@
         @Watch('isShow')
         onShowConfirm(val) {
             if (val === true) {
-                this.$nextTick(() => {
-                    this.showPopup(this.$refs.modal);
-                });
+                this.showModal();
             }
+        }
+
+        mounted() {
+            if (this.isShow) {
+                this.showModal();
+            }
+        }
+
+        showModal() {
+            this.$nextTick(() => {
+                this.showPopup(this.$refs.modal);
+            });
         }
     }
 </script>

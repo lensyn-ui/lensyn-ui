@@ -31,7 +31,7 @@ declare namespace LensynUI {
         setRowBeActiveByRowData(rowDataOrId: any): void;
         setRowBeActive(rowData: any): void;
         hideColumn(field: string): void;
-        showColumn(field: string): void
+        showColumn(field: string): void;
         setEditorFocusByRowData(rowDataOrId: any, field: string): void;
         setEditorFocusByRowNumber(rowNumber: number, field: string): void;
         setFieldBeChecked(field: string, ids: any[], isCheckbox?: boolean): void;
@@ -50,6 +50,23 @@ declare namespace LensynUI {
 
     export class Popup extends Vue {
         showPopup(popupElement: HTMLElement, targetElement?: HTMLElement): void;
+    }
+
+    export interface Transfer {
+        getTargetDatas(): any[];
+        getSourceDatas(): any[];
+        checkedSourceData(data: any): void;
+        uncheckedSourceData(data: any): void;
+        toggleCheckSourceData(data: any): void;
+        checkedAllSourceData(): void;
+        uncheckedAllSourceData(): void;
+        toggleCheckAllSourceData(): void;
+        checkedTargetData(data: any): void;
+        uncheckedTargetData(data: any): void;
+        toggleCheckTargetData(data: any): void;
+        checkedAllTargetData(): void;
+        uncheckedAllTargetData(): void;
+        toggleCheckAllTargetData(): void;
     }
 }
 
