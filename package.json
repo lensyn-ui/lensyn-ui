@@ -4,7 +4,7 @@
   "description": "vue es6 conponents",
   "main": "index.js",
   "scripts": {
-    "start": "set NODE_ENV=development && webpack-dev-server --config ./build/webpack.config.js --inline --hot --no-info --host localhost --port 9900 --profile --open-page index.html",
+    "start": "set NODE_ENV=development && webpack-dev-server --config ./build/webpack.config.js --inline --hot --no-info --host localhost --port 9901 --profile --open-page index.html",
     "deploy": "set NODE_ENV=production && webpack --display-error-details --config ./build/webpack.config.js && gulp check-code && gulp build",
     "build": "set NODE_ENV=production && webpack --display-error-details --config ./build/webpack.build.config.js"
   },
