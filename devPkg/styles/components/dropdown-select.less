@@ -2,6 +2,10 @@
   @box-name: dropdown-select;
   @list-item-height: 28px;
   @list-show-count: 6;
+  @remove-icon-size: 16px;
+  @arrow-icon-size: 16px;
+  @remove-icon-mini-size: 12px;
+  @arrow-icon-mini-size: 12px;
 
   height: @form-widget-height;
   line-height: @form-widget-height;
@@ -10,11 +14,37 @@
   &&--mini {
     height: @form-widget-mini-height;
     line-height: @form-widget-mini-height;
+
+    .@{box-name}__remove {
+      width: @remove-icon-mini-size;
+      height: @remove-icon-mini-size;
+      top: (@form-widget-mini-height - @remove-icon-mini-size) / 2;
+      right: 24px;
+      background-size: 100%;
+    }
+
+    .@{box-name}__input-wrapper {
+      &:after {
+        width: @arrow-icon-mini-size;
+        height: @arrow-icon-mini-size;
+        top: (@form-widget-mini-height - @remove-icon-mini-size) / 2
+      }
+    }
   }
 
   &&--big {
     height: @form-widget-big-height;
     line-height: @form-widget-big-height;
+
+    .@{box-name}__remove {
+      top: (@form-widget-big-height - @remove-icon-size) / 2
+    }
+
+    .@{box-name}__input-wrapper {
+      &:after {
+        top: (@form-widget-big-height - @remove-icon-size) / 2
+      }
+    }
   }
 
   &&--disabled {
@@ -30,16 +60,21 @@
     &:after {
       content: "";
       position: absolute;
-      width: 16px;
-      height: 16px;
+      width: @arrow-icon-size;
+      height: @arrow-icon-size;
       right: 5px;
-      top: 50%;
-      margin-top: -8px;
+      top: (@form-widget-height - @arrow-icon-size) / 2;
       background-image: url("../../images/components/select-arrow-icon.png");
       background-repeat: no-repeat;
       -webkit-background-size: 100%;
       background-size: 100%;
       background-position: center;
+    }
+
+    &:hover {
+      .@{box-name}__remove {
+        display: block;
+      }
     }
   }
 
@@ -61,6 +96,18 @@
       -webkit-box-shadow: 0 0 4px 0 @primary-color;
       box-shadow: 0 0 4px 0 @primary-color;
     }
+  }
+
+  &__remove {
+    display: none;
+    position: absolute;
+    right: 30px;
+    top: (@form-widget-height - @remove-icon-size) / 2;
+    width: @remove-icon-size;
+    height: @remove-icon-size;
+    background-size: 100%;
+    background: url("../../images/components/circle-delete.png") no-repeat;
+    cursor: pointer;
   }
 
   &__list {

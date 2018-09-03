@@ -9,7 +9,14 @@
                  @dropdownEvent="handleDropdownEvent">
 
         <div slot="input" class="dropdown-select__input-wrapper">
-            <input ref="input" class="dropdown-select__input" v-model="inputValue" @blur="handleInputBlur" :readonly="!isEnableInput" />
+            <input ref="input"
+                   class="dropdown-select__input"
+                   v-model="inputValue"
+                   :readonly="!isEnableInput"
+                   @blur="handleInputBlur"
+                   @keyup.delete="handleInputDeleteEvent"/>
+
+            <i v-if="isEnableDelete" class="dropdown-select__remove" @click="handleClickRemove"></i>
         </div>
 
         <div slot="list" class="dropdown-select__list">
@@ -89,6 +96,11 @@
             },
 
             isUserCustomList: {
+                type: Boolean,
+                default: false
+            },
+
+            isEnableDelete: {
                 type: Boolean,
                 default: false
             }
@@ -324,6 +336,18 @@
             });
         }
 
+        handleClickRemove() {
+            if (this.currentSelected !== "") {
+                this.clearValue();
+            }
+        }
+
+        handleInputDeleteEvent() {
+            if (this.isEnableDelete && this.currentSelected !== "") {
+                this.clearValue();
+            }
+        }
+
         handleDropdownEvent({action}) {
             if (action === "expand" && this.isEnableFilter) {
                 this.updateShowDatas(this.datas);
@@ -333,6 +357,10 @@
                     input.select();
                 }
             }
+        }
+
+        clearValue() {
+            this.updateModel("");
         }
 
         validate() {
