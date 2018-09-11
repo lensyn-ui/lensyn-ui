@@ -166,7 +166,6 @@
 
 					if (page >= 1 && page <= this.totalPage && page !== this.currentPage) {
 						this.jumpToPage(page);
-						this.emitEvent("jump");
 					}
 				}
 			},
