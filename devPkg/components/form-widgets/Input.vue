@@ -52,23 +52,10 @@
 
         @Watch('inputValue')
         onInputValueChange(value, oldValue) {
-            if (this.rule) {
-                let editorValue = this.getValue(),
-                    validateResult = Validator.validate(editorValue, this.rule);
-
-                if (validateResult.status) {
-                    this.updateInputValue(value, oldValue);
-                } else {
-                    if (validateResult.msg) {
-                        this.validateErrorMsg = validateResult.msg;
-                    } else {
-                        this.validateErrorMsg = this.defaultValidateMsg;
-                    }
-                    this.isShowErrorMsg = true;
-                    this.emitEvent("validateFailed", {value, oldValue, rule: this.rule});
-                }
-            } else {
+            if (this.validate()) {
                 this.updateInputValue(value, oldValue);
+            } else {
+                this.emitEvent("validateFailed", {value, oldValue, rule: this.rule});
             }
         }
 
@@ -115,6 +102,12 @@
             this.inputValue = this.value;
         }
 
+        /**
+         * 更新 v-model 的值
+         * @param {string | number} value - 新的值
+         * @param {string | number} oldValue - 上次的值
+         * @private
+         */
         updateInputValue(value, oldValue) {
             this.isShowErrorMsg = false;
             this.validateErrorMsg = "";
@@ -122,15 +115,28 @@
             this.emitEvent({action: "change", value, oldValue});
         }
 
+        /**
+         * 当输入框获得焦点时，清除错误信息
+         * @private
+         */
         onInputFocus() {
             this.isShowErrorMsg = false;
             this.validateErrorMsg = "";
         }
 
+        /**
+         * 处理 enter 事件
+         * @param {object} $event - 键盘事件
+         * @private
+         */
         enterEvt($event) {
             this.emitEvent({action: 'enter', value: this.inputValue, $event});
         }
 
+        /**
+         * 获取输入框的值
+         * @public
+         */
         getValue() {
             if (this.inputType === "number") {
                 return Number(this.inputValue);
@@ -138,8 +144,40 @@
             return this.inputValue;
         }
 
+        /**
+         * 使输入框获取焦点
+         * @public
+         */
         focus() {
             this.$refs.input.focus();
+        }
+
+        /**
+         * 验证输入框的值
+         * @param {boolean} isShowErrorMsg - 是否显示错误提示信息
+         * @returns {boolean} - 为 true 则是合法，为 false 则验证失败
+         * @public
+         */
+        validate(isShowErrorMsg = true) {
+            if (this.rule) {
+                let editorValue = this.getValue(),
+                    validateResult = Validator.validate(editorValue, this.rule);
+
+                if (!validateResult.status) {
+                    if (isShowErrorMsg) {
+                        if (validateResult.msg) {
+                            this.validateErrorMsg = validateResult.msg;
+                        } else {
+                            this.validateErrorMsg = this.defaultValidateMsg;
+                        }
+                        this.isShowErrorMsg = true;
+                    } else {
+                        this.isShowErrorMsg = false;
+                    }
+                    return false;
+                }
+            }
+            return true;
         }
     }
 </script>
