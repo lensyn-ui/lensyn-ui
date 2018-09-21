@@ -330,7 +330,7 @@
             /**
              * 刷新表格的数据
              * @private
-             * @param {object[]} - 新的表格的数据
+             * @param {object[]} value - 新的表格的数据
              */
             refreshTableDatas(value) {
                 if (this.isNotCopyData) {
@@ -356,8 +356,8 @@
             /**
              * 根据列的 field 获取 checkbox 当前选中的数据
              * @public
-             * @param {string} - 对应列的 field 字段
-             * @return - 选中的行的数据
+             * @param {string} field - 对应列的 field 字段
+             * @return {object[]} - 选中的行的数据
              */
             getCheckboxSelected(field) {
                 let selected = this.checkboxSelected[field],
@@ -380,7 +380,7 @@
             /**
              * 根据列的 field 获取 radio 当前选中的数据
              * @public
-             * @param {string} - 对应列的 field 值
+             * @param {string} field - 对应列的 field 值
              * @return - 被选中行的数据
              */
             getRadioSelected(field) {
@@ -393,7 +393,7 @@
             /**
              * 获取当前的活动行
              * @public
-             * @return - 当前活动行的数据
+             * @return {object} 当前活动行的数据
              */
             getActiveRow() {
                 let result = [],
@@ -492,10 +492,9 @@
 
                 } else {
                     let columnClass = this.buildColumnClassNameByField(field),
-                        style = "display: none",
-                        rule = this.gridStyleSheet.addRule("." + columnClass, style);
+                        style = "display: none";
 
-                    this.columnStatusMap[field].visibleRule = rule;
+                    this.columnStatusMap[field].visibleRule = this.gridStyleSheet.addRule("." + columnClass, style);
                 }
 
                 this.columnStatusMap[field].hide = true;
@@ -557,8 +556,8 @@
             /**
              * 判断一行数据是否为活动行
              * @private
-             * @param {object} - rowData
-             * @return - true 为活动行, false 为非活动行
+             * @param {object} rowData - 行数据
+             * @return {boolean} - true 为活动行, false 为非活动行
              */
             isRowActived(rowData) {
                 let id = this.getId(rowData);
@@ -570,7 +569,7 @@
              * 将当前数据的默认顺序保存下来
              * 以供后续排序时恢复默认顺序时使用
              * @private
-             * @param {object[]} - 表格的所有数据
+             * @param {object[]} datas - 表格的所有数据
              */
             cacheDefaultDataOrder(datas) {
                 this.defaultDataOrder = datas.map((item) => this.getId(item));
@@ -665,6 +664,33 @@
             },
 
             /**
+             * 将滚动条滚动到某一行的位置
+             * @public
+             * @param {object} rowData - 对应的行数据
+             */
+            scrollToRow(rowData) {
+                let data = this.findActualRowData(rowData);
+
+                this.$refs.body.scrollToRow(data);
+            },
+
+            /**
+             * 将滚动条设置到最底部
+             * @public
+             */
+            scrollToBottom(){
+                this.$refs.body.scrollToBottom();
+            },
+
+            /**
+             * 将滚动条设置到最顶部
+             * @public
+             */
+            scrollToTop() {
+                this.$refs.body.scrollToTop();
+            },
+
+            /**
              * 判断一条数据是否可选中
              * @private
              * @param {object} rowData
@@ -738,6 +764,18 @@
                     }
                 }
                 return null;
+            },
+
+            /**
+             * 查找一条数据在表格中对应的数据
+             * 因为存在有复制或都克隆的情况
+             * @private
+             * @param {object} rowData
+             */
+            findActualRowData(rowData) {
+                let id = this.getItemId(rowData);
+
+                return this.findRowDataById(id);
             },
 
             /**
@@ -928,7 +966,7 @@
              * 处理内容区是否有滚动条的事件
              * 当内容区有滚动条时，需要给表头一个右边的 padding 以对齐
              * @private
-             * @param {object} - event
+             * @param {object} event
              */
             handleContentScrollbarWidth(event) {
                 this.$refs.header.setHeaderPaddingByContentScrollbar(event);
@@ -936,7 +974,7 @@
 
             /**
              * @private
-             * @param {object} - event
+             * @param {object} event
              */
             handleContentVerticalScroll(event) {
                 this.triggerContentVerticalScroll(event);

@@ -343,6 +343,67 @@
 
             onGridContentVerticalScroll($event) {
                 this.$emit("contentVerticalScroll", {$event, contentWrapper: this.$refs.contentWrapper});
+            },
+
+            /**
+             * 获取行元素
+             * @private
+             * @param {number} rowNumber - 第几行
+             */
+            getRowElementByRowNumber(rowNumber) {
+                return this.$refs.content.querySelector(`.grid-row:nth-of-type(${rowNumber})`);
+            },
+
+            /**
+             * 设置滚动条到某行数据
+             * @public
+             * @todo 增加对树形表格的支持
+             * @param {object} rowData - 对应的行数据
+             */
+            scrollToRow(rowData) {
+                let index = this.datas.indexOf(rowData);
+
+                if (index !== -1) {
+                    let element = this.getRowElementByRowNumber(index + 1);
+
+                    if (element) {
+                        let contentElement = this.$refs.content,
+                            rowHeight = element.offsetHeight,
+                            elementOffsetTop = element.offsetTop,
+                            contentHeight = contentElement.offsetHeight,
+                            contentScrollHeight = contentElement.scrollHeight;
+
+                        // 如果行在内容区内，则直接将滚动位置设置为 0;
+                        if (elementOffsetTop + rowHeight < contentHeight) {
+                            this.scrollToTop();
+                            return;
+                        }
+                        // 如果滚动区域的高度大于或等该行在最顶部 + 内容区的高度，则滚动到该行显示到最顶部
+                        if (contentScrollHeight >= elementOffsetTop + contentHeight) {
+                            contentElement.scrollTop = elementOffsetTop;
+                            return;
+                        }
+                        this.scrollToBottom();
+                    }
+                }
+            },
+
+            /**
+             * 设置滚动条到最底部
+             * @public
+             */
+            scrollToBottom() {
+                let content = this.$refs.content;
+
+                content.scrollTop = content.scrollHeight - content.offsetHeight;
+            },
+
+            /**
+             * 设置滚动条到最顶部
+             * @public
+             */
+            scrollToTop() {
+                this.$refs.content.scrollTop = 0;
             }
         }
     };
