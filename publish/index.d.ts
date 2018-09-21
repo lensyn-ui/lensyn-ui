@@ -36,6 +36,9 @@ declare namespace LensynUI {
         setEditorFocusByRowNumber(rowNumber: number, field: string): void;
         setFieldBeChecked(field: string, ids: any[], isCheckbox?: boolean): void;
         setFieldBeUnChecked(field: string, ids: any[], isCheckbox?: boolean): void;
+        scrollToRow(rowData: any): void;
+        scrollToBottom(): void;
+        scrollToTop(): void;
     }
 
     export interface PaginationGrid extends Grid{
