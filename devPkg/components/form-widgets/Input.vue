@@ -1,11 +1,12 @@
 <template>
-    <div class="input" :class="inputModifier">
+    <div class="input" :class="inputModifier" @click="handleClickInput($event)">
         <input ref="input" class="input__box"
                :autofocus="autofocus"
                :placeholder="placeholder"
                v-model="inputValue"
-               @keyup.enter="enterEvt($event)"
-               @focus="onInputFocus"
+               @keyup.enter="handleInputEnter($event)"
+               @focus="handleInputFocus($event)"
+               @blur="handleInputBlur($event)"
                :readonly="widgetReadonly"
                :disabled="disabled"
                :type="actualInputType"/>
@@ -117,11 +118,32 @@
 
         /**
          * 当输入框获得焦点时，清除错误信息
+         * @param {object} $event - 获得焦点的事件
          * @private
          */
-        onInputFocus() {
+        handleInputFocus($event) {
             this.isShowErrorMsg = false;
             this.validateErrorMsg = "";
+
+            this.emitEvent({action: "focus", value: this.inputValue, $event});
+        }
+
+        /**
+         * 当点击输入框时触发
+         * @param {object} $event - 点击事件
+         * @private
+         */
+        handleClickInput($event) {
+            this.emitEvent({action: "click", value: this.inputValue, $event});
+        }
+
+        /**
+         * 当输入框失去焦点时触发
+         * @param {object} $event - 失去焦点的事件
+         * @private
+         */
+        handleInputBlur($event) {
+            this.emitEvent({action: "blur", value: this.inputValue, $event});
         }
 
         /**
@@ -129,7 +151,7 @@
          * @param {object} $event - 键盘事件
          * @private
          */
-        enterEvt($event) {
+        handleInputEnter($event) {
             this.emitEvent({action: 'enter', value: this.inputValue, $event});
         }
 
