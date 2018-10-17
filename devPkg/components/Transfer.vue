@@ -463,7 +463,7 @@
             children.push(this.renderSourceListPanelBody(createElement));
 
             return createElement(Panel, {
-
+                "class": "transfer__source-panel"
             }, children);
         }
 
@@ -595,6 +595,7 @@
             children.push(this.renderTargetListPanelBody(createElement));
 
             return createElement(Panel, {
+                "class": "transfer__target-panel"
             }, children);
         }
 
