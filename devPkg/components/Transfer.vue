@@ -683,7 +683,7 @@
          */
         renderTargetListPanelHeader(createElement) {
               if (this.$scopedSlots.targetHeader) {
-                  let header = this.$scopedSlots.sourceHeader({
+                  let header = this.$scopedSlots.targetHeader({
                       targetList: this.targetListDatas,
                       isCheckedAll: this.checkedAllTargetValue,
                       checkedData: this.currentTargetSelectedItems
