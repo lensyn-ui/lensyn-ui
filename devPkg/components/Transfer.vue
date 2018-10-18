@@ -61,6 +61,11 @@
 
             filterFn: {
                 type: Function
+            },
+
+            isKeepTargetWhenDatasChange: {
+                type: Boolean,
+                default: false
             }
         }
     })
@@ -279,11 +284,68 @@
         }
 
         /**
+         * 获取选中的源数据
+         * @public
+         */
+        getCheckedSourceDatas() {
+            return this.sourceListDatas.filter((item) => this.isSourceItemChecked(item));
+        }
+
+        /**
+         * 获取选中的目标数据
+         * @public
+         */
+        getCheckedTargetDatas() {
+            return this.targetListDatas.filter((item) => this.isTargetItemChecked(item));
+        }
+
+        /**
+         * 将选中的源数据移动到目标数据中
+         * @public
+         */
+        moveCheckedSourceDataToTarget() {
+            let moveDatas = this.getCheckedSourceDatas();
+
+            this.sourceListDatas = this.sourceListDatas.filter((item) => !this.isSourceItemChecked(item));
+
+            this.currentSourceSelectedItems = [];
+            this.checkedAllSourceValue = false;
+
+            this.targetListDatas = this.targetListDatas.concat(moveDatas);
+
+            return moveDatas;
+        }
+
+        /**
+         * 将选中的目标数据移动到源数据中
+         * @public
+         */
+        moveCheckedTargetDataToSource() {
+            let moveDatas = this.getCheckedTargetDatas();
+
+            this.targetListDatas = this.targetListDatas.filter((item) => !this.isTargetItemChecked(item));
+
+            this.currentTargetSelectedItems = [];
+            this.checkedAllTargetValue = false;
+
+            this.sourceListDatas = this.sourceListDatas.concat(moveDatas);
+
+            return moveDatas;
+        }
+
+        /**
          * 设置初始数据
+         * @private
          */
         setInitData() {
             this.sourceListDatas = this.datas.filter((item) => this.value.indexOf(this.getItemId(item)) === -1);
-            this.targetListDatas = this.datas.filter((item) => this.value.indexOf(this.getItemId(item)) !== -1);
+
+            if (this.isKeepTargetWhenDatasChange) {
+                let datas = this.datas.filter((item) => this.value.indexOf(this.getItemId(item)) !== -1);
+                this.targetListDatas = this.targetListDatas.concat(datas);
+            } else {
+                this.targetListDatas = this.datas.filter((item) => this.value.indexOf(this.getItemId(item)) !== -1);
+            }
         }
 
         /**
@@ -385,6 +447,7 @@
         }
 
         /**
+         * 处理点击源的全选事件
          * @private
          */
         handleSourceCheckAllEvent($event) {
@@ -398,6 +461,7 @@
         }
 
         /**
+         * 处理目标的全选事件
          * @private
          */
         handleTargetCheckAllEvent($event) {
@@ -411,6 +475,7 @@
         }
 
         /**
+         * 切换源数据的选中状态
          * @private
          */
         handleSourceCheckboxEvent($event, data) {
@@ -420,6 +485,7 @@
         }
 
         /**
+         * 切换目标数据的选中状态
          * @private
          */
         handleTargetCheckboxEvent($event, data) {
@@ -428,26 +494,36 @@
             }
         }
 
+        /**
+         * 点击移动到目标数据的按钮
+         * 将选中的源数据移动到目标数据中，从源数据中删除选中的数据，并清空选中项
+         * @private
+         */
         handleClickToTargetBtn() {
-            let moveDatas = this.sourceListDatas.filter((item) => this.isSourceItemChecked(item));
+            let moveDatas = this.moveCheckedSourceDataToTarget();
 
-            this.sourceListDatas = this.sourceListDatas.filter((item) => !this.isSourceItemChecked(item));
-
-            this.currentSourceSelectedItems = [];
-            this.checkedAllSourceValue = false;
-
-            this.targetListDatas = this.targetListDatas.concat(moveDatas);
+            this.emitEvent({
+                moveDatas,
+                action: "moveToTarget",
+                sourceDatas: this.sourceListDatas,
+                targetDatas: this.targetListDatas
+            });
         }
 
+        /**
+         * 点击移动到源数据的按钮
+         * 将目标数据中选中的项从目标数据中移除，并添加到源数据中，然后清空目标数据的选中项
+         * @private
+         */
         handleClickToSourceBtn() {
-            let moveDatas = this.targetListDatas.filter((item) => this.isTargetItemChecked(item));
+            let moveDatas = this.moveCheckedTargetDataToSource();
 
-            this.targetListDatas = this.targetListDatas.filter((item) => !this.isTargetItemChecked(item));
-
-            this.currentTargetSelectedItems = [];
-            this.checkedAllTargetValue = false;
-
-            this.sourceListDatas = this.sourceListDatas.concat(moveDatas);
+            this.emitEvent({
+                moveDatas,
+                action: "moveToSource",
+                sourceDatas: this.sourceListDatas,
+                targetDatas: this.targetListDatas
+            });
         }
 
         /**
