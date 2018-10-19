@@ -161,6 +161,11 @@
 
             sortFn: {
                 type: Function
+            },
+
+            isSelectRowByClick: {
+                type: Boolean,
+                default: false
             }
         },
 
@@ -208,7 +213,10 @@
                 // 分页
                 totalRows: 0,
                 currentPage: 1,
-                perpageCount: 10
+                perpageCount: 10,
+
+                // 选择控件对应的列
+                selectorColumns: null
             }
         },
 
@@ -250,6 +258,14 @@
 
             treeChildTemplate() {
                 return this.$scopedSlots.childTemplate;
+            },
+
+            isOnlyHaveOneSelector() {
+                return this.getGridSelectorColumns().length === 1;
+            },
+
+            firstSelectorColumn() {
+                return this.getGridSelectorColumns()[0];
             }
         },
 
@@ -554,18 +570,6 @@
             },
 
             /**
-             * 判断一行数据是否为活动行
-             * @private
-             * @param {object} rowData - 行数据
-             * @return {boolean} - true 为活动行, false 为非活动行
-             */
-            isRowActived(rowData) {
-                let id = this.getId(rowData);
-
-                return this.activeRowIds.indexOf(id) !== -1;
-            },
-
-            /**
              * 将当前数据的默认顺序保存下来
              * 以供后续排序时恢复默认顺序时使用
              * @private
@@ -691,6 +695,18 @@
             },
 
             /**
+             * 判断一行数据是否为活动行
+             * @private
+             * @param {object} rowData - 行数据
+             * @return {boolean} - true 为活动行, false 为非活动行
+             */
+            isRowActived(rowData) {
+                let id = this.getId(rowData);
+
+                return this.activeRowIds.indexOf(id) !== -1;
+            },
+
+            /**
              * 判断一条数据是否可选中
              * @private
              * @param {object} rowData
@@ -741,6 +757,16 @@
              */
             isAllowShowMultipleEditor() {
                 return this.editorMode === "multiple";
+            },
+
+            /**
+             * 判断一列是否是选择列
+             * @private
+             * @param {object} column - 对应的列
+             * @return {boolean} - true 表示是选择列，false 为非选择列
+             */
+            isSelectorColumn(column) {
+                return column.type === "checkbox" || column.type === "radio";
             },
 
             /**
@@ -823,6 +849,22 @@
                 this.listenClickRow(this.handleClickRow);
                 this.listenClickSort(this.handleClickSort);
                 this.listenHideColumn(this.handleHideColumnEvent);
+            },
+
+            /**
+             * 获取当前表格拥有的选择列
+             */
+            getGridSelectorColumns() {
+                if (this.selectorColumns === null) {
+                    let columns = [];
+                    Util.forEachContentColumns(this.contentColumns, (column) => {
+                        if (this.isSelectorColumn(column)) {
+                            columns.push(column);
+                        }
+                    });
+                    this.selectorColumns = columns;
+                }
+                return this.selectorColumns;
             },
 
             /**
@@ -990,6 +1032,10 @@
                 if (this.isEnableActiveRow) {
                     this.handleActiveRow(eventData.rowData);
                 }
+
+                if (this.isSelectRowByClick) {
+                    this.handleSelectRowByClick(eventData.rowData);
+                }
                 this.emitEvent("clickRow", eventData);
             },
 
@@ -1000,6 +1046,24 @@
              */
             handleActiveRow(rowData) {
                 this.setRowBeActive(rowData);
+            },
+
+            /**
+             * 处理当点击行时选中该行的事件
+             * @param {object} rowData
+             */
+            handleSelectRowByClick(rowData) {
+                if (this.isOnlyHaveOneSelector) {
+                    let column = this.firstSelectorColumn,
+                        field = column.field,
+                        checked = !this.isRowColumnSelected(rowData, column);
+
+                    if (column.type === "checkbox") {
+                        this.handleCheckboxSelectEvent({field, checked, rowData});
+                    } else {
+                        this.handleRadioSelectEvent({field, checked, rowData});
+                    }
+                }
             },
 
             /**

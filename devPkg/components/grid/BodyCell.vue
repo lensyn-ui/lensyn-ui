@@ -56,7 +56,9 @@
             },
 
             isEnableSelect() {
-                if (this.column.type === "checkbox") {
+                let column = this.column;
+
+                if (column.type === "checkbox" || column.type === "radio") {
                     let enableSelected = this.column.enableSelected;
 
                     if (typeof enableSelected !== "undefined") {

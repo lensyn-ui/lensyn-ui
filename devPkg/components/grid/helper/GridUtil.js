@@ -128,6 +128,14 @@ const Util  = {
                 delayJob = null;
             }, delay);
         }
+    },
+
+    forEachContentColumns(columns, callback) {
+        if (this.isArray(columns[0])) {
+            columns.forEach((subs) => subs.forEach(callback));
+        } else {
+            columns.forEach(callback);
+        }
     }
 };
 

@@ -18,9 +18,9 @@
         },
 
         methods: {
-            onClick(event) {
+            onClick($event) {
                 if (!this.disabled) {
-                    this.$emit("checkEvt", {event, checked: !this.checked});
+                    this.$emit("checkEvt", {$event, checked: !this.checked});
                 }
             }
         }

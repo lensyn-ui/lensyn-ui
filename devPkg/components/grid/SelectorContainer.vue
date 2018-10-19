@@ -66,11 +66,15 @@
                 });
             },
 
-            onSelectorCheckEvent(event) {
+            onSelectorCheckEvent(data) {
+                if (data.$event) {
+                    data.$event.stopPropagation();
+                }
+
                 this.$emit("selectEvt", {
                     field: this.column.field,
                     type: this.column.type,
-                    checked: event.checked
+                    checked: data.checked
                 });
             }
         }

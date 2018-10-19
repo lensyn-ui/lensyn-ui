@@ -40,8 +40,8 @@
         },
 
         methods: {
-            onClickExpandIcon() {
-                this.$emit("click");
+            onClickExpandIcon($event) {
+                this.$emit("click", {$event});
             }
         }
     };

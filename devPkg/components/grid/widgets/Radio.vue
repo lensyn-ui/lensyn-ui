@@ -1,5 +1,5 @@
 <template>
-    <div class="vue-grid-radio" :class="{'checked': checked}" @click="onClick"></div>
+    <div class="vue-grid-radio" :class="{'checked': checked, 'disabled': disabled}" @click="onClick"></div>
 </template>
 
 <script>
@@ -8,12 +8,19 @@
             checked: {
                 type: Boolean,
                 default: false
+            },
+
+            disabled: {
+                type: Boolean,
+                default: false
             }
         },
 
         methods: {
-            onClick(event) {
-                this.$emit("checkEvt", {event, checked: !this.checked});
+            onClick($event) {
+                if (!this.disabled) {
+                    this.$emit("checkEvt", {$event, checked: !this.checked});
+                }
             }
         }
     };

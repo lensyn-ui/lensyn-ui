@@ -75,7 +75,7 @@
                             },
                             listenerMap: ["click"]
                         },
-                        onWidgetEvent: () => this.handleClickTreeLabelEvent()
+                        onWidgetEvent: (data) => this.handleClickTreeLabelEvent(data)
                     }
                 });
             },
@@ -84,7 +84,10 @@
                 return this.expandRowDataIds.indexOf(this.getItemId(this.rowData)) !== -1;
             },
 
-            handleClickTreeLabelEvent() {
+            handleClickTreeLabelEvent(data) {
+                if (data && data.event && data.event.$event) {
+                    data.event.$event.stopPropagation();
+                }
                 this.$emit("clickTreeLabel", {action: "click", rowData: this.rowData});
             }
         }

@@ -76,7 +76,7 @@
                 let id = this.getId(rowData);
 
                 this.expandRowDataIds.push(id);
-                this.emitEvent({action: "expandRow", rowData});
+                this.emitEvent("expandRow", { rowData });
             },
 
             /**
@@ -90,7 +90,7 @@
 
                 if (index !== -1) {
                     this.expandRowDataIds.splice(index, 1);
-                    this.emitEvent({action: "collapseRow", rowData});
+                    this.emitEvent("collapseRow", { rowData });
                 }
             },
 
