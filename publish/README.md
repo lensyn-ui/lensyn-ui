@@ -9,7 +9,9 @@
 ## 安装方法
 
 ```
-npm i lensyn-ui -S
+npm install lensyn-ui --save-dev
+or
+npm install lensyn-ui -S/-D
 
 main.js
 
