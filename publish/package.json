@@ -1,6 +1,6 @@
 {
   "name": "lensyn-ui",
-  "version": "1.2.24",
+  "version": "1.2.25",
   "description": "lensyn ui component",
   "main": "./lib/lensyn-ui.js",
   "scripts": {},
