@@ -1,6 +1,8 @@
 // tooltip
 
 .lensyn_tooltip {
+  @arrow-height: 5px;
+
   display: none;
   box-sizing: border-box;
   position: fixed;
@@ -12,32 +14,33 @@
   padding: 0 @tooltip-padding;
   border-radius: 4px;
   text-align: center;
+
   .lensyn_tooltip_after {
     position: absolute;
-    border: 6px solid transparent;
+    border: @arrow-height solid transparent;
     &.top {
       border-top-color: @tooltip-bg;
       left: 50%;
-      bottom: -12px;
-      margin-left: -6px;
+      bottom: -(2 * @arrow-height);
+      margin-left: -@arrow-height;
     }
     &.bottom {
       border-bottom-color: @tooltip-bg;
       left: 50%;
-      top: -12px;
-      margin-left: -6px;
+      top: -(2 * @arrow-height);
+      margin-left: -@arrow-height;
     }
     &.left {
       border-left-color: @tooltip-bg;
-      right: -12px;
+      right: -(2 * @arrow-height);
       top: 50%;
-      margin-top: -6px;
+      margin-top: -@arrow-height;
     }
     &.right {
       border-right-color: @tooltip-bg;
-      left: -12px;
+      left: -(2 * @arrow-height);
       top: 50%;
-      margin-top: -6px;
+      margin-top: -@arrow-height;
     }
   }
   &.show {
